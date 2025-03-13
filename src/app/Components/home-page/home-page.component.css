@@ -1,0 +1,19 @@
+.wrapper{
+    max-width: 1512px;
+    margin-inline: auto; 
+    color: #FFFFFF;
+}
+
+.nav-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: end;
+    margin: 1rem 1rem;
+    padding: 3rem 8rem;
+    list-style: none;
+}
+.home-nav{
+    font-size: 1rem;
+    font-weight: 400;
+}
