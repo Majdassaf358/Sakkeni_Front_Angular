@@ -1,4 +1,8 @@
-<div class="wrapper">
+<div class="main-home-container">
+    <div class="home-img-container">
+        <img class="home-img" src="assets/Imgs/Homw-page-img.png" alt="">    
+        <div class="test">Discover a place you'll call Home.</div>
+    </div>
     <div class="home-nav">
         <ul class="nav-tags">
             <li>Homes</li>
@@ -7,5 +11,64 @@
             <li>Log In</li>
         </ul>
     </div>
-    <p>hi</p>
+    <div class="sign-up-form">
+        <div class="sign-up-title"></div>
+        <div class="logo"></div>
+        <form [formGroup]="signUpForm">
+            <div><input formControlName="userName" placeholder="Username" type="text"></div>
+            <div><input formControlName="email" placeholder="Email" type="text"></div>
+            <div><input formControlName="password" placeholder="Password" type="text"></div>
+            <div><input formControlName="confirmPassword" placeholder="Confirm Password" type="text"></div>
+        </form>
+    </div>
 </div>
+
+
+
+<!-- <div class="wrapper">
+    
+    <div class="container">    
+        <div class="test"><img src="assets/Imgs/Homw-page-img.png" alt=""></div>
+        <div class="properties-block">
+            <div class="properties-content">
+                <div class="ready-offplans">
+                    <a href="">Ready Properties</a>
+                    <a href="">off-plan Properties</a>
+                </div>
+                <div class="properties-choose">
+                    <div><i class="bi bi-geo-alt"></i>City</div>
+                    <div><i class="bi bi-house"></i>Property</div>
+                    <div><i class="bi bi-credit-card-fill"></i>Budget</div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="photo">
+              <img src="assets/Imgs/Homw-page-img.png" alt="Photo">
+            </div>
+            <div class="form-container">
+                <div class="properties-block">
+                    <div class="properties-content">
+                        <div class="ready-offplans">
+                            <a href="">Ready Properties</a>
+                            <a href="">off-plan Properties</a>
+                        </div>
+                        <div class="properties-choose">
+                            <div><i class="bi bi-geo-alt"></i>City</div>
+                            <div><i class="bi bi-house"></i>Property</div>
+                            <div><i class="bi bi-credit-card-fill"></i>Budget</div>
+                        </div>
+                    </div>
+            </div>
+          </div>
+    </div>
+    </div>
+    <div class="home-nav">
+        <ul class="nav-tags">
+            <li>Homes</li>
+            <li>Services</li>
+            <li>About Us</li>
+            <li>Log In</li>
+        </ul>
+    </div>
+</div> -->
