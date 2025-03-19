@@ -1,7 +1,76 @@
-.wrapper{
+.main-home-container{
+    display: flex;
+}
+.home-img-container{
+    width: 65%;
+    display: flex;
+    justify-content: end;
+}
+.home-img{
+    max-height: 60rem;
+    max-width: 100%;
+}
+.home-nav{
+    color: #ffff;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.nav-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: end;
+    margin: 1rem;
+    padding: 3rem 3rem 0rem 0rem;
+    list-style: none;
+}
+.test{
+    color: #27393A;
+    position: absolute;
+    top: 20%;
+    right: 46%;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 2rem;
+}
+/* Adjustments for smaller screens */
+@media (max-width: 1200px) {
+  .test {
+    top: 50%;
+    right: 57%;
+      font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .test {
+      top: 30%;
+      /* right: 35%; */
+      font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .test {
+      top: 35%;
+      /* right: 30%; */
+      font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .test {
+      top: 40%;
+      /* right: 25%; */
+      font-size: 0.6rem;
+  }
+}
+
+/* .wrapper{
     max-width: 1512px;
     margin-inline: auto; 
     color: #FFFFFF;
+    display: flex;
 }
 
 .nav-tags{
@@ -17,3 +86,62 @@
     font-size: 1rem;
     font-weight: 400;
 }
+.properties-block{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 1rem 8rem;
+}
+.properties-content{
+    width: 50%;
+    background-color: #FFFFFF;
+    max-width: 514px;
+    color: #b41d1d;
+}
+.ready-offplans{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;  
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .photo {
+    flex: 1;
+    position: relative;
+  }
+  
+  .photo img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .form-container {
+    flex: 1;
+    position: absolute;
+    left: 10%; 
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .form-container {
+      position: static;
+      transform: none;
+      width: 90%;
+      margin: 0 auto;
+    }
+  } */

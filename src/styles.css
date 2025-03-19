@@ -1,5 +1,68 @@
+:root{
+    --clr-primary-500:#27393A;
+    /* --clr-accent-500:; */
+    --clr-neutral-500:#27393A;
+    /* --clr-primary:; */
+
+}
+
 body {
     background-color: #27393A;
     font-family: 'Poppins', sans-serif;
     font-size: 16px; 
 }
+
+a{
+    color: #ffff;
+    cursor: pointer;
+}
+li{
+    cursor: pointer;
+}
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+html:focus-within{
+    scroll-behavior: smooth;
+}
+/* Set core body defaults */
+html,body{
+    height: 100%;
+}
+
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input, button,
+textarea, select {  
+  font-family: inherit;
+  font-size: inherit;
+}
+
+
