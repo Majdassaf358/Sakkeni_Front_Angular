@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
-export class YourComponent {
+export class HomePageComponent  {
   signUpForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {
