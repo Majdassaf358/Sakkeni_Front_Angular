@@ -12,12 +12,13 @@
         </ul>
         <div class="sign-up-div">
             <div class="sign-up-title">Welcome to</div>
-            <div class="logo"><img class="logo" src="assets/Imgs/Logo.png" alt=""> </div>
+            <div class="logo"><img  src="assets/Imgs/Logo.png" alt=""> </div>
             <form [formGroup]="signUpForm" class="forms-holder">
-                <input formControlName="userName" placeholder="Username" type="text" class="form">
-                <input formControlName="email" placeholder="Email" class="form" type="text">
-                <input formControlName="password" placeholder="Password" class="form" type="text">
-                <input formControlName="confirmPassword" placeholder="Confirm Password" class="form" type="text">
+                <input [class.is-invalid]="userName?.invalid && userName?.touched" formControlName="userName" placeholder="Username" type="text" class="form-control">
+                <input [class.is-invalid]="email?.invalid && email?.touched" formControlName="email" placeholder="Email" class="form-control" type="email">
+                <span *ngIf="email?.invalid && email?.touched" class="error-message">Email is required.</span>
+                <input [class.is-invalid]="password?.invalid && password?.touched" formControlName="password" placeholder="Password" class="form-control" type="password">
+                <input [class.is-invalid]="confirmPassword?.invalid && confirmPassword?.touched" formControlName="confirmPassword" placeholder="Confirm Password" class="form-control" type="password">
                 <a class="sign-up-button form" href="" >Sign Up</a>
             </form>
         </div>
