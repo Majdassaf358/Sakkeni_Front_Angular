@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { emailValidator } from '../../shared/validations';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,RouterModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
