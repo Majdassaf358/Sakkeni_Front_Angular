@@ -1,4 +1,4 @@
-export class sign_up{
+export class Sign_up{
     "username":string;
     "email":string;
     "password":string;
