@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 })
 export class HomePageComponent  {
   signUpForm!: FormGroup;
+  displayLogIn:boolean=false;
 
   get userName(){
     return this.signUpForm.get('userName');
@@ -36,4 +37,8 @@ export class HomePageComponent  {
   }
   ngOnInit(): void {
   }
+
+switchToLogIn(){
+    this.displayLogIn=true;
+}
 }
