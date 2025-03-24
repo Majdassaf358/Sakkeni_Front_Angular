@@ -1,8 +1,9 @@
 :root{
-    --clr-primary-500:#27393A;
-    /* --clr-accent-500:;  */
-    --clr-neutral-500:#27393A;
-    /* --clr-primary:; */
+    --clr-primary:#27393A;
+    --text-clr:#FCFDFD;
+    --text-title-clr:#27393A;
+    --bg-primary:#FCFDFD;
+    --bg-secondary:#FCFDFD47;
 }
 
 body {
@@ -62,5 +63,20 @@ textarea, select {
   font-family: inherit;
   font-size: inherit;
 }
+.container{
+  --max-width:972px;
+  --padding: 1.5rem;
 
-
+  width: min(var(--max-width),100%) - (var(--padding) * 2);
+  margin-inline: auto;
+}
+.table-columns{
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width:50em){
+  .table-columns{
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+  }
+}
