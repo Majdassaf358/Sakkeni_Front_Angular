@@ -12,7 +12,11 @@ import { RouterModule } from '@angular/router';
 })
 export class HomePageComponent  {
   signUpForm!: FormGroup;
-  displayLogIn:boolean=false;
+  logInForm!: FormGroup;
+  mode:string = 'start';
+  selectedProperty: string = 'ready';
+
+  
 
   get userName(){
     return this.signUpForm.get('userName');
@@ -34,11 +38,19 @@ export class HomePageComponent  {
           password: ['', [Validators.required,Validators.minLength(8)]],
           confirmPassword: ['', [Validators.required,Validators.minLength(8)]],
       });
+      this.logInForm = this.fb.group({
+          email: ['', [Validators.required,emailValidator()]],
+          password: ['', [Validators.required,Validators.minLength(8)]],
+      });
   }
   ngOnInit(): void {
   }
 
-switchToLogIn(){
-    this.displayLogIn=true;
-}
+  switchToLogIn(){
+    this.mode='log';
+  }
+  selectProperty(property: string) {
+  this.selectedProperty = property;
+  
+  }
 }

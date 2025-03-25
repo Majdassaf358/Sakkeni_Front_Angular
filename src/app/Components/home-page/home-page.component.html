@@ -1,4 +1,4 @@
-<div class="main-home-container">
+<div class="main-home-container bg-secondary">
     <div class="home-img-container">
         <img class="home-img" src="assets/Imgs/Homw-page-img.png" alt="">    
         <div class="home-img-text">Discover a place you'll call Home.</div>
@@ -10,27 +10,40 @@
             <li [routerLink]="['/about-us']">About Us</li>
             <li (click)="switchToLogIn()">Log In</li>
         </ul>
-        <!-- <div class="home-div">
+        <div *ngIf="mode === 'start'" class="home-div">
             <div class="home-div-title">
-                <p>Ready Properties</p>
-                <p>Off-plan Properties</p>
+                <label class="cursor-pointer font-300" [ngClass]="{'property-active': selectedProperty ==='ready'}" (click)="selectProperty('ready')">Ready Properties</label>
+                <label class="cursor-pointer font-500" [ngClass]="{'property-active': selectedProperty ==='off-plan'}" (click)="selectProperty('off-plan')">Off-plan Properties</label>
+                <div class="underline" [ngClass]="{'ready': selectedProperty === 'ready', 'off-plan': selectedProperty === 'off-plan'}"></div>
             </div>
             <div class="home-serach-div">
                 <div>
                     <label>City</label>
                 </div>
+                <input type="text">
                 <div>
                     <label>Property</label>
                 </div>
+                <input type="text">
                 <div>
                     <label>Budget</label>
                 </div>
+                <input type="text"> 
+                <div class="start-skip"><a href="" class="start-button">Start Searching</a>
+                    <p class="skip-text">or skip</p>
             </div>
-        </div> -->
-        <div *ngIf="displayLogIn" class="sign-up-div">
+            </div>
+        </div>
+        <div *ngIf="mode != 'start'" class="sign-up-div">
             <div class="sign-up-title">Welcome to</div>
             <div class="logo"><img  src="assets/Imgs/Logo.png" alt=""> </div>
-            <form [formGroup]="signUpForm" class="forms-holder">
+            <form *ngIf="mode === 'log'" [formGroup]="logInForm" class="forms-holder">
+                <input [class.is-invalid]="email?.invalid && email?.touched" formControlName="email" placeholder="Email" class="form-control" type="email">
+                <input [class.is-invalid]="password?.invalid && password?.touched" formControlName="password" placeholder="Password" class="form-control" type="password">
+                <a class="sign-up-button form" href="" >Sign Up</a>
+            </form>
+
+            <form *ngIf="mode === 'sign'" [formGroup]="signUpForm" class="forms-holder">
                 <input [class.is-invalid]="userName?.invalid && userName?.touched" formControlName="userName" placeholder="Username" type="text" class="form-control">
                 <input [class.is-invalid]="email?.invalid && email?.touched" formControlName="email" placeholder="Email" class="form-control" type="email">
                 <span *ngIf="email?.invalid && email?.touched" class="error-message">Email is required.</span>
