@@ -107,7 +107,7 @@
 .underline {
   position: absolute;
   left: 9%;
-  top: 14%;
+  top: 11%;
   width: 38%;
   height: 2px;
   background-color: #27393A;
@@ -137,36 +137,21 @@
   position: absolute;
   right: 2%;
 }
+
 /* Adjustments for smaller screens */
 @media (max-width: 1200px) {
-  .test {
-    /* top: 50%;
-    right: 57%; */
-      /* font-size: 1.4rem; */
-  }
+  
 }
 
 @media (max-width: 992px) {
-  .test {
-      /* top: 30%; */
-      /* right: 35%; */
-      /* font-size: 1rem; */
-  }
+  
 }
 
 @media (max-width: 768px) {
-  .test {
-      /* top: 35%; */
-      /* right: 30%; */
-      /* font-size: 0.8rem; */
-  }
+  
 }
 
 @media (max-width: 576px) {
-  .test {
-      /* top: 40%; */
-      /* right: 25%; */
-      /* font-size: 0.6rem; */
-  }
+  
 }
 

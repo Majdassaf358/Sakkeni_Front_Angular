@@ -13,20 +13,20 @@
         <div *ngIf="mode === 'start'" class="home-div">
             <div class="home-div-title">
                 <label class="cursor-pointer font-300" [ngClass]="{'property-active': selectedProperty ==='ready'}" (click)="selectProperty('ready')">Ready Properties</label>
-                <label class="cursor-pointer font-500" [ngClass]="{'property-active': selectedProperty ==='off-plan'}" (click)="selectProperty('off-plan')">Off-plan Properties</label>
+                <label class="cursor-pointer font-300" [ngClass]="{'property-active': selectedProperty ==='off-plan'}" (click)="selectProperty('off-plan')">Off-plan Properties</label>
                 <div class="underline" [ngClass]="{'ready': selectedProperty === 'ready', 'off-plan': selectedProperty === 'off-plan'}"></div>
             </div>
             <div class="home-serach-div">
-                <div>
-                    <label>City</label>
+                <div class="flex">
+                    <img class="location-icon" src="assets/Icons/garden_location-fill-16.svg" alt=""> <label>City</label>
                 </div>
                 <input type="text">
-                <div>
-                    <label>Property</label>
+                <div class="flex">
+                    <img class="home-icon" src="assets/Icons/Group.svg" alt=""> <label>Property</label>
                 </div>
                 <input type="text">
-                <div>
-                    <label>Budget</label>
+                <div class="flex">
+                    <img class="budget-icon" src="assets/Icons/Vector.svg" alt=""> <label>Budget</label>
                 </div>
                 <input type="text"> 
                 <div class="start-skip"><a href="" class="start-button">Start Searching</a>
