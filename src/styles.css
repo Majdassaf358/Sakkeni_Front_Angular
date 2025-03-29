@@ -7,6 +7,10 @@
     --fw-300:300;
     --fw-500:500;
     --fw-600:600;
+    --fs-16:1rem;
+    --fs-14:0.875rem;
+    --text-spacing-16-10:0.1rem;
+    --text-spacing-14-10:0.0875rem;
 }
 .text-primary-clr{
   color: var(--text-primary-clr);
@@ -31,6 +35,18 @@
 }
 .font-600{
   font-weight: var(--fw-600);
+}
+.font-14{
+  font-size: var(--fs-14);
+}
+.font-16{
+  font-size: var(--fs-16);
+}
+.letter-16-10{
+  letter-spacing: var(--text-spacing-16-10);
+}
+.letter-14-10{
+  letter-spacing: var(--text-spacing-14-10);
 }
 .cursor-pointer{
   cursor: pointer;
