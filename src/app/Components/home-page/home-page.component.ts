@@ -60,6 +60,9 @@ export class HomePageComponent  {
   switchToLogIn(){
     this.mode='log';
   }
+  switchToSignUp(){
+    this.mode='sign';
+  }
   selectProperty(property: string) {
   this.selectedProperty = property;
   

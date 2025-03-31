@@ -45,9 +45,12 @@
             <div class="logo"><img  src="assets/Imgs/Logo.png" alt=""> </div>
             <form *ngIf="mode === 'log'" [formGroup]="logInForm" class="forms-holder">
                 <input [class.is-invalid]="email?.invalid && email?.touched" formControlName="email" placeholder="username@gmail.com" class="form-control" type="email">
-                <input [class.is-invalid]="password?.invalid && password?.touched" formControlName="password" placeholder="Password" class="form-control" type="password">
+                <input [class.is-invalid]="password?.invalid && password?.touched" formControlName="password" placeholder="••••••••" class="form-control" type="password">
                 <div></div>
-                <a class="sign-up-button form" href="" >Sign Up</a>
+                <a class="sign-up-button form" href="" >Log In</a>
+                <div class="font-400 font-12 dont-have-account">Don’t have an account yet?</div>
+                <button class="sign-up-button form cursor-pointer" (click)="switchToSignUp()">Register</button>
+
             </form>
 
             <form *ngIf="mode === 'sign'" [formGroup]="signUpForm" class="forms-holder">

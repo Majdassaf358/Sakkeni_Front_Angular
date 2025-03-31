@@ -8,7 +8,8 @@
     justify-content: end;
 }
 .home-img{
-    max-height: 60rem;
+  margin-top: 1rem;
+    max-height: 45rem;
     max-width: 100%;
 }
 .home-nav{
@@ -28,7 +29,7 @@
 .home-img-text{
     color: #27393A;
     position: absolute;
-    top: 14%;
+    top: 15%;
     right: 48%;
     font-weight: 300;
     font-size: 1.6rem;
@@ -151,7 +152,10 @@
 .input-property{
  width: 100%;
 }
-
+.dont-have-account{
+  text-align: center;
+  margin: 2rem 0 0 0;
+}
 
 /* Adjustments for smaller screens */
 @media (max-width: 1200px) {

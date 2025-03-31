@@ -5,10 +5,12 @@
     --bg-secondary:#27393A;
     --bg-neutural:#FCFDFD47;
     --fw-300:300;
+    --fw-400:400;
     --fw-500:500;
     --fw-600:600;
     --fs-16:1rem;
     --fs-14:0.875rem;
+    --fs-12:0.75rem;
     --text-spacing-16-10:0.1rem;
     --text-spacing-14-10:0.0875rem;
 }
@@ -30,11 +32,17 @@
 .font-300{
   font-weight: var(--fw-300);
 }
+.font-400{
+  font-weight: var(--fw-400);
+}
 .font-500{
   font-weight: var(--fw-500);
 }
 .font-600{
   font-weight: var(--fw-600);
+}
+.font-12{
+  font-size: var(--fs-12);
 }
 .font-14{
   font-size: var(--fs-14);
