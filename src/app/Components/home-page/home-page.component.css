@@ -37,7 +37,7 @@
 .sign-up-div{
   max-width: 85%;
   position: relative;
-  margin: 2rem 1rem 1rem 1rem;
+  margin: 3rem 1rem 1rem 1rem;
   padding: 1rem;
   background: #FCFDFD47;
   border-radius: 30px;
@@ -102,8 +102,18 @@
   gap: 2rem;  
 }
 
-.property-active {
-  font-weight: 500;
+.underpoint {
+  display: none;
+  position: absolute;
+  top: 11%;
+  right: 15.2%;
+  width: 4px;
+  height: 4px;
+  background-color: #FCFDFD;
+  border-radius: 5px;
+}
+.underpoint.active {
+  display: block;
 }
 .underline {
   position: absolute;

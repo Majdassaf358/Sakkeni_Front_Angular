@@ -5,15 +5,16 @@
     </div>
     <div class="home-nav">
         <ul class="nav-tags">
-            <li [routerLink]="['/homes']">Homes</li>
-            <li [routerLink]="['/services']">Services</li>
-            <li [routerLink]="['/about-us']">About Us</li>
-            <li (click)="switchToLogIn()">Log In</li>
+            <li class="font-300" [routerLink]="['/homes']">Homes</li>
+            <li class="font-300" [routerLink]="['/services']">Services</li>
+            <li class="font-300" [routerLink]="['/about-us']">About Us</li>
+            <li (click)="switchToLogIn()" [ngClass]="{'font-600': mode ==='log'}">Log In</li>
+            <div class="underpoint" [ngClass]="{'active': mode ==='log'}"></div>
         </ul>
         <div *ngIf="mode === 'start'" class="home-div">
             <div class="home-div-title">
-                <label class="cursor-pointer font-300" [ngClass]="{'property-active': selectedProperty ==='ready'}" (click)="selectProperty('ready')">Ready Properties</label>
-                <label class="cursor-pointer font-300" [ngClass]="{'property-active': selectedProperty ==='off-plan'}" (click)="selectProperty('off-plan')">Off-plan Properties</label>
+                <label class="cursor-pointer font-300" [ngClass]="{'font-500': selectedProperty ==='ready'}" (click)="selectProperty('ready')">Ready Properties</label>
+                <label class="cursor-pointer font-300" [ngClass]="{'font-500': selectedProperty ==='off-plan'}" (click)="selectProperty('off-plan')">Off-plan Properties</label>
                 <div class="underline" [ngClass]="{'ready': selectedProperty === 'ready', 'off-plan': selectedProperty === 'off-plan'}"></div>
             </div>
             <div class="home-serach-div">
