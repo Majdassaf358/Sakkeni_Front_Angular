@@ -1,9 +1,9 @@
 <div class="navbar">
     <div class="logo-section width-25"><img class="nav-logo" src="assets/Imgs/Logo.png" alt=""></div>
-    <ul class="nav-section width-50">
-        <li>Homes</li>
-        <li>Services</li>
-        <li>About Us</li>
+    <ul class="nav-section width-50 text-secondary-clr font-400">
+      <li class="font-300" [ngClass]="{'font-600': page ==='homes'}" [routerLink]="['/homes']">Homes</li>
+      <li class="font-300" [ngClass]="{'font-600': page ==='services'}" [routerLink]="['/services']">Services</li>
+      <li class="font-300" [ngClass]="{'font-600': page ==='about'}" [routerLink]="['/about-us']">About Us</li>
         <li>Log In</li>
     </ul>
     <div class="profile-section width-25"><li>
@@ -33,4 +33,4 @@
         </div>
       </li></div>
 </div>
-<div class="nav-line">Looooong Liiiine</div>
+<div class="nav-line"></div>

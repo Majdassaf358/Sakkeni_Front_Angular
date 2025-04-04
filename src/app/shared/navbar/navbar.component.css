@@ -21,3 +21,12 @@
     display: flex;
     justify-content: end;
 }
+.nav-line{
+    background-color: #E9EEEE;
+    height: 1px;
+    width: 96%;
+    justify-self: center;
+}
+.underpoint {
+    left: 41%;
+  }

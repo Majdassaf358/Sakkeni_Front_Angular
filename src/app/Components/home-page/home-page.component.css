@@ -103,18 +103,9 @@
 }
 
 .underpoint {
-  display: none;
-  position: absolute;
-  top: 11%;
   right: 15.2%;
-  width: 4px;
-  height: 4px;
-  background-color: #FCFDFD;
-  border-radius: 5px;
 }
-.underpoint.active {
-  display: block;
-}
+
 .underline {
   position: absolute;
   left: 9%;

@@ -142,6 +142,18 @@ textarea, select {
   display: grid;
   gap: 1rem;
 }
+.underpoint {
+  display: none;
+  position: absolute;
+  top: 11%;
+  width: 4px;
+  height: 4px;
+  background-color: #FCFDFD;
+  border-radius: 5px;
+}
+.underpoint.active {
+  display: block;
+}
 @media (min-width:50em){
   .table-columns{
     grid-auto-flow: column;
