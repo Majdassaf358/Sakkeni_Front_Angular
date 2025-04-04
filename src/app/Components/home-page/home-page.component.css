@@ -1,6 +1,7 @@
 .main-home-container{
     display: flex;
     height: 100%;
+    background-color: #27393A;
 }
 .home-img-container{
     width: 60%;

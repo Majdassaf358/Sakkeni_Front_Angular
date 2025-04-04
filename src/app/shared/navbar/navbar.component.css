@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    background-color: #27393A;
 }
 .logo-section{
     max-width: 10%;
