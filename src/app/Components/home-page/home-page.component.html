@@ -45,22 +45,21 @@
             <div class="sign-up-title">Welcome to</div>
             <div class="logo"><img  src="assets/Imgs/Logo.png" alt=""> </div>
             <form *ngIf="mode === 'log'" [formGroup]="logInForm" class="forms-holder">
-                <input [class.is-invalid]="email?.invalid && email?.touched" formControlName="email" placeholder="username@gmail.com" class="form-control" type="email">
-                <input [class.is-invalid]="password?.invalid && password?.touched" formControlName="password" placeholder="••••••••" class="form-control" type="password">
+                <input [class.is-invalid]="logEmail?.invalid && logEmail?.touched" formControlName="logEmail" placeholder="username@gmail.com" class="form-control" type="email">
+                <input [class.is-invalid]="logPassword?.invalid && logPassword?.touched" formControlName="logPassword" placeholder="••••••••" class="form-control" type="password">
                 <div></div>
-                <a class="sign-up-button form" href="" >Log In</a>
+                <button class="sign-up-button cursor-pointer" (click)="loginFunction()">Log In</button>
                 <div class="font-400 font-12 dont-have-account">Don’t have an account yet?</div>
                 <button class="sign-up-button form cursor-pointer" (click)="switchToSignUp()">Register</button>
 
             </form>
-
             <form *ngIf="mode === 'sign'" [formGroup]="signUpForm" class="forms-holder">
-                <input [class.is-invalid]="userName?.invalid && userName?.touched" formControlName="userName" placeholder="Username" type="text" class="form-control">
+                <input [class.is-invalid]="username?.invalid && username?.touched" formControlName="username" placeholder="Username" type="text" class="form-control">
                 <input [class.is-invalid]="email?.invalid && email?.touched" formControlName="email" placeholder="Email" class="form-control" type="email">
                 <span *ngIf="email?.invalid && email?.touched" class="error-message">Email is required.</span>
                 <input [class.is-invalid]="password?.invalid && password?.touched" formControlName="password" placeholder="Password" class="form-control" type="password">
-                <input [class.is-invalid]="confirmPassword?.invalid && confirmPassword?.touched" formControlName="confirmPassword" placeholder="Confirm Password" class="form-control" type="password">
-                <a class="sign-up-button form" href="" >Sign Up</a>
+                <input [class.is-invalid]="password_confirmation?.invalid && password_confirmation?.touched" formControlName="password_confirmation" placeholder="Confirm Password" class="form-control" type="password">
+                <button class="sign-up-button cursor-pointer" (click)="signUpFunction()" >Sign Up</button>
             </form>
         </div>
     </div>

@@ -8,6 +8,7 @@ import { ApiResponse } from '../../Models/ApiResponse';
 import { authenticationRes } from '../../Models/authenticationRes';
 import { lastValueFrom } from 'rxjs';
 import { AuthenticationService } from '../../Services/authentication.service';
+import { sign_up } from '../../Models/sign-up';
 
 
 @Component({
@@ -25,8 +26,14 @@ export class HomePageComponent  {
   authenticationRes!: authenticationRes;
   
 
-  get userName(){
-    return this.signUpForm.get('userName');
+  get logEmail(){
+    return this.logInForm.get('logEmail');
+  }
+  get logPassword(){
+    return this.logInForm.get('logPassword');
+  }
+  get username(){
+    return this.signUpForm.get('username');
   }
   get email(){
         return this.signUpForm.get('email');
@@ -34,8 +41,8 @@ export class HomePageComponent  {
   get password(){
         return this.signUpForm.get('password');
   }
-  get confirmPassword(){
-        return this.signUpForm.get('confirmPassword');
+  get password_confirmation(){
+        return this.signUpForm.get('password_confirmation');
   }
 
     constructor(
@@ -43,15 +50,15 @@ export class HomePageComponent  {
       private authenticationService: AuthenticationService,
       private router: Router
     ) {
-      this.signUpForm = this.fb.group({
-          userName: ['', [Validators.required, Validators.minLength(3)]],
-          email: ['', [Validators.required,emailValidator()]],
-          password: ['', [Validators.required,Validators.minLength(8)]],
-          confirmPassword: ['', [Validators.required,Validators.minLength(8)]],
-      });
       this.logInForm = this.fb.group({
+          logEmail: ['', [Validators.required,emailValidator()]],
+          logPassword: ['', [Validators.required,Validators.minLength(8)]],
+      });
+      this.signUpForm = this.fb.group({
+          username: ['', [Validators.required, Validators.minLength(3)]],
           email: ['', [Validators.required,emailValidator()]],
           password: ['', [Validators.required,Validators.minLength(8)]],
+          password_confirmation: ['', [Validators.required,Validators.minLength(8)]],
       });
   }
   ngOnInit(): void {
@@ -69,10 +76,28 @@ export class HomePageComponent  {
   }
 
   async loginFunction() {
-    var req: login = this.logInForm.getRawValue();
+    var req: login = {
+    email: this.logInForm.get('logEmail')?.value,
+    password: this.logInForm.get('logPassword')?.value
+  };
     try {
       let res: ApiResponse<authenticationRes> = await lastValueFrom(
         this.authenticationService.login(req)
+      );
+      this.authenticationRes = res.data;
+      this.token = res.data.token || '';
+      localStorage.setItem('Token', this.token);
+      this.router.navigate(['/homes']);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async signUpFunction() {
+    var req: sign_up = this.signUpForm.getRawValue();
+    console.log(req);
+    try {
+      let res: ApiResponse<authenticationRes> = await lastValueFrom(
+        this.authenticationService.signUp(req)
       );
       this.authenticationRes = res.data;
       this.token = res.data.token || '';

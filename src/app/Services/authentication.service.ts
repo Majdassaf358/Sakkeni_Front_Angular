@@ -14,9 +14,9 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  public signUp(req: sign_up) : Observable<ApiResponse<sign_up>>{
-    let url = `${environment.Api}/`;
-    return this.http.post<ApiResponse<sign_up>>(url, req);
+  public signUp(req: sign_up) : Observable<ApiResponse<authenticationRes>>{
+    let url = `${environment.Api}/sign-up`;
+    return this.http.post<ApiResponse<authenticationRes>>(url, req);
   }
   public login(req: login): Observable<ApiResponse<authenticationRes>> {
     let url = `${environment.Api}/login`;
