@@ -45,7 +45,7 @@
 }
 .sign-up-title{
   margin: 0.4rem 0 0 0;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   text-align: center;
   color: #FCFDFD;
 }
@@ -53,7 +53,10 @@
   display: flex;
       justify-content: center;
       align-items: center;
-      margin: 1rem 0 0.5rem 0 ;
+      margin: 1rem 0 1.5rem 0 ;
+}
+.forms-logo{
+  width: 58%;
 }
 .forms-holder{
   display: grid;
@@ -61,26 +64,47 @@
 .form-control{
   background-color: #E9EEEEE5;
   border-radius: 10px;
-    margin: 0.5rem 2rem 0.5rem 2rem;
+    margin: 0.5rem 0rem 0.5rem 1.5rem;
     padding: 0.8rem 1rem;
     box-shadow: 0px 4px 4px 0px #00000040;
     border: 0;
-    max-width: 80%;
+    max-width: 85%;
 }
 .sign-up-button{
   background-color: #E9EEEEE5;
   border-radius: 10px;
-    margin: 0.5rem 2rem 0.5rem 2rem;
-    padding: 0.8rem 1rem;
-    box-shadow: 0px 4px 4px 0px #00000040;
-    border: 0;
-  margin-top: 2rem;
+  margin: 4rem 2rem 2rem 1.5rem;
+  padding: 0.8rem 1rem;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border: 0;
   text-align: center;
+}
+.log-button{
+  background-color: #E9EEEEE5;
+  border-radius: 10px;
+  margin: 0.8rem 2rem 1rem 1.5rem;
+  padding: 0.8rem 1rem;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border: 0;
+  text-align: center;
+}
+.register-button{
+  background-color: #E9EEEEE5;
+  border-radius: 10px;
+  margin: 1rem 2rem 2rem 1.5rem;
+  padding: 0.8rem 1rem;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border: 0;
+  text-align: center;
+}
+.password-options{
+  display: flex;
+  justify-content: space-around;
 }
 
 .home-div{
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
   position: relative;
   left: -10%;
   padding: 2.5rem 1rem  1rem 1rem;
@@ -104,13 +128,13 @@
 }
 
 .underpoint {
-  right: 15.2%;
+  right: 17.2%;
 }
 
 .underline {
   position: absolute;
   left: 9%;
-  top: 13%;
+  top: 16%;
   width: 38%;
   height: 2.5px;
   background-color: #27393A;
@@ -144,7 +168,7 @@
 }
 .icon-input{
   display: grid;
-  gap: 1rem;
+  /* gap: 1rem; */
   margin-bottom: 1rem;
 }
 .icon-property{
@@ -152,11 +176,16 @@
   gap: 1rem;
 }
 .input-property{
+  border: none;
+  border-bottom: 1px solid black;
  width: 100%;
 }
 .dont-have-account{
   text-align: center;
   margin: 2rem 0 0 0;
+}
+.remember-me{
+  margin-right: 2.5rem;
 }
 
 /* Adjustments for smaller screens */
