@@ -6,31 +6,12 @@
       <li class="font-300" [ngClass]="{'font-600': page ==='about'}" [routerLink]="['/about-us']">About Us</li>
         <li>Log In</li>
     </ul>
-    <div class="profile-section width-25"><li>
-        <div class="flags-list">
-          <div class="flag-language">
-            <!-- <img
-              class="top-flag"
-              src="{{ selectedFlag }}"
-              (change)="changeLan($event)"
-            /> -->
-          </div>
-          <div class="selected-language">
-            selectedlang
-          </div>
-          <ul>
-            <li class="the-list">
-              <div
-                class="display-flex"
-              >
-                <div class="flag-language">
-                  <!-- <img class="list-flags" src="{{ flag.src }}" /> -->
-                </div>
-                <a>flag.language </a>
-              </div>
-            </li>
-          </ul>
+    <div class="right-section width-25">
+        <div class="lan"></div>
+        <div class="profile-section">
+          <img src="assets/Imgs/em.jpeg" alt="" class="profile-img" (click)="goToProfile()">
+          <button class="profile-button"></button>
         </div>
-      </li></div>
+     </div>
       <div class="nav-line"></div>
 </div>

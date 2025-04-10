@@ -11,5 +11,10 @@ import { RouterModule,Router } from '@angular/router';
 })
 export class NavbarComponent {
   @Input() page!: string;
+  constructor(private router:Router){}
 
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
 }

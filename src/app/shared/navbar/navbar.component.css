@@ -18,9 +18,23 @@
     padding: 2rem 3rem 0rem 0rem;
     list-style: none;
 }
+.right-section{
+    display: flex;
+    justify-content: end;
+}
 .profile-section{
     display: flex;
     justify-content: end;
+}
+.profile-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    margin: 1rem;
+    cursor: pointer;
+}
+.profile-button{
+    display: none;
 }
 .nav-line{
     background-color: #E9EEEE;
