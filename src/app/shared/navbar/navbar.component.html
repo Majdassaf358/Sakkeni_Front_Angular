@@ -1,17 +1,56 @@
 <div class="navbar">
-    <div class="logo-section width-25"><img class="nav-logo" src="assets/Imgs/Logo.png" alt=""></div>
-    <ul class="nav-section width-50 text-secondary-clr font-400">
-      <li class="font-300" [ngClass]="{'font-600': page ==='homes'}" [routerLink]="['/homes']">Homes</li>
-      <li class="font-300" [ngClass]="{'font-600': page ==='services'}" [routerLink]="['/services']">Services</li>
-      <li class="font-300" [ngClass]="{'font-600': page ==='about'}" [routerLink]="['/about-us']">About Us</li>
-        <li>Log In</li>
-    </ul>
-    <div class="right-section width-25">
-        <div class="lan"></div>
-        <div class="profile-section">
-          <img src="assets/Imgs/em.jpeg" alt="" class="profile-img" (click)="goToProfile()">
-          <button class="profile-button"></button>
-        </div>
-     </div>
-      <div class="nav-line"></div>
+  <!-- Logo-section -->
+  <div class="logo-section width-25">
+    <img class="nav-logo" src="assets/Imgs/Logo.png" alt="" />
+  </div>
+  <!-- nav-section -->
+  <ul class="nav-section width-50 text-secondary-clr font-400">
+    <li
+      class="font-300"
+      [ngClass]="{ 'font-600': page === 'homes' }"
+      [routerLink]="['/homes']"
+    >
+      Homes
+    </li>
+    <li
+      class="font-300"
+      [ngClass]="{ 'font-600': page === 'services' }"
+      [routerLink]="['/services']"
+    >
+      Services
+    </li>
+    <li
+      class="font-300"
+      [ngClass]="{ 'font-600': page === 'about' }"
+      [routerLink]="['/about-us']"
+    >
+      About Us
+    </li>
+    <li>Log In</li>
+  </ul>
+  <!-- profile-section -->
+  <div class="right-section width-25">
+    <!-- language -->
+    <div class="lan">
+      <img src="assets/Icons/globe.svg" alt="" class="lan-icon" />
+      <div class="text-secondary-clr">Eng</div>
+      <button class="lan-button bg-secondary"></button>
+      <ul>
+        <li class="lan-list">
+          <div>Lan<a class="bg-neutural" href=""></a></div>
+        </li>
+      </ul>
+    </div>
+    <!-- profile -->
+    <div class="profile-section">
+      <img
+        src="assets/Imgs/em.jpeg"
+        alt=""
+        class="profile-img"
+        (click)="goToProfile()"
+      />
+      <button class="profile-button"></button>
+    </div>
+  </div>
+  <div class="nav-line"></div>
 </div>

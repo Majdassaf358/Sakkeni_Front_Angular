@@ -1,47 +1,67 @@
-.navbar{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    background-color: #27393A;
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #27393a;
 }
-.logo-section{
-    max-width: 10%;
-    max-height: 10%;
+.logo-section {
+  max-width: 10%;
+  max-height: 10%;
 }
-.nav-section{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3rem;
-    justify-content: end;
-    margin: 1rem 1rem 2rem 1rem;
-    padding: 2rem 3rem 0rem 0rem;
-    list-style: none;
+.nav-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: end;
+  margin: 1rem 1rem 2rem 1rem;
+  padding: 2rem 3rem 0rem 0rem;
+  list-style: none;
 }
-.right-section{
-    display: flex;
-    justify-content: end;
+.right-section {
+  display: flex;
+  justify-content: end;
 }
-.profile-section{
-    display: flex;
-    justify-content: end;
+.profile-section {
+  display: flex;
+  justify-content: end;
 }
-.profile-img{
-    width: 40px;
-    height: 40px;
-    border-radius: 30px;
-    margin: 1rem;
-    cursor: pointer;
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+  margin: 1rem;
+  cursor: pointer;
 }
-.profile-button{
-    display: none;
+.profile-button {
+  display: none;
 }
-.nav-line{
-    background-color: #E9EEEE;
-    height: 1px;
-    width: 96%;
-    justify-self: center;
+.nav-line {
+  background-color: #e9eeee;
+  height: 1px;
+  width: 96%;
+  justify-self: center;
 }
 .underpoint {
-    left: 41%;
-  }
+  left: 41%;
+}
+.lan {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+.lan-button {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #e9eeee;
+  border-bottom: none;
+  margin-left: 1rem;
+}
+.lan-list {
+  display: none;
+  cursor: pointer;
+  background-color: #e9eeee;
+}
+.lan:hover .lan-list {
+  display: block;
+}

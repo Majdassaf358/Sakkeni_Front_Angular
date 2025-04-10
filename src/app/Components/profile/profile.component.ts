@@ -9,18 +9,14 @@ import { AuthenticationService } from '../../Services/authentication.service';
   selector: 'app-profile',
   imports: [NavbarComponent],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.css',
 })
-export class ProfileComponent  implements OnInit  {
-  profileInfo:profile = new profile;
-constructor(
-  private authenticationService: AuthenticationService,
-){
-
-}
-ngOnInit(): void {
-  this.getProfile();
-}
+export class ProfileComponent implements OnInit {
+  profileInfo: profile = new profile();
+  constructor(private authenticationService: AuthenticationService) {}
+  ngOnInit(): void {
+    this.getProfile();
+  }
 
   async getProfile() {
     try {
