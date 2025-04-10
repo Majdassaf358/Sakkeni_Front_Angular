@@ -9,13 +9,12 @@ import { sign_up } from '../Models/sign-up';
 import { profile } from '../Models/profile';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  public signUp(req: sign_up) : Observable<ApiResponse<authenticationRes>>{
+  public signUp(req: sign_up): Observable<ApiResponse<authenticationRes>> {
     let url = `${environment.Api}/sign-up`;
     return this.http.post<ApiResponse<authenticationRes>>(url, req);
   }
@@ -26,5 +25,9 @@ export class AuthenticationService {
   public profile(): Observable<ApiResponse<profile>> {
     let url = `${environment.Api}/my-profile`;
     return this.http.get<ApiResponse<profile>>(url);
+  }
+  public logout(): Observable<ApiResponse<null>> {
+    let url = `${environment.Api}/logout`;
+    return this.http.get<ApiResponse<null>>(url);
   }
 }
