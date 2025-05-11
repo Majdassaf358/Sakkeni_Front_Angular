@@ -1,3 +1,4 @@
-.filter-container{
-    background-color: #27393A;
+.filter-container {
+  display: flex;
+  background-color: #27393a;
 }
