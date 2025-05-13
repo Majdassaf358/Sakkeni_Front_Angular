@@ -1,26 +1,18 @@
 <app-navbar [page]="'homes'"></app-navbar>
 <app-filters></app-filters>
 
-<p>homes works!</p>
 <div class="container-fluid">
   <div #top class="ml-4">
     <!-- <app-filter></app-filter> -->
   </div>
   <div class="cards-holder">
-    <!-- <div class="grid-card" *ngFor="let medicine of medicineList">
-      <a
-        
-        ><img class="medicine-image" src="assets/img/medicine.jpg" alt="" />
-      </a>
-      <p class="card-name">{{ medicine.commercialName }}</p>
-      <p class="card-form">Form: {{ medicine.medicineForm }}</p>
-      <p class="card-price">Gross Price: {{ medicine.grossPrice }} (SYP)</p>
-      <p class="card-price">Net Price: {{ medicine.netPrice }} (SYP)</p>
-      <button
-        class="add-to-cart-button"
-        
-      >
-      </button>
-    </div> -->
+    <div class="grid-card">
+      <a><img class="medicine-image" src="assets/Imgs/Home.png" alt="" /> </a>
+      <p class="card-name">medicine.commercialName</p>
+      <p class="card-form">Form: medicine.medicineForm</p>
+      <p class="card-price">Gross Price: medicine.grossPrice (SYP)</p>
+      <p class="card-price">Net Price: medicine.netPrice (SYP)</p>
+      <button class="add-to-cart-button"></button>
+    </div>
   </div>
 </div>

@@ -1,70 +1,172 @@
 <div class="main-home-container bg-secondary">
-    <div class="home-img-container">
-        <img class="home-img" src="assets/Imgs/Homw-page-img.png" alt="">    
-        <div class="home-img-text">Discover a place you'll call Home.</div>
-    </div>
-    <div class="home-nav">
-        <ul class="nav-tags">
-            <li class="font-300 font-14" [routerLink]="['/homes']">Homes</li>
-            <li class="font-300 font-14" [routerLink]="['/services']">Services</li>
-            <li class="font-300 font-14" [routerLink]="['/about-us']">About Us</li>
-            <li class="font-14" (click)="switchToLogIn()" [ngClass]="{'font-600': mode ==='log'}">Log In</li>
-            <div class="underpoint" [ngClass]="{'active': mode ==='log'}"></div>
-        </ul>
-        <div *ngIf="mode === 'start'" class="home-div">
-            <div class="home-div-title">
-                <label class="cursor-pointer font-300" [ngClass]="{'font-500': selectedProperty ==='ready'}" (click)="selectProperty('ready')">Ready Properties</label>
-                <label class="cursor-pointer font-300" [ngClass]="{'font-500': selectedProperty ==='off-plan'}" (click)="selectProperty('off-plan')">Off-plan Properties</label>
-                <div class="underline" [ngClass]="{'ready': selectedProperty === 'ready', 'off-plan': selectedProperty === 'off-plan'}"></div>
-            </div>
-            <div class="home-serach-div">
-                <div class="icon-input">
-                    <div class="icon-property">
-                        <img class="location-icon" src="assets/Icons/garden_location-fill-16.svg" alt=""> <label class="font-600 font-14 letter-14-10">City</label>
-                    </div>
-                    <input class="font-12 input-property" type="text" placeholder="Where do you want to live?">
-                </div>
-                <div class="icon-input">
-                    <div class="icon-property">
-                        <img class="home-icon" src="assets/Icons/Group.svg" alt=""> <label class="font-600 font-14 letter-14-10">Property</label>
-                    </div>
-                    <input class="font-12 input-property" type="text" placeholder="Pick up your type of property">
-                </div>
-                <div class="icon-input">
-                    <div class="icon-property">
-                        <img class="budget-icon" src="assets/Icons/Vector.svg" alt=""> <label class="font-600 font-14 letter-14-10">Budget</label>
-                    </div>
-                    <input class="input-property font-12" type="text" placeholder="Choose the value of your budget">
-                </div>
-                <div class="start-skip"><a href="" class="start-button">Start Searching</a>
-                    <p class="skip-text">or skip</p>
-            </div>
-            </div>
+  <div class="home-img-container">
+    <img class="home-img" src="assets/Imgs/Home-page-img.png" alt="" />
+    <div class="home-img-text">Discover a place you'll call Home.</div>
+  </div>
+  <div class="home-nav">
+    <ul class="nav-tags">
+      <li class="font-300 font-14" [routerLink]="['/homes']">Homes</li>
+      <li class="font-300 font-14" [routerLink]="['/services']">Services</li>
+      <li class="font-300 font-14" [routerLink]="['/about-us']">About Us</li>
+      <li
+        class="font-14"
+        (click)="switchToLogIn()"
+        [ngClass]="{ 'font-600': mode === 'log' }"
+      >
+        Log In
+      </li>
+      <div class="underpoint" [ngClass]="{ active: mode === 'log' }"></div>
+    </ul>
+    <div *ngIf="mode === 'start'" class="home-div">
+      <div class="home-div-title">
+        <label
+          class="cursor-pointer font-300"
+          [ngClass]="{ 'font-500': selectedProperty === 'ready' }"
+          (click)="selectProperty('ready')"
+          >Ready Properties</label
+        >
+        <label
+          class="cursor-pointer font-300"
+          [ngClass]="{ 'font-500': selectedProperty === 'off-plan' }"
+          (click)="selectProperty('off-plan')"
+          >Off-plan Properties</label
+        >
+        <div
+          class="underline"
+          [ngClass]="{
+            ready: selectedProperty === 'ready',
+            'off-plan': selectedProperty === 'off-plan'
+          }"
+        ></div>
+      </div>
+      <div class="home-serach-div">
+        <div class="icon-input">
+          <div class="icon-property">
+            <img
+              class="location-icon"
+              src="assets/Icons/garden_location-fill-16.svg"
+              alt=""
+            />
+            <label class="font-600 font-14 letter-14-10">City</label>
+          </div>
+          <input
+            class="font-12 input-property"
+            type="text"
+            placeholder="Where do you want to live?"
+          />
         </div>
-        <div *ngIf="mode != 'start'" class="sign-up-div">
-            <div class="sign-up-title font-300">Welcome to</div>
-            <div class="logo"><img class="forms-logo" src="assets/Imgs/Logo.png" alt=""> </div>
-            <form *ngIf="mode === 'log'" [formGroup]="logInForm" class="forms-holder">
-                <input [class.is-invalid]="logEmail?.invalid && logEmail?.touched" formControlName="logEmail" placeholder="username@gmail.com" class="form-control" type="email">
-                <input [class.is-invalid]="logPassword?.invalid && logPassword?.touched" formControlName="logPassword" placeholder="••••••••" class="form-control" type="password">
-                <div class="password-options">
-                    <div class="text-secondary-clr font-14 remember-me">
-                        <input  type="checkbox">Remember me</div>
-                        <a class="text-secondary-clr font-14" href="">Forgot?</a>
-                </div>
-                <button class="log-button cursor-pointer" (click)="loginFunction()">Log In</button>
-                <div class="font-400 font-12 dont-have-account">Don’t have an account yet?</div>
-                <button class="register-button form cursor-pointer" (click)="switchToSignUp()">Register</button>
-
-            </form>
-            <form *ngIf="mode === 'sign'" [formGroup]="signUpForm" class="forms-holder">
-                <input [class.is-invalid]="username?.invalid && username?.touched" formControlName="username" placeholder="Username" type="text" class="form-control font-14">
-                <input [class.is-invalid]="email?.invalid && email?.touched" formControlName="email" placeholder="Email" type="email" class="form-control font-14">
-                <span *ngIf="email?.invalid && email?.touched" class="error-message">Email is required.</span>
-                <input [class.is-invalid]="password?.invalid && password?.touched" formControlName="password" placeholder="Password" type="password" class="form-control font-14">
-                <input [class.is-invalid]="password_confirmation?.invalid && password_confirmation?.touched" formControlName="password_confirmation" placeholder="Confirm Password" type="password" class="form-control font-14">
-                <button class="sign-up-button cursor-pointer font-14" (click)="signUpFunction()" >Sign Up</button>
-            </form>
+        <div class="icon-input">
+          <div class="icon-property">
+            <img class="home-icon" src="assets/Icons/Group.svg" alt="" />
+            <label class="font-600 font-14 letter-14-10">Property</label>
+          </div>
+          <input
+            class="font-12 input-property"
+            type="text"
+            placeholder="Pick up your type of property"
+          />
         </div>
+        <div class="icon-input">
+          <div class="icon-property">
+            <img class="budget-icon" src="assets/Icons/Vector.svg" alt="" />
+            <label class="font-600 font-14 letter-14-10">Budget</label>
+          </div>
+          <input
+            class="input-property font-12"
+            type="text"
+            placeholder="Choose the value of your budget"
+          />
+        </div>
+        <div class="start-skip">
+          <a href="" class="start-button">Start Searching</a>
+          <p class="skip-text">or skip</p>
+        </div>
+      </div>
     </div>
+    <div *ngIf="mode != 'start'" class="sign-up-div">
+      <div class="sign-up-title font-300">Welcome to</div>
+      <div class="logo">
+        <img class="forms-logo" src="assets/Imgs/Logo.png" alt="" />
+      </div>
+      <form *ngIf="mode === 'log'" [formGroup]="logInForm" class="forms-holder">
+        <input
+          [class.is-invalid]="logEmail?.invalid && logEmail?.touched"
+          formControlName="logEmail"
+          placeholder="username@gmail.com"
+          class="form-control"
+          type="email"
+        />
+        <input
+          [class.is-invalid]="logPassword?.invalid && logPassword?.touched"
+          formControlName="logPassword"
+          placeholder="••••••••"
+          class="form-control"
+          type="password"
+        />
+        <div class="password-options">
+          <div class="text-secondary-clr font-14 remember-me">
+            <input type="checkbox" />Remember me
+          </div>
+          <a class="text-secondary-clr font-14" href="">Forgot?</a>
+        </div>
+        <button class="log-button cursor-pointer" (click)="loginFunction()">
+          Log In
+        </button>
+        <div class="font-400 font-12 dont-have-account">
+          Don’t have an account yet?
+        </div>
+        <button
+          class="register-button form cursor-pointer"
+          (click)="switchToSignUp()"
+        >
+          Register
+        </button>
+      </form>
+      <form
+        *ngIf="mode === 'sign'"
+        [formGroup]="signUpForm"
+        class="forms-holder"
+      >
+        <input
+          [class.is-invalid]="username?.invalid && username?.touched"
+          formControlName="username"
+          placeholder="Username"
+          type="text"
+          class="form-control font-14"
+        />
+        <input
+          [class.is-invalid]="email?.invalid && email?.touched"
+          formControlName="email"
+          placeholder="Email"
+          type="email"
+          class="form-control font-14"
+        />
+        <span *ngIf="email?.invalid && email?.touched" class="error-message"
+          >Email is required.</span
+        >
+        <input
+          [class.is-invalid]="password?.invalid && password?.touched"
+          formControlName="password"
+          placeholder="Password"
+          type="password"
+          class="form-control font-14"
+        />
+        <input
+          [class.is-invalid]="
+            password_confirmation?.invalid && password_confirmation?.touched
+          "
+          formControlName="password_confirmation"
+          placeholder="Confirm Password"
+          type="password"
+          class="form-control font-14"
+        />
+        <button
+          class="sign-up-button cursor-pointer font-14"
+          (click)="signUpFunction()"
+        >
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
