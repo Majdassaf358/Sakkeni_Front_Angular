@@ -1,4 +1,11 @@
 .filter-container {
   display: flex;
   background-color: #27393a;
+  padding: 0.9rem 2rem;
+}
+.filter-div {
+  display: flex;
+}
+.filter {
+  margin: 0 0.38rem 0 1.8rem;
 }

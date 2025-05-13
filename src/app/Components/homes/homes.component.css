@@ -1,2 +1,11 @@
-.grid-card {
+.cards-filter {
+  display: flex;
+}
+.grid-cards {
+  padding-top: clamp(10px, 4.3vw, 43px);
+  padding-left: clamp(60px, 7.9vw, 120px);
+  width: 79.3%;
+}
+.side-filters {
+  background-color: #27393a;
 }
