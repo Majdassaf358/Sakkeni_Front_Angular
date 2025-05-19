@@ -78,6 +78,12 @@
 .width-50 {
   width: 50%;
 }
+.margin-1 {
+  margin: 1rem;
+}
+.border-right {
+  border-right: 1px solid #27393a33;
+}
 body {
   background-color: #fcfdfd;
   font-family: "Poppins", sans-serif;
