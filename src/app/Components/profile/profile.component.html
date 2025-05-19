@@ -1,3 +1,32 @@
 <app-navbar [page]="'profile'"></app-navbar>
-<p>profile works!</p>
-<p>{{profileInfo.email}}</p>
+<app-filters></app-filters>
+<div class="profile-container">
+  <div class="profile-top text-neutural-clr font-16 font-500">
+    Profile
+    <div class="nav-line"></div>
+  </div>
+  <div class="profile-body">
+    <div class="profile-picture">
+      <label class="text-neutural-clr font-500">Profile Picute</label>
+      <img class="pic" src="assets/Imgs/em.jpeg" alt="" />
+    </div>
+    <div class="profile-details">
+      <div class="profile-element">
+        <label class="text-neutural-clr font-500 font-14">Name</label
+        ><label class="font-12 font-400">{{ profileInfo.username }}</label>
+      </div>
+      <div class="profile-element">
+        <label class="text-neutural-clr font-500 font-14">Email</label
+        ><label class="font-12 font-400">{{ profileInfo.email }}</label>
+      </div>
+      <div class="profile-element">
+        <label class="text-neutural-clr font-500 font-14">Address</label
+        ><label class="font-12 font-400">{{ profileInfo.address }}</label>
+      </div>
+      <div class="profile-element">
+        <label class="text-neutural-clr font-500 font-14">Number</label
+        ><label class="font-12 font-400">{{ profileInfo.phone_number }}</label>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+.profile-container {
+  display: grid;
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-top: clamp(10px, 4.8vw, 2.8rem);
+  margin-left: clamp(10px, 13.4vw, 207px);
+  margin-right: clamp(10px, 13.4vw, 207px);
+  padding: 1.25rem;
+}
+.profile-top {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+.profile-body {
+  display: flex;
+  padding: 0.5rem;
+}
+.profile-picture {
+  display: grid;
+  margin-right: 1.5rem;
+}
+.pic {
+  border-radius: 16px;
+}
+.profile-details {
+  display: grid;
+  gap: 4rem;
+}
+.profile-element {
+  display: grid;
+}
+.nav-line {
+  background-color: #101818;
+  width: 100%;
+  height: 1.8px;
+}

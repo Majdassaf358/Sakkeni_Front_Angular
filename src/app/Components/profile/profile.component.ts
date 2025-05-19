@@ -4,10 +4,11 @@ import { ApiResponse } from '../../Models/ApiResponse';
 import { profile } from '../../Models/profile';
 import { lastValueFrom } from 'rxjs';
 import { AuthenticationService } from '../../Services/authentication.service';
+import { FiltersComponent } from '../../shared/filters/filters.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, FiltersComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })

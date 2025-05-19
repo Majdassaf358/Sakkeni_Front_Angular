@@ -1,6 +1,7 @@
 :root {
   --text-primary-clr: #27393a;
   --text-secondary-clr: #fcfdfd;
+  --text-neutural-clr: #101818;
   --bg-primary: #fcfdfd;
   --bg-secondary: #27393a;
   --bg-neutural: #fcfdfd47;
@@ -19,6 +20,9 @@
 }
 .text-secondary-clr {
   color: var(--text-secondary-clr);
+}
+.text-neutural-clr {
+  color: var(--text-neutural-clr);
 }
 .bg-primary {
   background-color: var(--bg-primary);
@@ -158,6 +162,12 @@ select {
 }
 .underpoint.active {
   display: block;
+}
+.nav-line {
+  background-color: #e9eeee;
+  height: 1px;
+  width: 96%;
+  justify-self: center;
 }
 @media (min-width: 50em) {
   .table-columns {
