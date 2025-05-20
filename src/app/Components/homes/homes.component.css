@@ -7,6 +7,88 @@
   width: 79.3%;
 }
 .side-filters {
-  width: 20.7%;
+  width: 21.7%;
   background-color: #27393a;
+}
+.filters-panel {
+  color: #fcfdfd;
+  padding: 1rem;
+  width: 250px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.filter-group {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.filter-title {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.radio-row label {
+  width: calc(50% - 0.5rem);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+/* Hide default checkbox and radio */
+input[type="checkbox"],
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+}
+
+/* Custom checkmark for checkbox and radio */
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  background-color: #fff;
+}
+
+/* Add a checkmark using pseudo element */
+input[type="checkbox"]:checked::after,
+input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #1d2e2f; /* dark color for check */
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Optional: spacing between input and text */
+label {
+  gap: 0.5rem;
+  display: flex;
+  align-items: center;
 }

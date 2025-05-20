@@ -1,5 +1,5 @@
 <app-navbar [page]="'homes'"></app-navbar>
-<app-filters></app-filters>
+<app-filters [page]="'homes'"></app-filters>
 
 <div class="container-fluid">
   <div #top class="ml-4">
@@ -16,6 +16,67 @@
         <button class="add-to-cart-button"></button>
       </div>
     </div>
-    <div class="side-filters">ho</div>
+    <div class="side-filters">
+      <div class="filters-panel">
+        <div class="filter-group">
+          <label>
+            <input type="checkbox" />
+            <span>Ready Property</span>
+          </label>
+        </div>
+        <div class="filter-group">
+          <div class="radio-row">
+            <label class="font-12 font-300"
+              ><input type="radio" name="purpose" /> Rent</label
+            >
+            <label class="font-12 font-300"
+              ><input type="radio" name="purpose" /> Buy</label
+            >
+          </div>
+        </div>
+        <div class="filter-group">
+          <p class="filter-title">Furnishing:</p>
+          <div class="radio-row">
+            <label class="font-12 font-300"
+              ><input type="radio" name="furnishing" /> Furnished</label
+            >
+            <label class="font-12 font-300"
+              ><input type="radio" name="furnishing" /> Unfurnished</label
+            >
+          </div>
+        </div>
+        <div class="filter-group">
+          <p class="filter-title">Rental Frequency:</p>
+          <div class="radio-row">
+            <label class="font-12 font-300"
+              ><input type="radio" name="frequency" /> Yearly</label
+            >
+            <label class="font-12 font-300"
+              ><input type="radio" name="frequency" /> Monthly</label
+            >
+            <label class="font-12 font-300"
+              ><input type="radio" name="frequency" /> Weekly</label
+            >
+            <label class="font-12 font-300"
+              ><input type="radio" name="frequency" /> Daily</label
+            >
+          </div>
+        </div>
+        <div class="filter-group">
+          <p class="filter-title">Viewing Option:</p>
+          <div class="radio-row">
+            <label class="font-12 font-300"
+              ><input type="radio" name="viewing" /> Floor Plans</label
+            >
+            <label class="font-12 font-300"
+              ><input type="radio" name="viewing" /> Video Tour</label
+            >
+            <label class="font-12 font-300"
+              ><input type="radio" name="viewing" /> 360 Tour</label
+            >
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
