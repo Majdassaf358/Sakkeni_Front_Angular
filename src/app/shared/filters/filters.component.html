@@ -30,17 +30,30 @@
       <li class="filter text-secondary-clr font-12 font-300">More Filters</li>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
-    <ul class="list-map">
-      <li class="font-12 font-300 border-right" (click)="changeDisplay('list')">
-        List
-      </li>
-      <li
-        class="font-12 font-300 border-right"
-        (click)="changeDisplay('split')"
-      >
-        Split
-      </li>
-      <li class="font-12 font-300" (click)="changeDisplay('map')">Map</li>
-    </ul>
+    <div class="list-map">
+      <ul>
+        <li
+          class="font-12 font-300 list-button"
+          [ngClass]="{ 'bg-focused': sideSelect === 'list' }"
+          (click)="changeDisplay('list')"
+        >
+          List
+        </li>
+        <li
+          class="font-12 font-300 border-right border-left"
+          [ngClass]="{ 'bg-focused': sideSelect === 'split' }"
+          (click)="changeDisplay('split')"
+        >
+          Split
+        </li>
+        <li
+          class="font-12 font-300 map-button"
+          [ngClass]="{ 'bg-focused': sideSelect === 'map' }"
+          (click)="changeDisplay('map')"
+        >
+          Map
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

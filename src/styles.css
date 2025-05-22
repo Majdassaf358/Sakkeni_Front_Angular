@@ -5,6 +5,7 @@
   --bg-primary: #fcfdfd;
   --bg-secondary: #27393a;
   --bg-neutural: #fcfdfd47;
+  --bg-focused: #b4c5c5;
   --fw-300: 300;
   --fw-400: 400;
   --fw-500: 500;
@@ -32,6 +33,9 @@
 }
 .bg-neutural {
   background-color: var(--bg-neutural);
+}
+.bg-focused {
+  background-color: var(--bg-focused);
 }
 .font-300 {
   font-weight: var(--fw-300);
@@ -83,6 +87,9 @@
 }
 .border-right {
   border-right: 1px solid #27393a33;
+}
+.border-left {
+  border-left: 1px solid #27393a33;
 }
 body {
   background-color: #fcfdfd;
