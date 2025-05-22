@@ -1,49 +1,46 @@
 <div class="filters">
-  <div class="filter-container">
+  <ul class="filter-container">
     <div class="filter-div">
-      <label class="filter text-secondary-clr font-12 font-300">Location</label>
+      <li class="filter text-secondary-clr font-12 font-300">Location</li>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <div class="filter-div">
-      <label class="filter text-secondary-clr font-12 font-300"
-        >Property Type</label
-      >
+      <li class="filter text-secondary-clr font-12 font-300">Property Type</li>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <div class="filter-div">
-      <label class="filter text-secondary-clr font-12 font-300"
-        >Price Range</label
-      >
+      <li class="filter text-secondary-clr font-12 font-300">Price Range</li>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <div class="filter-div">
-      <label class="filter text-secondary-clr font-12 font-300">Bedrooms</label>
+      <li class="filter text-secondary-clr font-12 font-300">Bedrooms</li>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <div class="filter-div">
-      <label class="filter text-secondary-clr font-12 font-300"
-        >Bathrooms</label
-      >
+      <li class="filter text-secondary-clr font-12 font-300">Bathrooms</li>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <div class="filter-div">
-      <label class="filter text-secondary-clr font-12 font-300"
-        >Area Range</label
-      >
+      <li class="filter text-secondary-clr font-12 font-300">Area Range</li>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
-  </div>
+  </ul>
   <div class="side-filters">
     <div class="more-filter">
-      <label class="filter text-secondary-clr font-12 font-300"
-        >More Filters</label
-      >
+      <li class="filter text-secondary-clr font-12 font-300">More Filters</li>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <ul class="list-map">
-      <li class="font-12 font-300 border-right">List</li>
-      <li class="font-12 font-300 border-right">Split</li>
-      <li class="font-12 font-300">Map</li>
+      <li class="font-12 font-300 border-right" (click)="changeDisplay('list')">
+        List
+      </li>
+      <li
+        class="font-12 font-300 border-right"
+        (click)="changeDisplay('split')"
+      >
+        Split
+      </li>
+      <li class="font-12 font-300" (click)="changeDisplay('map')">Map</li>
     </ul>
   </div>
 </div>

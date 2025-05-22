@@ -5,11 +5,16 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-homes',
+  standalone: true,
   imports: [NavbarComponent, FiltersComponent, CommonModule],
   templateUrl: './homes.component.html',
-  styleUrl: './homes.component.css',
+  styleUrls: ['./homes.component.css'],
 })
 export class HomesComponent implements OnInit {
+  sideFilter: string = 'list';
   constructor() {}
   ngOnInit(): void {}
+  updateSideFilter(Value: string) {
+    this.sideFilter = Value;
+  }
 }

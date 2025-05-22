@@ -22,6 +22,7 @@
 }
 .filter {
   margin: 0 0.38rem 0 1.8rem;
+  list-style: none;
 }
 .more-filter {
   display: flex;

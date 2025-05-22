@@ -1,11 +1,14 @@
 <app-navbar [page]="'homes'"></app-navbar>
-<app-filters [page]="'homes'"></app-filters>
+<app-filters
+  [page]="'homes'"
+  (filterChange)="updateSideFilter($event)"
+></app-filters>
 
 <div class="container-fluid">
   <div #top class="ml-4">
     <!-- <app-filter></app-filter> -->
   </div>
-  <div class="cards-filter">
+  <div *ngIf="sideFilter != 'map'" class="cards-filter">
     <div class="grid-cards">
       <a><img class="medicine-image" src="assets/Imgs/Home.png" alt="" /> </a>
       <div class="bottom-card">
@@ -16,8 +19,9 @@
         <button class="add-to-cart-button"></button>
       </div>
     </div>
-    <div class="side-filters">
+    <div *ngIf="sideFilter == 'list'" class="side-filters">
       <div class="filters-panel">
+        {{ sideFilter }}
         <div class="filter-group">
           <label>
             <input type="checkbox" />
@@ -78,5 +82,6 @@
         </div>
       </div>
     </div>
+    <div *ngIf="sideFilter == 'map'">{{ sideFilter }}</div>
   </div>
 </div>
