@@ -1,5 +1,5 @@
 <div class="filters">
-  <ul class="filter-container">
+  <ul class="filter-container" [ngClass]="{ 'width-75': page == 'homes' }">
     <div class="filter-div">
       <li class="filter text-secondary-clr font-12 font-300">Location</li>
       <img src="assets/Icons/chevron-down.svg" />
@@ -25,7 +25,7 @@
       <img src="assets/Icons/chevron-down.svg" />
     </div>
   </ul>
-  <div class="side-filters">
+  <div *ngIf="page === 'homes'" class="side-filters">
     <div class="more-filter">
       <li class="filter text-secondary-clr font-12 font-300">More Filters</li>
       <img src="assets/Icons/chevron-down.svg" />
