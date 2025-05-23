@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FiltersComponent } from '../../shared/filters/filters.component';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-homes',
@@ -12,9 +13,12 @@ import { CommonModule } from '@angular/common';
 })
 export class HomesComponent implements OnInit {
   sideFilter: string = 'list';
-  constructor() {}
+  constructor(private router: Router) {}
   ngOnInit(): void {}
   updateSideFilter(Value: string) {
     this.sideFilter = Value;
+  }
+  goToDetails() {
+    this.router.navigate(['/homess']);
   }
 }

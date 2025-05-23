@@ -4,31 +4,36 @@ import { HomesComponent } from './Components/homes/homes.component';
 import { AboutUsComponent } from './Components/about-us/about-us.component';
 import { ServicesComponent } from './Components/services-componenet-folder/services.component';
 import { ProfileComponent } from './Components/profile/profile.component';
+import { HomeDetailsComponent } from './Components/home-details/home-details.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full',
-      },
-      {
-        path: 'home',
-        component: HomePageComponent,
-      },
-      {
-        path: 'homes',
-        component: HomesComponent,
-      },
-      {
-        path: 'services',
-        component: ServicesComponent,
-      },
-      {
-        path: 'about-us',
-        component: AboutUsComponent,
-      },
-      {
-        path: 'profile',
-        component: ProfileComponent,
-      },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    component: HomePageComponent,
+  },
+  {
+    path: 'homes',
+    component: HomesComponent,
+  },
+  {
+    path: 'homess',
+    component: HomeDetailsComponent,
+  },
+  {
+    path: 'services',
+    component: ServicesComponent,
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+  },
 ];
