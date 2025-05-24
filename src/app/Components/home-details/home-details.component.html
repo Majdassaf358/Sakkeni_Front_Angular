@@ -1,3 +1,63 @@
 <app-navbar [page]="'homes'"></app-navbar>
 <app-filters [page]="'details'"></app-filters>
-<p>home-details works!</p>
+<div class="property-details-container">
+  <!-- Left Column -->
+  <div class="left-column">
+    <!-- Main Image -->
+    <div class="main-image">
+      <img src="assets/Imgs/Home.png" alt="House Image" />
+    </div>
+
+    <!-- Thumbnails -->
+    <div class="thumbnails">
+      <img src="assets/Imgs/Home.png" alt="Thumbnail 1" />
+      <img src="assets/Imgs/Home.png" alt="Thumbnail 2" />
+      <img src="assets/Imgs/Home.png" alt="Thumbnail 3" />
+      <img src="assets/Imgs/Home.png" alt="Thumbnail 4" />
+      <div class="more-thumbnails">+14</div>
+    </div>
+
+    <!-- Property Info -->
+    <div class="property-info">
+      <div class="status">
+        <span class="status-dot"></span>
+        House for sale
+      </div>
+      <h2 class="address">30 Kershner Pl, Fair Lawn, NJ 07410</h2>
+
+      <div class="info-pair">
+        <strong>Location</strong> Downtown Dubai - Dubai - United Arab Emirates
+        - next to the building red rosto
+      </div>
+      <div class="info-pair"><strong>Property Type</strong> Villa</div>
+      <div class="info-pair"><strong>Bedrooms</strong> 4 Bedrooms</div>
+    </div>
+  </div>
+
+  <!-- Right Column -->
+  <div class="right-column">
+    <!-- Map -->
+    <div class="map-box">
+      <img src="assets/Imgs/Home.png" alt="Map Location" />
+    </div>
+
+    <!-- Contact Agent -->
+    <div class="contact-card">
+      <div class="contact-info">
+        <div class="contact-item">
+          <img src="assets/Icons/call.svg" lt="Email" />
+          michel.brimofgmail.com
+        </div>
+        <div class="contact-item">
+          <img src="assets/Icons/email.svg" lt="Phone" />
+          +9635621717
+        </div>
+        <p class="note">
+          Take a tour over live video, or in-person with a leasing agent. Choose
+          the day and time that works for you.
+        </p>
+        <button class="contact-button">Contact Agent</button>
+      </div>
+    </div>
+  </div>
+</div>
