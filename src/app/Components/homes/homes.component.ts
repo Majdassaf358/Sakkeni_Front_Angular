@@ -19,6 +19,6 @@ export class HomesComponent implements OnInit {
     this.sideFilter = Value;
   }
   goToDetails() {
-    this.router.navigate(['/homess']);
+    this.router.navigate(['/homes-details']);
   }
 }

@@ -21,7 +21,7 @@ export const routes: Routes = [
     component: HomesComponent,
   },
   {
-    path: 'homess',
+    path: 'homes-details',
     component: HomeDetailsComponent,
   },
   {
