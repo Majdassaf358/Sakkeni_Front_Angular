@@ -14,12 +14,10 @@ export class PropertyService {
   constructor(private http: HttpClient) {}
 
   public viewProperty(
-    readyOrOff: 'ready-to-move-in',
-    comOrRes: 'commercial',
-    purOrRent: string,
+    type: string = 'rent',
     page: number = 1
   ): Observable<ApiResponse<PaginatedData<propertyCard>>> {
-    let url = `${environment.Api}/view-properties/${readyOrOff}/${comOrRes}/${purOrRent}/?page=${page}`;
+    let url = `${environment.Api}/view-properties/${type}/?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<propertyCard>>>(url);
   }
   public addProperty(property: addProperty): Observable<ApiResponse<null>> {

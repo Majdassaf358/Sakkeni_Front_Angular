@@ -9,19 +9,20 @@
     <!-- <app-filter></app-filter> -->
   </div>
   <div *ngIf="sideFilter != 'map'" class="cards-filter">
-    <div class="grid-cards">
-      <a (click)="goToDetails()"
-        ><img class="medicine-image" src="assets/Imgs/Home.png" alt="" />
-      </a>
-      <div class="property-details">
-        <div class="property-header">
-          <p class="property-type">House for sale</p>
-          <span class="wishlist">♡</span>
+    <div class="all-cards">
+      <div class="one-card" *ngFor="let test of properties">
+        <a (click)="goToDetails()"
+          ><img class="home-image" src="assets/Imgs/Home.png" alt="" />
+        </a>
+        <div class="property-details">
+          <div class="property-header">
+            <p class="property-type">House for sale</p>
+            <span class="wishlist">♡</span>
+          </div>
+          <p class="property-price">{{ test.price }}</p>
+          <p class="property-bedrooms"><strong>4</strong> bedroom</p>
+          <p class="property-location">{{ test.city }}</p>
         </div>
-        <p class="property-price">$479,999</p>
-        <p class="property-bedrooms"><strong>4</strong> bedroom</p>
-        <p class="property-location">30 Kershner Pl, Fair Lawn, NJ 07410</p>
-        <button class="contact-agent-btn">Contact Agent</button>
       </div>
     </div>
 

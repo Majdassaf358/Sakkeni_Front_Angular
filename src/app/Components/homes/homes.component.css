@@ -2,15 +2,26 @@
   display: flex;
 }
 
-.grid-cards {
+.all-cards {
   padding-top: clamp(10px, 4.3vw, 43px);
   padding-left: clamp(60px, 7.9vw, 120px);
   width: 79.3%;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  gap: 1rem;
+}
+.one-card {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .property-details {
+  width: 90%;
   background-color: #fff;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+}
+.home-image {
+  width: 90%;
 }
 .side-filters {
   width: 21.7%;
