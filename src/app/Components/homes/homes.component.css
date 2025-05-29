@@ -1,10 +1,16 @@
 .cards-filter {
   display: flex;
 }
+
 .grid-cards {
   padding-top: clamp(10px, 4.3vw, 43px);
   padding-left: clamp(60px, 7.9vw, 120px);
   width: 79.3%;
+  overflow: hidden;
+}
+.property-details {
+  background-color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 .side-filters {
   width: 21.7%;
@@ -87,4 +93,55 @@ label {
   gap: 0.5rem;
   display: flex;
   align-items: center;
+}
+
+.property-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.property-type {
+  color: #666;
+}
+
+.wishlist {
+  cursor: pointer;
+  color: #aaa;
+  transition: color 0.2s ease;
+}
+
+.wishlist:hover {
+  color: #f87171; /* soft red */
+}
+
+.property-price {
+  margin: 8px 0 4px;
+  color: #333;
+}
+
+.property-bedrooms {
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.property-location {
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.contact-agent-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.contact-agent-btn:hover {
+  background-color: #ddd;
 }

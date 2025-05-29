@@ -13,16 +13,18 @@
       <a (click)="goToDetails()"
         ><img class="medicine-image" src="assets/Imgs/Home.png" alt="" />
       </a>
-      <div class="bottom-card">
-        <label> class="card-name">medicine.commercialName</label>
-        <label> class="card-form">Form: medicine.medicineForm</label>
-        <label>
-          class="card-price">Gross Price: medicine.grossPrice (SYP)</label
-        >
-        <label> class="card-price">Net Price: medicine.netPrice (SYP)</label>
-        <button class="add-to-cart-button"></button>
+      <div class="property-details">
+        <div class="property-header">
+          <p class="property-type">House for sale</p>
+          <span class="wishlist">♡</span>
+        </div>
+        <p class="property-price">$479,999</p>
+        <p class="property-bedrooms"><strong>4</strong> bedroom</p>
+        <p class="property-location">30 Kershner Pl, Fair Lawn, NJ 07410</p>
+        <button class="contact-agent-btn">Contact Agent</button>
       </div>
     </div>
+
     <div *ngIf="sideFilter == 'list'" class="side-filters">
       <div class="filters-panel">
         <div class="filter-group">
