@@ -10,18 +10,21 @@
   </div>
   <div *ngIf="sideFilter != 'map'" class="cards-filter">
     <div class="all-cards">
-      <div class="one-card" *ngFor="let test of properties">
-        <a (click)="goToDetails()"
-          ><img class="home-image" src="assets/Imgs/Home.png" alt="" />
+      <div class="width-95" *ngFor="let card of properties">
+        <a class="home-image"
+          ><img src="assets/Imgs/Home.png" alt="" (click)="goToDetails()" />
         </a>
         <div class="property-details">
           <div class="property-header">
-            <p class="property-type">House for sale</p>
+            <span class="status-dot"></span>
+            <p class="property-type">Condo for rent</p>
             <span class="wishlist">♡</span>
           </div>
-          <p class="property-price">{{ test.price }}</p>
+          <p class="property-price">
+            {{ card.price }}<span class="per-month">/month</span>
+          </p>
           <p class="property-bedrooms"><strong>4</strong> bedroom</p>
-          <p class="property-location">{{ test.city }}</p>
+          <p class="property-location">{{ card.city }}</p>
         </div>
       </div>
     </div>
