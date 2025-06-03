@@ -24,18 +24,16 @@
 }
 .profile-section {
   display: flex;
-  justify-content: end;
+  align-items: center;
 }
 .profile-img {
   width: 40px;
   height: 40px;
   border-radius: 30px;
-  margin: 1rem;
+  /* margin: 1rem; */
   cursor: pointer;
 }
-.profile-button {
-  display: none;
-}
+
 .underpoint {
   left: 41%;
 }
@@ -49,7 +47,8 @@
   border-right: 6px solid transparent;
   border-top: 6px solid #e9eeee;
   border-bottom: none;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .lan-list {
   display: none;
