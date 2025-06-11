@@ -49,14 +49,14 @@
       </ul>
     </div>
     <!-- profile -->
-    <div class="profile-section">
-      <img
-        src="assets/Imgs/em.jpeg"
-        alt=""
-        class="profile-img"
-        (click)="goToProfile()"
-      />
-      <button class="lan-button bg-secondary"></button>
+    <div class="profile-section" (click)="toggleDropdown()">
+      <img src="assets/Imgs/em.jpeg" alt="" class="profile-img" />
+      <span class="lan-button bg-secondary"></span>
+      <ul class="dropdown-menu" *ngIf="dropdownOpen">
+        <li (click)="goToProfile()">Edit Profile</li>
+        <li (click)="changePassword()">Change Password</li>
+        <li (click)="logout()">Log Out</li>
+      </ul>
     </div>
   </div>
   <div class="nav-line"></div>

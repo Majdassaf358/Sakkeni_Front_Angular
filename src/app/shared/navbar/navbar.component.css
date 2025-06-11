@@ -58,3 +58,27 @@
 .lan:hover .lan-list {
   display: block;
 }
+.dropdown-menu {
+  position: absolute;
+  top: 8%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  z-index: 1000;
+  min-width: 160px;
+}
+
+.dropdown-menu li {
+  padding: 10px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}

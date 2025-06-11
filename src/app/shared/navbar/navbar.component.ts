@@ -13,6 +13,7 @@ import { AuthenticationService } from '../../Services/authentication.service';
 })
 export class NavbarComponent {
   @Input() page!: string;
+  dropdownOpen = false;
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
@@ -26,6 +27,32 @@ export class NavbarComponent {
       let res: ApiResponse<null> = await lastValueFrom(
         this.authenticationService.logout()
       );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  closeDropdown() {
+    setTimeout(() => (this.dropdownOpen = false), 150);
+  }
+
+  editProfile() {
+    console.log('Edit Profile clicked');
+  }
+
+  changePassword() {
+    console.log('Change Password clicked');
+  }
+
+  async logout() {
+    try {
+      let res: ApiResponse<null> = await lastValueFrom(
+        this.authenticationService.logout()
+      );
+      this.router.navigate(['/home']);
     } catch (error) {
       console.log(error);
     }
