@@ -7,7 +7,7 @@
   padding-left: clamp(60px, 7.9vw, 120px);
   width: 79.3%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(21%, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem 0rem;
   margin-right: 0.2rem;
 }
@@ -17,11 +17,11 @@
   background-color: #fffefc;
   box-shadow: 0px 4px 10px 0px #00000026;
   padding: 0.5rem;
-
   justify-content: center;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
 .home-image {
   cursor: default;
 }
