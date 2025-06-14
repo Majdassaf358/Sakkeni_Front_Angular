@@ -12,13 +12,12 @@ import { FormsModule } from '@angular/forms';
 import { filters } from '../../Models/filters';
 
 @Component({
-  selector: 'app-homes',
-  standalone: true,
+  selector: 'app-properties',
   imports: [NavbarComponent, FiltersComponent, CommonModule, FormsModule],
-  templateUrl: './homes.component.html',
-  styleUrls: ['./homes.component.css'],
+  templateUrl: './properties.component.html',
+  styleUrl: './properties.component.css',
 })
-export class HomesComponent implements OnInit {
+export class PropertiesComponent implements OnInit {
   sideFilter: string = 'list';
   currentPage: number = 1;
   properties: propertyCard[] = [];
@@ -27,6 +26,25 @@ export class HomesComponent implements OnInit {
     private propertyservice: PropertyService
   ) {}
   ngOnInit(): void {
-    // this.getProperties();
+    this.getProperties();
+  }
+  async getProperties() {
+    try {
+      let res: ApiResponse<PaginatedData<propertyCard>> = await lastValueFrom(
+        this.propertyservice.viewProperty()
+      );
+      this.currentPage = res.data.current_page;
+      this.properties = res.data.data;
+      console.log(this.properties);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  updateSideFilter(Value: string) {
+    this.sideFilter = Value;
+  }
+  updateView(Value: filters) {}
+  goToDetails() {
+    this.router.navigate(['/homes-details']);
   }
 }

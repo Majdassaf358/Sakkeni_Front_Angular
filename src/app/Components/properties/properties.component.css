@@ -1,0 +1,170 @@
+.cards-filter {
+  display: flex;
+}
+
+.all-cards {
+  padding-top: clamp(10px, 4.3vw, 43px);
+  padding-left: clamp(60px, 7.9vw, 120px);
+  width: 79.3%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem 0rem;
+  margin-right: 0.2rem;
+}
+
+.property-details {
+  display: grid;
+  background-color: #fffefc;
+  box-shadow: 0px 4px 10px 0px #00000026;
+  padding: 0.5rem;
+  justify-content: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.home-image {
+  cursor: default;
+}
+.home-image img {
+  cursor: pointer;
+}
+.side-filters {
+  width: 21.7%;
+  background-color: #27393a;
+  display: flex;
+  justify-content: center;
+}
+.filters-panel {
+  color: #fcfdfd;
+  padding: 1rem;
+}
+
+.filter-group {
+  margin-bottom: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.filter-title {
+  margin-bottom: 0.3rem;
+}
+.radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.radio-row label {
+  width: calc(35% - 0.5rem);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+/* Hide default checkbox and radio */
+input[type="checkbox"],
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+}
+
+/* Custom checkmark for checkbox and radio */
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  background-color: #fff;
+}
+
+/* Add a checkmark using pseudo element */
+input[type="checkbox"]:checked::after,
+input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #1d2e2f; /* dark color for check */
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Optional: spacing between input and text */
+label {
+  gap: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.property-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ffe600;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.property-type {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wishlist {
+  cursor: pointer;
+  color: #aaa;
+  transition: color 0.2s ease;
+}
+
+.wishlist:hover {
+  color: #f87171; /* soft red */
+}
+
+.property-price {
+  margin: 0.4rem 0 0;
+}
+.per-month {
+  margin-left: 0.2rem;
+}
+
+/* .property-bedrooms {
+  }
+  
+  .property-location {
+  } */
+
+.contact-agent-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.contact-agent-btn:hover {
+  background-color: #ddd;
+}

@@ -5,6 +5,7 @@ import { AboutUsComponent } from './Components/about-us/about-us.component';
 import { ServicesComponent } from './Components/services-component-folder/services.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { HomeDetailsComponent } from './Components/home-details/home-details.component';
+import { PropertiesComponent } from './Components/properties/properties.component';
 
 export const routes: Routes = [
   {
@@ -13,12 +14,16 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
+    path: 'login',
     component: HomePageComponent,
   },
   {
-    path: 'homes',
+    path: 'home',
     component: HomesComponent,
+  },
+  {
+    path: 'properties',
+    component: PropertiesComponent,
   },
   {
     path: 'homes-details',
