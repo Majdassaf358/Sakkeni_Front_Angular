@@ -27,6 +27,8 @@
 }
 .home-image img {
   cursor: pointer;
+  width: 100%;
+  /* height: auto; */
 }
 .side-filters {
   width: 21.7%;
