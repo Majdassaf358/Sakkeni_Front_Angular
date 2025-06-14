@@ -18,6 +18,18 @@
     </div>
     <div class="filter-div">
       <li class="filter text-secondary-clr font-12 font-300">Bathrooms</li>
+      <select
+        class="test"
+        [(ngModel)]="filtersVal.bathrooms"
+        (change)="getProperties()"
+      >
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <div class="filter-div">
