@@ -89,10 +89,10 @@
   position: absolute;
   top: 13.5rem;
   background-color: #27393a;
-  width: 4.2%;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  width: 3%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .add-property-icon {
-  margin: 0.8rem 0 0 0rem;
+  margin: 0.8rem 0rem 0.8rem 0rem;
 }

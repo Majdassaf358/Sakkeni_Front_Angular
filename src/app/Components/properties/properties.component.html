@@ -18,7 +18,7 @@
       <div class="width-95" *ngFor="let card of properties">
         <a class="home-image" *ngFor="let img of card.images"
           ><img
-            [src]="'http://127.0.0.1:8000/' + img.image_path"
+            [src]="'http://127.0.0.1:8000/' + img?.image_path"
             alt=""
             (click)="goToDetails()"
           />
