@@ -10,15 +10,10 @@
   </div>
   <div *ngIf="sideFilter != 'map'" class="cards-filter">
     <div class="all-cards">
-      <img
-        src="http://127.0.0.1:8000/storage/property/4/sAP1t0VHaZJw3ERpoY0ycjwZuIRGNIdKwmd0yOrL.jpg"
-        alt="Test Image"
-      />
-
       <div class="width-95" *ngFor="let card of properties">
-        <a class="home-image" *ngFor="let img of card.images"
+        <a class="home-image"
           ><img
-            [src]="'http://127.0.0.1:8000/' + img?.image_path"
+            [src]="'http://127.0.0.1:8000/' + card.cover_image.image_path"
             alt=""
             (click)="goToDetails()"
           />

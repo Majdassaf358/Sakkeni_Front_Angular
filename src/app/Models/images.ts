@@ -1,4 +1,4 @@
-export class images {
+export class cover_image {
   'id': number;
   'property_id': number;
   'image_path': string;

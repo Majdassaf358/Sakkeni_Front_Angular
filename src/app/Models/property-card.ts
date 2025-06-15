@@ -1,4 +1,4 @@
-import { images } from './images';
+import { cover_image } from './images';
 
 export class propertyCard {
   'id': number;
@@ -6,5 +6,5 @@ export class propertyCard {
   'country': string;
   'city': string;
   'additional_info': string;
-  'images': images[];
+  'cover_image': cover_image;
 }
