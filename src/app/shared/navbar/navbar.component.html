@@ -33,7 +33,7 @@
     >
       About Us
     </li>
-    <li [routerLink]="['/home']">Log In</li>
+    <li [routerLink]="['/login']">Log In</li>
   </ul>
   <!-- profile-section -->
   <div class="right-section width-25">
@@ -60,4 +60,7 @@
     </div>
   </div>
   <div class="nav-line"></div>
+</div>
+<div *ngIf="page === 'properties'" class="plus-button">
+  <img src="assets/Icons/add-property.svg" alt="" class="add-property-icon" />
 </div>

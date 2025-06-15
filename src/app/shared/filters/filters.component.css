@@ -61,3 +61,8 @@
   border-bottom-right-radius: 5px;
 }
 /* focused color:#B4C5C5 */
+.test {
+  background-color: #27393a;
+  border: none;
+  color: #fcfdfd;
+}

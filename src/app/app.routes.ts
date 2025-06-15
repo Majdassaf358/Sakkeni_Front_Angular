@@ -10,7 +10,7 @@ import { PropertiesComponent } from './Components/properties/properties.componen
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {

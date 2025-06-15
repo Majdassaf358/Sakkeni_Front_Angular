@@ -35,6 +35,7 @@ export class PropertiesComponent implements OnInit {
       );
       this.currentPage = res.data.current_page;
       this.properties = res.data.data;
+
       console.log(this.properties);
     } catch (error) {
       console.log(error);
