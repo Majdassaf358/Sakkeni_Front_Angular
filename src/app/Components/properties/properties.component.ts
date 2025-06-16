@@ -66,6 +66,6 @@ export class PropertiesComponent implements OnInit {
   handleFiltersUpdate(newFilters: filters) {
     console.log('Received Filters:', this.receivedFilters);
     this.receivedFilters = newFilters;
-    console.log(this.properties);
+    this.filterProperties();
   }
 }
