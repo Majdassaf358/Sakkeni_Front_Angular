@@ -18,73 +18,8 @@
       </li>
       <div class="underpoint" [ngClass]="{ active: mode === 'log' }"></div>
     </ul>
-    <div *ngIf="mode === 'start'" class="home-div">
-      <div class="home-div-title">
-        <label
-          class="cursor-pointer font-300"
-          [ngClass]="{ 'font-500': selectedProperty === 'ready' }"
-          (click)="selectProperty('ready')"
-          >Ready Properties</label
-        >
-        <label
-          class="cursor-pointer font-300"
-          [ngClass]="{ 'font-500': selectedProperty === 'off-plan' }"
-          (click)="selectProperty('off-plan')"
-          >Off-plan Properties</label
-        >
-        <div
-          class="underline"
-          [ngClass]="{
-            ready: selectedProperty === 'ready',
-            'off-plan': selectedProperty === 'off-plan'
-          }"
-        ></div>
-      </div>
-      <div class="home-serach-div">
-        <div class="icon-input">
-          <div class="icon-property">
-            <img
-              class="location-icon"
-              src="assets/Icons/garden_location-fill-16.svg"
-              alt=""
-            />
-            <label class="font-600 font-14 letter-14-10">City</label>
-          </div>
-          <input
-            class="font-12 input-property"
-            type="text"
-            placeholder="Where do you want to live?"
-          />
-        </div>
-        <div class="icon-input">
-          <div class="icon-property">
-            <img class="home-icon" src="assets/Icons/Group.svg" alt="" />
-            <label class="font-600 font-14 letter-14-10">Property</label>
-          </div>
-          <input
-            class="font-12 input-property"
-            type="text"
-            placeholder="Pick up your type of property"
-          />
-        </div>
-        <div class="icon-input">
-          <div class="icon-property">
-            <img class="budget-icon" src="assets/Icons/Vector.svg" alt="" />
-            <label class="font-600 font-14 letter-14-10">Budget</label>
-          </div>
-          <input
-            class="input-property font-12"
-            type="text"
-            placeholder="Choose the value of your budget"
-          />
-        </div>
-        <div class="start-skip">
-          <a href="" class="start-button">Start Searching</a>
-          <p class="skip-text">or skip</p>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="mode != 'start'" class="sign-up-div">
+
+    <div class="sign-up-div">
       <div class="sign-up-title font-300">Welcome to</div>
       <div class="logo">
         <img class="forms-logo" src="assets/Imgs/Logo.png" alt="" />

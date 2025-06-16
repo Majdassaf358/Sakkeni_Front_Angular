@@ -17,15 +17,15 @@ import { AuthenticationService } from '../../Services/authentication.service';
 import { sign_up } from '../../Models/sign-up';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-login-page',
   imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css',
+  templateUrl: './login-page.component.html',
+  styleUrl: './login-page.component.css',
 })
-export class HomePageComponent {
+export class LoginPageComponent {
   signUpForm!: FormGroup;
   logInForm!: FormGroup;
-  mode: string = 'start';
+  mode: string = 'log';
   token: string = '';
   selectedProperty: string = 'ready';
   authenticationRes!: authenticationRes;
