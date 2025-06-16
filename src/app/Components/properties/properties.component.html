@@ -2,6 +2,7 @@
 <app-filters
   [page]="'properties'"
   (filterChange)="updateSideFilter($event)"
+  (filter)="handleFiltersUpdate($event)"
 ></app-filters>
 
 <div class="container-fluid">

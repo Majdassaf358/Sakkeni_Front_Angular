@@ -20,6 +20,7 @@ import { filters } from '../../Models/filters';
 export class PropertiesComponent implements OnInit {
   sideFilter: string = 'list';
   currentPage: number = 1;
+  receivedFilters!: filters;
   properties: propertyCard[] = [];
   constructor(
     private router: Router,
@@ -41,11 +42,30 @@ export class PropertiesComponent implements OnInit {
       console.log(error);
     }
   }
+  async filterProperties() {
+    try {
+      this.properties = [];
+      let res: ApiResponse<PaginatedData<propertyCard>> = await lastValueFrom(
+        this.propertyservice.filterProperty('rent', 1, this.receivedFilters)
+      );
+      this.currentPage = res.data.current_page;
+      this.properties = res.data.data;
+
+      console.log(this.properties);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   updateSideFilter(Value: string) {
     this.sideFilter = Value;
   }
   updateView(Value: filters) {}
   goToDetails() {
     this.router.navigate(['/homes-details']);
+  }
+  handleFiltersUpdate(newFilters: filters) {
+    console.log('Received Filters:', this.receivedFilters);
+    this.receivedFilters = newFilters;
+    console.log(this.properties);
   }
 }

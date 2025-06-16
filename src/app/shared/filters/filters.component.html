@@ -5,23 +5,56 @@
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <div class="filter-div">
-      <li class="filter text-secondary-clr font-12 font-300">Property Type</li>
+      <li class="filter text-secondary-clr font-12 font-300">Area Min</li>
+      <select
+        class="test"
+        [(ngModel)]="filtersSel.min_area"
+        (change)="getFilteredData()"
+      >
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <div class="filter-div">
-      <li class="filter text-secondary-clr font-12 font-300">Price Range</li>
+      <li class="filter text-secondary-clr font-12 font-300">Area Max</li>
+      <select
+        class="test"
+        [(ngModel)]="filtersSel.max_area"
+        (change)="getFilteredData()"
+      >
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <div class="filter-div">
-      <li class="filter text-secondary-clr font-12 font-300">Bedrooms</li>
+      <li class="filter text-secondary-clr font-12 font-300">Balconies</li>
+      <select
+        class="test"
+        [(ngModel)]="filtersSel.balconies"
+        (change)="getFilteredData()"
+      >
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
       <img src="assets/Icons/chevron-down.svg" />
     </div>
     <div class="filter-div">
       <li class="filter text-secondary-clr font-12 font-300">Bathrooms</li>
       <select
         class="test"
-        [(ngModel)]="filtersVal.bathrooms"
-        (change)="getProperties()"
+        [(ngModel)]="filtersSel.bathrooms"
+        (change)="getFilteredData()"
       >
         <option value="1">1</option>
         <option value="2">2</option>

@@ -19,9 +19,9 @@ import { filters } from '../../Models/filters';
 export class FiltersComponent {
   @Input() page!: string;
   @Output() filterChange = new EventEmitter<string>();
+  @Output() filter = new EventEmitter<filters>();
   sideSelect: string = 'list';
-  properties: propertyCard[] = [];
-  filtersVal: filters = new filters();
+  filtersSel: filters = new filters();
 
   constructor(
     private router: Router,
@@ -31,16 +31,8 @@ export class FiltersComponent {
     this.filterChange.emit(change);
     this.sideSelect = change;
   }
-  async getProperties() {
-    try {
-      let res: ApiResponse<PaginatedData<propertyCard>> = await lastValueFrom(
-        this.propertyservice.filterProperty('rent', 1, this.filtersVal)
-      );
-      this.properties = res.data.data;
-      console.log(this.properties);
-    } catch (error) {
-      console.log(error);
-    }
+  getFilteredData() {
+    console.log('Child: Filters Updated', this.filtersSel);
+    this.filter.emit(this.filtersSel);
   }
-  sendFilter() {}
 }
