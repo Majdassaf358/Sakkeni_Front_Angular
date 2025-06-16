@@ -38,7 +38,7 @@
   <!-- profile-section -->
   <div class="right-section width-25">
     <!-- language -->
-    <div class="lan">
+    <!-- <div class="lan">
       <img src="assets/Icons/globe.svg" alt="" class="lan-icon" />
       <div class="text-secondary-clr">Eng</div>
       <button class="lan-button bg-secondary"></button>
@@ -47,9 +47,9 @@
           <div>Lan<a class="bg-neutural" href=""></a></div>
         </li>
       </ul>
-    </div>
+    </div> -->
     <!-- profile -->
-    <div class="profile-section" (click)="toggleDropdown()">
+    <div class="profile-section" (click)="toggleDropdown()" #dropdown>
       <img src="assets/Imgs/em.jpeg" alt="" class="profile-img" />
       <span class="lan-button bg-secondary"></span>
       <ul class="dropdown-menu" *ngIf="dropdownOpen">

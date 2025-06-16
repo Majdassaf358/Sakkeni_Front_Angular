@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { ApiResponse } from '../../Models/ApiResponse';
@@ -13,6 +19,7 @@ import { AuthenticationService } from '../../Services/authentication.service';
 })
 export class NavbarComponent {
   @Input() page!: string;
+  @ViewChild('dropdown', { static: false }) dropdown!: ElementRef;
   dropdownOpen = false;
   constructor(
     private router: Router,
@@ -55,6 +62,16 @@ export class NavbarComponent {
       this.router.navigate(['/home']);
     } catch (error) {
       console.log(error);
+    }
+  }
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (
+      this.dropdownOpen &&
+      this.dropdown &&
+      !this.dropdown.nativeElement.contains(event.target)
+    ) {
+      this.dropdownOpen = false;
     }
   }
 }
