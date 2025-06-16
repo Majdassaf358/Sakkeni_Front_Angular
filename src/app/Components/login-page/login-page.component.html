@@ -70,6 +70,11 @@
           type="text"
           class="form-control font-14"
         />
+        <span
+          *ngIf="username?.invalid && username?.touched"
+          class="error-message"
+          >Username is required.</span
+        >
         <input
           [class.is-invalid]="email?.invalid && email?.touched"
           formControlName="email"
@@ -87,6 +92,11 @@
           type="password"
           class="form-control font-14"
         />
+        <span
+          *ngIf="password?.invalid && password?.touched"
+          class="error-message"
+          >Password must be 8 characters.</span
+        >
         <input
           [class.is-invalid]="
             password_confirmation?.invalid && password_confirmation?.touched
@@ -96,6 +106,13 @@
           type="password"
           class="form-control font-14"
         />
+        <span
+          *ngIf="
+            password_confirmation?.invalid && password_confirmation?.touched
+          "
+          class="error-message"
+          >The Confirm is required.</span
+        >
         <button
           class="sign-up-button cursor-pointer font-14"
           (click)="signUpFunction()"
