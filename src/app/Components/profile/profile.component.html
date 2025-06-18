@@ -7,33 +7,53 @@
   </div>
   <div class="profile-body">
     <div class="profile-picture">
-      <label class="text-neutural-clr font-500">Profile Picute</label>
+      <label class="text-neutural-clr font-500">Profile Picture</label>
       <img class="pic" src="assets/Imgs/Girl.jpg" alt="" />
     </div>
+
     <div class="profile-details">
       <div class="profile-element">
-        <label class="text-neutural-clr font-500 font-14">Name</label
-        ><label class="font-12 font-400">{{ profileInfo.username }}</label>
+        <label class="text-neutural-clr font-500 font-14">Name</label>
+        <input
+          class="font-12 font-400 profile-inputs"
+          [(ngModel)]="profileInfo.username"
+        />
       </div>
       <div class="profile-element">
-        <label class="text-neutural-clr font-500 font-14">Email</label
-        ><label class="font-12 font-400">{{ profileInfo.email }}</label>
+        <label class="text-neutural-clr font-500 font-14">Email</label>
+        <input
+          class="font-12 font-400 profile-inputs"
+          [(ngModel)]="profileInfo.email"
+        />
       </div>
       <div class="profile-element">
-        <label class="text-neutural-clr font-500 font-14">Address</label
-        ><label class="font-12 font-400">{{ profileInfo.address }}</label>
+        <label class="text-neutural-clr font-500 font-14">Address</label>
+        <input
+          class="font-12 font-400 profile-inputs"
+          [(ngModel)]="updatedProfile.address"
+        />
       </div>
       <div class="profile-element">
-        <label class="text-neutural-clr font-500 font-14">Number</label
-        ><label class="font-12 font-400">{{ profileInfo.phone_number }}</label>
+        <label class="text-neutural-clr font-500 font-14">Number</label>
+        <input
+          class="font-12 font-400 profile-inputs"
+          [(ngModel)]="updatedProfile.phone_number"
+        />
       </div>
     </div>
   </div>
+
   <div class="buttons">
-    <button class="cancel-button font-400 font-12 text-secondary-clr">
+    <button
+      (click)="cancelChanges()"
+      class="cancel-button font-400 font-12 text-secondary-clr cursor-pointer"
+    >
       Cancel
     </button>
-    <button class="save-button font-400 font-12 text-secondary-clr">
+    <button
+      (click)="updateProfile()"
+      class="save-button font-400 font-12 text-secondary-clr cursor-pointer"
+    >
       Save
     </button>
   </div>

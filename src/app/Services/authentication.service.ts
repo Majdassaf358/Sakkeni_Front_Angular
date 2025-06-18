@@ -7,6 +7,7 @@ import { login } from '../Models/login';
 import { authenticationRes } from '../Models/authenticationRes';
 import { sign_up } from '../Models/sign-up';
 import { profile } from '../Models/profile';
+import { updateProfile } from '../Models/updateProfile';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,10 @@ export class AuthenticationService {
   public profile(): Observable<ApiResponse<profile>> {
     let url = `${environment.Api}/my-profile`;
     return this.http.get<ApiResponse<profile>>(url);
+  }
+  public updateProfile(req: updateProfile): Observable<ApiResponse<null>> {
+    let url = `${environment.Api}/my-profile`;
+    return this.http.post<ApiResponse<null>>(url, req);
   }
   public logout(): Observable<ApiResponse<null>> {
     let url = `${environment.Api}/logout`;
