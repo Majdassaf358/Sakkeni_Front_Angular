@@ -13,6 +13,7 @@ import { AuthenticationService } from '../../Services/authentication.service';
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',

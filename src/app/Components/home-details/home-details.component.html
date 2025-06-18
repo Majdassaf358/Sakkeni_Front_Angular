@@ -1,20 +1,35 @@
-<app-navbar [page]="'home'"></app-navbar>
+<app-navbar [page]="'properties'"></app-navbar>
 <app-filters [page]="'details'"></app-filters>
 <div class="property-details-container">
   <!-- Left Column -->
   <div class="left-column">
     <!-- Main Image -->
-    <div class="main-image">
+    <!-- <div class="main-image">
       <img src="assets/Imgs/Home.png" alt="House Image" />
-    </div>
+    </div> -->
 
-    <!-- Thumbnails -->
-    <div class="thumbnails">
-      <img src="assets/Imgs/Home.png" alt="Thumbnail 1" />
-      <img src="assets/Imgs/Home.png" alt="Thumbnail 2" />
-      <img src="assets/Imgs/Home.png" alt="Thumbnail 3" />
-      <img src="assets/Imgs/Home.png" alt="Thumbnail 4" />
-      <div class="more-thumbnails">+14</div>
+    <div class="gallery">
+      <!-- Cover image -->
+      <div class="cover-image">
+        <img [src]="images[0]" alt="Cover" />
+      </div>
+
+      <!-- Thumbnails -->
+      <div class="thumbnail-row">
+        <ng-container *ngFor="let img of images.slice(1, 5); let i = index">
+          <img [src]="img" alt="Thumbnail" class="thumbnail" />
+        </ng-container>
+
+        <!-- "+N" Overlay on last thumbnail if more than 5 -->
+        <div
+          class="thumbnail overlay"
+          *ngIf="images.length > 5"
+          (click)="openGallery()"
+        >
+          <img [src]="images[5]" alt="More thumbnails" />
+          <div class="overlay-text">+{{ images.length - 5 }}</div>
+        </div>
+      </div>
     </div>
 
     <!-- Property Info -->
@@ -30,7 +45,15 @@
         - next to the building red rosto
       </div>
       <div class="info-pair"><strong>Property Type</strong> Villa</div>
-      <div class="info-pair"><strong>Bedrooms</strong> 4 Bedrooms</div>
+      <div class="info-pair"><strong>Area</strong>{{ details.area }}</div>
+      <div class="info-pair">
+        <strong>Bathrooms</strong> {{ details.bathrooms }}
+      </div>
+
+      <div class="info-pair">
+        <strong>Balconies</strong>{{ details.balconies }}
+      </div>
+      <div class="info-pair"><strong>Price</strong>{{ details.price }}</div>
     </div>
   </div>
 
