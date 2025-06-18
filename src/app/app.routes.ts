@@ -26,7 +26,7 @@ export const routes: Routes = [
     component: PropertiesComponent,
   },
   {
-    path: 'homes-details',
+    path: 'homes-details/:homeID',
     component: HomeDetailsComponent,
   },
   {

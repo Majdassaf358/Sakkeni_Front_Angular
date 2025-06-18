@@ -16,7 +16,7 @@
           ><img
             [src]="'http://127.0.0.1:8000/' + card.cover_image.image_path"
             alt=""
-            (click)="goToDetails()"
+            (click)="goToDetails(card.id)"
           />
         </a>
         <div class="property-details">

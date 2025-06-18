@@ -60,8 +60,8 @@ export class PropertiesComponent implements OnInit {
     this.sideFilter = Value;
   }
   updateView(Value: filters) {}
-  goToDetails() {
-    this.router.navigate(['/homes-details']);
+  goToDetails(id: number) {
+    this.router.navigate(['/homes-details', id]);
   }
   handleFiltersUpdate(newFilters: filters) {
     console.log('Received Filters:', this.receivedFilters);

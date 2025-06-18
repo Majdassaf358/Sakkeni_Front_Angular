@@ -7,6 +7,7 @@ import { propertyCard } from '../Models/property-card';
 import { PaginatedData } from '../Models/paginatedData';
 import { addProperty } from '../Models/addProperty';
 import { filters } from '../Models/filters';
+import { propertyDetails } from '../Models/property-details';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,12 @@ export class PropertyService {
   ): Observable<ApiResponse<PaginatedData<propertyCard>>> {
     let url = `${environment.Api}/view-properties/${type}?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<propertyCard>>>(url);
+  }
+  public viewPropertyDetails(
+    homeId: number
+  ): Observable<ApiResponse<propertyDetails>> {
+    let url = `${environment.Api}/view-property-details/${homeId}`;
+    return this.http.get<ApiResponse<propertyDetails>>(url);
   }
   public filterProperty(
     type: string,
