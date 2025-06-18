@@ -16,6 +16,34 @@
   justify-content: end;
   list-style: none;
 }
+
+.nav-item {
+  position: relative;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  font-weight: 600;
+}
+
+.nav-item::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) translateY(0);
+  width: 5px;
+  height: 5px;
+  background-color: #fcfdfd;
+  border-radius: 50%;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-item.active::after {
+  transform: translateX(-50%) translateY(9px);
+  opacity: 1;
+}
 .right-section {
   display: flex;
   justify-content: end;
@@ -57,6 +85,7 @@
 .lan:hover .lan-list {
   display: block;
 }
+
 .dropdown-menu {
   position: absolute;
   top: 8%;

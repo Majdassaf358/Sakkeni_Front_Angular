@@ -1,6 +1,5 @@
 .filters {
   display: flex;
-  background: aqua;
 }
 .filter-container-without-filters {
   display: flex;

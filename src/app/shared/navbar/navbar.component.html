@@ -6,48 +6,47 @@
   <!-- nav-section -->
   <ul class="nav-section width-50 text-secondary-clr font-400">
     <li
-      class="font-300"
-      [ngClass]="{ 'font-600': page === 'home' }"
+      class="nav-item"
+      [ngClass]="{ active: page === 'home' }"
       [routerLink]="['/home']"
     >
       Home
     </li>
     <li
-      class="font-300"
-      [ngClass]="{ 'font-600': page === 'properties' }"
+      class="nav-item"
+      [ngClass]="{ active: page === 'properties' }"
       [routerLink]="['/properties']"
     >
       Properties
     </li>
     <li
-      class="font-300"
-      [ngClass]="{ 'font-600': page === 'services' }"
+      class="nav-item"
+      [ngClass]="{ active: page === 'services' }"
       [routerLink]="['/services']"
     >
       Services
     </li>
     <li
-      class="font-300"
-      [ngClass]="{ 'font-600': page === 'about' }"
+      class="nav-item"
+      [ngClass]="{ active: page === 'about' }"
       [routerLink]="['/about-us']"
     >
       About Us
     </li>
-    <li [routerLink]="['/login']">Log In</li>
+    <li class="nav-item" [routerLink]="['/login']">Log In</li>
   </ul>
+
   <!-- profile-section -->
   <div class="right-section width-25">
     <!-- language -->
-    <!-- <div class="lan">
-      <img src="assets/Icons/globe.svg" alt="" class="lan-icon" />
-      <div class="text-secondary-clr">Eng</div>
-      <button class="lan-button bg-secondary"></button>
+    <div class="lan">
+      <img src="assets/Icons/Vector.svg" alt="" class="lan-icon" />
       <ul>
         <li class="lan-list">
           <div>Lan<a class="bg-neutural" href=""></a></div>
         </li>
       </ul>
-    </div> -->
+    </div>
     <!-- profile -->
     <div class="profile-section" (click)="toggleDropdown()" #dropdown>
       <img src="assets/Imgs/Girl.jpg" alt="" class="profile-img" />

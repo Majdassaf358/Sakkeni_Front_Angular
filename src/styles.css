@@ -190,8 +190,8 @@ select {
 }
 .nav-line {
   background-color: #e9eeee;
-  height: 1px;
-  width: 96%;
+  height: 0.8px;
+  width: 85%;
   justify-self: center;
 }
 @media (min-width: 50em) {
@@ -214,7 +214,7 @@ select {
   height: 1.2rem;
 }
 .lan-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   margin: 0rem 0.5rem 0 0;
 }
