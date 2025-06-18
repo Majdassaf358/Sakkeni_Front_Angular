@@ -1,7 +1,16 @@
 .filters {
   display: flex;
+  background: aqua;
 }
-.filter-container {
+.filter-container-without-filters {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #27393a;
+  padding: 1.93% 2rem;
+  white-space: nowrap;
+}
+.filter-container-with-filters {
   display: flex;
   align-items: center;
   width: 100%;

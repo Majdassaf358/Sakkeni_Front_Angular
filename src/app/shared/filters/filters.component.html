@@ -1,5 +1,13 @@
 <div class="filters">
-  <ul class="filter-container" [ngClass]="{ 'width-75': page == 'properties' }">
+  <div
+    class="filter-container-without-filters"
+    *ngIf="page != 'properties'"
+  ></div>
+  <ul
+    class="filter-container-with-filters"
+    [ngClass]="{ 'width-75': page == 'properties' }"
+    *ngIf="page === 'properties'"
+  >
     <div class="filter-div">
       <li class="filter text-secondary-clr font-12 font-300">Location</li>
       <img src="assets/Icons/chevron-down.svg" />
