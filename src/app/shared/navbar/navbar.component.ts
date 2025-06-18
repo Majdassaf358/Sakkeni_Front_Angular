@@ -60,7 +60,7 @@ export class NavbarComponent {
       let res: ApiResponse<null> = await lastValueFrom(
         this.authenticationService.logout()
       );
-      this.router.navigate(['/home']);
+      this.router.navigate(['/login']);
     } catch (error) {
       console.log(error);
     }
