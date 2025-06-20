@@ -1,8 +1,13 @@
+<app-pop-up
+  *ngIf="showFilterPopup"
+  (filtersApplied)="onFiltersApplied($event)"
+  (popupClosed)="showFilterPopup = false"
+></app-pop-up>
 <div class="filters">
-  <div
+  <!-- <div
     class="filter-container-without-filters"
     *ngIf="page != 'properties'"
-  ></div>
+  ></div> -->
   <!-- <ul
     class="filter-container-with-filters"
     [ngClass]="{ 'width-75': page == 'properties' }"
@@ -78,7 +83,8 @@
       <img src="assets/Icons/chevron-down.svg" />
     </div>
   </ul> -->
-  <div *ngIf="page === 'properties'" class="side-filters">
+  <!-- <div *ngIf="page === 'properties'" class="side-filters">
+    
     <div class="more-filter">
       <li class="filter text-secondary-clr font-12 font-300">More Filters</li>
       <img src="assets/Icons/chevron-down.svg" />
@@ -107,6 +113,82 @@
           Map
         </li>
       </ul>
+    </div>
+  </div> -->
+  <div class="bottom-toolbar">
+    <!-- Left section -->
+    <div class="toolbar-left">
+      <button
+        class="font-12 font-300 type"
+        [ngClass]="{ 'bg-focused': type === 'rent' }"
+        (click)="changeType('rent')"
+      >
+        For Rent
+      </button>
+
+      <button
+        class="font-12 font-300 type"
+        [ngClass]="{ 'bg-focused': type === 'sale' }"
+        (click)="changeType('sale')"
+      >
+        For Sale
+      </button>
+      <button
+        class="font-12 font-300 type"
+        [ngClass]="{ 'bg-focused': type === 'off' }"
+        (click)="changeType('off')"
+      >
+        Off Plan
+      </button>
+    </div>
+
+    <!-- Middle section -->
+    <div class="toolbar-center">
+      <div class="search-container">
+        <div class="search-container-left">
+          <img class="search-icon" src="assets\Icons\Search.svg" alt="" />
+          <input type="text" placeholder="Search Location" />
+        </div>
+        <div class="search-container-right">
+          <div class="vertical-line"></div>
+          <img
+            class="cursor-pointer"
+            (click)="showFilterPopup = true"
+            src="assets\Icons\Filters.svg"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Right section -->
+    <div class="toolbar-right">
+      <span class="font-400 font-12 text-secondary-clr">View As</span>
+      <div class="list-map">
+        <ul>
+          <li
+            class="font-12 font-300 list-button"
+            [ngClass]="{ 'bg-focused': sideSelect === 'list' }"
+            (click)="changeDisplay('list')"
+          >
+            List
+          </li>
+          <li
+            class="font-12 font-300 split-button"
+            [ngClass]="{ 'bg-focused': sideSelect === 'split' }"
+            (click)="changeDisplay('split')"
+          >
+            Split
+          </li>
+          <li
+            class="font-12 font-300 map-button"
+            [ngClass]="{ 'bg-focused': sideSelect === 'map' }"
+            (click)="changeDisplay('map')"
+          >
+            Map
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
