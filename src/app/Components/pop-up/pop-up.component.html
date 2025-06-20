@@ -1,0 +1,29 @@
+<div class="popup-overlay" (click)="closePopup()">
+  <div class="popup-container" (click)="$event.stopPropagation()">
+    <h2>Filter Options</h2>
+    <!-- Put your filter form controls or filter choices here -->
+    <form (submit)="applyFilters()">
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" [(ngModel)]="filterData.status" name="status">
+          <option value="">All</option>
+          <option value="open">Open</option>
+          <option value="closed">Closed</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input
+          type="text"
+          id="category"
+          [(ngModel)]="filterData.category"
+          name="category"
+        />
+      </div>
+      <div class="button-group">
+        <button type="button" (click)="closePopup()">Cancel</button>
+        <button type="submit">Apply Filters</button>
+      </div>
+    </form>
+  </div>
+</div>
