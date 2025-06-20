@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { filters } from '../../Models/filters';
 
 @Component({
   selector: 'app-pop-up',
@@ -11,10 +12,7 @@ export class PopUpComponent {
   @Output() filtersApplied = new EventEmitter<any>();
   @Output() popupClosed = new EventEmitter<void>();
 
-  filterData = {
-    status: '',
-    category: '',
-  };
+  filterData: filters = new filters();
 
   closePopup(): void {
     this.popupClosed.emit();

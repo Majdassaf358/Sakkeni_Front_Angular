@@ -1,11 +1,10 @@
 <div class="popup-overlay" (click)="closePopup()">
   <div class="popup-container" (click)="$event.stopPropagation()">
-    <h2>Filter Options</h2>
     <!-- Put your filter form controls or filter choices here -->
-    <form (submit)="applyFilters()">
+    <!-- <form (submit)="applyFilters()">
       <div class="form-group">
         <label for="status">Status</label>
-        <select id="status" [(ngModel)]="filterData.status" name="status">
+        <select id="status" [(ngModel)]="filterData.balconies" name="status">
           <option value="">All</option>
           <option value="open">Open</option>
           <option value="closed">Closed</option>
@@ -16,7 +15,7 @@
         <input
           type="text"
           id="category"
-          [(ngModel)]="filterData.category"
+          [(ngModel)]="filterData.bathrooms"
           name="category"
         />
       </div>
@@ -24,6 +23,59 @@
         <button type="button" (click)="closePopup()">Cancel</button>
         <button type="submit">Apply Filters</button>
       </div>
-    </form>
+    </form> -->
+    <div class="filter-header">
+      <h2>Filters</h2>
+      <button class="close-btn" (click)="closePopup()">&times;</button>
+    </div>
+    <div class="filter-section">
+      <h3>Property Type:</h3>
+      <div class="filter-subsection">
+        <strong>Residential:</strong>
+        <div class="checkbox-group">
+          <label><input type="checkbox" /> Appartement</label>
+          <label><input type="checkbox" /> Town House</label>
+          <label><input type="checkbox" /> Residential Plot</label>
+          <label><input type="checkbox" /> Villa</label>
+          <label><input type="checkbox" /> Hotel</label>
+          <label><input type="checkbox" /> Daily</label>
+        </div>
+      </div>
+      <div class="filter-subsection">
+        <strong>Commercial:</strong>
+        <div class="checkbox-group">
+          <label><input type="checkbox" /> Office</label>
+          <label><input type="checkbox" /> Shop</label>
+          <label><input type="checkbox" /> Warehouse</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <h3>Area Range</h3>
+      <div class="filter-subsection">
+        <strong>Bedrooms:</strong>
+        <div class="checkbox-group">
+          <label><input type="checkbox" /> 1</label>
+          <label><input type="checkbox" /> 2</label>
+          <label><input type="checkbox" /> 3</label>
+          <label><input type="checkbox" /> 4</label>
+          <label><input type="checkbox" /> 5</label>
+          <label><input type="checkbox" /> More</label>
+        </div>
+      </div>
+      <div class="filter-subsection">
+        <strong>Bathrooms:</strong>
+        <div class="checkbox-group">
+          <label><input type="checkbox" /> 1</label>
+          <label><input type="checkbox" /> 3</label>
+          <label><input type="checkbox" /> 5</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-footer">
+      <button class="search-btn">Search</button>
+    </div>
   </div>
 </div>

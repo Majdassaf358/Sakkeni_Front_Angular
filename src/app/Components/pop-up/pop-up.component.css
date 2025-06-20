@@ -16,26 +16,70 @@
 .popup-container {
   background: #fff;
   padding: 20px;
-  width: 90%;
-  max-width: 400px;
-  border-radius: 5px;
+  width: 46.2%;
+  border-radius: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Responsive tweaks if needed */
 @media (min-width: 600px) {
   .popup-container {
-    width: 80%;
+    width: 46.2%;
   }
 }
 
-/* Additional CSS for form formatting */
-.form-group {
-  margin-bottom: 15px;
+/* chat */
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-.button-group {
+.filter-header h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.close-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.filter-section {
+  margin-bottom: 1.5rem;
+}
+
+.filter-subsection {
+  margin: 0.5rem 0;
+}
+
+.checkbox-group {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.filter-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.search-btn {
+  padding: 0.75rem 2rem;
+  background-color: #2e3e38;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
 }
