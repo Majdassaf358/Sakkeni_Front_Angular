@@ -15,7 +15,6 @@
 /* Popup container styles */
 .popup-container {
   background: #fff;
-  padding: 20px;
   width: 46.2%;
   border-radius: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -33,23 +32,42 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin: 1rem;
 }
 
 .filter-header h2 {
   font-size: 1.5rem;
   margin: 0;
 }
+.nav-line {
+  background-color: #b4c5c5;
+  height: 1px;
+  width: 100%;
+}
 
 .close-btn {
-  font-size: 1.5rem;
+  font-weight: 300;
+  font-size: 1.4rem;
   background: none;
   border: none;
   cursor: pointer;
 }
+.filter-options {
+  overflow-y: auto;
+  max-height: 300px;
+  margin-bottom: 15px;
+  margin: 2rem;
+}
+.filter-options::-webkit-scrollbar {
+  width: 8px;
+}
 
+.filter-options::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
 .filter-section {
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */
 }
 
 .filter-subsection {
