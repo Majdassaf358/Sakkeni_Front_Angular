@@ -3,15 +3,11 @@
   padding: 2rem clamp(1rem, 4vw, 5rem);
   overflow-x: auto;
   scroll-behavior: smooth;
-  user-select: none;
-  cursor: grab;
 }
 .services-section::-webkit-scrollbar {
   display: none;
 }
-.services-section.dragging {
-  cursor: grabbing;
-}
+
 .section-title {
   font-size: 1.8rem;
   margin-bottom: 1rem;
@@ -56,6 +52,6 @@
   margin-bottom: 0.5rem;
 }
 img {
-  -webkit-user-drag: none; /* Chrome */
+  -webkit-user-drag: none;
   pointer-events: auto;
 }

@@ -76,9 +76,22 @@
 </div> -->
 <div class="figma-design-container">
   <!-- Image Carousel Section -->
-  <section class="slider">
+  <section
+    class="slider"
+    #slider
+    (mousedown)="startDrag($event)"
+    (mouseup)="stopDrag()"
+    (mouseleave)="stopDrag()"
+    (mousemove)="onDrag($event)"
+  >
     <div class="slides">
-      <img *ngFor="let img of images" [src]="img" alt="Property image" />
+      <img
+        class="cursor-pointer"
+        *ngFor="let img of images"
+        [src]="img"
+        alt="Property image"
+        draggable="false"
+      />
     </div>
     <div class="slide-counter">{{ 0 + 1 }}/{{ images.length }}</div>
   </section>

@@ -9,11 +9,15 @@
 
 .slider {
   position: relative;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+.slider::-webkit-scrollbar {
+  display: none;
 }
 
 .slider .slides {
   display: flex;
-  overflow-x: auto;
   border-radius: 1rem;
   gap: 0.8rem;
 }
