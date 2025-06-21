@@ -1,26 +1,17 @@
 <app-navbar [page]="'properties'"></app-navbar>
 <app-filters [page]="'details'"></app-filters>
-<div class="property-details-container">
-  <!-- Left Column -->
+<!-- <div class="property-details-container">
   <div class="left-column">
-    <!-- Main Image -->
-    <!-- <div class="main-image">
-      <img src="assets/Imgs/Home.png" alt="House Image" />
-    </div> -->
-
     <div class="gallery">
-      <!-- Cover image -->
       <div class="cover-image">
         <img [src]="images[0]" alt="Cover" />
       </div>
 
-      <!-- Thumbnails -->
       <div class="thumbnail-row">
         <ng-container *ngFor="let img of images.slice(1, 5); let i = index">
           <img [src]="img" alt="Thumbnail" class="thumbnail" />
         </ng-container>
 
-        <!-- "+N" Overlay on last thumbnail if more than 5 -->
         <div
           class="thumbnail overlay"
           *ngIf="images.length > 5"
@@ -32,7 +23,6 @@
       </div>
     </div>
 
-    <!-- Property Info -->
     <div class="property-info">
       <div class="status">
         <span class="status-dot"></span>
@@ -57,14 +47,14 @@
     </div>
   </div>
 
-  <!-- Right Column -->
+ 
   <div class="right-column">
-    <!-- Map -->
+    
     <div class="map-box">
       <img src="assets/Imgs/Home.png" alt="Map Location" />
     </div>
 
-    <!-- Contact Agent -->
+   
     <div class="contact-card">
       <div class="contact-info">
         <div class="contact-item">
@@ -83,4 +73,74 @@
       </div>
     </div>
   </div>
+</div> -->
+<div class="figma-design-container">
+  <!-- Image Carousel Section -->
+  <section class="slider">
+    <div class="slides">
+      <img *ngFor="let img of images" [src]="img" alt="Property image" />
+    </div>
+    <div class="slide-counter">{{ 0 + 1 }}/{{ images.length }}</div>
+  </section>
+
+  <!-- Main Content Section -->
+  <section class="content">
+    <!-- Property Details (Left) -->
+    <div class="details">
+      <small class="label">House for sale</small>
+      <h1 class="title">30 Kershner Pl, Fair Lawn, NJ 07410</h1>
+      <ul class="stats">
+        <li>
+          <span class="stat-key">Location</span
+          ><span class="stat-value">Downtown Dubai - United Arab</span>
+        </li>
+        <li>
+          <span class="stat-key">Property Type</span
+          ><span class="stat-value">Villa</span>
+        </li>
+        <li>
+          <span class="stat-key">Bedrooms</span
+          ><span class="stat-value">4 Bedrooms</span>
+        </li>
+        <li>
+          <span class="stat-key">Bathrooms</span
+          ><span class="stat-value">3 Bathrooms</span>
+        </li>
+        <li>
+          <span class="stat-key">Area</span
+          ><span class="stat-value">540 m2</span>
+        </li>
+        <li>
+          <span class="stat-key">Ownership Type</span
+          ><span class="stat-value">Yes</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Action Cards & Map (Right) -->
+    <div class="sidebar">
+      <div class="card pricing">
+        <span class="badge">Residential</span>
+        <p class="price">$2,200/month</p>
+        <p class="desc">2 bedroom</p>
+        <p class="address">30 Kershner Pl, Fair Lawn, NJ 07410</p>
+        <button class="btn-save">Save</button>
+      </div>
+
+      <div class="card contact">
+        <div class="contact-item">
+          <i class="icon-email"></i>
+          <span>Yolla.todaygmail.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="icon-phone"></i>
+          <span>+963334452</span>
+        </div>
+      </div>
+
+      <div class="map">
+        <!-- Embed map or map component here -->
+      </div>
+    </div>
+  </section>
 </div>
