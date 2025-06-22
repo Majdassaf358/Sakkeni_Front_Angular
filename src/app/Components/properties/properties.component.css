@@ -127,6 +127,7 @@
 
 .card__image-wrapper {
   position: relative;
+  cursor: pointer;
 }
 
 .card__save-btn img {

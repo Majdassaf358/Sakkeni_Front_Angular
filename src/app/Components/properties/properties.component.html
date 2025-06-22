@@ -14,6 +14,7 @@
       <div class="width-95" *ngFor="let card of properties; let i = index">
         <div class="card__image-wrapper">
           <img
+            (click)="goToDetails(card.id)"
             [src]="'http://127.0.0.1:8000/' + card.cover_image.image_path"
             class="card__image"
           />

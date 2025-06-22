@@ -1,6 +1,11 @@
 import { amenities } from './amenities';
 import { directions } from './directions';
+import { availability_status } from './home-details-info/availability_status';
+import { ownership_type } from './home-details-info/ownership_type';
+import { property_type } from './home-details-info/property_type';
 import { cover_image } from './images';
+import { location } from './location';
+import { profile } from './profile';
 
 export class propertyDetails {
   'id': number;
@@ -11,27 +16,14 @@ export class propertyDetails {
   'bathrooms': number;
   'balconies': number;
   'ownership_type_id': number;
-  'property_type_id': number;
   'sell_type_id': number;
-  'availability_status_id': number;
-  'created_at': string;
-  'updated_at': string;
-  'country_id': number;
-  'city_id': number;
-  'latitude': number;
-  'longitude': number;
-  'additional_info': string;
-  'name': string;
-  'property_id': number;
-  'price': number;
-  'lease_period': string;
-  'payment_plan': string;
-  'is_furnished': number;
-  'floor': number;
-  'building_number': number;
-  'apartment_number': number;
-  'commercial_property_type_id': number;
-  'images': cover_image[];
   'amenities': amenities[];
   'directions': directions[];
+  'images': cover_image[];
+  'property_type': property_type;
+  'availability_status': availability_status;
+  'ownership_type': ownership_type;
+  'owner': profile;
+  'location': location;
+  // Rent
 }

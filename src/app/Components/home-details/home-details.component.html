@@ -1,81 +1,8 @@
 <app-navbar [page]="'properties'"></app-navbar>
 <app-filters [page]="'details'"></app-filters>
-<!-- <div class="property-details-container">
-  <div class="left-column">
-    <div class="gallery">
-      <div class="cover-image">
-        <img [src]="images[0]" alt="Cover" />
-      </div>
 
-      <div class="thumbnail-row">
-        <ng-container *ngFor="let img of images.slice(1, 5); let i = index">
-          <img [src]="img" alt="Thumbnail" class="thumbnail" />
-        </ng-container>
-
-        <div
-          class="thumbnail overlay"
-          *ngIf="images.length > 5"
-          (click)="openGallery()"
-        >
-          <img [src]="images[5]" alt="More thumbnails" />
-          <div class="overlay-text">+{{ images.length - 5 }}</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="property-info">
-      <div class="status">
-        <span class="status-dot"></span>
-        House for sale
-      </div>
-      <h2 class="address">30 Kershner Pl, Fair Lawn, NJ 07410</h2>
-
-      <div class="info-pair">
-        <strong>Location</strong> Downtown Dubai - Dubai - United Arab Emirates
-        - next to the building red rosto
-      </div>
-      <div class="info-pair"><strong>Property Type</strong> Villa</div>
-      <div class="info-pair"><strong>Area</strong>{{ details.area }}</div>
-      <div class="info-pair">
-        <strong>Bathrooms</strong> {{ details.bathrooms }}
-      </div>
-
-      <div class="info-pair">
-        <strong>Balconies</strong>{{ details.balconies }}
-      </div>
-      <div class="info-pair"><strong>Price</strong>{{ details.price }}</div>
-    </div>
-  </div>
-
+<!-- <div class="figma-design-container">
  
-  <div class="right-column">
-    
-    <div class="map-box">
-      <img src="assets/Imgs/Home.png" alt="Map Location" />
-    </div>
-
-   
-    <div class="contact-card">
-      <div class="contact-info">
-        <div class="contact-item">
-          <img src="assets/Icons/call.svg" lt="Email" />
-          michel.brimofgmail.com
-        </div>
-        <div class="contact-item">
-          <img src="assets/Icons/email.svg" lt="Phone" />
-          +9635621717
-        </div>
-        <p class="note">
-          Take a tour over live video, or in-person with a leasing agent. Choose
-          the day and time that works for you.
-        </p>
-        <button class="contact-button">Contact Agent</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-<div class="figma-design-container">
-  <!-- Image Carousel Section -->
   <section
     class="slider"
     #slider
@@ -85,76 +12,146 @@
     (mousemove)="onDrag($event)"
   >
     <div class="slides">
-      <div class="image-container" *ngFor="let img of images">
-        <img
-          class="details-image"
-          [src]="img"
-          alt="Property image"
-          draggable="false"
-        />
-      </div>
-    </div>
-    <div class="slide-counter">{{ 0 + 1 }}/{{ images.length }}</div>
-  </section>
+      <img
+        class="cursor-pointer"
+        *ngFor="let img of images"
+        [src]="img"
+        alt="Property image"
+        draggable="false"
+      />
 
-  <!-- Main Content Section -->
-  <section class="content">
-    <!-- Property Details (Left) -->
-    <div class="details">
-      <small class="label">House for sale</small>
-      <h1 class="title">30 Kershner Pl, Fair Lawn, NJ 07410</h1>
-      <ul class="stats">
-        <li>
-          <span class="stat-key">Location</span
-          ><span class="stat-value">Downtown Dubai - United Arab</span>
-        </li>
-        <li>
-          <span class="stat-key">Property Type</span
-          ><span class="stat-value">Villa</span>
-        </li>
-        <li>
-          <span class="stat-key">Bedrooms</span
-          ><span class="stat-value">4 Bedrooms</span>
-        </li>
-        <li>
-          <span class="stat-key">Bathrooms</span
-          ><span class="stat-value">3 Bathrooms</span>
-        </li>
-        <li>
-          <span class="stat-key">Area</span
-          ><span class="stat-value">540 m2</span>
-        </li>
-        <li>
-          <span class="stat-key">Ownership Type</span
-          ><span class="stat-value">Yes</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Action Cards & Map (Right) -->
-    <div class="sidebar">
-      <div class="card pricing">
-        <span class="badge">Residential</span>
-        <p class="price">$2,200/month</p>
-        <p class="desc">2 bedroom</p>
-        <p class="address">30 Kershner Pl, Fair Lawn, NJ 07410</p>
-        <button class="btn-save">Save</button>
-      </div>
-
-      <div class="card contact">
-        <div class="contact-item">
-          <i class="icon-email"></i>
-          <span>Yolla.todaygmail.com</span>
+    
+      <section class="content">
+      
+        <div class="details">
+          <small class="label">House for sale</small>
+          <h1 class="title">30 Kershner Pl, Fair Lawn, NJ 07410</h1>
+          <ul class="stats">
+            <li>
+              <span class="stat-key">Location</span
+              ><span class="stat-value">Downtown Dubai - United Arab</span>
+            </li>
+            <li>
+              <span class="stat-key">Property Type</span
+              ><span class="stat-value">Villa</span>
+            </li>
+            <li>
+              <span class="stat-key">Bedrooms</span
+              ><span class="stat-value">4 Bedrooms</span>
+            </li>
+            <li>
+              <span class="stat-key">Bathrooms</span
+              ><span class="stat-value">3 Bathrooms</span>
+            </li>
+            <li>
+              <span class="stat-key">Area</span
+              ><span class="stat-value">540 m2</span>
+            </li>
+            <li>
+              <span class="stat-key">Ownership Type</span
+              ><span class="stat-value">Yes</span>
+            </li>
+          </ul>
         </div>
-        <div class="contact-item">
-          <i class="icon-phone"></i>
-          <span>+963334452</span>
-        </div>
-      </div>
 
-      <div class="map">
-        <!-- Embed map or map component here -->
-      </div>
+   
+        <div class="sidebar">
+          <div class="card pricing">
+            <span class="badge">Residential</span>
+            <p class="price">$2,200/month</p>
+            <p class="desc">2 bedroom</p>
+            <p class="address">30 Kershner Pl, Fair Lawn, NJ 07410</p>
+            <button class="btn-save">Save</button>
+          </div>
+
+          <div class="card contact">
+            <div class="contact-item">
+              <i class="icon-email"></i>
+              <span>Yolla.todaygmail.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="icon-phone"></i>
+              <span>+963334452</span>
+            </div>
+          </div>
+
+          <div class="map">
+      
+          </div>
+        </div>
+      </section>
     </div>
   </section>
+</div> -->
+<div class="container">
+  <!-- Image Slider -->
+  <section
+    #scrollContainer
+    class="slider-section"
+    (mousedown)="startDrag($event)"
+    (mouseup)="stopDrag()"
+    (mouseleave)="stopDrag()"
+    (mousemove)="onDrag($event)"
+  >
+    <img
+      *ngFor="let img of images"
+      [src]="img"
+      alt="Property image"
+      draggable="false"
+    />
+  </section>
+</div>
+
+<!-- Details Section -->
+<div class="details">
+  <div class="info">
+    <div class="info-title">
+      <p class="font-400 font-14">House for sale</p>
+      <h2>30 Kershner Pl, Fair Lawn, NJ 07410</h2>
+    </div>
+    <div class="info-details">
+      <div class="row">
+        <p class="font-600">Location:</p>
+        {{ details.location.country.name }} - {{ details.location.city.name }}
+      </div>
+      <div class="row">
+        <p class="font-600">Property Type:</p>
+        {{ details.property_type.name }}
+      </div>
+      <div class="row">
+        <p class="font-600">Balconies:</p>
+        {{ details.balconies }} Balconies
+      </div>
+      <div class="row">
+        <p class="font-600">Bathrooms:</p>
+        {{ details.bathrooms }} Bathrooms
+      </div>
+      <div class="row">
+        <p class="font-600">Area:</p>
+        {{ details.area }}
+      </div>
+      <div class="row">
+        <p class="font-600">Ownership Type:</p>
+        Yes
+      </div>
+    </div>
+  </div>
+
+  <div class="right-section">
+    <div>
+      <div class="price-box">
+        <small>Residential</small>
+        <span>$2,200/month</span>
+        <p>2 bedroom<br />30 Kershner Pl, Fair Lawn, NJ 07410</p>
+        <button>Save</button>
+      </div>
+      <div class="contact-box">
+        <p>📧 Yolla.todaygmail.com</p>
+        <p>📞 +96333444552</p>
+      </div>
+    </div>
+    <div class="map-box">
+      <img class="map" src="assets\Imgs\map.png" alt="Map location" />
+    </div>
+  </div>
 </div>
