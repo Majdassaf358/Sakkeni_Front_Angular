@@ -36,8 +36,11 @@ export class LoginPageComponent {
   get logPassword() {
     return this.logInForm.get('logPassword');
   }
-  get username() {
-    return this.signUpForm.get('username');
+  get first_name() {
+    return this.signUpForm.get('first_name');
+  }
+  get last_name() {
+    return this.signUpForm.get('last_name');
   }
   get email() {
     return this.signUpForm.get('email');
@@ -59,7 +62,8 @@ export class LoginPageComponent {
       logPassword: ['', [Validators.required, Validators.minLength(8)]],
     });
     this.signUpForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
+      first_name: ['', [Validators.required, Validators.minLength(3)]],
+      last_name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, emailValidator()]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       password_confirmation: [

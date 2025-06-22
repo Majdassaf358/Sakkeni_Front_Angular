@@ -64,16 +64,28 @@
         class="forms-holder"
       >
         <input
-          [class.is-invalid]="username?.invalid && username?.touched"
-          formControlName="username"
-          placeholder="Username"
+          [class.is-invalid]="first_name?.invalid && first_name?.touched"
+          formControlName="first_name"
+          placeholder="First Name"
           type="text"
           class="form-control font-14"
         />
         <span
-          *ngIf="username?.invalid && username?.touched"
+          *ngIf="first_name?.invalid && first_name?.touched"
           class="error-message"
-          >Username is required.</span
+          >First name is required.</span
+        >
+        <input
+          [class.is-invalid]="last_name?.invalid && last_name?.touched"
+          formControlName="last_name"
+          placeholder="Last Name"
+          type="text"
+          class="form-control font-14"
+        />
+        <span
+          *ngIf="last_name?.invalid && last_name?.touched"
+          class="error-message"
+          >Last name is required.</span
         >
         <input
           [class.is-invalid]="email?.invalid && email?.touched"
