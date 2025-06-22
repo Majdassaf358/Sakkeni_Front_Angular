@@ -189,7 +189,7 @@ select {
   display: block;
 }
 .nav-line {
-  background-color: #e9eeee;
+  background-color: #e9eeeebf;
   height: 0.8px;
   width: 85%;
   justify-self: center;

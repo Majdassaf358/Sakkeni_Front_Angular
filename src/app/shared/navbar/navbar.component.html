@@ -1,61 +1,62 @@
 <div class="navbar">
-  <!-- Logo-section -->
-  <div class="logo-section width-25">
-    <img class="nav-logo" src="assets/Imgs/Logo.png" alt="" />
-  </div>
-  <!-- nav-section -->
-  <ul class="nav-section width-50 text-secondary-clr font-400">
-    <li
-      class="nav-item"
-      [ngClass]="{ active: page === 'home' }"
-      [routerLink]="['/home']"
-    >
-      Home
-    </li>
-    <li
-      class="nav-item"
-      [ngClass]="{ active: page === 'properties' }"
-      [routerLink]="['/properties']"
-    >
-      Properties
-    </li>
-    <li
-      class="nav-item"
-      [ngClass]="{ active: page === 'services' }"
-      [routerLink]="['/services']"
-    >
-      Services
-    </li>
-    <li
-      class="nav-item"
-      [ngClass]="{ active: page === 'about' }"
-      [routerLink]="['/about-us']"
-    >
-      About Us
-    </li>
-    <li class="nav-item" [routerLink]="['/login']">Log In</li>
-  </ul>
-
-  <!-- profile-section -->
-  <div class="right-section width-25">
-    <!-- language -->
-    <div class="lan">
-      <img src="assets/Icons/Vector.svg" alt="" class="lan-icon" />
-      <ul>
-        <li class="lan-list">
-          <div>Lan<a class="bg-neutural" href=""></a></div>
-        </li>
-      </ul>
+  <div class="nav-container">
+    <!-- Logo-section -->
+    <div class="logo-section width-25">
+      <img class="nav-logo" src="assets/Imgs/Logo.png" alt="" />
     </div>
-    <!-- profile -->
-    <div class="profile-section" (click)="toggleDropdown()" #dropdown>
-      <img src="assets/Imgs/Girl.jpg" alt="" class="profile-img" />
-      <span class="lan-button bg-secondary"></span>
-      <ul class="dropdown-menu" *ngIf="dropdownOpen">
-        <li (click)="goToProfile()">Edit Profile</li>
-        <li (click)="changePassword()">Change Password</li>
-        <li (click)="logout()">Log Out</li>
-      </ul>
+    <!-- nav-section -->
+    <ul class="nav-section width-50 text-secondary-clr font-400">
+      <li
+        class="nav-item"
+        [ngClass]="{ active: page === 'home' }"
+        [routerLink]="['/home']"
+      >
+        Home
+      </li>
+      <li
+        class="nav-item"
+        [ngClass]="{ active: page === 'properties' }"
+        [routerLink]="['/properties']"
+      >
+        Properties
+      </li>
+      <li
+        class="nav-item"
+        [ngClass]="{ active: page === 'services' }"
+        [routerLink]="['/services']"
+      >
+        Services
+      </li>
+      <li
+        class="nav-item"
+        [ngClass]="{ active: page === 'about' }"
+        [routerLink]="['/about-us']"
+      >
+        About Us
+      </li>
+      <li class="nav-item" [routerLink]="['/login']">Log In</li>
+    </ul>
+    <!-- profile-section -->
+    <div class="right-section width-25">
+      <!-- language -->
+      <div class="lan">
+        <img src="assets/Icons/Vector.svg" alt="" class="lan-icon" />
+        <ul>
+          <li class="lan-list">
+            <div>Lan<a class="bg-neutural" href=""></a></div>
+          </li>
+        </ul>
+      </div>
+      <!-- profile -->
+      <div class="profile-section" (click)="toggleDropdown()" #dropdown>
+        <img src="assets/Imgs/Girl.jpg" alt="" class="profile-img" />
+        <span class="lan-button bg-secondary"></span>
+        <ul class="dropdown-menu" *ngIf="dropdownOpen">
+          <li (click)="goToProfile()">Edit Profile</li>
+          <li (click)="changePassword()">Change Password</li>
+          <li (click)="logout()">Log Out</li>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="nav-line"></div>
