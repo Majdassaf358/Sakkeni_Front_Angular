@@ -10,92 +10,46 @@
     <!-- <app-filter></app-filter> -->
   </div>
   <div *ngIf="sideFilter != 'map'" class="cards-filter">
-    <div class="all-cards">
-      <div class="width-95" *ngFor="let card of properties">
-        <a class="home-image"
-          ><img
+    <div class="all-cards" [ngClass]="{ listSwitch: sideFilter === 'list' }">
+      <div class="width-95" *ngFor="let card of properties; let i = index">
+        <div class="card__image-wrapper">
+          <img
             [src]="'http://127.0.0.1:8000/' + card.cover_image.image_path"
-            alt=""
-            (click)="goToDetails(card.id)"
+            class="card__image"
           />
-        </a>
+          <!-- Bookmark icon overlay -->
+          <button class="card__save-btn" (click)="toggleSave(i)">
+            <img
+              [src]="
+                savedCardIds.has(i)
+                  ? 'assets/Icons/Save-clicked.svg'
+                  : 'assets/Icons/Save.svg'
+              "
+              alt="Save"
+              class="card__save-icon"
+              [ngClass]="{ active: savedCardIds.has(i) }"
+            />
+          </button>
+        </div>
+
         <div class="property-details">
-          <div class="property-header">
-            <span class="status-dot"></span>
-            <p class="property-type">Condo for rent</p>
-            <span class="wishlist">♡</span>
+          <div class="card__content">
+            <div class="card__tag">
+              <span class="card__dot"></span>
+              <span class="card__tag-text">Condo for rent</span>
+            </div>
           </div>
-          <p class="property-price">
-            {{ card.price }}<span class="per-month">/month</span>
-          </p>
-          <p class="property-bedrooms"><strong>4</strong> bedroom</p>
-          <p class="property-location">{{ card.city }}</p>
+          <h3 class="card__price">
+            $2,200<span class="card__period">/month</span>
+          </h3>
+          <p class="card__bedrooms">2 bedroom</p>
+          <div class="card__location">
+            <p class="card__address">10 Lakeview St, Toronto, ON M4B 2B2</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <div *ngIf="sideFilter == 'list'" class="side-filters">
-      <div class="filters-panel">
-        <div class="filter-group">
-          <label>
-            <input type="checkbox" />
-            <span>Ready Property</span>
-          </label>
-        </div>
-        <div class="filter-group">
-          <div class="radio-row">
-            <label class="font-12 font-300"
-              ><input type="radio" name="purpose" /> Rent</label
-            >
-            <label class="font-12 font-300"
-              ><input type="radio" name="purpose" /> Buy</label
-            >
-          </div>
-        </div>
-        <div class="filter-group">
-          <p class="filter-title">Furnishing:</p>
-          <div class="radio-row">
-            <label class="font-12 font-300"
-              ><input type="radio" name="furnishing" /> Furnished</label
-            >
-            <label class="font-12 font-300"
-              ><input type="radio" name="furnishing" /> Unfurnished</label
-            >
-          </div>
-        </div>
-        <div class="filter-group">
-          <p class="filter-title">Rental Frequency:</p>
-          <div class="radio-row">
-            <label class="font-12 font-300"
-              ><input type="radio" name="frequency" /> Yearly</label
-            >
-            <label class="font-12 font-300"
-              ><input type="radio" name="frequency" /> Monthly</label
-            >
-            <label class="font-12 font-300"
-              ><input type="radio" name="frequency" /> Weekly</label
-            >
-            <label class="font-12 font-300"
-              ><input type="radio" name="frequency" /> Daily</label
-            >
-          </div>
-        </div>
-        <div class="filter-group">
-          <p class="filter-title">Viewing Option:</p>
-          <div class="radio-row">
-            <label class="font-12 font-300"
-              ><input type="radio" name="viewing" /> Floor Plans</label
-            >
-            <label class="font-12 font-300"
-              ><input type="radio" name="viewing" /> Video Tour</label
-            >
-            <label class="font-12 font-300"
-              ><input type="radio" name="viewing" /> 360 Tour</label
-            >
-          </div>
-        </div>
-      </div>
-    </div>
     <div *ngIf="sideFilter == 'split'" class="side-map">split</div>
   </div>
   <div *ngIf="sideFilter == 'map'">Full Map</div>

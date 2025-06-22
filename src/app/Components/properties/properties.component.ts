@@ -18,6 +18,7 @@ import { filters } from '../../Models/filters';
   styleUrl: './properties.component.css',
 })
 export class PropertiesComponent implements OnInit {
+  savedCardIds = new Set<number>();
   sideFilter: string = 'list';
   currentPage: number = 1;
   receivedFilters!: filters;
@@ -67,5 +68,12 @@ export class PropertiesComponent implements OnInit {
     console.log('Received Filters:', this.receivedFilters);
     this.receivedFilters = newFilters;
     this.filterProperties();
+  }
+  toggleSave(index: number) {
+    if (this.savedCardIds.has(index)) {
+      this.savedCardIds.delete(index);
+    } else {
+      this.savedCardIds.add(index);
+    }
   }
 }
