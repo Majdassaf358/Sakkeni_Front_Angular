@@ -7,6 +7,8 @@
 .slider-section {
   display: flex;
   padding: 2rem clamp(1rem, 4vw, 5rem);
+  margin-left: clamp(1rem, 7vw, 4rem);
+  margin-right: clamp(1rem, 7vw, 4rem);
   overflow-x: auto;
   scroll-behavior: smooth;
   gap: 0.8rem;
@@ -20,12 +22,14 @@
 }
 
 .details {
-  margin-left: 7rem;
+  margin-left: clamp(1rem, 7vw, 7rem);
+  margin-right: clamp(1rem, 7vw, 4rem);
+  padding-bottom: 3rem;
   display: flex;
   flex-wrap: wrap;
 }
 .info {
-  flex: 2;
+  width: 50%;
 }
 .info-title {
   display: grid;
@@ -51,42 +55,92 @@
 
 .right-section {
   display: flex;
+  /* margin-right: 2rem; */
+}
+.right-boxes {
+  width: 55%;
+  display: grid;
+  gap: 1.4rem;
 }
 .price-box,
-.contact-box,
-.map-box {
-  background-color: white;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.contact-box {
+  display: grid;
+  background-color: #fffefc;
+  border-radius: 10px;
+  padding: 1rem 1.6rem;
+  box-shadow: 0px 4px 10px 0px #00000026;
+  width: 100%;
 }
 .price-box {
-  flex: 1;
+  position: relative;
 }
-.price-box span {
-  font-size: 24px;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-top: 0.9rem;
+  margin-bottom: 0.5rem;
 }
-.price-box button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #ddd;
+
+.status-dot {
+  height: 11px;
+  width: 11px;
+  background-color: #e9e916;
+  border-radius: 50%;
+  margin-left: 1rem;
+}
+
+.residential-text {
+  margin-left: 1.5rem;
+}
+
+.location-icon {
+  position: absolute;
+  right: 10%;
+  top: 15%;
+  margin-left: 1rem;
+}
+.price-box-text {
+  display: grid;
+  margin-left: 1rem;
+  gap: 0.5rem;
+}
+.save-btn {
+  width: 70%;
+  padding: 0.3rem 0.4rem;
+  margin-top: 1.4rem;
+  justify-self: center;
+  background: #27393a33;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .contact-box {
+  background-color: #fcfdfd;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1.5rem;
+}
+.contact-info {
+  margin-left: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+.contact-text {
+  padding: 0 1rem;
+}
+.map-box {
+  width: 67%;
+  margin: 0 0 0 2rem;
 }
 
 .map-box img {
   width: 100%;
+  height: 370px;
+  object-fit: cover;
   border-radius: 15px;
+  box-shadow: 4px 4px 10px 0px #00000026;
 }
 .map {
   max-width: 318px;

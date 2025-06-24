@@ -132,22 +132,41 @@
       </div>
       <div class="row">
         <p class="font-600">Ownership Type:</p>
-        Yes
+        {{ details.ownership_type.name }}
       </div>
     </div>
   </div>
 
   <div class="right-section">
-    <div>
+    <div class="right-boxes">
       <div class="price-box">
-        <small>Residential</small>
-        <span>$2,200/month</span>
-        <p>2 bedroom<br />30 Kershner Pl, Fair Lawn, NJ 07410</p>
-        <button>Save</button>
+        <div class="card-header">
+          <span class="status-dot"></span>
+          <span class="residential-text text-primary-clr font-12"
+            >Residential</span
+          >
+          <img class="location-icon" src="assets\Icons\Location.svg" />
+        </div>
+        <div class="price-box-text">
+          <p class="font-18 text-primary-clr">$2,200/month</p>
+          <p class="font-12 text-primary-clr">2 bedroom</p>
+          <p class="font-12 text-primary-clr">30 Kershner Pl, Fair Lawn</p>
+        </div>
+        <button class="save-btn text-primary-clr">Save</button>
       </div>
       <div class="contact-box">
-        <p>📧 Yolla.todaygmail.com</p>
-        <p>📞 +96333444552</p>
+        <div class="contact-info">
+          <img src="assets\Icons\email.svg" />
+          <p class="text-primary-clr font-400 font-12 contact-text">
+            Yolla.todaygmail.com
+          </p>
+        </div>
+        <div class="contact-info">
+          <img src="assets\Icons\call.svg" />
+          <p class="text-primary-clr font-400 font-12 contact-text">
+            +963334452
+          </p>
+        </div>
       </div>
     </div>
     <div class="map-box">
