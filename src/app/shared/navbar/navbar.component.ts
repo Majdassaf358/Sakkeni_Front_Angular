@@ -10,7 +10,6 @@ import { RouterModule, Router } from '@angular/router';
 import { ApiResponse } from '../../Models/ApiResponse';
 import { lastValueFrom } from 'rxjs';
 import { AuthenticationService } from '../../Services/authentication.service';
-
 @Component({
   selector: 'app-navbar',
   standalone: true,

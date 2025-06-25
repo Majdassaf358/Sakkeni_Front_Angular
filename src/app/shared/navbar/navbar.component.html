@@ -51,10 +51,12 @@
       <div class="profile-section" (click)="toggleDropdown()" #dropdown>
         <img src="assets/Imgs/Girl.jpg" alt="" class="profile-img" />
         <span class="lan-button bg-secondary"></span>
-        <ul class="dropdown-menu" *ngIf="dropdownOpen">
-          <li (click)="goToProfile()">Edit Profile</li>
-          <li (click)="changePassword()">Change Password</li>
-          <li (click)="logout()">Log Out</li>
+        <ul class="dropdown-menu" [class.show]="dropdownOpen">
+          <li (click)="goToProfile()" class="font-400 font-14">Edit Profile</li>
+          <li (click)="changePassword()" class="font-400 font-14">
+            Change Password
+          </li>
+          <li (click)="logout()" class="font-400 font-14">Log Out</li>
         </ul>
       </div>
     </div>
