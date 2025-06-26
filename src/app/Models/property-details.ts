@@ -5,7 +5,7 @@ import { ownership_type } from './home-details-info/ownership_type';
 import { property_type } from './home-details-info/property_type';
 import { cover_image } from './images';
 import { location } from './location';
-import { profile } from './profile';
+import { profile } from './profile/profile';
 
 export class propertyDetails {
   'id': number;
