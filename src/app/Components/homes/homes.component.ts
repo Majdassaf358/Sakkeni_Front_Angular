@@ -14,7 +14,7 @@ import { filters } from '../../Models/filters';
 @Component({
   selector: 'app-homes',
   standalone: true,
-  imports: [NavbarComponent, FiltersComponent, CommonModule, FormsModule],
+  imports: [NavbarComponent, CommonModule, FormsModule],
   templateUrl: './homes.component.html',
   styleUrls: ['./homes.component.css'],
 })

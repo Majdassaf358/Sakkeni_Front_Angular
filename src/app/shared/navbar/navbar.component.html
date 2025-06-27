@@ -1,4 +1,9 @@
-<div class="navbar">
+<div
+  class="navbar"
+  [ngClass]="{
+    noFilters: withFilters === false
+  }"
+>
   <div class="nav-container">
     <!-- Logo-section -->
     <div class="logo-section width-25">
@@ -61,7 +66,7 @@
       </div>
     </div>
   </div>
-  <div class="nav-line"></div>
+  <div *ngIf="withFilters === true" class="nav-line"></div>
 </div>
 <div *ngIf="page === 'properties'" class="plus-button">
   <img src="assets/Icons/add-circle.svg" alt="" class="add-property-icon" />

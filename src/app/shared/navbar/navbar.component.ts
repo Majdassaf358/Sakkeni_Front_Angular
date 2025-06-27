@@ -19,6 +19,7 @@ import { AuthenticationService } from '../../Services/authentication.service';
 })
 export class NavbarComponent {
   @Input() page!: string;
+  @Input() withFilters!: boolean;
   @ViewChild('dropdown', { static: false }) dropdown!: ElementRef;
   dropdownOpen = false;
   constructor(

@@ -1,6 +1,10 @@
 .navbar {
   background-color: #27393a;
 }
+.noFilters {
+  height: 136px;
+  display: grid;
+}
 .nav-container {
   display: flex;
   flex-wrap: wrap;
