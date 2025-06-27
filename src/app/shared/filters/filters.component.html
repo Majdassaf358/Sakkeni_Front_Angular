@@ -3,10 +3,15 @@
   (filtersApplied)="onFiltersApplied($event)"
   (popupClosed)="showFilterPopup = false"
 ></app-pop-up>
-<div class="filters">
+<div
+  class="filters"
+  [ngClass]="{
+    'home_filters': page === 'home',
+  }"
+>
   <div class="bottom-toolbar">
     <!-- Left section -->
-    <div class="toolbar-left">
+    <div class="toolbar-left" *ngIf="page != 'home'">
       <button
         class="font-12 font-300 type"
         [ngClass]="{ 'bg-focused': type === 'rent' }"
@@ -33,7 +38,11 @@
 
     <!-- Middle section -->
     <div class="toolbar-center">
-      <div class="search-container">
+      <div
+        class="search-container"
+        [ngClass]="{
+        'width_change': page === 'home',}"
+      >
         <div class="search-container-left">
           <img class="search-icon" src="assets\Icons\Search.svg" alt="" />
           <input type="text" placeholder="Search Location" />
@@ -51,7 +60,7 @@
     </div>
 
     <!-- Right section -->
-    <div class="toolbar-right">
+    <div class="toolbar-right" *ngIf="page != 'home'">
       <span class="font-400 font-12 text-secondary-clr">View As</span>
       <div class="list-map">
         <ul>
