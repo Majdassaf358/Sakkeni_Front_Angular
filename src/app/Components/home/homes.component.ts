@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
-import { FiltersComponent } from '../../shared/filters/filters.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { propertyCard } from '../../Models/property-card';
-import { PaginatedData } from '../../Models/paginatedData';
-import { ApiResponse } from '../../Models/ApiResponse';
-import { lastValueFrom } from 'rxjs';
 import { PropertyService } from '../../Services/property.service';
 import { FormsModule } from '@angular/forms';
-import { filters } from '../../Models/filters';
 
 @Component({
   selector: 'app-homes',
@@ -19,14 +14,22 @@ import { filters } from '../../Models/filters';
   styleUrls: ['./homes.component.css'],
 })
 export class HomesComponent implements OnInit {
-  sideFilter: string = 'list';
-  currentPage: number = 1;
-  properties: propertyCard[] = [];
-  constructor(
-    private router: Router,
-    private propertyservice: PropertyService
-  ) {}
+  images: string[] = [
+    'assets/Imgs/landing1.jpg',
+    'assets/Imgs/landing2.jpg',
+    'assets/Imgs/landing3.jpg',
+  ];
+  currentImage = 0;
+  private swapInterval!: number;
+  constructor() {}
   ngOnInit(): void {
-    // this.getProperties();
+    // Every 5 seconds, advance to the next image (loops back to 0 at the end)
+    this.swapInterval = window.setInterval(() => {
+      this.currentImage = (this.currentImage + 1) % this.images.length;
+    }, 5000);
+  }
+  ngOnDestroy(): void {
+    // Clean up the interval when leaving this component
+    clearInterval(this.swapInterval);
   }
 }

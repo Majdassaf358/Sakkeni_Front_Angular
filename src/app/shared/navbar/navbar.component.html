@@ -1,73 +1,101 @@
 <div
   class="navbar"
   [ngClass]="{
-    noFilters: withFilters === false
+    'home-navbar': page === 'home',
+    'default-navbar': page !== 'home'
   }"
 >
   <div class="nav-container">
-    <!-- Logo-section -->
+    <!-- Logo -->
     <div class="logo-section width-25">
-      <img class="nav-logo" src="assets/Imgs/Logo.png" alt="" />
+      <img class="nav-logo" src="assets/Imgs/Logo.png" alt="Logo" />
     </div>
-    <!-- nav-section -->
-    <ul class="nav-section width-50 text-secondary-clr font-400">
-      <li
-        class="nav-item"
-        [ngClass]="{ active: page === 'home' }"
-        [routerLink]="['/home']"
-      >
-        Home
-      </li>
-      <li
-        class="nav-item"
-        [ngClass]="{ active: page === 'properties' }"
-        [routerLink]="['/properties']"
-      >
-        Properties
-      </li>
-      <li
-        class="nav-item"
-        [ngClass]="{ active: page === 'services' }"
-        [routerLink]="['/services']"
-      >
-        Services
-      </li>
-      <li
-        class="nav-item"
-        [ngClass]="{ active: page === 'about' }"
-        [routerLink]="['/about-us']"
-      >
-        About Us
-      </li>
-      <li class="nav-item" [routerLink]="['/login']">Log In</li>
-    </ul>
-    <!-- profile-section -->
-    <div class="right-section width-25">
-      <!-- language -->
-      <div class="lan">
-        <img src="assets/Icons/Vector.svg" alt="" class="lan-icon" />
-        <ul>
-          <li class="lan-list">
-            <div>Lan<a class="bg-neutural" href=""></a></div>
-          </li>
-        </ul>
+
+    <!-- HOME VERSION -->
+    <ng-container *ngIf="page === 'home'; else defaultNav">
+      <!-- Centered nav links -->
+      <ul class="nav-section home-links">
+        <li class="nav-item" [routerLink]="['/home']">Home</li>
+        <li class="nav-item" [routerLink]="['/properties']">Properties</li>
+        <li class="nav-item" [routerLink]="['/services']">Services</li>
+        <li class="nav-item" [routerLink]="['/about-us']">About Us</li>
+        <li class="nav-item" [routerLink]="['/login']">Log In</li>
+      </ul>
+
+      <!-- Inline search bar -->
+      <div class="home-search width-50">
+        <input type="text" placeholder="Search Location" class="search-input" />
+        <!-- optional filter icon -->
+        <img src="assets/Icons/filter.svg" alt="Filter" class="filter-icon" />
       </div>
-      <!-- profile -->
-      <div class="profile-section" (click)="toggleDropdown()" #dropdown>
-        <img src="assets/Imgs/Girl.jpg" alt="" class="profile-img" />
-        <span class="lan-button bg-secondary"></span>
-        <ul class="dropdown-menu" [class.show]="dropdownOpen">
-          <li (click)="goToProfile()" class="font-400 font-14">Edit Profile</li>
-          <li (click)="changePassword()" class="font-400 font-14">
-            Change Password
-          </li>
-          <li (click)="logout()" class="font-400 font-14">Log Out</li>
-        </ul>
+    </ng-container>
+
+    <!-- DEFAULT VERSION -->
+    <ng-template #defaultNav>
+      <ul class="nav-section width-50 text-secondary-clr font-400">
+        <li
+          class="nav-item"
+          [ngClass]="{ active: page === 'home' }"
+          [routerLink]="['/home']"
+        >
+          Home
+        </li>
+        <li
+          class="nav-item"
+          [ngClass]="{ active: page === 'properties' }"
+          [routerLink]="['/properties']"
+        >
+          Properties
+        </li>
+        <li
+          class="nav-item"
+          [ngClass]="{ active: page === 'services' }"
+          [routerLink]="['/services']"
+        >
+          Services
+        </li>
+        <li
+          class="nav-item"
+          [ngClass]="{ active: page === 'about' }"
+          [routerLink]="['/about-us']"
+        >
+          About Us
+        </li>
+        <li class="nav-item" [routerLink]="['/login']">Log In</li>
+      </ul>
+
+      <div class="right-section width-25">
+        <div class="lan">
+          <img src="assets/Icons/Vector.svg" alt="" class="lan-icon" />
+          <ul>
+            <li class="lan-list">
+              <div>Lan<a class="bg-neutural" href=""></a></div>
+            </li>
+          </ul>
+        </div>
+        <!-- profile -->
+        <div class="profile-section" (click)="toggleDropdown()" #dropdown>
+          <img src="assets/Imgs/Girl.jpg" alt="" class="profile-img" />
+          <span class="lan-button bg-secondary"></span>
+          <ul class="dropdown-menu" [class.show]="dropdownOpen">
+            <li (click)="goToProfile()" class="font-400 font-14">
+              Edit Profile
+            </li>
+            <li (click)="changePassword()" class="font-400 font-14">
+              Change Password
+            </li>
+            <li (click)="logout()" class="font-400 font-14">Log Out</li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </ng-template>
   </div>
-  <div *ngIf="withFilters === true" class="nav-line"></div>
+
+  <!-- default filter line -->
+  <div *ngIf="withFilters && page !== 'home'" class="nav-line"></div>
 </div>
+
+<!-- plus button only on properties -->
 <div *ngIf="page === 'properties'" class="plus-button">
-  <img src="assets/Icons/add-circle.svg" alt="" class="add-property-icon" />
+  <img src="assets/Icons/add-circle.svg" alt="Add" class="add-property-icon" />
 </div>
