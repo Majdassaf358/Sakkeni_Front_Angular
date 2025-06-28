@@ -32,11 +32,18 @@ export class AuthenticationService {
     return this.http.get<ApiResponse<profile>>(url);
   }
   public updateProfileDetails(
-    req: updateProfile
+    updatedProfile: updateProfile
   ): Observable<ApiResponse<null>> {
-    console.log(req);
+    const formData = new FormData();
+    formData.append('first_name', updatedProfile.first_name);
+    formData.append('last_name', updatedProfile.last_name);
+    formData.append('address', updatedProfile.address);
+    formData.append('phone_number', updatedProfile.phone_number);
+    if (updatedProfile.profile_picture) {
+      formData.append('profile_picture', updatedProfile.profile_picture);
+    }
     let url = `${environment.Api}/update-profile`;
-    return this.http.post<ApiResponse<null>>(url, req);
+    return this.http.post<ApiResponse<null>>(url, formData);
   }
   public updateProfilePictue(file: any): Observable<ApiResponse<null>> {
     const formData = new FormData();

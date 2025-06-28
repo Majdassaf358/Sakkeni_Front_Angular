@@ -3,5 +3,5 @@ export class updateProfile {
   'last_name': string;
   'address': string;
   'phone_number': string;
-  // 'profile_pic': File | null;
+  'profile_picture': File | null;
 }
