@@ -22,15 +22,15 @@
 
       <button
         class="font-12 font-300 type"
-        [ngClass]="{ 'bg-focused': type === 'sale' }"
-        (click)="changeType('sale')"
+        [ngClass]="{ 'bg-focused': type === 'purchase' }"
+        (click)="changeType('purchase')"
       >
         For Sale
       </button>
       <button
         class="font-12 font-300 type"
-        [ngClass]="{ 'bg-focused': type === 'off' }"
-        (click)="changeType('off')"
+        [ngClass]="{ 'bg-focused': type === 'off-plan' }"
+        (click)="changeType('off-plan')"
       >
         Off Plan
       </button>

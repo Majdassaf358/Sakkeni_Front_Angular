@@ -15,6 +15,7 @@ import { PopUpComponent } from '../../Components/pop-up/pop-up.component';
 })
 export class FiltersComponent {
   @Input() page!: string;
+  @Output() typeChange = new EventEmitter<string>();
   @Output() filterChange = new EventEmitter<string>();
   @Output() filter = new EventEmitter<filters>();
   sideSelect: string = 'list';
@@ -30,8 +31,9 @@ export class FiltersComponent {
     this.filterChange.emit(change);
     this.sideSelect = change;
   }
+
   changeType(change: string) {
-    // this.filterChange.emit(change);
+    this.typeChange.emit(change);
     this.type = change;
   }
   getFilteredData() {

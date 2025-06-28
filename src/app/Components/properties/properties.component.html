@@ -1,6 +1,7 @@
 <app-navbar [page]="'properties'" [withFilters]="true"></app-navbar>
 <app-filters
   [page]="'properties'"
+  (typeChange)="updateViewType($event)"
   (filterChange)="updateSideFilter($event)"
   (filter)="handleFiltersUpdate($event)"
 ></app-filters>

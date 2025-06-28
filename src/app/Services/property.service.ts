@@ -16,7 +16,7 @@ export class PropertyService {
   constructor(private http: HttpClient) {}
 
   public viewProperty(
-    type: string = 'rent',
+    type: string,
     page: number = 1
   ): Observable<ApiResponse<PaginatedData<propertyCard>>> {
     let url = `${environment.Api}/view-properties/${type}?page=${page}`;

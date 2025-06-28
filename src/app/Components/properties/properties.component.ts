@@ -20,6 +20,7 @@ import { filters } from '../../Models/filters';
 export class PropertiesComponent implements OnInit {
   savedCardIds = new Set<number>();
   sideFilter: string = 'list';
+  viewType: string = 'rent';
   currentPage: number = 1;
   receivedFilters!: filters;
   properties: propertyCard[] = [];
@@ -33,12 +34,10 @@ export class PropertiesComponent implements OnInit {
   async getProperties() {
     try {
       let res: ApiResponse<PaginatedData<propertyCard>> = await lastValueFrom(
-        this.propertyservice.viewProperty()
+        this.propertyservice.viewProperty(this.viewType)
       );
       this.currentPage = res.data.current_page;
       this.properties = res.data.data;
-
-      console.log(this.properties);
     } catch (error) {
       console.log(error);
     }
@@ -51,16 +50,17 @@ export class PropertiesComponent implements OnInit {
       );
       this.currentPage = res.data.current_page;
       this.properties = res.data.data;
-
-      console.log(this.properties);
     } catch (error) {
       console.log(error);
     }
   }
-  updateSideFilter(Value: string) {
-    this.sideFilter = Value;
+  updateSideFilter(value: string) {
+    this.sideFilter = value;
   }
-  updateView(Value: filters) {}
+  updateViewType(value: string) {
+    this.viewType = value;
+    this.getProperties();
+  }
   goToDetails(id: number) {
     this.router.navigate(['/home-details', id]);
   }
