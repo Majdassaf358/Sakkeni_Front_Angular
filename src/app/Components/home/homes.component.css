@@ -1,12 +1,16 @@
-/* height = 100vh minus your navbar height (157px) */
-.hero {
+.slider {
   position: absolute;
   top: 0;
+  overflow: hidden;
   width: 100%;
-  height: 430px;
+  height: 35rem;
+}
+.hero {
+  position: absolute;
+  width: 100%;
+  height: 35rem;
   background-size: cover;
-  background-position: center;
-  transition: background-image 1s ease-in-out;
+  transition: transform 0.8s ease-out;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,7 +23,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(39, 57, 58, 0.5); /* semi-dark tint */
+    background: rgba(39, 57, 58, 0.5);
     background-size: cover;
     z-index: 1;
   }
@@ -27,14 +31,18 @@
   .hero-content {
     position: relative;
     z-index: 2;
-
+    display: grid;
     h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: 2.25rem;
+      line-height: 172%;
+      letter-spacing: 1px;
+      text-align: center;
+      margin-top: 7rem;
     }
 
     p {
-      font-size: 1.25rem;
+      margin-top: 4rem;
+      font-size: 1.5rem;
     }
   }
 }

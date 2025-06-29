@@ -1,12 +1,19 @@
 <app-navbar [page]="'home'" [withFilters]="false"></app-navbar>
 <app-filters [page]="'home'"></app-filters>
-<div
-  class="hero"
-  [ngStyle]="{ 'background-image': 'url(' + images[currentImage] + ')' }"
->
-  <div class="overlay"></div>
-  <div class="hero-content">
-    <h1>One Platform, Infinite Property Possibilities</h1>
-    <p>Buy, sell or rent, your next move starts here!</p>
+<div class="slider">
+  <div
+    class="hero"
+    *ngFor="let slide of slides; let i = index"
+    [ngStyle]="{
+      'background-image': 'url(' + slide.image + ')',
+      'background-position': slide.position,
+      transform: 'translateX(' + (i - currentImage) * 100 + '%)'
+    }"
+  >
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1 [innerHTML]="slide.title" class="font-600"></h1>
+      <p [innerHTML]="slide.text" class="font-300"></p>
+    </div>
   </div>
 </div>
