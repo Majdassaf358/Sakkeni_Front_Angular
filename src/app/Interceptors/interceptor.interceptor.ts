@@ -6,10 +6,8 @@ export const interceptorInterceptor: HttpInterceptorFn = (req, next) => {
     myToken = localStorage.getItem('Token');
   }
 
-  // Start from the original headers
   let headers = req.headers;
 
-  // Always set auth if token exists
   if (myToken) {
     headers = headers.set('Authorization', `Bearer ${myToken}`);
   }
@@ -22,7 +20,6 @@ export const interceptorInterceptor: HttpInterceptorFn = (req, next) => {
     headers = headers.set('Content-Type', 'application/json');
   }
 
-  // Clone with the updated headers
   const clonedReq = req.clone({ headers });
   return next(clonedReq);
 };
