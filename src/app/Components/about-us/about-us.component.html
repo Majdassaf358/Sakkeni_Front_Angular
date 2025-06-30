@@ -1,2 +1,4 @@
 <app-navbar [page]="'about'" [withFilters]="false"></app-navbar>
-<p>about-us works!</p>
+<google-map [center]="center">
+  <map-marker *ngFor="let p of markerLatLong" [position]="p"> </map-marker>
+</google-map>
