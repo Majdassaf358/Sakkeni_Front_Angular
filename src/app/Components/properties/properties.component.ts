@@ -37,10 +37,8 @@ export class PropertiesComponent implements OnInit {
     lat: 33.42565943762839,
     lng: 36.94301086943456,
   };
-  markerLatLong: google.maps.LatLngLiteral[] = [
-    { lat: 33.56565943762839, lng: 36.84301086943456 },
-    { lat: 33.57765943762839, lng: 36.87301086943456 },
-  ];
+
+  markers: { position: google.maps.LatLngLiteral; title: string }[] = [];
 
   constructor(
     private router: Router,
@@ -105,7 +103,14 @@ export class PropertiesComponent implements OnInit {
         return 'N/A';
     }
   }
-  test(event: any) {
-    console.log(event);
+  onMapClick(event: google.maps.MapMouseEvent): void {
+    if (event.latLng) {
+      const position = event.latLng.toJSON();
+      console.log('Clicked position:', position);
+      this.markers.push({
+        position,
+        title: `Marker at (${position.lat},${position.lng})`,
+      });
+    }
   }
 }

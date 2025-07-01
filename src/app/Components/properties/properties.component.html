@@ -70,15 +70,24 @@
         [center]="center"
         [zoom]="10"
         height="100vh"
-        (click)="test($event)"
+        (mapClick)="onMapClick($event)"
       >
-        <map-marker *ngFor="let p of markerLatLong" [position]="p"></map-marker>
+        <map-marker
+          *ngFor="let marker of markers"
+          [position]="marker.position"
+          [title]="marker.title"
+        ></map-marker>
       </google-map>
     </div>
   </div>
   <div *ngIf="sideFilter == 'map'">
-    <google-map [center]="center" [zoom]="10" height="100vh" width="100%">
-      <map-marker *ngFor="let p of markerLatLong" [position]="p"> </map-marker>
+    <google-map
+      [center]="center"
+      [zoom]="10"
+      height="100vh"
+      width="100%"
+      (mapClick)="onMapClick($event)"
+    >
     </google-map>
   </div>
 </div>
