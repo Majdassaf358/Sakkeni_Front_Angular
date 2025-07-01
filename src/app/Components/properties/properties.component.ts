@@ -21,6 +21,7 @@ export class PropertiesComponent implements OnInit {
   savedCardIds = new Set<number>();
   sideFilter: string = 'list';
   viewType: string = 'rent';
+  propertyType!: string;
   currentPage: number = 1;
   receivedFilters!: filters;
   properties: propertyCard[] = [];
@@ -65,7 +66,6 @@ export class PropertiesComponent implements OnInit {
     this.router.navigate(['/home-details', id]);
   }
   handleFiltersUpdate(newFilters: filters) {
-    console.log('Received Filters:', this.receivedFilters);
     this.receivedFilters = newFilters;
     this.filterProperties();
   }

@@ -13,10 +13,8 @@ export const interceptorInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   if (req.body instanceof FormData) {
-    console.log('delete');
     headers = headers.delete('Content-Type');
   } else {
-    console.log('json');
     headers = headers.set('Content-Type', 'application/json');
   }
 

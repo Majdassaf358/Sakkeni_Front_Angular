@@ -37,11 +37,9 @@ export class FiltersComponent {
     this.type = change;
   }
   getFilteredData() {
-    console.log('Child: Filters Updated', this.filtersSel);
     this.filter.emit(this.filtersSel);
   }
   onFiltersApplied(filters: any) {
-    console.log('Filter data:', filters);
     // Implement your filter logic here
     this.showFilterPopup = false;
   }
