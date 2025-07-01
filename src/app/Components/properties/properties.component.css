@@ -7,9 +7,9 @@
   padding-left: clamp(60px, 7.9vw, 120px);
   width: 80%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem 0rem;
-  margin-right: 0.2rem;
+  margin-right: 1.2rem;
 }
 .property-details {
   background-color: #fffefc;
@@ -21,6 +21,9 @@
 .listSwitch {
   width: 94%;
   grid-template-columns: repeat(5, 1fr);
+}
+.side-map {
+  width: 30%;
 }
 
 .card__content {

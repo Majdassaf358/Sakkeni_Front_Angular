@@ -10,10 +10,17 @@ import { lastValueFrom } from 'rxjs';
 import { PropertyService } from '../../Services/property.service';
 import { FormsModule } from '@angular/forms';
 import { filters } from '../../Models/filters';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
   selector: 'app-properties',
-  imports: [NavbarComponent, FiltersComponent, CommonModule, FormsModule],
+  imports: [
+    NavbarComponent,
+    FiltersComponent,
+    CommonModule,
+    FormsModule,
+    GoogleMapsModule,
+  ],
   templateUrl: './properties.component.html',
   styleUrl: './properties.component.css',
 })
@@ -25,6 +32,16 @@ export class PropertiesComponent implements OnInit {
   currentPage: number = 1;
   receivedFilters!: filters;
   properties: propertyCard[] = [];
+
+  center: google.maps.LatLngLiteral = {
+    lat: 33.42565943762839,
+    lng: 36.94301086943456,
+  };
+  markerLatLong: google.maps.LatLngLiteral[] = [
+    { lat: 33.56565943762839, lng: 36.84301086943456 },
+    { lat: 33.57765943762839, lng: 36.87301086943456 },
+  ];
+
   constructor(
     private router: Router,
     private propertyservice: PropertyService
@@ -39,7 +56,6 @@ export class PropertiesComponent implements OnInit {
       );
       this.currentPage = res.data.current_page;
       this.properties = res.data.data;
-      console.log(this.properties);
     } catch (error) {
       console.log(error);
     }
@@ -75,6 +91,13 @@ export class PropertiesComponent implements OnInit {
       this.savedCardIds.delete(index);
     } else {
       this.savedCardIds.add(index);
+    }
+  }
+  onMapClick(event: google.maps.MapMouseEvent) {
+    if (event.latLng) {
+      const lat = event.latLng.lat();
+      const lng = event.latLng.lng();
+      console.log('Clicked coordinates:', { lat, lng });
     }
   }
 }

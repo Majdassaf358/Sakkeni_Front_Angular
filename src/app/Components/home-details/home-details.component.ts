@@ -8,11 +8,18 @@ import { propertyDetails } from '../../Models/property-details';
 import { PropertyService } from '../../Services/property.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
   selector: 'app-home-details',
   standalone: true,
-  imports: [NavbarComponent, FiltersComponent, CommonModule, FormsModule],
+  imports: [
+    NavbarComponent,
+    FiltersComponent,
+    CommonModule,
+    FormsModule,
+    GoogleMapsModule,
+  ],
   templateUrl: './home-details.component.html',
   styleUrl: './home-details.component.css',
 })
@@ -28,6 +35,13 @@ export class HomeDetailsComponent implements OnInit {
   images: string[] = [];
   imagesUrl: string = 'http://127.0.0.1:8000/';
   details: propertyDetails = new propertyDetails();
+
+  center: google.maps.LatLngLiteral = { lat: 52.3676, lng: 4.9041 };
+  markerLatLong: google.maps.LatLngLiteral[] = [
+    { lat: 52.3676, lng: 4.9051 },
+    { lat: 52.3676, lng: 4.9031 },
+  ];
+
   constructor(
     private route: ActivatedRoute,
     private propertyservice: PropertyService

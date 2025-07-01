@@ -12,7 +12,7 @@
   </div>
   <div *ngIf="sideFilter != 'map'" class="cards-filter">
     <div class="all-cards" [ngClass]="{ listSwitch: sideFilter === 'list' }">
-      <div class="width-95" *ngFor="let card of properties; let i = index">
+      <div class="width-88" *ngFor="let card of properties; let i = index">
         <div class="card__image-wrapper">
           <img
             (click)="goToDetails(card.id)"
@@ -57,8 +57,15 @@
         </div>
       </div>
     </div>
-
-    <div *ngIf="sideFilter == 'split'" class="side-map">split</div>
+    <div *ngIf="sideFilter == 'split'" class="side-map">
+      <google-map [center]="center" [zoom]="10" height="100vh">
+        <map-marker *ngFor="let p of markerLatLong" [position]="p"></map-marker>
+      </google-map>
+    </div>
   </div>
-  <div *ngIf="sideFilter == 'map'">Full Map</div>
+  <div *ngIf="sideFilter == 'map'">
+    <google-map [center]="center" [zoom]="10" height="100vh" width="100%">
+      <map-marker *ngFor="let p of markerLatLong" [position]="p"> </map-marker>
+    </google-map>
+  </div>
 </div>
