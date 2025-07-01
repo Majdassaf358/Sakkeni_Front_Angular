@@ -17,7 +17,7 @@ export class PropertyService {
 
   public viewProperty(
     type: string,
-    page: number = 1
+    page: number
   ): Observable<ApiResponse<PaginatedData<propertyCard>>> {
     let url = `${environment.Api}/view-properties/${type}?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<propertyCard>>>(url);

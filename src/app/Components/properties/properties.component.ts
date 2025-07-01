@@ -52,7 +52,7 @@ export class PropertiesComponent implements OnInit {
   async getProperties() {
     try {
       let res: ApiResponse<PaginatedData<propertyCard>> = await lastValueFrom(
-        this.propertyservice.viewProperty(this.viewType)
+        this.propertyservice.viewProperty(this.viewType, 1)
       );
       this.currentPage = res.data.current_page;
       this.properties = res.data.data;
@@ -93,11 +93,19 @@ export class PropertiesComponent implements OnInit {
       this.savedCardIds.add(index);
     }
   }
-  onMapClick(event: google.maps.MapMouseEvent) {
-    if (event.latLng) {
-      const lat = event.latLng.lat();
-      const lng = event.latLng.lng();
-      console.log('Clicked coordinates:', { lat, lng });
+  getPrice(card: propertyCard): number | string {
+    switch (this.viewType) {
+      case 'rent':
+        return card.rent?.price ?? 'N/A';
+      case 'purchase':
+        return card.purchase?.price ?? 'N/A';
+      case 'off_plan':
+        return card.off_plan?.overall_payment ?? 'N/A';
+      default:
+        return 'N/A';
     }
+  }
+  test(event: any) {
+    console.log(event);
   }
 }

@@ -44,21 +44,34 @@
                   residential: card.residential
                 }"
               ></span>
-              <span class="card__tag-text">Condo for rent</span>
+              <span class="font-400 font-12 text-primary-clr">{{
+                card.property_type.name
+              }}</span>
+              <img
+                class="card_location"
+                src="assets\Icons\Location.svg"
+                alt=""
+              />
             </div>
           </div>
-          <h3 class="card__price">
-            $2,200<span class="card__period">/month</span>
-          </h3>
-          <p class="card__bedrooms">2 bedroom</p>
-          <div class="card__location">
-            <p class="card__address">10 Lakeview St, Toronto, ON M4B 2B2</p>
+          <div class="bottom_card">
+            <h3 class="font-400 font-18 text-primary-clr">
+              ${{ getPrice(card) }}
+            </h3>
+            <p class="font-400 font-14 text-primary-clr">
+              {{ card.location.country.name }},{{ card.location.city.name }}
+            </p>
           </div>
         </div>
       </div>
     </div>
     <div *ngIf="sideFilter == 'split'" class="side-map">
-      <google-map [center]="center" [zoom]="10" height="100vh">
+      <google-map
+        [center]="center"
+        [zoom]="10"
+        height="100vh"
+        (click)="test($event)"
+      >
         <map-marker *ngFor="let p of markerLatLong" [position]="p"></map-marker>
       </google-map>
     </div>
