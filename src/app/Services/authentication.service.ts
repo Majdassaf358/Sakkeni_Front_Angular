@@ -48,10 +48,7 @@ export class AuthenticationService {
   public updateProfilePictue(file: any): Observable<ApiResponse<null>> {
     const formData = new FormData();
     formData.append('profile_picture', file, file.name);
-    // for (const [key, value] of formData.entries()) {
-    //   console.log(key, value);
-    // }
-    console.log(formData);
+
     let url = `${environment.Api}/update-profile`;
     return this.http.post<ApiResponse<null>>(url, formData);
   }

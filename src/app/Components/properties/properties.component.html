@@ -37,7 +37,13 @@
         <div class="property-details">
           <div class="card__content">
             <div class="card__tag">
-              <span class="card__dot"></span>
+              <span
+                class="card__dot"
+                [ngClass]="{
+                  commercial: card.property_type,
+                  residential: card.residential
+                }"
+              ></span>
               <span class="card__tag-text">Condo for rent</span>
             </div>
           </div>

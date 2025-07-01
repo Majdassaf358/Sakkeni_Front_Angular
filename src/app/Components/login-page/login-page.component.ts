@@ -103,7 +103,6 @@ export class LoginPageComponent {
   }
   async signUpFunction() {
     var req: sign_up = this.signUpForm.getRawValue();
-    console.log(req);
     try {
       let res: ApiResponse<authenticationRes> = await lastValueFrom(
         this.authenticationService.signUp(req)
