@@ -5,7 +5,7 @@
 .home_filters {
   background: transparent;
   position: relative;
-  z-index: 5;
+  z-index: 3;
 }
 .filter-container-without-filters {
   display: flex;
