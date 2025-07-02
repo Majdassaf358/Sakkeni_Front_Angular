@@ -6,7 +6,7 @@ import { lastValueFrom } from 'rxjs';
 import { AuthenticationService } from '../../Services/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { updateProfile } from '../../Models/profile/updateProfile';
-import { RouterModule, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -47,7 +47,6 @@ export class ProfileComponent implements OnInit {
       );
 
       await this.getProfile();
-      console.log('Profile refreshed');
     } catch (error) {
       console.log(error);
     }

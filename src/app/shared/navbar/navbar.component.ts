@@ -30,6 +30,9 @@ export class NavbarComponent {
   goToProfile() {
     this.router.navigate(['/profile']);
   }
+  goToReset() {
+    this.router.navigate(['/reset']);
+  }
   async logOut() {
     try {
       let res: ApiResponse<null> = await lastValueFrom(
@@ -45,14 +48,6 @@ export class NavbarComponent {
 
   closeDropdown() {
     setTimeout(() => (this.dropdownOpen = false), 150);
-  }
-
-  editProfile() {
-    console.log('Edit Profile clicked');
-  }
-
-  changePassword() {
-    console.log('Change Password clicked');
   }
 
   async logout() {

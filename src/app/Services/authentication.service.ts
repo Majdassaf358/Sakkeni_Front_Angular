@@ -8,6 +8,7 @@ import { authenticationRes } from '../Models/authenticationRes';
 import { sign_up } from '../Models/sign-up';
 import { profile } from '../Models/profile/profile';
 import { updateProfile } from '../Models/profile/updateProfile';
+import { resetPassword } from '../Models/profile/resetPassword';
 
 @Injectable({
   providedIn: 'root',
@@ -55,5 +56,9 @@ export class AuthenticationService {
   public logout(): Observable<ApiResponse<null>> {
     let url = `${environment.Api}/logout`;
     return this.http.get<ApiResponse<null>>(url);
+  }
+  public resetPassword(req: resetPassword): Observable<ApiResponse<null>> {
+    let url = `${environment.Api}/reset-password`;
+    return this.http.post<ApiResponse<null>>(url, req);
   }
 }

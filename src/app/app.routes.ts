@@ -6,6 +6,7 @@ import { ServicesComponent } from './Components/services-component-folder/servic
 import { ProfileComponent } from './Components/profile/profile.component';
 import { HomeDetailsComponent } from './Components/home-details/home-details.component';
 import { PropertiesComponent } from './Components/properties/properties.component';
+import { ResetPasswordComponent } from './Components/reset-password/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
@@ -40,5 +41,9 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+  },
+  {
+    path: 'reset',
+    component: ResetPasswordComponent,
   },
 ];
