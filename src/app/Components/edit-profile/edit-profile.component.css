@@ -6,21 +6,12 @@
   padding: 1.25rem;
 }
 .profile-top {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-}
-.profile-top .history {
-  display: flex;
-  padding-top: 0.5rem;
-  cursor: pointer;
-}
-.profile-top .history .text {
-  margin-right: 0.4rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
 }
 .profile-body {
   display: flex;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
 }
 .profile-picture {
   width: 320px;
@@ -44,7 +35,6 @@
   background-color: #101818;
   width: 100%;
   height: 1px;
-  margin-bottom: 2rem;
 }
 .buttons {
   display: flex;

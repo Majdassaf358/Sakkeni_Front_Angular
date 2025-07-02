@@ -1,15 +1,13 @@
 <app-navbar [page]="'profile'" [withFilters]="false"></app-navbar>
 <div class="profile-container">
   <div class="profile-top text-neutural-clr font-16 font-500">
-    <h3>Profile</h3>
-    <div class="history">
-      <p class="font-14 font-400 text">View History</p>
-      <img src="assets\Icons\history.svg" alt="" />
-    </div>
+    Profile
+    <div class="nav-line"></div>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
   </div>
-  <div class="nav-line"></div>
   <div class="profile-body">
     <div class="profile-picture">
+      <label class="text-neutural-clr font-500">Profile Picture</label>
       <img
         class="pic"
         [src]="imageUrl + profileInfo.profile_picture_path"

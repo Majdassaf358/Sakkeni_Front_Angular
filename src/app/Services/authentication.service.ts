@@ -61,4 +61,8 @@ export class AuthenticationService {
     let url = `${environment.Api}/reset-password`;
     return this.http.post<ApiResponse<null>>(url, req);
   }
+  public forgetPassword(email: string): Observable<ApiResponse<null>> {
+    let url = `${environment.Api}/forgot-password`;
+    return this.http.post<ApiResponse<null>>(url, email);
+  }
 }
