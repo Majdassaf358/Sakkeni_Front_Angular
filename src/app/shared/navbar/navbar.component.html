@@ -2,7 +2,8 @@
   class="navbar"
   [ngClass]="{
     'home-navbar': page === 'home',
-    navbar: page !== 'home'
+    navbar: page !== 'home',
+    'noFilters': withFilters === false,
   }"
 >
   <div class="nav-container">
