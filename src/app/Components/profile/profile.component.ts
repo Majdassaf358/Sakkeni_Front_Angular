@@ -34,24 +34,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  async updateProfile() {
-    try {
-      this.updatedProfile.first_name = this.profileInfo.first_name;
-      this.updatedProfile.last_name = this.profileInfo.last_name;
-      this.updatedProfile.address = this.profileInfo.address;
-      this.updatedProfile.phone_number = this.profileInfo.phone_number;
-      this.updatedProfile.profile_picture = this.selectedFile;
-
-      const res = await lastValueFrom(
-        this.authenticationService.updateProfileDetails(this.updatedProfile)
-      );
-
-      await this.getProfile();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async getProfile() {
     try {
       let res: ApiResponse<profile> = await lastValueFrom(
@@ -62,7 +44,10 @@ export class ProfileComponent implements OnInit {
       console.log(error);
     }
   }
-  cancelChanges() {
-    this.router.navigate(['/home']);
+  goToEditProfile() {
+    this.router.navigate(['/edit']);
+  }
+  resetPass() {
+    this.router.navigate(['/reset']);
   }
 }

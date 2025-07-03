@@ -7,6 +7,7 @@ import { ProfileComponent } from './Components/profile/profile.component';
 import { HomeDetailsComponent } from './Components/home-details/home-details.component';
 import { PropertiesComponent } from './Components/properties/properties.component';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password/reset-password.component';
+import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,10 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+  },
+  {
+    path: 'edit',
+    component: EditProfileComponent,
   },
   {
     path: 'reset',

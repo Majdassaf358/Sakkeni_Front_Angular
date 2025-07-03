@@ -58,12 +58,12 @@ export class ResetPasswordComponent {
         this.authenticationService.resetPassword(req)
       );
       console.log(res.message);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/profile']);
     } catch (error) {
       console.log(error);
     }
   }
   cancel() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/profile']);
   }
 }
