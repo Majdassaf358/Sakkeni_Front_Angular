@@ -6,6 +6,7 @@
       <p class="font-14 font-400 text">View History</p>
       <img src="assets\Icons\history.svg" alt="" />
     </div>
+    <!-- <input type="file" (change)="onFileSelected($event)" accept="image/*" /> -->
   </div>
   <div class="nav-line"></div>
   <div class="profile-body">
@@ -19,32 +20,35 @@
 
     <div class="profile-details">
       <div class="profile-element">
-        <label class="text-neutural-clr font-500 font-14">First Name</label>
-        <input
-          class="font-12 font-400 profile-inputs"
-          [(ngModel)]="profileInfo.first_name"
-        />
+        <img src="assets\Icons\User.svg" alt="" />
+        <label class="text-neutural-clr font-300 font-14"
+          >{{ profileInfo.first_name }} {{ profileInfo.last_name }}</label
+        >
+      </div>
+
+      <div class="profile-element">
+        <img src="assets\Icons\call.svg" alt="" />
+        <label class="text-neutural-clr font-300 font-14">{{
+          profileInfo.phone_number
+        }}</label>
       </div>
       <div class="profile-element">
-        <label class="text-neutural-clr font-500 font-14">Last Name</label>
-        <input
-          class="font-12 font-400 profile-inputs"
-          [(ngModel)]="profileInfo.last_name"
-        />
+        <img src="assets\Icons\email.svg" alt="" />
+        <label class="text-neutural-clr font-300 font-14">{{
+          profileInfo.email
+        }}</label>
       </div>
       <div class="profile-element">
-        <label class="text-neutural-clr font-500 font-14">Address</label>
-        <input
-          class="font-12 font-400 profile-inputs"
-          [(ngModel)]="profileInfo.address"
-        />
+        <img src="assets\Icons\Location-profile.svg" alt="" />
+        <label class="text-neutural-clr font-300 font-14">{{
+          profileInfo.address
+        }}</label>
       </div>
       <div class="profile-element">
-        <label class="text-neutural-clr font-500 font-14">Number</label>
-        <input
-          class="font-12 font-400 profile-inputs"
-          [(ngModel)]="profileInfo.phone_number"
-        />
+        <img src="assets\Icons\profile-type.svg" alt="" />
+        <label class="text-neutural-clr font-300 font-14">{{
+          profileInfo.updated_at
+        }}</label>
       </div>
     </div>
   </div>
