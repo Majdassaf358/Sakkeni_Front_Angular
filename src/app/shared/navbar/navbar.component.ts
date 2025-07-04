@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,6 +11,7 @@ import { RouterModule, Router } from '@angular/router';
 import { ApiResponse } from '../../Models/ApiResponse';
 import { lastValueFrom } from 'rxjs';
 import { AuthenticationService } from '../../Services/authentication.service';
+import { profile } from '../../Models/profile/profile';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -17,15 +19,20 @@ import { AuthenticationService } from '../../Services/authentication.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @Input() page!: string;
   @Input() withFilters!: boolean;
   @ViewChild('dropdown', { static: false }) dropdown!: ElementRef;
+  profileInfo: profile = new profile();
+  imageUrl: string = 'http://127.0.0.1:8000/';
   dropdownOpen = false;
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {}
+  ngOnInit(): void {
+    this.getProfile();
+  }
 
   goToProfile() {
     this.router.navigate(['/profile']);
@@ -38,6 +45,16 @@ export class NavbarComponent {
       let res: ApiResponse<null> = await lastValueFrom(
         this.authenticationService.logout()
       );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async getProfile() {
+    try {
+      let res: ApiResponse<profile> = await lastValueFrom(
+        this.authenticationService.profile()
+      );
+      this.profileInfo = res.data;
     } catch (error) {
       console.log(error);
     }
@@ -58,6 +75,12 @@ export class NavbarComponent {
       this.router.navigate(['/login']);
     } catch (error) {
       console.log(error);
+    }
+  }
+  handleImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    if (target.src !== 'assets/images/default-profile.png') {
+      target.src = 'assets/images/default-profile.png';
     }
   }
   @HostListener('document:click', ['$event'])
