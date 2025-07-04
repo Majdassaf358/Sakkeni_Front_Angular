@@ -1,3 +1,5 @@
+import { seller } from './seller';
+
 export class profile {
   'id': number;
   'first_name': string;
@@ -9,4 +11,5 @@ export class profile {
   'phone_number': string;
   'created_at': string;
   'updated_at': string;
+  'seller': seller;
 }

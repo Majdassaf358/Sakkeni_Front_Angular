@@ -13,8 +13,13 @@
     <div class="profile-picture">
       <img
         class="pic"
-        [src]="imageUrl + profileInfo.profile_picture_path"
+        [src]="
+          profileInfo.profile_picture_path
+            ? imageUrl + profileInfo.profile_picture_path
+            : 'assets/Imgs/em.jpeg'
+        "
         alt=""
+        (error)="handleImageError($event)"
       />
     </div>
 

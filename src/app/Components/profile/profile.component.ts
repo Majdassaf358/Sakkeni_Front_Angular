@@ -50,4 +50,10 @@ export class ProfileComponent implements OnInit {
   resetPass() {
     this.router.navigate(['/reset']);
   }
+  handleImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    if (target.src !== 'assets/images/default-profile.png') {
+      target.src = 'assets/images/default-profile.png';
+    }
+  }
 }
