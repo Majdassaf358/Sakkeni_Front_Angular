@@ -88,7 +88,13 @@
       </div>
     </div>
     <div class="map-box">
-      <google-map [center]="center">
+      <google-map
+        class=""
+        [center]="center"
+        width="20rem"
+        height="23rem"
+        border-radius="10px"
+      >
         <map-marker *ngFor="let p of markerLatLong" [position]="p">
         </map-marker>
       </google-map>
