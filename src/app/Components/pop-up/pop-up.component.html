@@ -1,130 +1,330 @@
 <div class="popup-overlay" (click)="closePopup()">
   <div class="popup-container" (click)="$event.stopPropagation()">
     <div class="filter-header">
-      <h2>Filters</h2>
+      <p class="font-600 font-16 filters-title">Filters</p>
       <button class="close-btn" (click)="closePopup()">&times;</button>
     </div>
     <div class="nav-line"></div>
     <div class="filter-options">
-      <!-- Property Type -->
+      <!-- COMMON FIELDS -->
       <div class="filter-section">
-        <h3>Property Type:</h3>
+        <p class="font-600">Location</p>
+        <!-- Country is fixed to Syria (id=1) -->
+        <input type="hidden" [(ngModel)]="filters.country_id" [ngModel]="1" />
         <div class="filter-subsection">
-          <strong>Residential:</strong>
+          <p>City</p>
           <div class="checkbox-group">
-            <label>
+            <label
+              *ngFor="
+                let city of [
+                  { id: 1, name: 'Damascus' },
+                  { id: 2, name: 'Aleppo' },
+                  { id: 3, name: 'Homs' },
+                  { id: 4, name: 'Latakia' },
+                  { id: 5, name: 'Hama' },
+                  { id: 6, name: 'Daraa' },
+                  { id: 7, name: 'Deir ez-Zor' },
+                  { id: 8, name: 'Raqqa' },
+                  { id: 9, name: 'Tartus' },
+                  { id: 10, name: 'Idlib' },
+                  { id: 11, name: 'Qamishli' },
+                  { id: 12, name: 'Al-Hasakah' },
+                  { id: 13, name: 'Palmyra' },
+                  { id: 14, name: 'Apamea' }
+                ]
+              "
+            >
               <input
                 type="radio"
-                name="propertyType"
-                [(ngModel)]="selectedPropertyType"
-                value="Apartment"
+                name="city"
+                [value]="city.id"
+                [(ngModel)]="filters.city_id"
               />
-              Apartment
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="propertyType"
-                [(ngModel)]="selectedPropertyType"
-                value="Villa"
-              />
-              Villa
-            </label>
-          </div>
-        </div>
-        <div class="filter-subsection">
-          <strong>Commercial:</strong>
-          <div class="checkbox-group">
-            <label>
-              <input
-                type="radio"
-                name="propertyType"
-                [(ngModel)]="selectedPropertyType"
-                value="Office"
-              />
-              Office
+              {{ city.name }}
             </label>
           </div>
         </div>
       </div>
 
-      <!-- Bedrooms -->
-      <div class="filter-subsection">
-        <strong>Bedrooms:</strong>
-        <div class="checkbox-group">
-          <label *ngFor="let bedroom of ['1', '2', '3', '4', '5', 'More']">
+      <!-- RENT -->
+      <ng-container *ngIf="selectedType === 'rent'">
+        <div class="filter-section">
+          <p class="font-600">Area (m²)</p>
+          <input
+            type="number"
+            placeholder="Min area"
+            [(ngModel)]="filters.min_area"
+          />
+          <input
+            type="number"
+            placeholder="Max area"
+            [(ngModel)]="filters.max_area"
+          />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Bedrooms</p>
+          <input type="number" [(ngModel)]="selectedBedrooms" />
+          <p class="font-600">Bathrooms</p>
+          <input type="number" [(ngModel)]="filters.bathrooms" />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Balconies</p>
+          <input type="number" [(ngModel)]="filters.balconies" />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Amenities</p>
+          <label
+            *ngFor="
+              let amenity of [
+                { id: 1, name: 'nihil' },
+                { id: 2, name: 'earum' },
+                { id: 3, name: 'quam' },
+                { id: 4, name: 'nostrum' },
+                { id: 5, name: 'eaque' },
+                { id: 6, name: 'corporis' },
+                { id: 7, name: 'in' },
+                { id: 8, name: 'facilis' },
+                { id: 9, name: 'sequi' },
+                { id: 10, name: 'harum' }
+              ]
+            "
+          >
             <input
-              type="radio"
-              name="bedrooms"
-              [(ngModel)]="selectedBedrooms"
-              [value]="bedroom"
+              type="checkbox"
+              [value]="amenity.id"
+              (change)="toggleAmenity(amenity.id)"
             />
-            {{ bedroom }}
+            {{ amenity.name }}
           </label>
         </div>
-      </div>
-
-      <!-- Bathrooms -->
-      <div class="filter-subsection">
-        <strong>Bathrooms:</strong>
-        <div class="checkbox-group">
-          <label *ngFor="let bathroom of ['1', '3', '5', 'More']">
-            <input
+        <div class="filter-section">
+          <p class="font-600">Price (USD)</p>
+          <input
+            type="number"
+            placeholder="Min price"
+            [(ngModel)]="filters.min_price"
+          />
+          <input
+            type="number"
+            placeholder="Max price"
+            [(ngModel)]="filters.max_price"
+          />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Furnished</p>
+          <label
+            ><input
               type="radio"
-              name="bathrooms"
-              [(ngModel)]="selectedBathrooms"
-              [value]="bathroom"
+              [value]="1"
+              [(ngModel)]="filters.is_furnished"
             />
-            {{ bathroom }}
+            Yes</label
+          >
+          <label
+            ><input
+              type="radio"
+              [value]="0"
+              [(ngModel)]="filters.is_furnished"
+            />
+            No</label
+          >
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Lease Period</p>
+          <select [(ngModel)]="filters.lease_period">
+            <option value="Yearly">Yearly</option>
+            <option value="Monthly">Monthly</option>
+          </select>
+        </div>
+      </ng-container>
+
+      <!-- PURCHASE -->
+      <ng-container *ngIf="selectedType === 'purchase'">
+        <div class="filter-section">
+          <p class="font-600">Area (m²)</p>
+          <input
+            type="number"
+            placeholder="Min area"
+            [(ngModel)]="filters.min_area"
+          />
+          <input
+            type="number"
+            placeholder="Max area"
+            [(ngModel)]="filters.max_area"
+          />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Bedrooms</p>
+          <input type="number" [(ngModel)]="selectedBedrooms" />
+          <p class="font-600">Bathrooms</p>
+          <input type="number" [(ngModel)]="filters.bathrooms" />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Balconies</p>
+          <input type="number" [(ngModel)]="filters.balconies" />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Amenities</p>
+          <label
+            *ngFor="
+              let amenity of [
+                { id: 1, name: 'nihil' },
+                { id: 2, name: 'earum' },
+                { id: 3, name: 'quam' },
+                { id: 4, name: 'nostrum' },
+                { id: 5, name: 'eaque' },
+                { id: 6, name: 'corporis' },
+                { id: 7, name: 'in' },
+                { id: 8, name: 'facilis' },
+                { id: 9, name: 'sequi' },
+                { id: 10, name: 'harum' }
+              ]
+            "
+          >
+            <input
+              type="checkbox"
+              [value]="amenity.id"
+              (change)="toggleAmenity(amenity.id)"
+            />
+            {{ amenity.name }}
           </label>
         </div>
-      </div>
-
-      <!-- Type Selection -->
-      <div class="filter-subsection">
-        <strong>Filter Type:</strong>
-        <div class="checkbox-group">
-          <label *ngFor="let type of ['rent', 'purchase', 'off-plan']">
-            <input
+        <div class="filter-section">
+          <p class="font-600">Price (USD)</p>
+          <input
+            type="number"
+            placeholder="Min price"
+            [(ngModel)]="filters.min_price"
+          />
+          <input
+            type="number"
+            placeholder="Max price"
+            [(ngModel)]="filters.max_price"
+          />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Furnished</p>
+          <label
+            ><input
               type="radio"
-              name="filterType"
-              [(ngModel)]="selectedType"
-              [value]="type"
+              [value]="1"
+              [(ngModel)]="filters.is_furnished"
             />
-            {{ type }}
+            Yes</label
+          >
+          <label
+            ><input
+              type="radio"
+              [value]="0"
+              [(ngModel)]="filters.is_furnished"
+            />
+            No</label
+          >
+        </div>
+      </ng-container>
+
+      <!-- OFF‑PLAN -->
+      <ng-container *ngIf="selectedType === 'off-plan'">
+        <!-- reuse base fields -->
+        <div class="filter-section">
+          <p class="font-600">Area (m²)</p>
+          <input
+            type="number"
+            placeholder="Min area"
+            [(ngModel)]="filters.min_area"
+          />
+          <input
+            type="number"
+            placeholder="Max area"
+            [(ngModel)]="filters.max_area"
+          />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Area (m²)</p>
+          <input
+            type="number"
+            placeholder="Min area"
+            [(ngModel)]="filters.min_area"
+          />
+          <input
+            type="number"
+            placeholder="Max area"
+            [(ngModel)]="filters.max_area"
+          />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Bedrooms</p>
+          <input type="number" [(ngModel)]="selectedBedrooms" />
+          <p class="font-600">Bathrooms</p>
+          <input type="number" [(ngModel)]="filters.bathrooms" />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Balconies</p>
+          <input type="number" [(ngModel)]="filters.balconies" />
+        </div>
+        <div class="filter-section">
+          <p class="font-600">Amenities</p>
+          <label
+            *ngFor="
+              let amenity of [
+                { id: 1, name: 'nihil' },
+                { id: 2, name: 'earum' },
+                { id: 3, name: 'quam' },
+                { id: 4, name: 'nostrum' },
+                { id: 5, name: 'eaque' },
+                { id: 6, name: 'corporis' },
+                { id: 7, name: 'in' },
+                { id: 8, name: 'facilis' },
+                { id: 9, name: 'sequi' },
+                { id: 10, name: 'harum' }
+              ]
+            "
+          >
+            <input
+              type="checkbox"
+              [value]="amenity.id"
+              (change)="toggleAmenity(amenity.id)"
+            />
+            {{ amenity.name }}
           </label>
         </div>
-      </div>
-
-      <!-- Apply Button -->
-      <button (click)="applyFilters()">Apply Filters</button>
-
-      <div class="filter-section">
-        <h3>Area Range</h3>
-        <div class="filter-subsection">
-          <strong>Bedrooms:</strong>
-          <div class="checkbox-group">
-            <label><input type="checkbox" /> 1</label>
-            <label><input type="checkbox" /> 2</label>
-            <label><input type="checkbox" /> 3</label>
-            <label><input type="checkbox" /> 4</label>
-            <label><input type="checkbox" /> 5</label>
-            <label><input type="checkbox" /> More</label>
-          </div>
+        <div class="filter-section">
+          <p class="font-600">Price (USD)</p>
+          <input
+            type="number"
+            placeholder="Min price"
+            [(ngModel)]="filters.min_price"
+          />
+          <input
+            type="number"
+            placeholder="Max price"
+            [(ngModel)]="filters.max_price"
+          />
         </div>
-        <div class="filter-subsection">
-          <strong>Bathrooms:</strong>
-          <div class="checkbox-group">
-            <label><input type="checkbox" /> 1</label>
-            <label><input type="checkbox" /> 3</label>
-            <label><input type="checkbox" /> 5</label>
-          </div>
+        <div class="filter-section">
+          <p class="font-600">First Payment (USD)</p>
+          <input
+            type="number"
+            placeholder="Min first pay"
+            [(ngModel)]="filters.min_first_pay"
+          />
+          <input
+            type="number"
+            placeholder="Max first pay"
+            [(ngModel)]="filters.max_first_pay"
+          />
         </div>
-      </div>
-    </div>
+        <div class="filter-section">
+          <p class="font-600">Delivery Year</p>
+          <input type="number" [(ngModel)]="filters.delivery_date" />
+        </div>
+      </ng-container>
 
-    <div class="filter-footer">
-      <button class="search-btn">Search</button>
+      <div class="filter-footer">
+        <button class="search-btn" (click)="applyFilters()">
+          Apply Filters
+        </button>
+      </div>
     </div>
   </div>
 </div>

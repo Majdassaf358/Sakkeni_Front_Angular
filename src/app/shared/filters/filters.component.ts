@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { PropertyService } from '../../Services/property.service';
 import { filters } from '../../Models/filters';
 import { PopUpComponent } from '../../Components/pop-up/pop-up.component';
 
@@ -23,10 +21,7 @@ export class FiltersComponent {
   filtersSel: filters = new filters();
   showFilterPopup = false;
 
-  constructor(
-    private router: Router,
-    private propertyservice: PropertyService
-  ) {}
+  constructor() {}
   changeDisplay(change: string) {
     this.filterChange.emit(change);
     this.sideSelect = change;
@@ -40,7 +35,6 @@ export class FiltersComponent {
     this.filter.emit(this.filtersSel);
   }
   onFiltersApplied(filters: any) {
-    // Implement your filter logic here
     this.showFilterPopup = false;
   }
 }

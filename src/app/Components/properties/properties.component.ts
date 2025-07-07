@@ -25,12 +25,12 @@ import { GoogleMapsModule } from '@angular/google-maps';
   styleUrl: './properties.component.css',
 })
 export class PropertiesComponent implements OnInit {
-  savedCardIds = new Set<number>();
   sideFilter: string = 'list';
   viewType: string = 'rent';
   propertyType!: string;
-  currentPage: number = 1;
   receivedFilters!: filters;
+  savedCardIds = new Set<number>();
+  currentPage: number = 1;
   properties: propertyCard[] = [];
 
   center: google.maps.LatLngLiteral = {

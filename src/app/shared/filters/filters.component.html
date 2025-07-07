@@ -1,5 +1,6 @@
 <app-pop-up
   *ngIf="showFilterPopup"
+  [selectedType]="type"
   (filtersApplied)="onFiltersApplied($event)"
   (popupClosed)="showFilterPopup = false"
 ></app-pop-up>
@@ -29,8 +30,8 @@
       </button>
       <button
         class="font-12 font-300 type"
-        [ngClass]="{ 'bg-focused': type === 'off_plan' }"
-        (click)="changeType('off_plan')"
+        [ngClass]="{ 'bg-focused': type === 'off-plan' }"
+        (click)="changeType('off-plan')"
       >
         Off Plan
       </button>
