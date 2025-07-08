@@ -36,6 +36,9 @@ export class LoginPageComponent {
   forgotForm!: FormGroup;
   showMessagePopup = false;
   messageText = '';
+  sendEmailDisabled = false;
+  sendEmailTimer = 0;
+  private sendEmailIntervalId?: any;
   mode: string = 'log';
   token: string = '';
   message: string = '';
@@ -153,8 +156,30 @@ export class LoginPageComponent {
   }
   onPopupClosed() {
     this.showMessagePopup = false;
-    // if (this.messageText.includes('success')) {
-    //   this.router.navigate(['/home']);
-    // }
+    // if success, you could now navigate:
+    if (this.messageText.includes('success')) {
+      this.router.navigate(['/home']);
+    }
+
+    // NEW: start 60s countdown and disable the button
+    this.startSendEmailCountdown(60);
+  }
+
+  private startSendEmailCountdown(seconds: number) {
+    // clear any previous timer
+    if (this.sendEmailIntervalId) {
+      clearInterval(this.sendEmailIntervalId);
+    }
+
+    this.sendEmailDisabled = true;
+    this.sendEmailTimer = seconds;
+
+    this.sendEmailIntervalId = setInterval(() => {
+      this.sendEmailTimer--;
+      if (this.sendEmailTimer <= 0) {
+        clearInterval(this.sendEmailIntervalId);
+        this.sendEmailDisabled = false;
+      }
+    }, 1_000);
   }
 }
