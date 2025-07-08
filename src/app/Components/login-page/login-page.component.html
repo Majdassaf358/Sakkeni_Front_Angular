@@ -1,3 +1,9 @@
+<app-message
+  *ngIf="showMessagePopup"
+  [message]="messageText"
+  (popupClosed)="onPopupClosed()"
+>
+</app-message>
 <div class="main-home-container bg-secondary">
   <img class="home-img" src="assets/Imgs/Home-page-img.png" alt="" />
   <div class="home-img-text">Discover a place you'll call Home.</div>

@@ -233,3 +233,16 @@ select {
   height: 1.8rem;
   margin: 0rem 0.5rem 0 0;
 }
+/* Pop-up Section */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}

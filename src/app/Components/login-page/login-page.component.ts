@@ -16,10 +16,17 @@ import { lastValueFrom } from 'rxjs';
 import { AuthenticationService } from '../../Services/authentication.service';
 import { sign_up } from '../../Models/auth/sign-up';
 import { forgot } from '../../Models/auth/forgot';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-login-page',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    MessageComponent,
+  ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css',
 })
@@ -27,6 +34,8 @@ export class LoginPageComponent {
   signUpForm!: FormGroup;
   logInForm!: FormGroup;
   forgotForm!: FormGroup;
+  showMessagePopup = false;
+  messageText = '';
   mode: string = 'log';
   token: string = '';
   message: string = '';
@@ -133,10 +142,19 @@ export class LoginPageComponent {
       let res: string = await lastValueFrom(
         this.authenticationService.fogotPass(req)
       );
+      this.messageText = 'Check Your Email!';
+      this.showMessagePopup = true;
       this.message = res;
-      console.log(this.message);
     } catch (error) {
+      this.messageText = 'Login failed. Please check your credentials.';
+      this.showMessagePopup = true;
       console.log(error);
     }
+  }
+  onPopupClosed() {
+    this.showMessagePopup = false;
+    // if (this.messageText.includes('success')) {
+    //   this.router.navigate(['/home']);
+    // }
   }
 }
