@@ -71,6 +71,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease-in-out;
+}
+.card__image-wrapper:hover .card__image {
+  transform: scale(1.1);
 }
 
 .card__save-btn {
