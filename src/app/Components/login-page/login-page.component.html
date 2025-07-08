@@ -43,7 +43,9 @@
           <div class="text-secondary-clr font-14 remember-me">
             <input type="checkbox" />Remember me
           </div>
-          <a class="text-secondary-clr font-14" href="">Forgot?</a>
+          <a class="text-secondary-clr font-14" (click)="switchToForgot()"
+            >Forgot?</a
+          >
         </div>
         <button class="log-button cursor-pointer" (click)="loginFunction()">
           Log In
@@ -56,6 +58,26 @@
           (click)="switchToSignUp()"
         >
           Register
+        </button>
+      </form>
+      <form
+        *ngIf="mode === 'forgot'"
+        [formGroup]="forgotForm"
+        class="forms-holder"
+      >
+        <div class="font-500 font-16 enter-email">Enter the Email:</div>
+        <input
+          [class.is-invalid]="forgotEmail?.invalid && forgotEmail?.touched"
+          formControlName="forgotEmail"
+          placeholder="username@gmail.com"
+          class="form-control"
+          type="email"
+        />
+        <button
+          class="sign-up-button cursor-pointer font-14"
+          (click)="sendEmail()"
+        >
+          Send Email
         </button>
       </form>
       <form

@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { environment } from '../shared/environments';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/ApiResponse';
-import { login } from '../Models/login';
+import { login } from '../Models/auth/login';
 import { authenticationRes } from '../Models/authenticationRes';
-import { sign_up } from '../Models/sign-up';
+import { sign_up } from '../Models/auth/sign-up';
 import { profile } from '../Models/profile/profile';
 import { updateProfile } from '../Models/profile/updateProfile';
 import { resetPassword } from '../Models/profile/resetPassword';
+import { forgot } from '../Models/auth/forgot';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +25,9 @@ export class AuthenticationService {
     let url = `${environment.Api}/login`;
     return this.http.post<ApiResponse<authenticationRes>>(url, req);
   }
-  public fogotPass(email: string): Observable<ApiResponse<authenticationRes>> {
-    let url = `${environment.Api}/login`;
-    return this.http.post<ApiResponse<authenticationRes>>(url, email);
+  public fogotPass(req: forgot): Observable<string> {
+    let url = `${environment.Api}/forgot-password`;
+    return this.http.post<string>(url, req);
   }
   public profile(): Observable<ApiResponse<profile>> {
     let url = `${environment.Api}/my-profile`;

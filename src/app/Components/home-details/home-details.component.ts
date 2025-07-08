@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
-import { FiltersComponent } from '../../shared/filters/filters.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { ApiResponse } from '../../Models/ApiResponse';
@@ -13,13 +12,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 @Component({
   selector: 'app-home-details',
   standalone: true,
-  imports: [
-    NavbarComponent,
-    FiltersComponent,
-    CommonModule,
-    FormsModule,
-    GoogleMapsModule,
-  ],
+  imports: [NavbarComponent, CommonModule, FormsModule, GoogleMapsModule],
   templateUrl: './home-details.component.html',
   styleUrl: './home-details.component.css',
 })

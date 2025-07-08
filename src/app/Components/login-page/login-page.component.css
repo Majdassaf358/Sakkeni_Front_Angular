@@ -187,6 +187,9 @@
   text-align: center;
   margin: 2rem 0 0 0;
 }
+.enter-email {
+  margin: 1rem 0 0 1.5rem;
+}
 .remember-me {
   margin-right: 2.5rem;
 }
