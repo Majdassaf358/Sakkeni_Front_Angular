@@ -62,7 +62,11 @@ export class PropertiesComponent implements OnInit {
     try {
       this.properties = [];
       let res: ApiResponse<PaginatedData<propertyCard>> = await lastValueFrom(
-        this.propertyservice.filterProperty('rent', 1, this.receivedFilters)
+        this.propertyservice.filterProperty(
+          this.viewType,
+          1,
+          this.receivedFilters
+        )
       );
       this.currentPage = res.data.current_page;
       this.properties = res.data.data;

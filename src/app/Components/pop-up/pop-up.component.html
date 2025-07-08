@@ -6,11 +6,13 @@
     </div>
     <div class="nav-line"></div>
     <div class="filter-options">
-      <!-- COMMON FIELDS -->
       <div class="filter-section">
         <p class="font-600">Location</p>
-        <!-- Country is fixed to Syria (id=1) -->
-        <input type="hidden" [(ngModel)]="filters.country_id" [ngModel]="1" />
+        <input
+          type="hidden"
+          [(ngModel)]="filterValues.country_id"
+          [ngModel]="1"
+        />
         <div class="filter-subsection">
           <p>City</p>
           <div class="checkbox-group">
@@ -38,7 +40,7 @@
                 type="radio"
                 name="city"
                 [value]="city.id"
-                [(ngModel)]="filters.city_id"
+                [(ngModel)]="filterValues.city_id"
               />
               {{ city.name }}
             </label>
@@ -53,23 +55,21 @@
           <input
             type="number"
             placeholder="Min area"
-            [(ngModel)]="filters.min_area"
+            [(ngModel)]="filterValues.min_area"
           />
           <input
             type="number"
             placeholder="Max area"
-            [(ngModel)]="filters.max_area"
+            [(ngModel)]="filterValues.max_area"
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">Bedrooms</p>
-          <input type="number" [(ngModel)]="selectedBedrooms" />
           <p class="font-600">Bathrooms</p>
-          <input type="number" [(ngModel)]="filters.bathrooms" />
+          <input type="number" [(ngModel)]="filterValues.bathrooms" />
         </div>
         <div class="filter-section">
           <p class="font-600">Balconies</p>
-          <input type="number" [(ngModel)]="filters.balconies" />
+          <input type="number" [(ngModel)]="filterValues.balconies" />
         </div>
         <div class="filter-section">
           <p class="font-600">Amenities</p>
@@ -102,12 +102,12 @@
           <input
             type="number"
             placeholder="Min price"
-            [(ngModel)]="filters.min_price"
+            [(ngModel)]="filterValues.min_price"
           />
           <input
             type="number"
             placeholder="Max price"
-            [(ngModel)]="filters.max_price"
+            [(ngModel)]="filterValues.max_price"
           />
         </div>
         <div class="filter-section">
@@ -116,7 +116,7 @@
             ><input
               type="radio"
               [value]="1"
-              [(ngModel)]="filters.is_furnished"
+              [(ngModel)]="filterValues.is_furnished"
             />
             Yes</label
           >
@@ -124,14 +124,14 @@
             ><input
               type="radio"
               [value]="0"
-              [(ngModel)]="filters.is_furnished"
+              [(ngModel)]="filterValues.is_furnished"
             />
             No</label
           >
         </div>
         <div class="filter-section">
           <p class="font-600">Lease Period</p>
-          <select [(ngModel)]="filters.lease_period">
+          <select [(ngModel)]="filterValues.lease_period">
             <option value="Yearly">Yearly</option>
             <option value="Monthly">Monthly</option>
           </select>
@@ -145,23 +145,21 @@
           <input
             type="number"
             placeholder="Min area"
-            [(ngModel)]="filters.min_area"
+            [(ngModel)]="filterValues.min_area"
           />
           <input
             type="number"
             placeholder="Max area"
-            [(ngModel)]="filters.max_area"
+            [(ngModel)]="filterValues.max_area"
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">Bedrooms</p>
-          <input type="number" [(ngModel)]="selectedBedrooms" />
           <p class="font-600">Bathrooms</p>
-          <input type="number" [(ngModel)]="filters.bathrooms" />
+          <input type="number" [(ngModel)]="filterValues.bathrooms" />
         </div>
         <div class="filter-section">
           <p class="font-600">Balconies</p>
-          <input type="number" [(ngModel)]="filters.balconies" />
+          <input type="number" [(ngModel)]="filterValues.balconies" />
         </div>
         <div class="filter-section">
           <p class="font-600">Amenities</p>
@@ -194,12 +192,12 @@
           <input
             type="number"
             placeholder="Min price"
-            [(ngModel)]="filters.min_price"
+            [(ngModel)]="filterValues.min_price"
           />
           <input
             type="number"
             placeholder="Max price"
-            [(ngModel)]="filters.max_price"
+            [(ngModel)]="filterValues.max_price"
           />
         </div>
         <div class="filter-section">
@@ -208,7 +206,7 @@
             ><input
               type="radio"
               [value]="1"
-              [(ngModel)]="filters.is_furnished"
+              [(ngModel)]="filterValues.is_furnished"
             />
             Yes</label
           >
@@ -216,7 +214,7 @@
             ><input
               type="radio"
               [value]="0"
-              [(ngModel)]="filters.is_furnished"
+              [(ngModel)]="filterValues.is_furnished"
             />
             No</label
           >
@@ -231,12 +229,12 @@
           <input
             type="number"
             placeholder="Min area"
-            [(ngModel)]="filters.min_area"
+            [(ngModel)]="filterValues.min_area"
           />
           <input
             type="number"
             placeholder="Max area"
-            [(ngModel)]="filters.max_area"
+            [(ngModel)]="filterValues.max_area"
           />
         </div>
         <div class="filter-section">
@@ -244,23 +242,21 @@
           <input
             type="number"
             placeholder="Min area"
-            [(ngModel)]="filters.min_area"
+            [(ngModel)]="filterValues.min_area"
           />
           <input
             type="number"
             placeholder="Max area"
-            [(ngModel)]="filters.max_area"
+            [(ngModel)]="filterValues.max_area"
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">Bedrooms</p>
-          <input type="number" [(ngModel)]="selectedBedrooms" />
           <p class="font-600">Bathrooms</p>
-          <input type="number" [(ngModel)]="filters.bathrooms" />
+          <input type="number" [(ngModel)]="filterValues.bathrooms" />
         </div>
         <div class="filter-section">
           <p class="font-600">Balconies</p>
-          <input type="number" [(ngModel)]="filters.balconies" />
+          <input type="number" [(ngModel)]="filterValues.balconies" />
         </div>
         <div class="filter-section">
           <p class="font-600">Amenities</p>
@@ -293,12 +289,12 @@
           <input
             type="number"
             placeholder="Min price"
-            [(ngModel)]="filters.min_price"
+            [(ngModel)]="filterValues.min_price"
           />
           <input
             type="number"
             placeholder="Max price"
-            [(ngModel)]="filters.max_price"
+            [(ngModel)]="filterValues.max_price"
           />
         </div>
         <div class="filter-section">
@@ -306,17 +302,17 @@
           <input
             type="number"
             placeholder="Min first pay"
-            [(ngModel)]="filters.min_first_pay"
+            [(ngModel)]="filterValues.min_first_pay"
           />
           <input
             type="number"
             placeholder="Max first pay"
-            [(ngModel)]="filters.max_first_pay"
+            [(ngModel)]="filterValues.max_first_pay"
           />
         </div>
         <div class="filter-section">
           <p class="font-600">Delivery Year</p>
-          <input type="number" [(ngModel)]="filters.delivery_date" />
+          <input type="number" [(ngModel)]="filterValues.delivery_date" />
         </div>
       </ng-container>
 
