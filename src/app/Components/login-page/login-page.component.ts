@@ -122,6 +122,8 @@ export class LoginPageComponent {
       localStorage.setItem('Token', this.token);
       this.router.navigate(['/home']);
     } catch (error) {
+      this.messageText = 'Login failed. Please check your credentials.';
+      this.showMessagePopup = true;
       console.log(error);
     }
   }
@@ -156,17 +158,14 @@ export class LoginPageComponent {
   }
   onPopupClosed() {
     this.showMessagePopup = false;
-    // if success, you could now navigate:
     if (this.messageText.includes('success')) {
       this.router.navigate(['/home']);
     }
 
-    // NEW: start 60s countdown and disable the button
     this.startSendEmailCountdown(60);
   }
 
   private startSendEmailCountdown(seconds: number) {
-    // clear any previous timer
     if (this.sendEmailIntervalId) {
       clearInterval(this.sendEmailIntervalId);
     }
