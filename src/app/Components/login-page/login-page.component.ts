@@ -138,6 +138,8 @@ export class LoginPageComponent {
       localStorage.setItem('Token', this.token);
       this.router.navigate(['/home']);
     } catch (error) {
+      this.messageText = 'Sign Up failed. Please check your credentials.';
+      this.showMessagePopup = true;
       console.log(error);
     }
   }
@@ -150,6 +152,7 @@ export class LoginPageComponent {
       this.messageText = 'Check Your Email!';
       this.showMessagePopup = true;
       this.message = res;
+      this.startSendEmailCountdown(60);
     } catch (error) {
       this.messageText = 'Login failed. Please check your credentials.';
       this.showMessagePopup = true;
@@ -161,8 +164,6 @@ export class LoginPageComponent {
     if (this.messageText.includes('success')) {
       this.router.navigate(['/home']);
     }
-
-    this.startSendEmailCountdown(60);
   }
 
   private startSendEmailCountdown(seconds: number) {
