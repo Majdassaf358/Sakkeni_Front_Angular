@@ -42,3 +42,17 @@
   cursor: pointer;
   margin-bottom: 2rem;
 }
+.close-btn {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  width: 2rem;
+  height: 2rem;
+}
+.pop-image {
+  height: 100dvh;
+  width: 90%;
+  justify-self: center;
+  object-fit: contain;
+  margin-top: 1rem;
+}

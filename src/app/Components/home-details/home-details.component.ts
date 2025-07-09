@@ -8,11 +8,18 @@ import { PropertyService } from '../../Services/property.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-home-details',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, FormsModule, GoogleMapsModule],
+  imports: [
+    NavbarComponent,
+    CommonModule,
+    FormsModule,
+    GoogleMapsModule,
+    MessageComponent,
+  ],
   templateUrl: './home-details.component.html',
   styleUrl: './home-details.component.css',
 })
@@ -22,6 +29,8 @@ export class HomeDetailsComponent implements OnInit {
   isDragging = false;
   startX = 0;
   scrollLeft = 0;
+  showMessagePopup = false;
+  imageToShow: string = '';
 
   homeIdSRT: string = '';
   homeId: number = 0;
@@ -76,6 +85,13 @@ export class HomeDetailsComponent implements OnInit {
       : '';
 
     return `${name} ${action}`.trim();
+  }
+  openPopup(img: string) {
+    this.imageToShow = img;
+    this.showMessagePopup = true;
+  }
+  onPopupClosed() {
+    this.showMessagePopup = false;
   }
 
   startDrag(event: MouseEvent): void {

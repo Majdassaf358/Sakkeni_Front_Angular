@@ -1,3 +1,9 @@
+<app-message
+  *ngIf="showMessagePopup"
+  [image]="imageToShow"
+  (popupClosed)="onPopupClosed()"
+>
+</app-message>
 <app-navbar [page]="'properties'" [withFilters]="false"></app-navbar>
 
 <div class="container">
@@ -10,12 +16,17 @@
     (mouseleave)="stopDrag()"
     (mousemove)="onDrag($event)"
   >
-    <img
-      *ngFor="let img of images"
-      [src]="img"
-      alt="Property image"
-      draggable="false"
-    />
+    <div class="slide-track">
+      <div class="slide">
+        <img
+          *ngFor="let img of images"
+          [src]="img"
+          alt="Property image"
+          draggable="false"
+          (click)="openPopup(img)"
+        />
+      </div>
+    </div>
   </section>
 </div>
 

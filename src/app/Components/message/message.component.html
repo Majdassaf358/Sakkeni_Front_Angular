@@ -1,5 +1,9 @@
-<div class="popup-overlay" (click)="close()">
-  <div class="message-container" (click)="$event.stopPropagation()">
+<div class="popup-overlay">
+  <div
+    *ngIf="message"
+    class="message-container"
+    (click)="$event.stopPropagation()"
+  >
     <div class="sekkeni-container">
       <img class="sekkeni" src="assets\Imgs\Sekkeni-green.png" alt="" />
     </div>
@@ -11,5 +15,14 @@
         Done!
       </button>
     </div>
+  </div>
+  <div *ngIf="image">
+    <button class="close-btn" (click)="close()">&times;</button>
+    <img
+      class="pop-image"
+      [src]="image"
+      alt=""
+      (click)="$event.stopPropagation()"
+    />
   </div>
 </div>

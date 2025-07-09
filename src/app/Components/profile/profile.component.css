@@ -24,7 +24,7 @@
 }
 .profile-picture {
   aspect-ratio: 1 / 1;
-  width: 300px;
+  width: 18.75rem;
   overflow: hidden;
   margin-right: 5rem;
 }

@@ -5,19 +5,30 @@
   margin: 1rem;
 }
 .slider-section {
-  display: flex;
+  height: 20rem;
+  width: 90%;
+  display: grid;
+  position: relative;
   padding: 2rem clamp(1rem, 4vw, 5rem);
   margin-left: clamp(1rem, 7vw, 4rem);
   margin-right: clamp(1rem, 7vw, 4rem);
+  overflow: hidden;
   overflow-x: auto;
   scroll-behavior: smooth;
+}
+.slide-track {
+  display: flex;
+}
+.slide {
+  width: 18rem;
+  display: flex;
   gap: 0.8rem;
 }
-
-.slider-section img {
-  width: 20%;
-  object-fit: cover;
+.slide img {
+  height: 16rem;
+  width: 100%;
   border-radius: 10px;
+  object-fit: cover;
   box-shadow: 0px 4px 4px 0px #00000040;
 }
 

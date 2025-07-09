@@ -1,15 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-message',
-  imports: [],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './message.component.html',
   styleUrl: './message.component.css',
 })
 export class MessageComponent {
   @Input() message: string = '';
+  @Input() image: string = '';
 
-  /** Fired when the user clicks “Okay” */
   @Output() popupClosed = new EventEmitter<void>();
 
   close() {
