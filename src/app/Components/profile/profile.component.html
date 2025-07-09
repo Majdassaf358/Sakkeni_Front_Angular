@@ -37,23 +37,28 @@
         }}</label>
       </div>
 
-      <div class="profile-element">
-        <img src="assets\Icons\call.svg" alt="" />
-        <label class="text-neutural-clr font-300 font-14">{{
-          profileInfo.phone_number
-        }}</label>
+      <div *ngIf="profileInfo.seller">
+        <div class="profile-element">
+          <img src="assets\Icons\call.svg" alt="" />
+          <label class="text-neutural-clr font-300 font-14">{{
+            profileInfo.phone_number
+          }}</label>
+        </div>
+        <div class="profile-element">
+          <img src="assets\Icons\Location-profile.svg" alt="" />
+          <label class="text-neutural-clr font-300 font-14">{{
+            profileInfo.address
+          }}</label>
+        </div>
+        <div class="profile-element">
+          <img src="assets\Icons\profile-type.svg" alt="" />
+          <label class="text-neutural-clr font-300 font-14">{{
+            profileInfo.seller.account_type.name
+          }}</label>
+        </div>
       </div>
-      <div class="profile-element">
-        <img src="assets\Icons\Location-profile.svg" alt="" />
-        <label class="text-neutural-clr font-300 font-14">{{
-          profileInfo.address
-        }}</label>
-      </div>
-      <div class="profile-element">
-        <img src="assets\Icons\profile-type.svg" alt="" />
-        <label class="text-neutural-clr font-300 font-14">{{
-          profileInfo.updated_at
-        }}</label>
+      <div *ngIf="!profileInfo.seller">
+        <button class="upgrade text-secondary-clr">Upgrade to seller</button>
       </div>
     </div>
   </div>

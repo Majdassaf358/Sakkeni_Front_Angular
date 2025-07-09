@@ -7,10 +7,11 @@ import { AuthenticationService } from '../../Services/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { updateProfile } from '../../Models/profile/updateProfile';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
-  imports: [NavbarComponent, FormsModule],
+  imports: [NavbarComponent, FormsModule, CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })

@@ -10,14 +10,16 @@
   padding: 0.5rem;
 }
 .profile-body {
+  height: 30rem;
   display: flex;
   padding: 0.5rem;
 }
 .profile-picture {
+  position: relative;
   aspect-ratio: 1 / 1;
   width: 300px;
   overflow: hidden;
-  margin-right: 5rem;
+  margin-right: 3rem;
 }
 .pic {
   width: 100%;
@@ -26,10 +28,35 @@
   justify-self: center;
   border-radius: 16px;
 }
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  cursor: pointer;
+  border-radius: 16px;
+  transition: opacity 0.2s;
+}
+.profile-picture:hover .overlay {
+  opacity: 1;
+}
+
+.overlay .icon-edit {
+  position: absolute;
+  font-size: 2rem;
+  color: blue;
+  z-index: 50;
+}
 .img-upload-wrapper {
   position: relative;
   display: inline-block;
-  cursor: pointer; /* show pointer on hover */
+  cursor: pointer;
 }
 
 .file-input {
@@ -38,18 +65,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0; /* hide the native input */
-  cursor: pointer; /* ensure click works */
+  opacity: 0;
+  cursor: pointer;
 }
 .profile-details {
-  height: 460px;
-
   width: 60%;
   display: grid;
-  gap: 4rem;
 }
 .profile-element {
-  display: grid;
+  display: flex;
+  flex-direction: column;
 }
 .nav-line {
   background-color: #101818;
@@ -78,5 +103,5 @@
 .profile-inputs {
   border-radius: 10px;
   border: 1px solid #cbcbcb;
-  padding-left: 1rem;
+  padding: 0.75rem 1rem;
 }

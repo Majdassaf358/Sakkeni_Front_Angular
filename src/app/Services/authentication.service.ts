@@ -37,8 +37,6 @@ export class AuthenticationService {
     updatedProfile: updateProfile
   ): Observable<ApiResponse<null>> {
     const formData = new FormData();
-    formData.append('first_name', updatedProfile.first_name);
-    formData.append('last_name', updatedProfile.last_name);
     formData.append('address', updatedProfile.address);
     formData.append('phone_number', updatedProfile.phone_number);
     if (updatedProfile.profile_picture) {

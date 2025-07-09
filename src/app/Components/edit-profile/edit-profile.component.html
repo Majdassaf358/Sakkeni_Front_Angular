@@ -6,35 +6,21 @@
   </div>
   <div class="profile-body">
     <div class="profile-picture">
-      <label class="text-neutural-clr font-500">Profile Picture</label>
-      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-
-      <!-- wrap img + hidden file input in a label -->
-      <!-- <label class="img-upload-wrapper"> -->
-      <img
-        class="pic"
-        [src]="imageUrl + profileInfo.profile_picture_path"
-        alt="Profile picture"
-      />
-
-      <!-- </label> -->
+      <img class="pic" [src]="avatarSrc" alt="Profile picture" />
+      <div class="overlay" (click)="triggerFileInput()">
+        <img class="icon-edit" src="assets\Icons\image-icon.svg" alt="" />
+        <!-- swap in whatever icon component or <svg> you use -->
+      </div>
     </div>
+    <input
+      type="file"
+      #fileInput
+      accept="image/*"
+      style="display: none"
+      (change)="onFileSelected($event)"
+    />
 
     <div class="profile-details">
-      <div class="profile-element">
-        <label class="text-neutural-clr font-500 font-14">First Name</label>
-        <input
-          class="font-12 font-400 profile-inputs"
-          [(ngModel)]="profileInfo.first_name"
-        />
-      </div>
-      <div class="profile-element">
-        <label class="text-neutural-clr font-500 font-14">Last Name</label>
-        <input
-          class="font-12 font-400 profile-inputs"
-          [(ngModel)]="profileInfo.last_name"
-        />
-      </div>
       <div class="profile-element">
         <label class="text-neutural-clr font-500 font-14">Address</label>
         <input
@@ -51,10 +37,13 @@
       </div>
       <div class="profile-element">
         <label class="text-neutural-clr font-500 font-14">Account Type</label>
-        <input
+        <select
           class="font-12 font-400 profile-inputs"
-          [(ngModel)]="profileInfo.phone_number"
-        />
+          [(ngModel)]="profileInfo.seller.account_type.name"
+        >
+          <option [ngValue]="'Personal'">Personal</option>
+          <option [ngValue]="'Company'">Company</option>
+        </select>
       </div>
     </div>
   </div>
