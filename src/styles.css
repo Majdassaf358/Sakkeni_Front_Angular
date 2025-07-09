@@ -10,6 +10,8 @@
   --fw-400: 400;
   --fw-500: 500;
   --fw-600: 600;
+  --fs-24: 1.5rem;
+  --fs-22: 1.375rem;
   --fs-20: 1.25rem;
   --fs-18: 1.125rem;
   --fs-16: 1rem;
@@ -69,6 +71,12 @@
 }
 .font-20 {
   font-size: var(--fs-20);
+}
+.font-22 {
+  font-size: var(--fs-22);
+}
+.font-24 {
+  font-size: var(--fs-24);
 }
 .letter-16-10 {
   letter-spacing: var(--text-spacing-16-10);

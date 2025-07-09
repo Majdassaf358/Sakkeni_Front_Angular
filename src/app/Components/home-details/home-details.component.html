@@ -34,15 +34,20 @@
 <div class="details">
   <div class="info">
     <div class="info-title">
-      <p class="font-400 font-14 uppercase">
-        {{ displayText }}
-      </p>
-      <h2>30 Kershner Pl, Fair Lawn, NJ 07410</h2>
-    </div>
-    <div class="info-details">
-      <div class="row">
-        <p class="font-600">Location:</p>
+      <p class="font-500 font-24 uppercase">{{ displayText }} - price</p>
+      <h3 *ngIf="details?.location?.country && details?.location?.city">
         {{ details.location.country.name }} - {{ details.location.city.name }}
+      </h3>
+    </div>
+    <div
+      class="info-details"
+      *ngIf="details?.location?.country && details?.location?.city"
+    >
+      <div class="row">
+        <p class="font-600">Directions:</p>
+        <span *ngFor="let dir of details.directions; let isLast = last">
+          {{ dir.name }}<span *ngIf="!isLast">,&nbsp;</span>
+        </span>
       </div>
       <div class="row">
         <p class="font-600">Property Type:</p>
@@ -63,6 +68,12 @@
       <div class="row">
         <p class="font-600">Ownership Type:</p>
         {{ details.ownership_type.name }}
+      </div>
+      <div class="row">
+        <p class="font-600">Amenities:</p>
+        <span *ngFor="let ame of details.amenities; let isLast = last">
+          {{ ame.name }}<span *ngIf="!isLast">,&nbsp;</span>
+        </span>
       </div>
     </div>
   </div>
@@ -88,13 +99,13 @@
         <div class="contact-info">
           <img src="assets\Icons\email.svg" />
           <p class="text-primary-clr font-400 font-12 contact-text">
-            Yolla.todaygmail.com
+            {{ details.owner.email }}
           </p>
         </div>
         <div class="contact-info">
           <img src="assets\Icons\call.svg" />
           <p class="text-primary-clr font-400 font-12 contact-text">
-            +963334452
+            {{ details.owner.phone_number }}
           </p>
         </div>
       </div>

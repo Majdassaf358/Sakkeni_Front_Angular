@@ -1,5 +1,4 @@
 .container {
-  /* display: flex; */
   flex-direction: column;
   gap: 30px;
   margin: 1rem;
@@ -12,9 +11,11 @@
   padding: 2rem clamp(1rem, 4vw, 5rem);
   margin-left: clamp(1rem, 7vw, 4rem);
   margin-right: clamp(1rem, 7vw, 4rem);
-  overflow: hidden;
   overflow-x: auto;
   scroll-behavior: smooth;
+}
+.slider-section::-webkit-scrollbar {
+  display: none;
 }
 .slide-track {
   display: flex;
@@ -47,7 +48,7 @@
   gap: 0.6rem;
   margin-bottom: 1.8rem;
 }
-.info-title p {
+.info-title h3 {
   color: #27393a80;
 }
 .info-details {
@@ -58,7 +59,6 @@
 .row {
   margin-left: 2.1rem;
   display: flex;
-  /* margin-bottom: 10px; */
 }
 .row p {
   width: 30%;

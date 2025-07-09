@@ -24,7 +24,7 @@ import { MessageComponent } from '../message/message.component';
   styleUrl: './home-details.component.css',
 })
 export class HomeDetailsComponent implements OnInit {
-  @ViewChild('slider', { static: true }) scrollContainer!: ElementRef;
+  @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
 
   isDragging = false;
   startX = 0;
@@ -77,11 +77,11 @@ export class HomeDetailsComponent implements OnInit {
       : '';
 
     const action = this.details.purchase
-      ? 'for sale'
+      ? 'For Sale'
       : this.details.rent
-      ? 'for rent'
+      ? 'For Rent'
       : this.details.off_plan
-      ? 'off plan'
+      ? 'Off Plan'
       : '';
 
     return `${name} ${action}`.trim();
@@ -103,14 +103,16 @@ export class HomeDetailsComponent implements OnInit {
 
   stopDrag(): void {
     this.isDragging = false;
-    this.scrollContainer.nativeElement.classList.remove('dragging');
+    if (this.scrollContainer?.nativeElement) {
+      this.scrollContainer.nativeElement.classList.remove('dragging');
+    }
   }
 
   onDrag(event: MouseEvent): void {
     if (!this.isDragging) return;
     event.preventDefault();
     const x = event.pageX - this.scrollContainer.nativeElement.offsetLeft;
-    const walk = (x - this.startX) * 2; // Adjust speed here
+    const walk = (x - this.startX) * 2;
     this.scrollContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
   }
 }

@@ -31,7 +31,7 @@ export class ServicesComponent {
     if (!this.isDragging) return;
     event.preventDefault();
     const x = event.pageX - this.scrollContainer.nativeElement.offsetLeft;
-    const walk = (x - this.startX) * 2; // Adjust speed here
+    const walk = (x - this.startX) * 2;
     this.scrollContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
   }
 }
