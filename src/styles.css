@@ -203,6 +203,9 @@ select {
 .underpoint.active {
   display: block;
 }
+.uppercase::first-letter {
+  text-transform: uppercase;
+}
 .nav-line {
   background-color: #e9eeeebf;
   height: 0.8px;

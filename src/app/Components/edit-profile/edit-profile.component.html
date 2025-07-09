@@ -7,6 +7,7 @@
   <div class="profile-body">
     <div class="profile-picture">
       <label class="text-neutural-clr font-500">Profile Picture</label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
 
       <!-- wrap img + hidden file input in a label -->
       <!-- <label class="img-upload-wrapper"> -->
@@ -15,13 +16,8 @@
         [src]="imageUrl + profileInfo.profile_picture_path"
         alt="Profile picture"
       />
-      <!-- <input
-          type="file"
-          (change)="onFileSelected($event)"
-          accept="image/*"
-          class="file-input"
-        />
-      </label> -->
+
+      <!-- </label> -->
     </div>
 
     <div class="profile-details">

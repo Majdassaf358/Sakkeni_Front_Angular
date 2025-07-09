@@ -23,7 +23,7 @@
   grid-template-columns: repeat(5, 1fr);
 }
 .side-map {
-  width: 30%;
+  width: 33%;
 }
 
 .card__content {

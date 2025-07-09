@@ -60,6 +60,24 @@ export class HomeDetailsComponent implements OnInit {
       console.log(error);
     }
   }
+  get displayText(): string {
+    const name = this.details.residential
+      ? this.details.residential.residential_property_type.name
+      : this.details.commercial
+      ? this.details.commercial.commercial_property_type.name
+      : '';
+
+    const action = this.details.purchase
+      ? 'for sale'
+      : this.details.rent
+      ? 'for rent'
+      : this.details.off_plan
+      ? 'off plan'
+      : '';
+
+    return `${name} ${action}`.trim();
+  }
+
   startDrag(event: MouseEvent): void {
     this.isDragging = true;
     this.scrollContainer.nativeElement.classList.add('dragging');
