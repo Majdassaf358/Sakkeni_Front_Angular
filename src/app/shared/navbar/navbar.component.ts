@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
   profileInfo: profile = new profile();
   imageUrl: string = 'http://127.0.0.1:8000/';
   dropdownOpen = false;
+  menuOpen = false;
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
@@ -61,6 +62,9 @@ export class NavbarComponent implements OnInit {
   }
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
+  }
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
   }
 
   closeDropdown() {

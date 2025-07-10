@@ -76,11 +76,14 @@
     </div>
   </div>
 
-  <!-- default filter line -->
   <div *ngIf="withFilters || page === 'home'" class="nav-line"></div>
 </div>
 
-<!-- plus button only on properties -->
-<div *ngIf="page === 'properties'" class="plus-button">
+<div *ngIf="page === 'properties'" class="plus-button" (click)="toggleMenu()">
   <img src="assets/Icons/add-circle.svg" alt="Add" class="add-property-icon" />
+
+  <div class="submenu" [class.show]="menuOpen">
+    <img src="assets/Icons/add-property.svg" alt="Add Property" />
+    <img src="assets/Icons/add-service.svg" alt="Add Service" />
+  </div>
 </div>
