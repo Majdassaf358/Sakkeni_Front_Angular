@@ -66,12 +66,7 @@
 
 .right-section {
   display: flex;
-  /* margin-right: 2rem; */
-}
-.right-boxes {
-  width: 55%;
-  display: grid;
-  gap: 1.4rem;
+  margin-right: 2rem;
 }
 .price-box,
 .contact-box {
@@ -80,7 +75,7 @@
   border-radius: 10px;
   padding: 1rem 1.6rem;
   box-shadow: 0px 4px 10px 0px #00000026;
-  width: 100%;
+  margin-bottom: 1rem;
 }
 .price-box {
   position: relative;
@@ -143,8 +138,6 @@
 }
 .map-box {
   margin-left: 2rem;
-  box-shadow: 4px 4px 10px 0px #00000026;
-  border-radius: 10px;
 }
 
 @media (max-width: 768px) {

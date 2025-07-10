@@ -84,8 +84,24 @@ export class HomeDetailsComponent implements OnInit {
       ? 'Off Plan'
       : '';
 
-    return `${name} ${action}`.trim();
+    const base = `${name} ${action}`.trim();
+
+    let pricePart: string | number | null = null;
+    if (this.details.rent) {
+      const r = this.details.rent;
+      pricePart =
+        r.price != null && r.lease_period_unit
+          ? `${r.price}/${r.lease_period_unit}`
+          : null;
+    } else if (this.details.purchase) {
+      pricePart = this.details.purchase.price ?? null;
+    } else if (this.details.off_plan) {
+      pricePart = this.details.off_plan.overall_payment ?? null;
+    }
+
+    return pricePart != null ? `${base} - ${pricePart}` : base;
   }
+
   openPopup(img: string) {
     this.imageToShow = img;
     this.showMessagePopup = true;
