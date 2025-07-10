@@ -7,9 +7,7 @@
 ></app-filters>
 
 <div class="container-fluid">
-  <div #top class="ml-4">
-    <!-- <app-filter></app-filter> -->
-  </div>
+  <div #top class="ml-4"></div>
   <div *ngIf="sideFilter != 'map'" class="cards-filter">
     <div class="all-cards" [ngClass]="{ listSwitch: sideFilter === 'list' }">
       <div class="width-88" *ngFor="let card of properties; let i = index">
@@ -19,7 +17,6 @@
             [src]="'http://127.0.0.1:8000/' + card.cover_image.image_path"
             class="card__image"
           />
-          <!-- Bookmark icon overlay -->
           <button class="card__save-btn" (click)="toggleSave(i)">
             <img
               [src]="
@@ -67,29 +64,23 @@
         </div>
       </div>
     </div>
-    <div *ngIf="sideFilter == 'split'" class="side-map">
-      <google-map
-        [center]="center"
-        [zoom]="10"
-        height="100vh"
-        (mapClick)="onMapClick($event)"
-      >
+    <div *ngIf="sideFilter == 'split'">
+      <google-map [center]="center" [zoom]="10" height="100vh">
         <map-marker
           *ngFor="let marker of markers"
           [position]="marker.position"
-          [title]="marker.title"
+          (mapClick)="onMarkerClick(marker)"
         ></map-marker>
       </google-map>
     </div>
   </div>
   <div *ngIf="sideFilter == 'map'">
-    <google-map
-      [center]="center"
-      [zoom]="10"
-      height="100vh"
-      width="100%"
-      (mapClick)="onMapClick($event)"
-    >
+    <google-map [center]="center" [zoom]="10" height="100vh" width="100%">
+      <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker.position"
+        (mapClick)="onMarkerClick(marker)"
+      ></map-marker>
     </google-map>
   </div>
 </div>

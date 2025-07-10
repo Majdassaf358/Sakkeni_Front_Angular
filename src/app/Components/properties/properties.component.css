@@ -22,9 +22,6 @@
   width: 94%;
   grid-template-columns: repeat(5, 1fr);
 }
-.side-map {
-  width: 33%;
-}
 
 .card__content {
   margin: 1rem 1rem 0 1rem;

@@ -38,7 +38,10 @@ export class HomeDetailsComponent implements OnInit {
   imagesUrl: string = 'http://127.0.0.1:8000/';
   details: propertyDetails = new propertyDetails();
 
-  center: google.maps.LatLngLiteral = { lat: 34.8021, lng: 38.9968 };
+  center: google.maps.LatLngLiteral = {
+    lat: 33.42565943762839,
+    lng: 36.94301086943456,
+  };
   marker: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   mapOptions: google.maps.MapOptions = {
     center: this.center,
