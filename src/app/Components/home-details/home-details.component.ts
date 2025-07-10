@@ -7,7 +7,7 @@ import { propertyDetails } from '../../Models/property-details';
 import { PropertyService } from '../../Services/property.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GoogleMapsModule, GoogleMap, MapMarker } from '@angular/google-maps';
+import { GoogleMapsModule, GoogleMap } from '@angular/google-maps';
 import { MessageComponent } from '../message/message.component';
 
 @Component({
@@ -38,7 +38,7 @@ export class HomeDetailsComponent implements OnInit {
   imagesUrl: string = 'http://127.0.0.1:8000/';
   details: propertyDetails = new propertyDetails();
 
-  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
+  center: google.maps.LatLngLiteral = { lat: 34.8021, lng: 38.9968 };
   marker: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   mapOptions: google.maps.MapOptions = {
     center: this.center,
