@@ -2,7 +2,8 @@ export class rent {
   'id': number;
   'property_id': number;
   'price': number;
-  'lease_period': string;
+  'lease_period_value': number;
+  'lease_period_unit': string;
   'payment_plan': string;
   'is_furnished': number;
 }

@@ -98,10 +98,12 @@ export class PropertiesComponent implements OnInit {
   getPrice(card: propertyCard): number | string {
     switch (this.viewType) {
       case 'rent':
-        return card.rent?.price ?? 'N/A';
+        return card.rent?.price != null && card.rent?.lease_period_unit
+          ? `${card.rent.price}/${card.rent.lease_period_unit}`
+          : 'N/A';
       case 'purchase':
         return card.purchase?.price ?? 'N/A';
-      case 'off_plan':
+      case 'off-plan':
         return card.off_plan?.overall_payment ?? 'N/A';
       default:
         return 'N/A';
