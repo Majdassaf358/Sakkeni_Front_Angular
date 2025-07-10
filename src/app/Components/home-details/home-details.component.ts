@@ -7,7 +7,7 @@ import { propertyDetails } from '../../Models/property-details';
 import { PropertyService } from '../../Services/property.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMapsModule, GoogleMap, MapMarker } from '@angular/google-maps';
 import { MessageComponent } from '../message/message.component';
 
 @Component({
@@ -25,7 +25,7 @@ import { MessageComponent } from '../message/message.component';
 })
 export class HomeDetailsComponent implements OnInit {
   @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
-
+  @ViewChild(GoogleMap) map!: GoogleMap;
   isDragging = false;
   startX = 0;
   scrollLeft = 0;
@@ -38,12 +38,24 @@ export class HomeDetailsComponent implements OnInit {
   imagesUrl: string = 'http://127.0.0.1:8000/';
   details: propertyDetails = new propertyDetails();
 
-  center: google.maps.LatLngLiteral = { lat: 52.3676, lng: 4.9041 };
-  markerLatLong: google.maps.LatLngLiteral[] = [
-    { lat: 52.3676, lng: 4.9051 },
-    { lat: 52.3676, lng: 4.9031 },
-  ];
-
+  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
+  marker: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
+  mapOptions: google.maps.MapOptions = {
+    center: this.center,
+    zoom: 12,
+    mapTypeId: google.maps.MapTypeId.SATELLITE,
+    mapTypeControl: true,
+    mapTypeControlOptions: {
+      style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+      position: google.maps.ControlPosition.TOP_RIGHT,
+      mapTypeIds: [
+        google.maps.MapTypeId.ROADMAP,
+        google.maps.MapTypeId.SATELLITE,
+        google.maps.MapTypeId.HYBRID,
+        google.maps.MapTypeId.TERRAIN,
+      ],
+    },
+  };
   constructor(
     private route: ActivatedRoute,
     private propertyservice: PropertyService
@@ -65,6 +77,10 @@ export class HomeDetailsComponent implements OnInit {
       this.images = res.data.images.map(
         (img) => this.imagesUrl + img.image_path
       );
+      this.center.lat = this.details.location.latitude;
+      this.center.lng = this.details.location.longitude;
+      this.marker.lat = this.details.location.latitude;
+      this.marker.lng = this.details.location.longitude;
     } catch (error) {
       console.log(error);
     }
@@ -130,5 +146,10 @@ export class HomeDetailsComponent implements OnInit {
     const x = event.pageX - this.scrollContainer.nativeElement.offsetLeft;
     const walk = (x - this.startX) * 2;
     this.scrollContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
+  }
+  toggleSatellite(on: boolean) {
+    this.map.googleMap?.setMapTypeId(
+      on ? google.maps.MapTypeId.SATELLITE : google.maps.MapTypeId.ROADMAP
+    );
   }
 }

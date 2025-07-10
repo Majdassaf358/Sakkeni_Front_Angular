@@ -99,6 +99,15 @@
 .residential-text {
   margin-left: 1.5rem;
 }
+.rent_info {
+  display: flex;
+}
+.sale_info {
+  display: flex;
+}
+.off_info {
+  display: flex;
+}
 
 .location-icon {
   position: absolute;
@@ -145,4 +154,16 @@
   .details {
     flex-direction: column;
   }
+}
+.control-btn {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 4px;
+  padding: 6px 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.control-btn:hover {
+  background: #f0f0f0;
 }

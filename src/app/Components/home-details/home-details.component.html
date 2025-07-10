@@ -69,6 +69,24 @@
         <p class="font-600">Ownership Type:</p>
         {{ details.ownership_type.name }}
       </div>
+
+      <div class="row" *ngIf="!details.off_plan">
+        <p class="font-600">Furnished:</p>
+        <span *ngIf="details.rent">
+          {{ details.rent.is_furnished === 1 ? "Yes" : "No" }}
+        </span>
+        <span *ngIf="details.purchase">
+          {{ details.purchase.is_furnished === 1 ? "Yes" : "No" }}
+        </span>
+      </div>
+      <div class="row" *ngIf="details.off_plan">
+        <p class="font-600">Price Details:</p>
+        <div class="off_info">
+          <p>First Pay: {{ details.off_plan.first_pay }}</p>
+          <p>Pay Plan: in progress</p>
+          <p>Overall Payment: {{ details.off_plan.overall_payment }}</p>
+        </div>
+      </div>
       <div class="row">
         <p class="font-600">Amenities:</p>
         <span *ngFor="let ame of details.amenities; let isLast = last">
@@ -112,15 +130,15 @@
     </div>
     <div class="map-box">
       <google-map
-        class=""
+        [options]="mapOptions"
         [center]="center"
         width="20rem"
         height="23rem"
-        border-radius="10px"
       >
-        <map-marker *ngFor="let p of markerLatLong" [position]="p">
-        </map-marker>
+        <map-marker [position]="marker"> </map-marker>
       </google-map>
+      <button (click)="toggleSatellite(true)">Satellite</button>
+      <button (click)="toggleSatellite(false)">Roadmap</button>
     </div>
   </div>
 </div>
