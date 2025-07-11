@@ -24,7 +24,7 @@ import { FiltersComponent } from '../../../shared/filters/filters.component';
   templateUrl: './view-properties.component.html',
   styleUrl: './view-properties.component.css',
 })
-export class ViewViewPropertiesComponent implements OnInit {
+export class ViewPropertiesComponent implements OnInit {
   sideFilter: string = 'list';
   viewType: string = 'rent';
   propertyType!: string;

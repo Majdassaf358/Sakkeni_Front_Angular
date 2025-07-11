@@ -6,7 +6,7 @@ import { ServicesComponent } from './Components/services-component-folder/servic
 import { ProfileComponent } from './Components/profile/profile.component';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password/reset-password.component';
 import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
-import { ViewViewPropertiesComponent } from './Components/properties/view-properties/view-properties.component';
+import { ViewPropertiesComponent } from './Components/properties/view-properties/view-properties.component';
 import { PropertyDetailsComponent } from './Components/properties/property-details/property-details.component';
 import { AddPropertyComponent } from './Components/properties/add-property/add-property.component';
 
@@ -26,7 +26,7 @@ export const routes: Routes = [
   },
   {
     path: 'properties',
-    component: ViewViewPropertiesComponent,
+    component: ViewPropertiesComponent,
   },
   {
     path: 'home-details/:homeID',
