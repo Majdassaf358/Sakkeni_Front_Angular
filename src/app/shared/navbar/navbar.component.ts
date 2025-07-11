@@ -67,7 +67,7 @@ export class NavbarComponent implements OnInit {
     this.menuOpen = !this.menuOpen;
   }
   addProperty() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/add_property']);
   }
 
   closeDropdown() {
