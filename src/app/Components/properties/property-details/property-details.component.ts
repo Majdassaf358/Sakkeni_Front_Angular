@@ -1,14 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
-import { ApiResponse } from '../../Models/ApiResponse';
-import { propertyDetails } from '../../Models/property-details';
-import { PropertyService } from '../../Services/property.service';
+import { ApiResponse } from '../../../Models/ApiResponse';
+import { propertyDetails } from '../../../Models/property-details';
+import { PropertyService } from '../../../Services/property.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GoogleMapsModule, GoogleMap } from '@angular/google-maps';
-import { MessageComponent } from '../message/message.component';
+import { MessageComponent } from '../../message/message.component';
 
 @Component({
   selector: 'app-property-details',
