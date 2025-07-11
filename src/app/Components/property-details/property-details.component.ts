@@ -11,7 +11,7 @@ import { GoogleMapsModule, GoogleMap } from '@angular/google-maps';
 import { MessageComponent } from '../message/message.component';
 
 @Component({
-  selector: 'app-home-details',
+  selector: 'app-property-details',
   standalone: true,
   imports: [
     NavbarComponent,
@@ -20,10 +20,10 @@ import { MessageComponent } from '../message/message.component';
     GoogleMapsModule,
     MessageComponent,
   ],
-  templateUrl: './home-details.component.html',
-  styleUrl: './home-details.component.css',
+  templateUrl: './property-details.component.html',
+  styleUrl: './property-details.component.css',
 })
-export class HomeDetailsComponent implements OnInit {
+export class PropertyDetailsComponent implements OnInit {
   @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
   @ViewChild(GoogleMap) map!: GoogleMap;
   isDragging = false;

@@ -4,10 +4,10 @@ import { HomesComponent } from './Components/home/homes.component';
 import { AboutUsComponent } from './Components/about-us/about-us.component';
 import { ServicesComponent } from './Components/services-component-folder/services.component';
 import { ProfileComponent } from './Components/profile/profile.component';
-import { HomeDetailsComponent } from './Components/home-details/home-details.component';
-import { PropertiesComponent } from './Components/properties/properties.component';
+import { PropertyDetailsComponent } from './Components/property-details/property-details.component';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password/reset-password.component';
 import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
+import { ViewViewPropertiesComponent } from './Components/properties/view-properties/view-properties.component';
 
 export const routes: Routes = [
   {
@@ -25,11 +25,11 @@ export const routes: Routes = [
   },
   {
     path: 'properties',
-    component: PropertiesComponent,
+    component: ViewViewPropertiesComponent,
   },
   {
     path: 'home-details/:homeID',
-    component: HomeDetailsComponent,
+    component: PropertyDetailsComponent,
   },
   {
     path: 'services',

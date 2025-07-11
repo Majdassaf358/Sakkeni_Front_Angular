@@ -83,7 +83,9 @@
   <img src="assets/Icons/add-circle.svg" alt="Add" class="add-property-icon" />
 
   <div class="submenu" [class.show]="menuOpen">
-    <img src="assets/Icons/add-property.svg" alt="Add Property" />
-    <img src="assets/Icons/add-service.svg" alt="Add Service" />
+    <div (click)="addProperty()">
+      <img src="assets/Icons/add-property.svg" alt="Add Property" />
+    </div>
+    <div><img src="assets/Icons/add-service.svg" alt="Add Service" /></div>
   </div>
 </div>

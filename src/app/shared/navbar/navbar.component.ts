@@ -66,6 +66,9 @@ export class NavbarComponent implements OnInit {
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
+  addProperty() {
+    this.router.navigate(['/login']);
+  }
 
   closeDropdown() {
     setTimeout(() => (this.dropdownOpen = false), 150);

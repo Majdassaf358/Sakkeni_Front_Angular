@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
-import { FiltersComponent } from '../../shared/filters/filters.component';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { propertyCard } from '../../Models/property-card';
-import { PaginatedData } from '../../Models/paginatedData';
-import { ApiResponse } from '../../Models/ApiResponse';
+import { propertyCard } from '../../../Models/property-card';
+import { PaginatedData } from '../../../Models/paginatedData';
+import { ApiResponse } from '../../../Models/ApiResponse';
 import { lastValueFrom } from 'rxjs';
-import { PropertyService } from '../../Services/property.service';
+import { PropertyService } from '../../../Services/property.service';
 import { FormsModule } from '@angular/forms';
-import { filters } from '../../Models/filters';
+import { filters } from '../../../Models/filters';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { FiltersComponent } from '../../../shared/filters/filters.component';
 
 @Component({
-  selector: 'app-properties',
+  selector: 'app-view-properties',
   imports: [
     NavbarComponent,
     FiltersComponent,
@@ -21,10 +21,10 @@ import { GoogleMapsModule } from '@angular/google-maps';
     FormsModule,
     GoogleMapsModule,
   ],
-  templateUrl: './properties.component.html',
-  styleUrl: './properties.component.css',
+  templateUrl: './view-properties.component.html',
+  styleUrl: './view-properties.component.css',
 })
-export class PropertiesComponent implements OnInit {
+export class ViewViewPropertiesComponent implements OnInit {
   sideFilter: string = 'list';
   viewType: string = 'rent';
   propertyType!: string;
@@ -32,6 +32,7 @@ export class PropertiesComponent implements OnInit {
   savedCardIds = new Set<number>();
   currentPage: number = 1;
   properties: propertyCard[] = [];
+  imageUrl: string = 'http://127.0.0.1:8000/';
 
   center: google.maps.LatLngLiteral = {
     lat: 33.42565943762839,
@@ -58,6 +59,7 @@ export class PropertiesComponent implements OnInit {
         id: p.id,
         position: { lat: p.location.latitude, lng: p.location.longitude },
       }));
+      console.log(this.properties);
     } catch (error) {
       console.log(error);
     }
@@ -99,6 +101,13 @@ export class PropertiesComponent implements OnInit {
       this.savedCardIds.add(index);
     }
   }
+  handleImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    if (target.src !== 'assets/images/default-profile.png') {
+      target.src = 'assets/images/default-profile.png';
+    }
+  }
+
   getPrice(card: propertyCard): number | string {
     switch (this.viewType) {
       case 'rent':
