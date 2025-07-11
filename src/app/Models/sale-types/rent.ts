@@ -4,6 +4,5 @@ export class rent {
   'price': number;
   'lease_period_value': number;
   'lease_period_unit': string;
-  'payment_plan': string;
   'is_furnished': number;
 }

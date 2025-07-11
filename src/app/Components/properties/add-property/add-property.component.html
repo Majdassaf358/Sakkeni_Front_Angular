@@ -1,2 +1,25 @@
 <app-navbar [page]="'about'" [withFilters]="false"></app-navbar>
-<p>add-property works!</p>
+<!-- add-property.component.html -->
+<div class="wizard">
+  <!-- Navigation Dots / Titles -->
+  <nav class="wizard-nav">
+    <button (click)="goTo(1)" [class.active]="currentStep === 1">Step 1</button>
+    <button (click)="goTo(2)" [class.active]="currentStep === 2">Step 2</button>
+    <button (click)="goTo(3)" [class.active]="currentStep === 3">Step 3</button>
+  </nav>
+
+  <!-- Step Content -->
+  <section class="wizard-content">
+    <app-step-one *ngIf="currentStep === 1" (next)="goTo(2)"></app-step-one>
+    <app-step-two
+      *ngIf="currentStep === 2"
+      (prev)="goTo(1)"
+      (next)="goTo(3)"
+    ></app-step-two>
+    <app-step-three
+      *ngIf="currentStep === 3"
+      (prev)="goTo(2)"
+      (submit)="onSubmit()"
+    ></app-step-three>
+  </section>
+</div>
