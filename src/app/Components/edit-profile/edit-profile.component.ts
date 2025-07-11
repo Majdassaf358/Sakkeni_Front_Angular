@@ -35,7 +35,7 @@ export class EditProfileComponent implements OnInit {
     if (this.profileInfo.profile_picture_path) {
       return this.imageUrl + this.profileInfo.profile_picture_path;
     }
-    return 'assets/default-avatar.svg';
+    return 'assets/Imgs/em.jpeg';
   }
   onFileSelected(event: any) {
     const file = event.target.files?.[0] ?? null;
