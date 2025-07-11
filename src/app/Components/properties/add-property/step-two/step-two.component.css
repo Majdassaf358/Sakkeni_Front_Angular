@@ -1,0 +1,168 @@
+/* Container grid for two columns */
+.step-two-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+/* Left column form inputs */
+.inputs-col label {
+  display: block;
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.inputs-col select,
+.inputs-col input[type="text"],
+.inputs-col input[type="number"] {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* Exposure button group */
+.exposure-group {
+  margin-bottom: 1rem;
+}
+
+.exposure-group span {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.exposure-group button {
+  margin: 0 0.25rem 0.25rem 0;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.exposure-group button.selected {
+  background-color: #0069d9;
+  border-color: #0062cc;
+  color: #fff;
+}
+
+.exposure-group button:hover {
+  background-color: #e2e6ea;
+}
+
+/* Right column placeholder */
+.map-col {
+  /* reserved space for map; style as needed */
+  background-color: #f0f0f0;
+  border: 1px dashed #bbb;
+  border-radius: 4px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-style: italic;
+}
+
+/* Navigation buttons */
+.navigation-buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.navigation-buttons button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.navigation-buttons button[type="button"] {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.navigation-buttons button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.navigation-buttons button[type="button"]:hover {
+  background-color: #5a6268;
+}
+
+.navigation-buttons button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+/* Wraps the second section */
+.extended-section {
+  grid-column: 1 / -1;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+/* Headings */
+.extended-section h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Reuse button-group styles for sell/property type */
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.button-group button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.button-group button.selected {
+  background-color: #0069d9;
+  border-color: #0062cc;
+  color: #fff;
+}
+
+/* Grid for the detail inputs */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.details-grid label {
+  display: block;
+  font-weight: 500;
+  color: #333;
+}
+
+.details-grid input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}

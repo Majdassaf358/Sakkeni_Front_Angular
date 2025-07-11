@@ -5,77 +5,43 @@ import { residential } from '../Models/property-types/residential';
 import { rent } from '../Models/sale-types/rent';
 import { purchase } from '../Models/sale-types/purchase';
 import { off_plan } from '../Models/sale-types/off_plan';
-
-export interface BaseProperty {
-  country_id?: number;
-  city_id?: number;
-  altitude?: number;
-  longitude?: number;
-  additional_info?: string;
-  exposure?: [];
-  area?: number;
-  bathrooms?: number;
-  balconies?: number;
-  ownership_type_id?: number;
-  amenities?: amenities[];
-  images?: [];
-  // commercial: commercial;
-  // residential: residential;
-  // rent: rent;
-  // purchase: purchase;
-  // off_plan: off_plan;
-}
-export interface CommercialProperty {
-  floor: number;
-  building_number: number;
-  apartment_number: number;
-  commercial_property_type_id: number;
-}
-
-export interface ResidentialProperty {
-  bedrooms: number;
-  residential_property_type_id: number;
-}
-
-export interface RentTransaction {
-  price: number;
-  lease_period_value: number;
-  lease_period_unit: string;
-  is_furnished: number;
-}
-
-export interface PurchaseTransaction {
-  price: number;
-  is_furnished: number;
-}
-
-export interface OffPlanTransaction {
-  delivery_date: string;
-  first_pay: number;
-  pay_plan: string;
-  overall_payment: number;
-}
-export type PropertyForm = (
-  | (BaseProperty & CommercialProperty)
-  | (BaseProperty & ResidentialProperty)
-) &
-  (RentTransaction | PurchaseTransaction | OffPlanTransaction);
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddPropertyService {
-  private formData: Partial<PropertyForm> = {};
+  private wizardForm: FormGroup;
 
-  setFormData(data: Partial<PropertyForm>): void {
-    this.formData = { ...this.formData, ...data };
+  constructor(private fb: FormBuilder) {
+    this.wizardForm = this.fb.group({
+      // Step 1: images array
+      images: this.fb.array([]),
+      // You can add other steps here:
+      // stepTwoData: this.fb.group({ ... }),
+      // stepThreeData: this.fb.group({ ... })
+    });
   }
 
-  getFormData(): Partial<PropertyForm> {
-    return { ...this.formData };
+  getForm(): FormGroup {
+    return this.wizardForm;
   }
 
-  resetForm(): void {
-    this.formData = {};
+  get images(): FormArray {
+    return this.wizardForm.get('images') as FormArray;
+  }
+
+  addImage(imageData: string): void {
+    this.images.push(this.fb.control(imageData));
+  }
+
+  removeImage(index: number): void {
+    this.images.removeAt(index);
+  }
+
+  clearImages(): void {
+    while (this.images.length) {
+      this.images.removeAt(0);
+    }
   }
 }

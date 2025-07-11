@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { ApiResponse } from '../../../Models/ApiResponse';
 import { propertyDetails } from '../../../Models/property-details';

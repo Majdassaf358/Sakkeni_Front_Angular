@@ -1,6 +1,38 @@
 <form (ngSubmit)="saveAndNext()">
-  <label>Title</label>
+  <!-- <label>Title</label>
   <input name="title" required />
 
-  <button type="submit">Next →</button>
+  <button type="submit">Next →</button> -->
+  <div class="upload-controls">
+    <label for="imageUpload">Upload images:</label>
+    <input
+      id="imageUpload"
+      type="file"
+      accept="image/*"
+      multiple
+      (change)="onFilesSelected($event)"
+    />
+  </div>
+  <div class="container">
+    <section
+      #scrollContainer
+      class="slider-section"
+      (mousedown)="startDrag($event)"
+      (mouseup)="stopDrag()"
+      (mouseleave)="stopDrag()"
+      (mousemove)="onDrag($event)"
+    >
+      <div class="slide-track">
+        <div class="slide">
+          <img
+            *ngFor="let img of images"
+            [src]="img"
+            alt="Property image"
+            draggable="false"
+            (click)="openPopup(img)"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
 </form>

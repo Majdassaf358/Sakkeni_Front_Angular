@@ -8,15 +8,15 @@
 </div>
 <div class="wizard-container">
   <section class="wizard-content">
-    <app-step-one *ngIf="currentStep === 1" (next)="goTo(2)"></app-step-one>
+    <app-step-one [hidden]="currentStep !== 1" (next)="onNext()"></app-step-one>
     <app-step-two
-      *ngIf="currentStep === 2"
-      (prev)="goTo(1)"
-      (next)="goTo(3)"
+      [hidden]="currentStep !== 2"
+      (prev)="onPrev()"
+      (next)="onNext()"
     ></app-step-two>
     <app-step-three
-      *ngIf="currentStep === 3"
-      (prev)="goTo(2)"
+      [hidden]="currentStep !== 3"
+      (prev)="onPrev()"
       (submit)="onSubmit()"
     ></app-step-three>
   </section>
@@ -27,9 +27,8 @@
         class="step"
         [class.completed]="currentStep > 1"
         [class.active]="currentStep === 1"
-        (click)="goTo(1)"
       >
-        <span class="label">Previous</span>
+        <span (click)="onPrev()" class="label">Previous</span>
         <div class="circle">
           <span *ngIf="currentStep > 1">&#10003;</span>
           <span *ngIf="currentStep <= 1"></span>
@@ -42,7 +41,6 @@
         class="step"
         [class.completed]="currentStep > 2"
         [class.active]="currentStep === 2"
-        (click)="goTo(2)"
       >
         <div class="circle">
           <span *ngIf="currentStep > 2">&#10003;</span>
@@ -52,11 +50,16 @@
 
       <div class="line" [class.active]="currentStep === 3"></div>
 
-      <div class="step" [class.active]="currentStep === 3" (click)="goTo(3)">
+      <div class="step" [class.active]="currentStep === 3">
         <div class="circle">
           <span *ngIf="currentStep === 3"></span>
         </div>
-        <span class="label">Next</span>
+        <span
+          (click)="!isNextDisabled && onNext()"
+          [class.disabled]="isNextDisabled"
+          class="label"
+          >Next</span
+        >
       </div>
     </div>
   </div>

@@ -1,7 +1,185 @@
-<form (ngSubmit)="saveAndNext()">
-  <label>Address</label>
-  <input name="address" required />
+<!-- <form (ngSubmit)="saveAndNext()"> -->
+<form [formGroup]="form" (ngSubmit)="saveAndNext()">
+  <div class="step-two-grid">
+    <!-- Left column: inputs -->
+    <div class="inputs-col">
+      <label>
+        Country Name
+        <select formControlName="country">
+          <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+        </select>
+      </label>
 
-  <button type="button" (click)="back()">← Back</button>
-  <button type="submit">Next →</button>
+      <label>
+        City Name
+        <select formControlName="city">
+          <option *ngFor="let c of cities" [value]="c">{{ c }}</option>
+        </select>
+      </label>
+
+      <label>
+        Location
+        <input
+          type="text"
+          formControlName="location"
+          placeholder="Type an address or select on map"
+        />
+      </label>
+
+      <fieldset formGroupName="exposure">
+        <legend>Exposure</legend>
+        <button
+          type="button"
+          *ngFor="let exp of exposures"
+          [class.selected]="form.get('exposure')!.value === exp"
+          (click)="form.get('exposure')!.setValue(exp)"
+        >
+          {{ exp }}
+        </button>
+      </fieldset>
+
+      <label>
+        Area (m²)
+        <input type="number" formControlName="area" placeholder="Add Area" />
+      </label>
+
+      <label>
+        Bathrooms
+        <input
+          type="number"
+          formControlName="bathrooms"
+          placeholder="Add Number of Bathrooms"
+        />
+      </label>
+    </div>
+
+    <!-- Right column: map placeholder -->
+    <div class="map-col">
+      <!-- You can replace this with your actual map component -->
+      <app-map-selector formControlName="location"></app-map-selector>
+    </div>
+  </div>
+  <div
+    class="extended-section"
+    *ngIf="
+      form.get('country')!.value &&
+      form.get('city')!.value &&
+      form.get('location')!.value
+    "
+  >
+    <!-- Sell Type -->
+    <h3>Select Sell Type</h3>
+    <div class="button-group">
+      <button
+        type="button"
+        [class.selected]="form.get('sellType')!.value === 'rent'"
+        (click)="form.get('sellType')!.setValue('rent')"
+      >
+        For Rent
+      </button>
+      <button
+        type="button"
+        [class.selected]="form.get('sellType')!.value === 'sale'"
+        (click)="form.get('sellType')!.setValue('sale')"
+      >
+        For Sale
+      </button>
+      <button
+        type="button"
+        [class.selected]="form.get('sellType')!.value === 'offplan'"
+        (click)="form.get('sellType')!.setValue('offplan')"
+      >
+        Off Plan
+      </button>
+    </div>
+
+    <!-- Property Type -->
+    <h3>Select Property Type</h3>
+    <div class="button-group">
+      <button
+        type="button"
+        [class.selected]="form.get('propertyType')!.value === 'apartment'"
+        (click)="form.get('propertyType')!.setValue('apartment')"
+      >
+        Apartment
+      </button>
+      <button
+        type="button"
+        [class.selected]="form.get('propertyType')!.value === 'villa'"
+        (click)="form.get('propertyType')!.setValue('villa')"
+      >
+        Villa
+      </button>
+      <button
+        type="button"
+        [class.selected]="form.get('propertyType')!.value === 'office'"
+        (click)="form.get('propertyType')!.setValue('office')"
+      >
+        Office
+      </button>
+    </div>
+
+    <!-- Price & Other Details -->
+    <div class="details-grid">
+      <label>
+        Price
+        <input type="number" formControlName="price" placeholder="Add Price" />
+      </label>
+      <label>
+        Floor Number
+        <input
+          type="number"
+          formControlName="floorNumber"
+          placeholder="Add Floor Number"
+        />
+      </label>
+      <label>
+        Lease Period
+        <input
+          type="text"
+          formControlName="leasePeriod"
+          placeholder="First Pay"
+        />
+      </label>
+      <label>
+        Building Number
+        <input
+          type="text"
+          formControlName="buildingNumber"
+          placeholder="Add Building Number"
+        />
+      </label>
+      <label>
+        Payment Plan
+        <input
+          type="text"
+          formControlName="paymentPlan"
+          placeholder="Overall Payment"
+        />
+      </label>
+      <label>
+        Apartment Number
+        <input
+          type="text"
+          formControlName="apartmentNumber"
+          placeholder="Add Apartment Number"
+        />
+      </label>
+      <label>
+        Furnishing
+        <input
+          type="text"
+          formControlName="furnishing"
+          placeholder="Pay Plan"
+        />
+      </label>
+    </div>
+  </div>
+
+  <div class="navigation-buttons">
+    <button type="button" (click)="back()">Previous</button>
+    <button type="submit">Next</button>
+  </div>
 </form>
+
+<!-- </form> -->
