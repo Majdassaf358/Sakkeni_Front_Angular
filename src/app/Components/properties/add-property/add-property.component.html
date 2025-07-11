@@ -1,14 +1,12 @@
-<app-navbar [page]="'about'" [withFilters]="false"></app-navbar>
-<!-- add-property.component.html -->
-<div class="wizard">
-  <!-- Navigation Dots / Titles -->
-  <nav class="wizard-nav">
-    <button (click)="goTo(1)" [class.active]="currentStep === 1">Step 1</button>
-    <button (click)="goTo(2)" [class.active]="currentStep === 2">Step 2</button>
-    <button (click)="goTo(3)" [class.active]="currentStep === 3">Step 3</button>
-  </nav>
-
-  <!-- Step Content -->
+<app-navbar [page]="'add'" [withFilters]="false"></app-navbar>
+<div class="add-title">
+  <img class="add-icon" src="assets\Icons\add-property.svg" alt="" />
+  <div class="textAndLine">
+    <p class="font-600 text-primary-clr font-16">Add New Property</p>
+    <div class="add-line"></div>
+  </div>
+</div>
+<div class="wizard-container">
   <section class="wizard-content">
     <app-step-one *ngIf="currentStep === 1" (next)="goTo(2)"></app-step-one>
     <app-step-two
@@ -22,4 +20,44 @@
       (submit)="onSubmit()"
     ></app-step-three>
   </section>
+  <div class="wizard">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div
+        class="step"
+        [class.completed]="currentStep > 1"
+        [class.active]="currentStep === 1"
+        (click)="goTo(1)"
+      >
+        <span class="label">Previous</span>
+        <div class="circle">
+          <span *ngIf="currentStep > 1">&#10003;</span>
+          <span *ngIf="currentStep <= 1"></span>
+        </div>
+      </div>
+
+      <div class="line" [class.active]="currentStep >= 2"></div>
+
+      <div
+        class="step"
+        [class.completed]="currentStep > 2"
+        [class.active]="currentStep === 2"
+        (click)="goTo(2)"
+      >
+        <div class="circle">
+          <span *ngIf="currentStep > 2">&#10003;</span>
+          <span *ngIf="currentStep === 2"></span>
+        </div>
+      </div>
+
+      <div class="line" [class.active]="currentStep === 3"></div>
+
+      <div class="step" [class.active]="currentStep === 3" (click)="goTo(3)">
+        <div class="circle">
+          <span *ngIf="currentStep === 3"></span>
+        </div>
+        <span class="label">Next</span>
+      </div>
+    </div>
+  </div>
 </div>

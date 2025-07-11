@@ -1,0 +1,77 @@
+.add-title {
+  display: flex;
+  margin-top: 3rem;
+  margin-left: 7.5rem;
+  align-items: center;
+}
+
+.wizard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 3rem 10rem;
+}
+.wizard-content {
+  flex-grow: 1;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.circle {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #2f3e3f;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step.active .circle {
+  background-color: #2f3e3f;
+  color: white;
+}
+
+.step.completed .circle {
+  background-color: #2f3e3f;
+  color: white;
+}
+
+.line {
+  height: 1.6px;
+  width: 2.3rem;
+  background-color: #e0e0e0;
+}
+
+.line.active {
+  background-color: #27393a;
+}
+.add-line {
+  background-color: #27393a;
+  height: 0.8px;
+  width: 85%;
+}
+.label {
+  margin: 0 1rem;
+  color: #2f3e3f;
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+.add-icon {
+  margin-right: 1rem;
+}
+.textAndLine {
+  width: 100%;
+}
