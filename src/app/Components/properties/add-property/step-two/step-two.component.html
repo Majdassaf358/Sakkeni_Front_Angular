@@ -17,24 +17,24 @@
         </select>
       </label>
 
-      <label>
+      <!-- <label>
         Location
         <input
           type="text"
           formControlName="location"
           placeholder="Type an address or select on map"
         />
-      </label>
+      </label> -->
 
       <fieldset formGroupName="exposure">
         <legend>Exposure</legend>
         <button
           type="button"
           *ngFor="let exp of exposures"
-          [class.selected]="form.get('exposure')!.value === exp"
-          (click)="form.get('exposure')!.setValue(exp)"
+          (click)="toggleExposure(exp.id)"
+          [class.selected]="isSelected(exp.id)"
         >
-          {{ exp }}
+          {{ exp.name }}
         </button>
       </fieldset>
 
@@ -174,11 +174,6 @@
         />
       </label>
     </div>
-  </div>
-
-  <div class="navigation-buttons">
-    <button type="button" (click)="back()">Previous</button>
-    <button type="submit">Next</button>
   </div>
 </form>
 

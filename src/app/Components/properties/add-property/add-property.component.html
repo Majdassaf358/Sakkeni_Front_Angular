@@ -54,13 +54,13 @@
         <div class="circle">
           <span *ngIf="currentStep === 3"></span>
         </div>
-        <span
-          (click)="!isNextDisabled && onNext()"
-          [class.disabled]="isNextDisabled"
-          class="label"
-          >Next</span
-        >
+        <span (click)="onNext()" class="label">Next</span>
       </div>
     </div>
   </div>
 </div>
+<app-message
+  *ngIf="popupMessage"
+  [message]="popupMessage"
+  (popupClosed)="closePopup()"
+></app-message>

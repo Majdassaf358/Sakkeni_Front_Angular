@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { addProperty } from '../../../../Models/addProperty';
 
 @Component({
   selector: 'app-step-two',
@@ -19,17 +20,19 @@ export class StepTwoComponent {
   @Output() prev = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
   form: FormGroup;
-  countries = ['Syria', 'Lebanon', 'Jordan'];
+  stepTwo: addProperty = new addProperty();
+  countries = ['Syria'];
   cities = ['Damascus', 'Aleppo', 'Homs'];
-  exposures = [
-    'North',
-    'South',
-    'East',
-    'West',
-    'Northeast',
-    'Northwest',
-    'Southeast',
-    'Southwest',
+  selectedExposures = new Set<number>();
+  exposures: { id: number; name: string }[] = [
+    { id: 1, name: 'North' },
+    { id: 2, name: 'South' },
+    { id: 3, name: 'East' },
+    { id: 4, name: 'West' },
+    { id: 5, name: 'North‑East' },
+    { id: 6, name: 'North‑West' },
+    { id: 7, name: 'South‑East' },
+    { id: 8, name: 'South‑West' },
   ];
   constructor(private formSvc: AddPropertyService) {
     this.form = this.formSvc.getForm();
@@ -40,7 +43,7 @@ export class StepTwoComponent {
       this.form.addControl('country', new FormControl(this.countries[0]));
       this.form.addControl('city', new FormControl(this.cities[0]));
       this.form.addControl('location', new FormControl(''));
-      this.form.addControl('exposure', new FormControl(''));
+      this.form.addControl('exposures', new FormArray([]));
       this.form.addControl('area', new FormControl(null));
       this.form.addControl('bathrooms', new FormControl(null));
       this.form.addControl('sellType', new FormControl('rent'));
@@ -59,7 +62,18 @@ export class StepTwoComponent {
       (this.form.get('images') as FormArray).value
     );
   }
-  // form = this.formSvc.getFormData();
+  toggleExposure(id: number) {
+    const exposures = this.form.get('exposures') as FormArray;
+    const index = exposures.value.indexOf(id);
+    if (index === -1) {
+      exposures.push(new FormControl(id));
+    } else {
+      exposures.removeAt(index);
+    }
+  }
+  isSelected(id: number) {
+    return (this.form.get('exposure')!.value as number[]).includes(id);
+  }
   back() {
     console.log(this.form);
     this.prev.emit();

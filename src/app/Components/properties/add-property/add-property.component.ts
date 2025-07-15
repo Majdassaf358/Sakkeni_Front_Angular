@@ -6,6 +6,7 @@ import { StepOneComponent } from './step-one/step-one.component';
 import { StepTwoComponent } from './step-two/step-two.component';
 import { StepThreeComponent } from './step-three/step-three.component';
 import { AddPropertyService } from '../../../Services/add-property.service';
+import { MessageComponent } from '../../message/message.component';
 
 @Component({
   selector: 'app-add-property',
@@ -16,6 +17,7 @@ import { AddPropertyService } from '../../../Services/add-property.service';
     StepOneComponent,
     StepTwoComponent,
     StepThreeComponent,
+    MessageComponent,
   ],
   templateUrl: './add-property.component.html',
   styleUrl: './add-property.component.css',
@@ -23,6 +25,7 @@ import { AddPropertyService } from '../../../Services/add-property.service';
 export class AddPropertyComponent {
   currentStep = 1;
   form: FormGroup;
+  popupMessage: string | null = null;
 
   constructor(private formSvc: AddPropertyService) {
     this.form = this.formSvc.getForm();
@@ -36,6 +39,13 @@ export class AddPropertyComponent {
     return false;
   }
   onNext() {
+    if (
+      (this.currentStep === 1 && this.formSvc.images.length < 3) ||
+      !this.formSvc.images.length
+    ) {
+      this.popupMessage = 'Please upload at least 3 photos before continuing.';
+      return;
+    }
     if (this.currentStep === 2) {
       if (this.form.valid) {
         this.currentStep++;
@@ -52,6 +62,9 @@ export class AddPropertyComponent {
   }
   goTo(step: number) {
     this.currentStep = step;
+  }
+  closePopup() {
+    this.popupMessage = null;
   }
   onSubmit() {}
 }

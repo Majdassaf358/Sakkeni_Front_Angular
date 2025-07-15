@@ -166,3 +166,8 @@
   font-size: 0.95rem;
   box-sizing: border-box;
 }
+button.selected {
+  background-color: #007bff;
+  color: white;
+  /* add borders, shadows, whatever you like */
+}
