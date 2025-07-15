@@ -38,24 +38,6 @@ export class StepTwoComponent {
     this.form = this.formSvc.getForm();
   }
   ngOnInit(): void {
-    // ensure the controls exist (you can also initialize these in the service)
-    if (!this.form.get('country')) {
-      this.form.addControl('country', new FormControl(this.countries[0]));
-      this.form.addControl('city', new FormControl(this.cities[0]));
-      this.form.addControl('location', new FormControl(''));
-      this.form.addControl('exposures', new FormArray([]));
-      this.form.addControl('area', new FormControl(null));
-      this.form.addControl('bathrooms', new FormControl(null));
-      this.form.addControl('sellType', new FormControl('rent'));
-      this.form.addControl('propertyType', new FormControl('apartment'));
-      this.form.addControl('price', new FormControl(null));
-      this.form.addControl('floorNumber', new FormControl(null));
-      this.form.addControl('leasePeriod', new FormControl(''));
-      this.form.addControl('buildingNumber', new FormControl(''));
-      this.form.addControl('paymentPlan', new FormControl(''));
-      this.form.addControl('apartmentNumber', new FormControl(''));
-      this.form.addControl('furnishing', new FormControl(''));
-    }
     console.log('Images in service:', this.formSvc.images.value);
     console.log(
       'Images via form:',
@@ -72,7 +54,7 @@ export class StepTwoComponent {
     }
   }
   isSelected(id: number) {
-    return (this.form.get('exposure')!.value as number[]).includes(id);
+    return (this.form.get('exposures')!.value as number[]).includes(id);
   }
   back() {
     console.log(this.form);
