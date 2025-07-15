@@ -51,6 +51,14 @@ export class StepOneComponent {
       reader.readAsDataURL(file);
     });
   }
+  clearImages(): void {
+    this.images = [];
+    this.fileSignatures.clear();
+    const imagesArray = this.formSvc.images;
+    while (imagesArray.length) {
+      imagesArray.removeAt(0);
+    }
+  }
 
   openPopup(img: string) {
     this.imageToShow = img;

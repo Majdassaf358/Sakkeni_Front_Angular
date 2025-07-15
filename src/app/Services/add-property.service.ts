@@ -5,43 +5,62 @@ import { residential } from '../Models/property-types/residential';
 import { rent } from '../Models/sale-types/rent';
 import { purchase } from '../Models/sale-types/purchase';
 import { off_plan } from '../Models/sale-types/off_plan';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddPropertyService {
-  private wizardForm: FormGroup;
+  private form: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    this.wizardForm = this.fb.group({
-      // Step 1: images array
-      images: this.fb.array([]),
-      // You can add other steps here:
-      // stepTwoData: this.fb.group({ ... }),
-      // stepThreeData: this.fb.group({ ... })
-    });
+    this.form = this.createForm();
   }
 
+  private createForm(): FormGroup {
+    return this.fb.group({
+      images: this.fb.array([], Validators.required),
+      country: [null, Validators.required],
+      city: [null, Validators.required],
+      location: [null, Validators.required],
+      exposure: [<number[]>[], Validators.required],
+      area: [null, [Validators.required, Validators.min(1)]],
+      bathrooms: [null, [Validators.required, Validators.min(0)]],
+      sellType: ['rent', Validators.required],
+      propertyType: ['apartment', Validators.required],
+      price: [null, [Validators.required, Validators.min(0)]],
+      floorNumber: [null],
+      leasePeriod: [''],
+      buildingNumber: [''],
+      paymentPlan: [''],
+      apartmentNumber: [''],
+      furnishing: [''],
+    });
+  }
   getForm(): FormGroup {
-    return this.wizardForm;
+    return this.form;
   }
 
   get images(): FormArray {
-    return this.wizardForm.get('images') as FormArray;
+    return this.form.get('images') as FormArray;
   }
 
-  addImage(imageData: string): void {
-    this.images.push(this.fb.control(imageData));
+  addImage(url: string): void {
+    const imagesArray = this.form.get('images') as FormArray;
+    imagesArray.push(new FormControl(url));
   }
 
   removeImage(index: number): void {
     this.images.removeAt(index);
   }
 
-  clearImages(): void {
-    while (this.images.length) {
-      this.images.removeAt(0);
-    }
+  resetForm(): void {
+    this.form = this.createForm();
   }
 }
