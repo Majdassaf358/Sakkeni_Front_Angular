@@ -103,8 +103,8 @@ export class ViewPropertiesComponent implements OnInit {
   }
   handleImageError(event: Event) {
     const target = event.target as HTMLImageElement;
-    if (target.src !== 'assets/images/default-profile.png') {
-      target.src = 'assets/images/default-profile.png';
+    if (target.src !== 'assets/Imgs/pool.jpg') {
+      target.src = 'assets/Imgs/pool.jpg';
     }
   }
 
