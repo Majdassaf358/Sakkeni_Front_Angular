@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { FormArray, FormGroup, FormsModule } from '@angular/forms';
@@ -23,6 +23,8 @@ import { MessageComponent } from '../../message/message.component';
   styleUrl: './add-property.component.css',
 })
 export class AddPropertyComponent {
+  @ViewChild('stepOneRef') stepOneComponent!: StepOneComponent;
+  @ViewChild('stepTwoRef') stepTwoComponent!: StepTwoComponent;
   currentStep = 1;
   form: FormGroup;
   popupMessage: string | null = null;
@@ -51,16 +53,16 @@ export class AddPropertyComponent {
     if (this.currentStep === 1) {
       const imgs = this.form.get('stepOne.images') as FormArray;
       if (imgs.length < 3) {
-        this.popupMessage = 'Please upload at least 3 photos…';
+        this.popupMessage = 'Please upload at least 3 photos';
         return;
       }
     }
 
     if (this.currentStep === 2) {
-      if (this.form.valid) {
-        this.currentStep++;
+      if ((this.form.get('stepTwo.basic') as FormGroup).invalid) {
+        this.popupMessage = 'Please fill all the required info';
       } else {
-        this.form.markAllAsTouched();
+        this.stepTwoComponent.saveAndNext();
       }
     } else {
       this.currentStep = Math.min(3, this.currentStep + 1);
@@ -68,11 +70,16 @@ export class AddPropertyComponent {
   }
 
   onPrev() {
-    this.currentStep = Math.max(1, this.currentStep - 1);
+    if (
+      this.currentStep === 2 &&
+      (this.form.get('stepTwo.basic') as FormGroup).valid
+    ) {
+      this.stepTwoComponent.back();
+    } else {
+      this.currentStep = Math.max(1, this.currentStep - 1);
+    }
   }
-  goTo(step: number) {
-    this.currentStep = step;
-  }
+
   closePopup() {
     this.popupMessage = null;
   }

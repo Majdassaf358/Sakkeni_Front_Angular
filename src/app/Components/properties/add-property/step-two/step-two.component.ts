@@ -62,16 +62,17 @@ export class StepTwoComponent {
     ).includes(id);
   }
   back() {
-    console.log(this.form);
-    this.prev.emit();
+    if ((this.form.get('stepTwo.basic') as FormGroup).valid) {
+      this.showExtendedSection = false;
+    } else {
+      this.prev.emit();
+    }
   }
   saveAndNext() {
     if ((this.form.get('stepTwo.basic') as FormGroup).invalid) {
       (this.form.get('stepTwo.basic') as FormGroup).markAllAsTouched();
       return;
-    }
-
-    if (!this.showExtendedSection) {
+    } else {
       this.showExtendedSection = true;
       return;
     }

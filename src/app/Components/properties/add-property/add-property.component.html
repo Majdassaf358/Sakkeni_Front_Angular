@@ -8,8 +8,13 @@
 </div>
 <div class="wizard-container">
   <section class="wizard-content">
-    <app-step-one [hidden]="currentStep !== 1" (next)="onNext()"></app-step-one>
+    <app-step-one
+      #stepOneRef
+      [hidden]="currentStep !== 1"
+      (next)="onNext()"
+    ></app-step-one>
     <app-step-two
+      #stepTwoRef
       [hidden]="currentStep !== 2"
       (prev)="onPrev()"
       (next)="onNext()"
@@ -54,7 +59,12 @@
         <div class="circle">
           <span *ngIf="currentStep === 3"></span>
         </div>
-        <span (click)="onNext()" class="label">Next</span>
+        <span *ngIf="currentStep != 3" (click)="onNext()" class="label"
+          >Next</span
+        >
+        <span *ngIf="currentStep === 3" (click)="onNext()" class="label"
+          >Finish</span
+        >
       </div>
     </div>
   </div>
