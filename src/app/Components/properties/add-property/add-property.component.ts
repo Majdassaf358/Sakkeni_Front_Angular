@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
-import { FormGroup, FormsModule } from '@angular/forms';
+import { FormArray, FormGroup, FormsModule } from '@angular/forms';
 import { StepOneComponent } from './step-one/step-one.component';
 import { StepTwoComponent } from './step-two/step-two.component';
 import { StepThreeComponent } from './step-three/step-three.component';
@@ -32,20 +32,30 @@ export class AddPropertyComponent {
   }
   get isNextDisabled(): boolean {
     if (this.currentStep === 1) {
-      return this.formSvc.images.length === 0;
+      const imgs = this.form.get('stepOne.images') as FormArray;
+      return imgs.length === 0;
     } else if (this.currentStep === 2) {
       return !this.form.valid;
     }
     return false;
   }
   onNext() {
-    if (
-      (this.currentStep === 1 && this.formSvc.images.length < 3) ||
-      !this.formSvc.images.length
-    ) {
-      this.popupMessage = 'Please upload at least 3 photos before continuing.';
-      return;
+    console.log(
+      'onNext() called – step=',
+      this.currentStep,
+      ' form.valid=',
+      this.form.valid,
+      ' values=',
+      this.form.value
+    );
+    if (this.currentStep === 1) {
+      const imgs = this.form.get('stepOne.images') as FormArray;
+      if (imgs.length < 3) {
+        this.popupMessage = 'Please upload at least 3 photos…';
+        return;
+      }
     }
+
     if (this.currentStep === 2) {
       if (this.form.valid) {
         this.currentStep++;

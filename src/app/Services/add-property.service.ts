@@ -25,34 +25,43 @@ export class AddPropertyService {
 
   private createForm(): FormGroup {
     return this.fb.group({
-      images: this.fb.array([], Validators.required),
-      country: [null, Validators.required],
-      city: [null, Validators.required],
-      location: [null, Validators.required],
-      exposure: [<number[]>[], Validators.required],
-      area: [null, [Validators.required, Validators.min(1)]],
-      bathrooms: [null, [Validators.required, Validators.min(0)]],
-      sellType: ['rent', Validators.required],
-      propertyType: ['apartment', Validators.required],
-      price: [null, [Validators.required, Validators.min(0)]],
-      floorNumber: [null],
-      leasePeriod: [''],
-      buildingNumber: [''],
-      paymentPlan: [''],
-      apartmentNumber: [''],
-      furnishing: [''],
+      stepOne: this.fb.group({
+        images: this.fb.array([], Validators.required),
+      }),
+      stepTwo: this.fb.group({
+        basic: this.fb.group({
+          country: [null, Validators.required],
+          city: [null, Validators.required],
+          location: ['123 Main St, Damascus', Validators.required],
+          exposures: this.fb.array([], Validators.required),
+          area: [null, [Validators.required, Validators.min(1)]],
+          bathrooms: [null, [Validators.required, Validators.min(0)]],
+        }),
+        extended: this.fb.group({
+          sellType: ['rent', Validators.required],
+          propertyType: ['apartment', Validators.required],
+          price: [null, [Validators.required, Validators.min(0)]],
+          floorNumber: [null],
+          leasePeriod: [''],
+          buildingNumber: [''],
+          paymentPlan: [''],
+          apartmentNumber: [''],
+          furnishing: [''],
+        }),
+      }),
     });
   }
+
   getForm(): FormGroup {
     return this.form;
   }
 
   get images(): FormArray {
-    return this.form.get('images') as FormArray;
+    return this.form.get('stepOne.images') as FormArray;
   }
 
   addImage(url: string): void {
-    const imagesArray = this.form.get('images') as FormArray;
+    const imagesArray = this.form.get('stepOne.images') as FormArray;
     imagesArray.push(new FormControl(url));
   }
 

@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { AddPropertyService } from '../../../../Services/add-property.service';
 import { CommonModule } from '@angular/common';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-step-one',
@@ -25,8 +26,15 @@ export class StepOneComponent {
   scrollLeft = 0;
   showMessagePopup = false;
   imageToShow: string = '';
-  constructor(private formSvc: AddPropertyService) {}
+  form: FormGroup;
 
+  constructor(private formSvc: AddPropertyService) {
+    this.form = this.formSvc.getForm();
+  }
+
+  private get imagesArray() {
+    return this.form.get('stepOne.images') as FormArray;
+  }
   saveAndNext() {
     this.next.emit();
   }
@@ -46,7 +54,7 @@ export class StepOneComponent {
       reader.onload = () => {
         const dataUrl = reader.result as string;
         this.images.push(dataUrl);
-        this.formSvc.addImage(dataUrl);
+        this.imagesArray.push(new FormControl(dataUrl));
       };
       reader.readAsDataURL(file);
     });
@@ -54,7 +62,7 @@ export class StepOneComponent {
   clearImages(): void {
     this.images = [];
     this.fileSignatures.clear();
-    const imagesArray = this.formSvc.images;
+    const imagesArray = this.imagesArray;
     while (imagesArray.length) {
       imagesArray.removeAt(0);
     }

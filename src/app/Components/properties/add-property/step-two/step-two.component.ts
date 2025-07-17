@@ -19,11 +19,11 @@ import { addProperty } from '../../../../Models/addProperty';
 export class StepTwoComponent {
   @Output() prev = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
+  showExtendedSection: boolean = false;
   form: FormGroup;
   stepTwo: addProperty = new addProperty();
   countries = ['Syria'];
   cities = ['Damascus', 'Aleppo', 'Homs'];
-  selectedExposures = new Set<number>();
   exposures: { id: number; name: string }[] = [
     { id: 1, name: 'North' },
     { id: 2, name: 'South' },
@@ -37,15 +37,18 @@ export class StepTwoComponent {
   constructor(private formSvc: AddPropertyService) {
     this.form = this.formSvc.getForm();
   }
-  ngOnInit(): void {
-    console.log('Images in service:', this.formSvc.images.value);
-    console.log(
-      'Images via form:',
-      (this.form.get('images') as FormArray).value
-    );
+  ngOnInit(): void {}
+
+  get basicGroup(): FormGroup {
+    return this.form.get('stepTwo.basic') as FormGroup;
   }
+
+  get extendedGroup(): FormGroup {
+    return this.form.get('stepTwo.extended') as FormGroup;
+  }
+
   toggleExposure(id: number) {
-    const exposures = this.form.get('exposures') as FormArray;
+    const exposures = this.form.get('stepTwo.basic.exposures') as FormArray;
     const index = exposures.value.indexOf(id);
     if (index === -1) {
       exposures.push(new FormControl(id));
@@ -54,13 +57,28 @@ export class StepTwoComponent {
     }
   }
   isSelected(id: number) {
-    return (this.form.get('exposures')!.value as number[]).includes(id);
+    return (
+      this.form.get('stepTwo.basic.exposures')!.value as number[]
+    ).includes(id);
   }
   back() {
     console.log(this.form);
     this.prev.emit();
   }
   saveAndNext() {
+    if ((this.form.get('stepTwo.basic') as FormGroup).invalid) {
+      (this.form.get('stepTwo.basic') as FormGroup).markAllAsTouched();
+      return;
+    }
+
+    if (!this.showExtendedSection) {
+      this.showExtendedSection = true;
+      return;
+    }
+    if ((this.form.get('stepTwo.extended') as FormGroup).invalid) {
+      (this.form.get('stepTwo.extended') as FormGroup).markAllAsTouched();
+      return;
+    }
     this.next.emit();
   }
 }

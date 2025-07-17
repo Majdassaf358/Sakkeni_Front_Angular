@@ -1,7 +1,5 @@
-<!-- <form (ngSubmit)="saveAndNext()"> -->
-<form [formGroup]="form" (ngSubmit)="saveAndNext()">
+<form [formGroup]="basicGroup" (ngSubmit)="saveAndNext()">
   <div class="step-two-grid">
-    <!-- Left column: inputs -->
     <div class="inputs-col">
       <label>
         Country Name
@@ -53,21 +51,15 @@
       </label>
     </div>
 
-    <!-- Right column: map placeholder -->
-    <div class="map-col">
-      <!-- You can replace this with your actual map component -->
-      <app-map-selector formControlName="location"></app-map-selector>
-    </div>
+    <div class="map-col"></div>
   </div>
+
+  <!-- Extended-section                                                              Extended -->
   <div
     class="extended-section"
-    *ngIf="
-      form.get('country')!.value &&
-      form.get('city')!.value &&
-      form.get('location')!.value
-    "
+    [formGroup]="extendedGroup"
+    *ngIf="showExtendedSection"
   >
-    <!-- Sell Type -->
     <h3>Select Sell Type</h3>
     <div class="button-group">
       <button
@@ -93,7 +85,6 @@
       </button>
     </div>
 
-    <!-- Property Type -->
     <h3>Select Property Type</h3>
     <div class="button-group">
       <button
@@ -119,7 +110,6 @@
       </button>
     </div>
 
-    <!-- Price & Other Details -->
     <div class="details-grid">
       <label>
         Price
@@ -176,5 +166,3 @@
     </div>
   </div>
 </form>
-
-<!-- </form> -->
