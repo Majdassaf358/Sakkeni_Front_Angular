@@ -8,10 +8,11 @@ import {
 import { AddPropertyService } from '../../../../Services/add-property.service';
 import { CommonModule } from '@angular/common';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { MessageComponent } from '../../../message/message.component';
 
 @Component({
   selector: 'app-step-one',
-  imports: [CommonModule],
+  imports: [CommonModule, MessageComponent],
   templateUrl: './step-one.component.html',
   styleUrl: './step-one.component.css',
 })

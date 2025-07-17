@@ -1,3 +1,9 @@
+<app-message
+  *ngIf="showMessagePopup"
+  [image]="imageToShow"
+  (popupClosed)="onPopupClosed()"
+>
+</app-message>
 <form (ngSubmit)="saveAndNext()">
   <div class="upload-controls">
     <label for="imageUpload">Upload images:</label>
@@ -24,6 +30,7 @@
       <div class="slide-track">
         <div class="slide">
           <img
+            class="cursor-pointer"
             *ngFor="let img of images"
             [src]="img"
             alt="Property image"
