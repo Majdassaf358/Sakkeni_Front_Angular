@@ -3,15 +3,17 @@
     <div class="inputs-col">
       <label>
         Country Name
-        <select formControlName="country">
-          <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+        <select class="add_input" formControlName="country">
+          <option *ngFor="let c of countries" [value]="c.id">
+            {{ c.name }}
+          </option>
         </select>
       </label>
 
       <label>
         City Name
         <select formControlName="city">
-          <option *ngFor="let c of cities" [value]="c">{{ c }}</option>
+          <option *ngFor="let c of cities" [value]="c.id">{{ c.name }}</option>
         </select>
       </label>
 
@@ -24,18 +26,16 @@
         />
       </label> -->
 
-      <fieldset>
-        <legend>Exposure</legend>
-        <button
-          type="button"
-          *ngFor="let exp of exposures"
-          (click)="toggleExposure(exp.id)"
-          [class.selected]="isSelected(exp.id)"
-        >
-          {{ exp.name }}
-        </button>
-      </fieldset>
-
+      <label>Exposure </label>
+      <button
+        class="add_options font-12 font-400"
+        type="button"
+        *ngFor="let exp of exposures"
+        (click)="toggleSelection('stepTwo.basic.exposures', exp.id)"
+        [class.selected]="isSelected('stepTwo.basic.exposures', exp.id)"
+      >
+        {{ exp.name }}
+      </button>
       <label>
         Area (m²)
         <input type="number" formControlName="area" placeholder="Add Area" />
@@ -49,6 +49,36 @@
           placeholder="Add Number of Bathrooms"
         />
       </label>
+      <label>
+        Balconies
+        <input
+          type="number"
+          formControlName="balconies"
+          placeholder="Add Number of Balconies"
+        />
+      </label>
+      <label>Amenities </label>
+      <button
+        class="add_options font-12 font-400"
+        type="button"
+        *ngFor="let amen of amenities"
+        (click)="toggleSelection('stepTwo.basic.amenities', amen.id)"
+        [class.selected]="isSelected('stepTwo.basic.amenities', amen.id)"
+      >
+        {{ amen.name }}
+      </button>
+      <label>Ownership Type </label>
+      <button
+        class="add_options font-12 font-400"
+        type="button"
+        *ngFor="let owner of ownership_type_id"
+        (click)="toggleSelection('stepTwo.basic.ownership_type_id', owner.id)"
+        [class.selected]="
+          isSelected('stepTwo.basic.ownership_type_id', owner.id)
+        "
+      >
+        {{ owner.name }}
+      </button>
     </div>
 
     <div class="map-col"></div>

@@ -9,8 +9,8 @@
 /* Left column form inputs */
 .inputs-col label {
   display: block;
-  margin-bottom: 1.25rem;
-  font-weight: 500;
+  margin: 1rem 0rem;
+  font-weight: 600;
   color: #333;
 }
 
@@ -19,11 +19,18 @@
 .inputs-col input[type="number"] {
   width: 100%;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  color: #333;
+  border: 1px solid #cbcbcb;
+  border-radius: 10px;
   box-sizing: border-box;
+  color: #27393a8c;
+}
+.add_options {
+  background: #e9eeee;
+  border-radius: 10px;
+  border: none;
+  padding: 0.5rem;
+  margin: 0.2rem 0.2rem;
+  cursor: pointer;
 }
 
 /* Exposure button group */
