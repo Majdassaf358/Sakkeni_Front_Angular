@@ -88,106 +88,120 @@
 <form
   class="extended-section"
   [formGroup]="extendedGroup"
-  *ngIf="showExtendedSection"
+  *ngIf="!showExtendedSection"
 >
-  <h3>Select Sell Type</h3>
-  <div class="button-group">
-    <button
-      type="button"
-      [class.selected]="form.get('sellType')!.value === 'rent'"
-      (click)="form.get('sellType')!.setValue('rent')"
-    >
-      For Rent
-    </button>
-    <button
-      type="button"
-      [class.selected]="form.get('sellType')!.value === 'sale'"
-      (click)="form.get('sellType')!.setValue('sale')"
-    >
-      For Sale
-    </button>
-    <button
-      type="button"
-      [class.selected]="form.get('sellType')!.value === 'offplan'"
-      (click)="form.get('sellType')!.setValue('offplan')"
-    >
-      Off Plan
-    </button>
+  <div class="sale-section width-50">
+    <h3>Select Sell Type</h3>
+    <div class="button-group">
+      <button
+        type="button"
+        class="add_options font-12 font-400"
+        [class.selected]="form.get('sellType')!.value === 'rent'"
+        (click)="form.get('sellType')!.setValue('rent')"
+      >
+        For Rent
+      </button>
+      <button
+        type="button"
+        class="add_options font-12 font-400"
+        [class.selected]="form.get('sellType')!.value === 'sale'"
+        (click)="form.get('sellType')!.setValue('sale')"
+      >
+        For Sale
+      </button>
+      <button
+        type="button"
+        class="add_options font-12 font-400"
+        [class.selected]="form.get('sellType')!.value === 'offplan'"
+        (click)="form.get('sellType')!.setValue('offplan')"
+      >
+        Off Plan
+      </button>
+    </div>
+    <div class="details-grid inputs-col">
+      <label>
+        Price
+        <input type="text" formControlName="price" placeholder="Add Price" />
+      </label>
+      <label>
+        Floor Number
+        <input
+          type="number"
+          formControlName="floorNumber"
+          placeholder="Add Floor Number"
+        />
+      </label>
+      <label>
+        Lease Period
+        <input
+          type="text"
+          formControlName="leasePeriod"
+          placeholder="First Pay"
+        />
+      </label>
+      <label>
+        Building Number
+        <input
+          type="text"
+          formControlName="buildingNumber"
+          placeholder="Add Building Number"
+        />
+      </label>
+    </div>
   </div>
-
-  <h3>Select Property Type</h3>
-  <div class="button-group">
-    <button
-      type="button"
-      [class.selected]="form.get('propertyType')!.value === 'apartment'"
-      (click)="form.get('propertyType')!.setValue('apartment')"
-    >
-      Apartment
-    </button>
-    <button
-      type="button"
-      [class.selected]="form.get('propertyType')!.value === 'villa'"
-      (click)="form.get('propertyType')!.setValue('villa')"
-    >
-      Villa
-    </button>
-    <button
-      type="button"
-      [class.selected]="form.get('propertyType')!.value === 'office'"
-      (click)="form.get('propertyType')!.setValue('office')"
-    >
-      Office
-    </button>
-  </div>
-
-  <div class="details-grid">
-    <label>
-      Price
-      <input type="number" formControlName="price" placeholder="Add Price" />
-    </label>
-    <label>
-      Floor Number
-      <input
-        type="number"
-        formControlName="floorNumber"
-        placeholder="Add Floor Number"
-      />
-    </label>
-    <label>
-      Lease Period
-      <input
-        type="text"
-        formControlName="leasePeriod"
-        placeholder="First Pay"
-      />
-    </label>
-    <label>
-      Building Number
-      <input
-        type="text"
-        formControlName="buildingNumber"
-        placeholder="Add Building Number"
-      />
-    </label>
-    <label>
-      Payment Plan
-      <input
-        type="text"
-        formControlName="paymentPlan"
-        placeholder="Overall Payment"
-      />
-    </label>
-    <label>
-      Apartment Number
-      <input
-        type="text"
-        formControlName="apartmentNumber"
-        placeholder="Add Apartment Number"
-      />
-    </label>
-    <label>
-      Furnishing
-      <input type="text" formControlName="furnishing" placeholder="Pay Plan" />
-    </label>
+  <div class="property-section width-50">
+    <h3>Select Property Type</h3>
+    <div class="button-group">
+      <button
+        type="button"
+        class="add_options font-12 font-400"
+        [class.selected]="form.get('propertyType')!.value === 'apartment'"
+        (click)="form.get('propertyType')!.setValue('apartment')"
+      >
+        Apartment
+      </button>
+      <button
+        type="button"
+        class="add_options font-12 font-400"
+        [class.selected]="form.get('propertyType')!.value === 'villa'"
+        (click)="form.get('propertyType')!.setValue('villa')"
+      >
+        Villa
+      </button>
+      <button
+        type="button"
+        class="add_options font-12 font-400"
+        [class.selected]="form.get('propertyType')!.value === 'office'"
+        (click)="form.get('propertyType')!.setValue('office')"
+      >
+        Office
+      </button>
+    </div>
+    <div class="details-grid inputs-col">
+      <label>
+        Payment Plan
+        <input
+          type="text"
+          formControlName="paymentPlan"
+          placeholder="Overall Payment"
+        />
+      </label>
+      <label>
+        Apartment Number
+        <input
+          type="text"
+          formControlName="apartmentNumber"
+          placeholder="Add Apartment Number"
+        />
+      </label>
+      <label>
+        Furnishing
+        <input
+          type="text"
+          formControlName="furnishing"
+          placeholder="Pay Plan"
+        />
+      </label>
+    </div>
   </div>
 </form>

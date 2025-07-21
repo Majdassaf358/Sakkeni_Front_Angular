@@ -25,7 +25,7 @@ import { MessageComponent } from '../../message/message.component';
 export class AddPropertyComponent {
   @ViewChild('stepOneRef') stepOneComponent!: StepOneComponent;
   @ViewChild('stepTwoRef') stepTwoComponent!: StepTwoComponent;
-  currentStep = 1;
+  currentStep = 2;
   form: FormGroup;
   popupMessage: string | null = null;
 
