@@ -88,7 +88,7 @@
 <form
   class="extended-section"
   [formGroup]="extendedGroup"
-  *ngIf="!showExtendedSection"
+  *ngIf="showExtendedSection"
 >
   <div class="sale-section width-50">
     <h3>Select Sell Type</h3>
@@ -96,49 +96,83 @@
       <button
         type="button"
         class="add_options font-12 font-400"
-        [class.selected]="form.get('sellType')!.value === 'rent'"
-        (click)="form.get('sellType')!.setValue('rent')"
+        [ngClass]="{ 'bg-focused': selectedSellType === 'rent' }"
+        (click)="setSellType('rent')"
       >
         For Rent
       </button>
       <button
         type="button"
         class="add_options font-12 font-400"
-        [class.selected]="form.get('sellType')!.value === 'sale'"
-        (click)="form.get('sellType')!.setValue('sale')"
+        [ngClass]="{ 'bg-focused': selectedSellType === 'purchase' }"
+        (click)="setSellType('purchase')"
       >
         For Sale
       </button>
+
       <button
         type="button"
         class="add_options font-12 font-400"
-        [class.selected]="form.get('sellType')!.value === 'offplan'"
-        (click)="form.get('sellType')!.setValue('offplan')"
+        [ngClass]="{ 'bg-focused': selectedSellType === 'offplan' }"
+        (click)="setSellType('offplan')"
       >
         Off Plan
       </button>
     </div>
     <div class="details-grid inputs-col">
-      <label>
-        Price
-        <input type="text" formControlName="price" placeholder="Add Price" />
-      </label>
-      <label>
-        Floor Number
+      <div *ngIf="selectedSellType === 'rent'" formGroupName="rent">
+        <label
+          >Price
+          <input
+            type="number"
+            formControlName="price"
+            placeholder="e.g. 12 months"
+          />
+        </label>
+        <label>
+          Lease Period
+          <input
+            type="text"
+            formControlName="leasePeriod"
+            placeholder="e.g. 12 months"
+          />
+        </label>
+        <label
+          >Unit
+          <input
+            type="text"
+            formControlName="lease_period_unit"
+            placeholder="e.g. 12 months"
+          />
+        </label>
+        <label> Furnished </label>
         <input
-          type="number"
-          formControlName="floorNumber"
-          placeholder="Add Floor Number"
+          type="checkbox"
+          formControlName="is_furnished"
+          placeholder="e.g. 12 months"
         />
-      </label>
-      <label>
-        Lease Period
-        <input
-          type="text"
-          formControlName="leasePeriod"
-          placeholder="First Pay"
-        />
-      </label>
+      </div>
+      <div *ngIf="selectedSellType === 'purchase'" formGroupName="purchase">
+        <label
+          >Price
+          <input type="number" formControlName="price" />
+        </label>
+        <label> Furnished </label>
+        <input type="checkbox" formControlName="is_furnished" />
+      </div>
+
+      <!-- Off‑plan-only controls -->
+      <div *ngIf="selectedSellType === 'offplan'" formGroupName="offPlan">
+        <label
+          >Delivery Date
+          <input type="date" formControlName="delivery_date" />
+        </label>
+        <label
+          >Overall Payment
+          <input type="text" formControlName="overall_payment" />
+        </label>
+        <!-- payment_phases can be added here later -->
+      </div>
       <label>
         Building Number
         <input
@@ -149,59 +183,69 @@
       </label>
     </div>
   </div>
+  <!-- Second part -->
   <div class="property-section width-50">
     <h3>Select Property Type</h3>
     <div class="button-group">
       <button
         type="button"
         class="add_options font-12 font-400"
-        [class.selected]="form.get('propertyType')!.value === 'apartment'"
-        (click)="form.get('propertyType')!.setValue('apartment')"
+        [ngClass]="{ 'bg-focused': selectedPropertyType === 'apartment' }"
+        (click)="setPropertyType('apartment')"
       >
         Apartment
       </button>
       <button
         type="button"
         class="add_options font-12 font-400"
-        [class.selected]="form.get('propertyType')!.value === 'villa'"
-        (click)="form.get('propertyType')!.setValue('villa')"
+        [ngClass]="{ 'bg-focused': selectedPropertyType === 'villa' }"
+        (click)="setPropertyType('villa')"
       >
         Villa
       </button>
       <button
         type="button"
         class="add_options font-12 font-400"
-        [class.selected]="form.get('propertyType')!.value === 'office'"
-        (click)="form.get('propertyType')!.setValue('office')"
+        [ngClass]="{ 'bg-focused': selectedPropertyType === 'office' }"
+        (click)="setPropertyType('office')"
       >
         Office
       </button>
     </div>
     <div class="details-grid inputs-col">
-      <label>
-        Payment Plan
-        <input
-          type="text"
-          formControlName="paymentPlan"
-          placeholder="Overall Payment"
-        />
-      </label>
-      <label>
-        Apartment Number
-        <input
-          type="text"
-          formControlName="apartmentNumber"
-          placeholder="Add Apartment Number"
-        />
-      </label>
-      <label>
-        Furnishing
-        <input
-          type="text"
-          formControlName="furnishing"
-          placeholder="Pay Plan"
-        />
-      </label>
+      <div
+        *ngIf="selectedPropertyType === 'apartment'"
+        formGroupName="apartment"
+      >
+        <label
+          >Building Number
+          <input type="text" formControlName="building_number" />
+        </label>
+        <label
+          >Apartment Number
+          <input type="text" formControlName="apartment_number" />
+        </label>
+      </div>
+
+      <!-- Villa Form -->
+      <div *ngIf="selectedPropertyType === 'villa'" formGroupName="villa">
+        <label
+          >Number of Floors
+          <input type="number" formControlName="floors" />
+        </label>
+      </div>
+
+      <!-- Commercial/Office Form -->
+      <div *ngIf="selectedPropertyType === 'office'" formGroupName="office">
+        <label
+          >Building Number
+          <input type="text" formControlName="building_number" />
+        </label>
+        <label
+          >Apartment Number
+          <input type="text" formControlName="apartment_number" />
+        </label>
+      </div>
     </div>
   </div>
 </form>

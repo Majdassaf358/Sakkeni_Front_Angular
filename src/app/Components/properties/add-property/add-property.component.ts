@@ -25,7 +25,7 @@ import { MessageComponent } from '../../message/message.component';
 export class AddPropertyComponent {
   @ViewChild('stepOneRef') stepOneComponent!: StepOneComponent;
   @ViewChild('stepTwoRef') stepTwoComponent!: StepTwoComponent;
-  currentStep = 2;
+  currentStep = 1;
   form: FormGroup;
   popupMessage: string | null = null;
 
@@ -61,6 +61,7 @@ export class AddPropertyComponent {
     if (this.currentStep === 2) {
       if ((this.form.get('stepTwo.basic') as FormGroup).invalid) {
         this.popupMessage = 'Please fill all the required info';
+        return;
       } else {
         this.stepTwoComponent.saveAndNext();
       }

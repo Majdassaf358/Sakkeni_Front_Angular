@@ -19,6 +19,8 @@ import { addProperty } from '../../../../Models/addProperty';
 export class StepTwoComponent {
   @Output() prev = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
+  selectedSellType: string = 'rent';
+  selectedPropertyType: string = 'apartment';
   showExtendedSection: boolean = false;
   form: FormGroup;
   stepTwo: addProperty = new addProperty();
@@ -56,7 +58,16 @@ export class StepTwoComponent {
   constructor(private formSvc: AddPropertyService) {
     this.form = this.formSvc.getForm();
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const sellTypeControl = this.extendedGroup.get('sellType');
+    const propertyTypeControl = this.extendedGroup.get('propertyType');
+    if (propertyTypeControl) {
+      this.selectedPropertyType = propertyTypeControl.value;
+    }
+    if (sellTypeControl) {
+      this.selectedSellType = sellTypeControl.value;
+    }
+  }
 
   get basicGroup(): FormGroup {
     return this.form.get('stepTwo.basic') as FormGroup;
@@ -65,7 +76,14 @@ export class StepTwoComponent {
   get extendedGroup(): FormGroup {
     return this.form.get('stepTwo.extended') as FormGroup;
   }
-
+  setSellType(type: string): void {
+    this.selectedSellType = type;
+    this.extendedGroup.get('sellType')?.setValue(type);
+  }
+  setPropertyType(type: string): void {
+    this.selectedPropertyType = type;
+    this.extendedGroup.get('propertyType')?.setValue(type);
+  }
   toggleSelection(path: string, id: number): void {
     const array = this.form.get(path) as FormArray;
     const index = array.value.indexOf(id);
@@ -88,17 +106,20 @@ export class StepTwoComponent {
     }
   }
   saveAndNext() {
-    if ((this.form.get('stepTwo.basic') as FormGroup).invalid) {
-      (this.form.get('stepTwo.basic') as FormGroup).markAllAsTouched();
+    const basic = this.form.get('stepTwo.basic') as FormGroup;
+    const extended = this.form.get('stepTwo.extended') as FormGroup;
+
+    if (basic.invalid) {
+      basic.markAllAsTouched();
       return;
+    }
+
+    this.showExtendedSection = true;
+
+    if (extended.valid) {
+      this.next.emit();
     } else {
-      this.showExtendedSection = true;
-      return;
+      extended.markAllAsTouched();
     }
-    if ((this.form.get('stepTwo.extended') as FormGroup).invalid) {
-      (this.form.get('stepTwo.extended') as FormGroup).markAllAsTouched();
-      return;
-    }
-    this.next.emit();
   }
 }

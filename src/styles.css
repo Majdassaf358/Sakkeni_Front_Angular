@@ -40,7 +40,7 @@
   background-color: var(--bg-neutural);
 }
 .bg-focused {
-  background-color: var(--bg-focused);
+  background-color: var(--bg-focused) !important;
 }
 .font-300 {
   font-weight: var(--fw-300);
