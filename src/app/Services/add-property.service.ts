@@ -53,7 +53,7 @@ export class AddPropertyService {
           }),
           rent: this.fb.group({
             price: [null],
-            lease_period_value: [''],
+            leasePeriod: [''],
             lease_period_unit: [''],
             is_furnished: [false],
           }),
@@ -61,7 +61,7 @@ export class AddPropertyService {
             price: [null],
             is_furnished: [false],
           }),
-          off_plan: this.fb.group({
+          offPlan: this.fb.group({
             delivery_date: [null],
             overall_payment: [null],
             payment_phases: this.fb.array([]),
@@ -78,7 +78,7 @@ export class AddPropertyService {
     const updateSellTypeValidators = (type: string) => {
       const rent = extendedGroup.get('rent') as FormGroup;
       const purchase = extendedGroup.get('purchase') as FormGroup;
-      const offPlan = extendedGroup.get('off_plan') as FormGroup;
+      const offPlan = extendedGroup.get('offPlan') as FormGroup;
 
       // Reset all
       [rent, purchase, offPlan].forEach((group) => {
@@ -93,7 +93,7 @@ export class AddPropertyService {
         purchase
           .get('price')
           ?.setValidators([Validators.required, Validators.min(0)]);
-      } else if (type === 'off_plan') {
+      } else if (type === 'offPlan') {
         offPlan.get('delivery_date')?.setValidators([Validators.required]);
         offPlan.get('overall_payment')?.setValidators([Validators.required]);
       }

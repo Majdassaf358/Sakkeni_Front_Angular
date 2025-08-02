@@ -59,14 +59,13 @@ export class StepTwoComponent {
     this.form = this.formSvc.getForm();
   }
   ngOnInit(): void {
-    const sellTypeControl = this.extendedGroup.get('sellType');
-    const propertyTypeControl = this.extendedGroup.get('propertyType');
-    if (propertyTypeControl) {
-      this.selectedPropertyType = propertyTypeControl.value;
-    }
-    if (sellTypeControl) {
-      this.selectedSellType = sellTypeControl.value;
-    }
+    this.basicGroup.get('sellType')?.valueChanges.subscribe((value) => {
+      this.selectedSellType = value;
+    });
+
+    this.basicGroup.get('propertyType')?.valueChanges.subscribe((value) => {
+      this.selectedPropertyType = value;
+    });
   }
 
   get basicGroup(): FormGroup {
@@ -77,12 +76,10 @@ export class StepTwoComponent {
     return this.form.get('stepTwo.extended') as FormGroup;
   }
   setSellType(type: string): void {
-    this.selectedSellType = type;
-    this.extendedGroup.get('sellType')?.setValue(type);
+    this.basicGroup.get('sellType')!.setValue(type);
   }
   setPropertyType(type: string): void {
-    this.selectedPropertyType = type;
-    this.extendedGroup.get('propertyType')?.setValue(type);
+    this.basicGroup.get('propertyType')!.setValue(type);
   }
   toggleSelection(path: string, id: number): void {
     const array = this.form.get(path) as FormArray;
