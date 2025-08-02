@@ -1,4 +1,10 @@
 import { Injectable } from '@angular/core';
+import { amenities } from '../Models/amenities';
+import { commercial } from '../Models/property-types/commercial';
+import { residential } from '../Models/property-types/residential';
+import { rent } from '../Models/sale-types/rent';
+import { purchase } from '../Models/sale-types/purchase';
+import { off_plan } from '../Models/sale-types/off_plan';
 import {
   FormArray,
   FormBuilder,
@@ -15,7 +21,6 @@ export class AddPropertyService {
 
   constructor(private fb: FormBuilder) {
     this.form = this.createForm();
-    this.setupConditionalValidators(); // 🔧 setup dynamic rules
   }
 
   private createForm(): FormGroup {
@@ -41,7 +46,6 @@ export class AddPropertyService {
           apartment: this.fb.group({
             building_number: [''],
             apartment_number: [''],
-            floor: [null],
           }),
           villa: this.fb.group({
             floors: [null],
@@ -49,16 +53,15 @@ export class AddPropertyService {
           office: this.fb.group({
             building_number: [''],
             apartment_number: [''],
-            floor: [null],
           }),
           rent: this.fb.group({
-            price: [null],
-            leasePeriod: [''],
+            price: [null, [Validators.required, Validators.min(0)]],
+            lease_period_value: [''],
             lease_period_unit: [''],
             is_furnished: [false],
           }),
           purchase: this.fb.group({
-            price: [null],
+            price: [null, [Validators.required, Validators.min(0)]],
             is_furnished: [false],
           }),
           offPlan: this.fb.group({
@@ -71,81 +74,6 @@ export class AddPropertyService {
     });
   }
 
-  private setupConditionalValidators(): void {
-    const basicGroup = this.form.get('stepTwo.basic') as FormGroup;
-    const extendedGroup = this.form.get('stepTwo.extended') as FormGroup;
-
-    const updateSellTypeValidators = (type: string) => {
-      const rent = extendedGroup.get('rent') as FormGroup;
-      const purchase = extendedGroup.get('purchase') as FormGroup;
-      const offPlan = extendedGroup.get('offPlan') as FormGroup;
-
-      // Reset all
-      [rent, purchase, offPlan].forEach((group) => {
-        Object.values(group.controls).forEach((ctrl) => ctrl.clearValidators());
-      });
-
-      if (type === 'rent') {
-        rent
-          .get('price')
-          ?.setValidators([Validators.required, Validators.min(0)]);
-      } else if (type === 'purchase') {
-        purchase
-          .get('price')
-          ?.setValidators([Validators.required, Validators.min(0)]);
-      } else if (type === 'offPlan') {
-        offPlan.get('delivery_date')?.setValidators([Validators.required]);
-        offPlan.get('overall_payment')?.setValidators([Validators.required]);
-      }
-
-      [rent, purchase, offPlan].forEach((group) =>
-        Object.values(group.controls).forEach((ctrl) =>
-          ctrl.updateValueAndValidity()
-        )
-      );
-    };
-
-    const updatePropertyTypeValidators = (type: string) => {
-      const apartment = extendedGroup.get('apartment') as FormGroup;
-      const villa = extendedGroup.get('villa') as FormGroup;
-      const office = extendedGroup.get('office') as FormGroup;
-
-      [apartment, villa, office].forEach((group) =>
-        Object.values(group.controls).forEach((ctrl) => ctrl.clearValidators())
-      );
-
-      if (type === 'apartment') {
-        apartment.get('floor')?.setValidators([Validators.required]);
-        apartment.get('building_number')?.setValidators([Validators.required]);
-        apartment.get('apartment_number')?.setValidators([Validators.required]);
-      } else if (type === 'villa') {
-        villa.get('floors')?.setValidators([Validators.required]);
-      } else if (type === 'office') {
-        office.get('floor')?.setValidators([Validators.required]);
-        office.get('building_number')?.setValidators([Validators.required]);
-        office.get('apartment_number')?.setValidators([Validators.required]);
-      }
-
-      [apartment, villa, office].forEach((group) =>
-        Object.values(group.controls).forEach((ctrl) =>
-          ctrl.updateValueAndValidity()
-        )
-      );
-    };
-
-    // Set initial validators
-    updateSellTypeValidators(basicGroup.get('sellType')?.value);
-    updatePropertyTypeValidators(basicGroup.get('propertyType')?.value);
-
-    // Watch for changes
-    basicGroup
-      .get('sellType')
-      ?.valueChanges.subscribe(updateSellTypeValidators);
-    basicGroup
-      .get('propertyType')
-      ?.valueChanges.subscribe(updatePropertyTypeValidators);
-  }
-
   getForm(): FormGroup {
     return this.form;
   }
@@ -155,7 +83,7 @@ export class AddPropertyService {
   }
 
   addImage(url: string): void {
-    const imagesArray = this.images;
+    const imagesArray = this.form.get('stepOne.images') as FormArray;
     imagesArray.push(new FormControl(url));
   }
 
@@ -165,6 +93,5 @@ export class AddPropertyService {
 
   resetForm(): void {
     this.form = this.createForm();
-    this.setupConditionalValidators(); // Reset validators after reset
   }
 }

@@ -77,9 +77,33 @@ export class StepTwoComponent {
   }
   setSellType(type: string): void {
     this.basicGroup.get('sellType')!.setValue(type);
+
+    const ext = this.extendedGroup;
+    const types = ['rent', 'purchase', 'off_plan'];
+
+    types.forEach((t) => {
+      const grp = ext.get(t) as FormGroup;
+      if (t === type) {
+        grp.enable({ emitEvent: false });
+      } else {
+        grp.disable({ emitEvent: false });
+      }
+    });
   }
   setPropertyType(type: string): void {
     this.basicGroup.get('propertyType')!.setValue(type);
+
+    const ext = this.extendedGroup;
+    const types = ['apartment', 'villa', 'office'];
+
+    types.forEach((t) => {
+      const grp = ext.get(t) as FormGroup;
+      if (t === type) {
+        grp.enable({ emitEvent: false });
+      } else {
+        grp.disable({ emitEvent: false });
+      }
+    });
   }
   toggleSelection(path: string, id: number): void {
     const array = this.form.get(path) as FormArray;
@@ -102,21 +126,29 @@ export class StepTwoComponent {
       this.prev.emit();
     }
   }
-  saveAndNext() {
+  saveAndNext(): boolean {
     const basic = this.form.get('stepTwo.basic') as FormGroup;
     const extended = this.form.get('stepTwo.extended') as FormGroup;
 
     if (basic.invalid) {
       basic.markAllAsTouched();
-      return;
+      console.log('first');
+
+      return false;
+    }
+    if (!this.showExtendedSection) {
+      console.log('second');
+      this.showExtendedSection = true;
+      return false;
     }
 
-    this.showExtendedSection = true;
-
-    if (extended.valid) {
-      this.next.emit();
-    } else {
+    if (extended.invalid) {
+      console.log('third');
       extended.markAllAsTouched();
+      return false;
     }
+    console.log('four');
+
+    return true;
   }
 }

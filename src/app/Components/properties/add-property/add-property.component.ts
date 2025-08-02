@@ -62,9 +62,12 @@ export class AddPropertyComponent {
       if ((this.form.get('stepTwo.basic') as FormGroup).invalid) {
         this.popupMessage = 'Please fill all the required info';
         return;
-      } else {
-        this.stepTwoComponent.saveAndNext();
+      } else if (!this.stepTwoComponent.saveAndNext()) {
+        console.log(this.stepTwoComponent.saveAndNext());
+        return;
       }
+      this.currentStep = 3;
+      return;
     } else {
       this.currentStep = Math.min(3, this.currentStep + 1);
     }
