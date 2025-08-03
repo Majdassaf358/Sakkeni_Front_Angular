@@ -38,10 +38,10 @@
         <label class="text-neutural-clr font-500 font-14">Account Type</label>
         <select
           class="font-12 font-400 profile-inputs"
-          [(ngModel)]="profileInfo.seller.account_type.name"
+          [(ngModel)]="accountType"
         >
-          <option [ngValue]="'Personal'">Personal</option>
-          <option [ngValue]="'Company'">Company</option>
+          <option [ngValue]="1">Personal</option>
+          <option [ngValue]="2">Company</option>
         </select>
       </div>
     </div>

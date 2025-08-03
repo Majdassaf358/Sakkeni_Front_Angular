@@ -19,6 +19,7 @@ export class EditProfileComponent implements OnInit {
   selectedFile: File | null = null;
   profileInfo: profile = new profile();
   updatedProfile: updateProfile = new updateProfile();
+  accountType: number = 1;
   previewUrl: string | null = null;
   imageUrl: string = 'http://127.0.0.1:8000/';
   constructor(
@@ -51,11 +52,13 @@ export class EditProfileComponent implements OnInit {
     try {
       this.updatedProfile.address = this.profileInfo.address;
       this.updatedProfile.phone_number = this.profileInfo.phone_number;
-      // this.updatedProfile = this.profileInfo.seller.account_type.name;
       this.updatedProfile.profile_picture = this.selectedFile;
 
       const res = await lastValueFrom(
         this.authenticationService.updateProfileDetails(this.updatedProfile)
+      );
+      const res2 = await lastValueFrom(
+        this.authenticationService.upgradeToSeller(this.accountType)
       );
       this.previewUrl = null;
       await this.getProfile();

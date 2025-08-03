@@ -45,12 +45,11 @@ export class AuthenticationService {
     let url = `${environment.Api}/update-profile`;
     return this.http.post<ApiResponse<null>>(url, formData);
   }
-  public updateProfilePictue(file: any): Observable<ApiResponse<null>> {
-    const formData = new FormData();
-    formData.append('profile_picture', file, file.name);
-
-    let url = `${environment.Api}/update-profile`;
-    return this.http.post<ApiResponse<null>>(url, formData);
+  public upgradeToSeller(account_type: number): Observable<ApiResponse<null>> {
+    let url = `${environment.Api}/upgrade-to-seller`;
+    return this.http.post<ApiResponse<null>>(url, {
+      account_type_id: account_type,
+    });
   }
   public logout(): Observable<ApiResponse<null>> {
     let url = `${environment.Api}/logout`;
@@ -59,9 +58,5 @@ export class AuthenticationService {
   public resetPassword(req: resetPassword): Observable<ApiResponse<null>> {
     let url = `${environment.Api}/reset-password`;
     return this.http.post<ApiResponse<null>>(url, req);
-  }
-  public forgetPassword(email: string): Observable<ApiResponse<null>> {
-    let url = `${environment.Api}/forgot-password`;
-    return this.http.post<ApiResponse<null>>(url, email);
   }
 }

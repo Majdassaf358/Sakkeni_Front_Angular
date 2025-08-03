@@ -58,7 +58,9 @@
         </div>
       </div>
       <div *ngIf="!profileInfo.seller">
-        <button class="upgrade text-secondary-clr">Upgrade to seller</button>
+        <button class="upgrade text-secondary-clr" (click)="goToEditProfile()">
+          Upgrade to seller
+        </button>
       </div>
     </div>
   </div>
