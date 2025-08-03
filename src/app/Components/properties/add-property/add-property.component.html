@@ -6,7 +6,7 @@
     <div class="add-line"></div>
   </div>
 </div>
-<div class="wizard-container">
+<div class="wizard-container" [ngClass]="{ 'no-padding': currentStep === 3 }">
   <section class="wizard-content">
     <app-step-one
       #stepOneRef
@@ -62,7 +62,7 @@
         <span *ngIf="currentStep != 3" (click)="onNext()" class="label"
           >Next</span
         >
-        <span *ngIf="currentStep === 3" (click)="onNext()" class="label"
+        <span *ngIf="currentStep === 3" (click)="onSubmit()" class="label"
           >Finish</span
         >
       </div>

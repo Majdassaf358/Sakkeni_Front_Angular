@@ -7,6 +7,11 @@ import { StepTwoComponent } from './step-two/step-two.component';
 import { StepThreeComponent } from './step-three/step-three.component';
 import { AddPropertyService } from '../../../Services/add-property.service';
 import { MessageComponent } from '../../message/message.component';
+import { addProperty } from '../../../Models/addProperty';
+import { ApiResponse } from '../../../Models/ApiResponse';
+import { lastValueFrom } from 'rxjs';
+import { PropertyService } from '../../../Services/property.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-property',
@@ -28,8 +33,12 @@ export class AddPropertyComponent {
   currentStep = 1;
   form: FormGroup;
   popupMessage: string | null = null;
-
-  constructor(private formSvc: AddPropertyService) {
+  messageText = '';
+  showMessagePopup = false;
+  constructor(
+    private formSvc: AddPropertyService,
+    private propertyService: PropertyService
+  ) {
     this.form = this.formSvc.getForm();
   }
   get isNextDisabled(): boolean {
@@ -87,5 +96,18 @@ export class AddPropertyComponent {
   closePopup() {
     this.popupMessage = null;
   }
-  onSubmit() {}
+  async onSubmit() {
+    var req: addProperty = this.form.getRawValue();
+    try {
+      let res: ApiResponse<null> = await lastValueFrom(
+        this.propertyService.addProperty(req)
+      );
+    } catch (error) {
+      if (error instanceof HttpErrorResponse && error.status === 422) {
+        console.error('Validation errors:', error.error.errors);
+      } else {
+        console.log(error);
+      }
+    }
+  }
 }

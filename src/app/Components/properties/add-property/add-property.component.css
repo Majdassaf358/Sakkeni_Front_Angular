@@ -11,6 +11,9 @@
   height: 100vh;
   padding: 1rem 10rem;
 }
+.wizard-container.no-padding {
+  padding: 0 !important;
+}
 .wizard-content {
   flex-grow: 1;
 }
