@@ -40,7 +40,6 @@ export class AddPropertyService {
           latitude: ['', Validators.required],
           longitude: ['', Validators.required],
           additional_info: ['', Validators.required],
-          // location: ['123 Main St, Damascus', Validators.required],
           exposures: this.fb.array([], Validators.required),
           area: ['', [Validators.required, Validators.min(1)]],
           bathrooms: ['', [Validators.required, Validators.min(0)]],

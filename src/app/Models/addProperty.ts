@@ -1,15 +1,18 @@
 export class addProperty {
+  'images': [];
+
   'country_id': number;
   'city_id': number;
   'latitude': number;
   'longitude': number;
-  'additional_info': number;
+  'additional_info': string;
   'exposure': [];
   'area': number;
   'bathrooms': number;
   'balconies': number;
+  'ownership_type_id': number;
   'amenities': [];
-  'images': [];
+
   'physical_status_type_id': number;
   'is_furnished': number;
   'property_type_id': number;

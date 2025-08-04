@@ -21,8 +21,19 @@ import { addProperty } from '../../../../Models/addProperty';
 export class StepTwoComponent {
   @Output() prev = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
-  selectedSellType: string = 'rent';
-  selectedPropertyType: string = 'apartment';
+  sellTypes = [
+    { id: 1, name: 'rent' },
+    { id: 2, name: 'purchase' },
+    { id: 3, name: 'off_plan' },
+  ];
+  propertyTypes = [
+    { id: 1, name: 'apartment' },
+    { id: 2, name: 'villa' },
+    { id: 3, name: 'office' },
+  ];
+
+  selectedSellType: number = 1; // default to 'rent'
+  selectedPropertyType: number = 1; // default to 'apartment'
   showExtendedSection: boolean = false;
   form: FormGroup;
   stepTwo: addProperty = new addProperty();
@@ -99,34 +110,27 @@ export class StepTwoComponent {
   get extendedGroup(): FormGroup {
     return this.form.get('stepTwo.extended') as FormGroup;
   }
-  setSellType(type: string): void {
-    this.basicGroup.get('sellType')!.setValue(type);
-
+  setSellType(id: number): void {
+    this.basicGroup.get('sellType')!.setValue(id);
     const ext = this.extendedGroup;
-    const types = ['rent', 'purchase', 'off_plan'];
-
-    types.forEach((t) => {
-      const grp = ext.get(t) as FormGroup;
-      if (t === type) {
-        grp.enable({ emitEvent: false });
-      } else {
-        grp.disable({ emitEvent: false });
-      }
+    this.sellTypes.forEach(({ id: t }) => {
+      const grp = ext.get(
+        this.sellTypes.find((s) => s.id === t)!.name
+      ) as FormGroup;
+      if (t === id) grp.enable({ emitEvent: false });
+      else grp.disable({ emitEvent: false });
     });
   }
-  setPropertyType(type: string): void {
-    this.basicGroup.get('propertyType')!.setValue(type);
 
+  setPropertyType(id: number): void {
+    this.basicGroup.get('propertyType')!.setValue(id);
     const ext = this.extendedGroup;
-    const types = ['apartment', 'villa', 'office'];
-
-    types.forEach((t) => {
-      const grp = ext.get(t) as FormGroup;
-      if (t === type) {
-        grp.enable({ emitEvent: false });
-      } else {
-        grp.disable({ emitEvent: false });
-      }
+    this.propertyTypes.forEach(({ id: t }) => {
+      const grp = ext.get(
+        this.propertyTypes.find((p) => p.id === t)!.name
+      ) as FormGroup;
+      if (t === id) grp.enable({ emitEvent: false });
+      else grp.disable({ emitEvent: false });
     });
   }
   toggleSelection(path: string, id: number): void {

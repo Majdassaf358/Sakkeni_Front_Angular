@@ -3,7 +3,7 @@
     <div class="inputs-col">
       <label>
         Country Name
-        <select class="add_input" formControlName="country">
+        <select class="add_input" formControlName="country_id">
           <option *ngFor="let c of countries" [value]="c.id">
             {{ c.name }}
           </option>
@@ -12,19 +12,19 @@
 
       <label>
         City Name
-        <select formControlName="city">
+        <select formControlName="city_id">
           <option *ngFor="let c of cities" [value]="c.id">{{ c.name }}</option>
         </select>
       </label>
 
-      <!-- <label>
-        Location
+      <label>
+        Additional Info
         <input
           type="text"
-          formControlName="location"
-          placeholder="Type an address or select on map"
+          formControlName="additional_info"
+          placeholder="Type an address"
         />
-      </label> -->
+      </label>
 
       <label>Exposure </label>
       <button
@@ -38,7 +38,7 @@
       </button>
       <label>
         Area (m²)
-        <input type="number" formControlName="area" placeholder="Add Area" />
+        <input type="text" formControlName="area" placeholder="Add Area" />
       </label>
 
       <label>
@@ -107,16 +107,16 @@
       <button
         type="button"
         class="add_options font-12 font-400"
-        [ngClass]="{ 'bg-focused': selectedSellType === 'rent' }"
-        (click)="setSellType('rent')"
+        [ngClass]="{ 'bg-focused': selectedSellType === 1 }"
+        (click)="setSellType(1)"
       >
         For Rent
       </button>
       <button
         type="button"
         class="add_options font-12 font-400"
-        [ngClass]="{ 'bg-focused': selectedSellType === 'purchase' }"
-        (click)="setSellType('purchase')"
+        [ngClass]="{ 'bg-focused': selectedSellType === 2 }"
+        (click)="setSellType(2)"
       >
         For Sale
       </button>
@@ -124,14 +124,14 @@
       <button
         type="button"
         class="add_options font-12 font-400"
-        [ngClass]="{ 'bg-focused': selectedSellType === 'offplan' }"
-        (click)="setSellType('offplan')"
+        [ngClass]="{ 'bg-focused': selectedSellType === 3 }"
+        (click)="setSellType(3)"
       >
         Off Plan
       </button>
     </div>
     <div class="details-grid inputs-col">
-      <div *ngIf="selectedSellType === 'rent'" formGroupName="rent">
+      <div *ngIf="selectedSellType === 1" formGroupName="rent">
         <label
           >Price
           <input
@@ -163,7 +163,7 @@
           placeholder="e.g. 12 months"
         />
       </div>
-      <div *ngIf="selectedSellType === 'purchase'" formGroupName="purchase">
+      <div *ngIf="selectedSellType === 2" formGroupName="purchase">
         <label
           >Price
           <input type="number" formControlName="price" />
@@ -173,7 +173,7 @@
       </div>
 
       <!-- Off‑plan-only controls -->
-      <div *ngIf="selectedSellType === 'offplan'" formGroupName="offPlan">
+      <div *ngIf="selectedSellType === 3" formGroupName="offPlan">
         <label
           >Delivery Date
           <input type="date" formControlName="delivery_date" />
@@ -201,33 +201,30 @@
       <button
         type="button"
         class="add_options font-12 font-400"
-        [ngClass]="{ 'bg-focused': selectedPropertyType === 'apartment' }"
-        (click)="setPropertyType('apartment')"
+        [ngClass]="{ 'bg-focused': selectedPropertyType === 1 }"
+        (click)="setPropertyType(1)"
       >
         Apartment
       </button>
       <button
         type="button"
         class="add_options font-12 font-400"
-        [ngClass]="{ 'bg-focused': selectedPropertyType === 'villa' }"
-        (click)="setPropertyType('villa')"
+        [ngClass]="{ 'bg-focused': selectedPropertyType === 2 }"
+        (click)="setPropertyType(2)"
       >
         Villa
       </button>
       <button
         type="button"
         class="add_options font-12 font-400"
-        [ngClass]="{ 'bg-focused': selectedPropertyType === 'office' }"
-        (click)="setPropertyType('office')"
+        [ngClass]="{ 'bg-focused': selectedPropertyType === 3 }"
+        (click)="setPropertyType(3)"
       >
         Office
       </button>
     </div>
     <div class="details-grid inputs-col">
-      <div
-        *ngIf="selectedPropertyType === 'apartment'"
-        formGroupName="apartment"
-      >
+      <div *ngIf="selectedPropertyType === 1" formGroupName="apartment">
         <label
           >Building Number
           <input type="text" formControlName="building_number" />
@@ -239,7 +236,7 @@
       </div>
 
       <!-- Villa Form -->
-      <div *ngIf="selectedPropertyType === 'villa'" formGroupName="villa">
+      <div *ngIf="selectedPropertyType === 2" formGroupName="villa">
         <label
           >Number of Floors
           <input type="number" formControlName="floors" />
@@ -247,7 +244,7 @@
       </div>
 
       <!-- Commercial/Office Form -->
-      <div *ngIf="selectedPropertyType === 'office'" formGroupName="office">
+      <div *ngIf="selectedPropertyType === 3" formGroupName="office">
         <label
           >Building Number
           <input type="text" formControlName="building_number" />

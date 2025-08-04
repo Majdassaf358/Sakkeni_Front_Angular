@@ -244,6 +244,16 @@ select {
   height: 1.8rem;
   margin: 0rem 0.5rem 0 0;
 }
+/* Remove arrows from input[type=number] */
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Edge */
+  margin: 0;
+}
 /* Pop-up Section */
 .popup-overlay {
   position: fixed;
