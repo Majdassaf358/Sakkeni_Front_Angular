@@ -39,8 +39,4 @@ export class PropertyService {
       filters
     );
   }
-  public addProperty(property: addProperty): Observable<ApiResponse<null>> {
-    let url = `${environment.Api}/add-property`;
-    return this.http.post<ApiResponse<null>>(url, property);
-  }
 }

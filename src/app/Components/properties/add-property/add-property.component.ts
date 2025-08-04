@@ -30,7 +30,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class AddPropertyComponent {
   @ViewChild('stepOneRef') stepOneComponent!: StepOneComponent;
   @ViewChild('stepTwoRef') stepTwoComponent!: StepTwoComponent;
-  currentStep = 1;
+  currentStep = 2;
   form: FormGroup;
   popupMessage: string | null = null;
   messageText = '';
@@ -100,7 +100,7 @@ export class AddPropertyComponent {
     var req: addProperty = this.form.getRawValue();
     try {
       let res: ApiResponse<null> = await lastValueFrom(
-        this.propertyService.addProperty(req)
+        this.formSvc.addProperty(req)
       );
     } catch (error) {
       if (error instanceof HttpErrorResponse && error.status === 422) {

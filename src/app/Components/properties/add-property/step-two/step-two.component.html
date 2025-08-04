@@ -81,7 +81,18 @@
       </button>
     </div>
 
-    <div class="map-col"></div>
+    <google-map
+      #map
+      [center]="center"
+      [zoom]="6"
+      (mapClick)="onMapClick($event)"
+    >
+      <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker.position"
+        [title]="marker.title"
+      ></map-marker
+    ></google-map>
   </div>
 </form>
 <!-- Extended-section                                                              Extended -->
