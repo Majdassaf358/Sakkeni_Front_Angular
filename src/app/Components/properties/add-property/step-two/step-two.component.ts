@@ -68,7 +68,10 @@ export class StepTwoComponent {
   ownership_type_id: { id: number; name: string }[] = [
     { id: 1, name: 'Freehold' },
   ];
-  center: google.maps.LatLngLiteral = { lat: 34.8021, lng: 38.9968 };
+  center: google.maps.LatLngLiteral = {
+    lat: 33.499997429698276,
+    lng: 36.26559615601456,
+  };
   markers: { position: google.maps.LatLngLiteral; title: string }[] = [];
   syriaPolygonCoords = [
     { lat: 32.0, lng: 36.8 },

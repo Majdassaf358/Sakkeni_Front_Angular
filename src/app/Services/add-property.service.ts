@@ -37,8 +37,8 @@ export class AddPropertyService {
         basic: this.fb.group({
           country_id: ['', Validators.required],
           city_id: ['', Validators.required],
-          latitude: ['', Validators.required],
-          longitude: ['', Validators.required],
+          latitude: [1, Validators.required],
+          longitude: [1, Validators.required],
           additional_info: ['', Validators.required],
           exposures: this.fb.array([], Validators.required),
           area: ['', [Validators.required, Validators.min(1)]],

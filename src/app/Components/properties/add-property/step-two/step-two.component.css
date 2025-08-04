@@ -78,6 +78,9 @@
   box-sizing: border-box;
   color: #27393a8c;
 }
+select:focus {
+  outline: none;
+}
 
 .details-grid label {
   display: grid;
@@ -86,6 +89,13 @@
 }
 
 button.selected {
-  background-color: #007bff;
+  background-color: #b4c5c5;
+}
+select option {
+  background-color: #e9eeee;
+  color: black;
+}
+select option:hover {
+  background-color: #b4c5c5;
   color: white;
 }

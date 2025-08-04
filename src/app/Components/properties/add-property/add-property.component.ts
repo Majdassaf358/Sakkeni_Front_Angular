@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormGroup, FormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { StepOneComponent } from './step-one/step-one.component';
 import { StepTwoComponent } from './step-two/step-two.component';
 import { StepThreeComponent } from './step-three/step-three.component';
@@ -35,10 +35,7 @@ export class AddPropertyComponent {
   popupMessage: string | null = null;
   messageText = '';
   showMessagePopup = false;
-  constructor(
-    private formSvc: AddPropertyService,
-    private propertyService: PropertyService
-  ) {
+  constructor(private formSvc: AddPropertyService, private fb: FormBuilder) {
     this.form = this.formSvc.getForm();
   }
   get isNextDisabled(): boolean {
@@ -96,6 +93,7 @@ export class AddPropertyComponent {
   closePopup() {
     this.popupMessage = null;
   }
+
   async onSubmit() {
     var req: addProperty = this.form.getRawValue();
     try {

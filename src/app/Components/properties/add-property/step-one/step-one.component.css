@@ -3,6 +3,9 @@
   gap: 30px;
   margin: 1rem;
 }
+.upload-controls {
+  display: flex;
+}
 .slider-section {
   height: 20rem;
   width: 90%;
@@ -31,4 +34,11 @@
   border-radius: 10px;
   object-fit: cover;
   box-shadow: 0px 4px 4px 0px #00000040;
+}
+.clear-btn {
+  background-color: #fcfdfd;
+  color: #27393a;
+  width: 10.8%;
+
+  border: none;
 }

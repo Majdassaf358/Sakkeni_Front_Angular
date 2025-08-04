@@ -14,10 +14,7 @@ export class StepThreeComponent implements OnInit {
   @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
   @ViewChild(GoogleMap) map!: GoogleMap;
   form: FormGroup;
-  center: google.maps.LatLngLiteral = {
-    lat: 33.42565943762839,
-    lng: 36.94301086943456,
-  };
+
   propertyTypes = [
     { id: 1, name: 'apartment' },
     { id: 2, name: 'villa' },
@@ -60,14 +57,11 @@ export class StepThreeComponent implements OnInit {
   ownership_type_id: { id: number; name: string }[] = [
     { id: 1, name: 'Freehold' },
   ];
-  get marker(): google.maps.LatLngLiteral {
-    const lat = this.form.get('stepTwo.basic.latitude')?.value;
-    const lng = this.form.get('stepTwo.basic.longitude')?.value;
-    return {
-      lat: lat ?? this.center.lat,
-      lng: lng ?? this.center.lng,
-    };
-  }
+  center: google.maps.LatLngLiteral = {
+    lat: 33.42565943762839,
+    lng: 36.94301086943456,
+  };
+
   mapOptions: google.maps.MapOptions = {
     center: this.center,
     zoom: 12,
@@ -93,9 +87,7 @@ export class StepThreeComponent implements OnInit {
     this.form = this.formSvc.getForm();
   }
 
-  ngOnInit(): void {
-    // any initialization if needed
-  }
+  ngOnInit(): void {}
 
   get displayText(): string {
     const basic = this.form.get('stepTwo.basic')!.value;
@@ -132,33 +124,46 @@ export class StepThreeComponent implements OnInit {
 
     return `${typeName} ${action} - ${pricePart}`;
   }
+  get marker(): google.maps.LatLngLiteral {
+    const lat = this.form.get('stepTwo.basic.latitude')?.value;
+    const lng = this.form.get('stepTwo.basic.longitude')?.value;
+    this.center = { lat: lat, lng: lng };
 
-  // helper for image URLs
+    return {
+      lat: lat,
+      lng: lng,
+    };
+  }
   get images(): string[] {
-    return this.form.get('stepOne.images')!.value;
+    return this.form.get('stepOne.images')?.value;
   }
 
-  // getters for basic and extended
   get basic() {
-    return this.form.get('stepTwo.basic')!.value;
+    return this.form.get('stepTwo.basic')?.value;
   }
 
   get extended() {
-    return this.form.get('stepTwo.extended')!.value;
+    return this.form.get('stepTwo.extended')?.value;
   }
   getCountryName(id: number): string {
-    return this.countries.find((c) => c.id === id)?.name || '';
+    return this.countries.find((c) => c.id === +id)?.name || '';
   }
 
-  getCityName(id: number): string {
-    return this.cities.find((c) => c.id === id)?.name || '';
+  getCityName(id: number | string): string {
+    return this.cities.find((c) => c.id === +id)?.name || '';
   }
 
-  getDirectionNames(ids: number[]): string[] {
+  getDirectionNames(ids: number[] | undefined): string[] {
+    if (!ids || !Array.isArray(ids)) {
+      return [];
+    }
     return this.exposures.filter((d) => ids.includes(d.id)).map((d) => d.name);
   }
 
   getAmenityNames(ids: number[]): string[] {
+    if (!ids || !Array.isArray(ids)) {
+      return [];
+    }
     return this.amenities.filter((a) => ids.includes(a.id)).map((a) => a.name);
   }
 

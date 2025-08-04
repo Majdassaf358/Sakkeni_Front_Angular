@@ -35,7 +35,7 @@
         <p class="font-600">Directions:</p>
         <span
           *ngFor="
-            let dir of getDirectionNames(basic.directions);
+            let dir of getDirectionNames(basic.exposures);
             let isLast = last
           "
         >
@@ -76,8 +76,8 @@
       <div class="row" *ngIf="basic.sellType === 3">
         <p class="font-600">Price Details:</p>
         <div class="off_info">
-          <p>Delivery Date: {{ extended.off_plan.delivery_date }}</p>
-          <p>Overall Payment: {{ extended.off_plan.overall_payment }}</p>
+          <p>Delivery Date: {{ extended.offPlan.delivery_date }}</p>
+          <p>Overall Payment: {{ extended.offPlan.overall_payment }}</p>
         </div>
       </div>
 
@@ -104,9 +104,7 @@
           </p>
         </div>
       </div>
-      <div class="contact-box">
-        <!-- Bind owner info here if available -->
-      </div>
+      <div class="contact-box"></div>
     </div>
     <div class="map-box">
       <google-map
@@ -117,6 +115,8 @@
       >
         <map-marker [position]="marker"></map-marker>
       </google-map>
+      <button (click)="toggleSatellite(true)">Satellite</button>
+      <button (click)="toggleSatellite(false)">Roadmap</button>
     </div>
   </div>
 </div>
