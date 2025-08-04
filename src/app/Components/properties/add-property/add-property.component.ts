@@ -30,7 +30,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class AddPropertyComponent {
   @ViewChild('stepOneRef') stepOneComponent!: StepOneComponent;
   @ViewChild('stepTwoRef') stepTwoComponent!: StepTwoComponent;
-  currentStep = 2;
+  currentStep = 1;
   form: FormGroup;
   popupMessage: string | null = null;
   messageText = '';

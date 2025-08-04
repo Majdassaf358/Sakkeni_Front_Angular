@@ -46,8 +46,8 @@ export class AddPropertyService {
           balconies: ['', [Validators.required, Validators.min(0)]],
           ownership_type_id: this.fb.array([], Validators.required),
           amenities: this.fb.array([], Validators.required),
-          sellType: ['rent', Validators.required],
-          propertyType: ['apartment', Validators.required],
+          sellType: [1, Validators.required],
+          propertyType: [1, Validators.required],
         }),
         extended: this.fb.group({
           apartment: this.fb.group({

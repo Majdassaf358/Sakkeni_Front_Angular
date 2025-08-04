@@ -18,7 +18,56 @@ export class StepThreeComponent implements OnInit {
     lat: 33.42565943762839,
     lng: 36.94301086943456,
   };
-  marker: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
+  propertyTypes = [
+    { id: 1, name: 'apartment' },
+    { id: 2, name: 'villa' },
+    { id: 3, name: 'office' },
+  ];
+
+  sellTypes = [
+    { id: 1, name: 'rent' },
+    { id: 2, name: 'purchase' },
+    { id: 3, name: 'off_plan' },
+  ];
+  countries: { id: number; name: string }[] = [{ id: 1, name: 'Syria' }];
+  cities: { id: number; name: string }[] = [
+    { id: 1, name: 'Damascus' },
+    { id: 2, name: 'Aleppo' },
+    { id: 3, name: 'Homs' },
+  ];
+  exposures: { id: number; name: string }[] = [
+    { id: 1, name: 'North' },
+    { id: 2, name: 'South' },
+    { id: 3, name: 'East' },
+    { id: 4, name: 'West' },
+    { id: 5, name: 'North‑East' },
+    { id: 6, name: 'North‑West' },
+    { id: 7, name: 'South‑East' },
+    { id: 8, name: 'South‑West' },
+  ];
+  amenities: { id: number; name: string }[] = [
+    { id: 1, name: 'Rerum' },
+    { id: 2, name: 'Id' },
+    { id: 3, name: 'Voluptatem' },
+    { id: 4, name: 'Laudantium' },
+    { id: 5, name: 'Sunt' },
+    { id: 6, name: 'Blanditiis' },
+    { id: 7, name: 'Assumenda' },
+    { id: 8, name: 'Recusandae' },
+    { id: 9, name: 'Vel' },
+    { id: 10, name: 'Repudiandae' },
+  ];
+  ownership_type_id: { id: number; name: string }[] = [
+    { id: 1, name: 'Freehold' },
+  ];
+  get marker(): google.maps.LatLngLiteral {
+    const lat = this.form.get('stepTwo.basic.latitude')?.value;
+    const lng = this.form.get('stepTwo.basic.longitude')?.value;
+    return {
+      lat: lat ?? this.center.lat,
+      lng: lng ?? this.center.lng,
+    };
+  }
   mapOptions: google.maps.MapOptions = {
     center: this.center,
     zoom: 12,
@@ -52,20 +101,33 @@ export class StepThreeComponent implements OnInit {
     const basic = this.form.get('stepTwo.basic')!.value;
     const extended = this.form.get('stepTwo.extended')!.value;
 
-    const typeName = basic.propertyType;
+    const typeName =
+      this.propertyTypes.find((t) => t.id === basic.propertyType)?.name || '';
     let action = '';
-    if (basic.sellType === 'rent') action = 'For Rent';
-    else if (basic.sellType === 'purchase') action = 'For Sale';
-    else if (basic.sellType === 'off_plan') action = 'Off Plan';
 
-    // price part
+    switch (basic.sellType) {
+      case 1:
+        action = 'For Rent';
+        break;
+      case 2:
+        action = 'For Sale';
+        break;
+      case 3:
+        action = 'Off Plan';
+        break;
+    }
+
     let pricePart: string | number = '';
-    if (basic.sellType === 'rent') {
-      pricePart = extended.rent.price;
-    } else if (basic.sellType === 'purchase') {
-      pricePart = extended.purchase.price;
-    } else if (basic.sellType === 'off_plan') {
-      pricePart = extended.off_plan.overall_payment;
+    switch (basic.sellType) {
+      case 1:
+        pricePart = extended.rent.price;
+        break;
+      case 2:
+        pricePart = extended.purchase.price;
+        break;
+      case 3:
+        pricePart = extended.off_plan.overall_payment;
+        break;
     }
 
     return `${typeName} ${action} - ${pricePart}`;
@@ -84,6 +146,28 @@ export class StepThreeComponent implements OnInit {
   get extended() {
     return this.form.get('stepTwo.extended')!.value;
   }
+  getCountryName(id: number): string {
+    return this.countries.find((c) => c.id === id)?.name || '';
+  }
+
+  getCityName(id: number): string {
+    return this.cities.find((c) => c.id === id)?.name || '';
+  }
+
+  getDirectionNames(ids: number[]): string[] {
+    return this.exposures.filter((d) => ids.includes(d.id)).map((d) => d.name);
+  }
+
+  getAmenityNames(ids: number[]): string[] {
+    return this.amenities.filter((a) => ids.includes(a.id)).map((a) => a.name);
+  }
+
+  getOwnershipNames(ids: number[]): string[] {
+    return this.ownership_type_id
+      .filter((o) => ids.includes(o.id))
+      .map((o) => o.name);
+  }
+
   openPopup(img: string) {
     this.imageToShow = img;
     this.showMessagePopup = true;
