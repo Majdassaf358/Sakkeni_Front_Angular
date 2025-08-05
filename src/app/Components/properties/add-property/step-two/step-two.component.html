@@ -1,4 +1,4 @@
-<form *ngIf="!showExtendedSection" [formGroup]="basicGroup">
+<form *ngIf="showExtendedSection" [formGroup]="basicGroup">
   <div class="step-two-grid">
     <div class="inputs-col">
       <label>
@@ -99,7 +99,7 @@
 <form
   class="extended-section"
   [formGroup]="extendedGroup"
-  *ngIf="showExtendedSection"
+  *ngIf="!showExtendedSection"
 >
   <div class="sale-section width-50">
     <h3>Select Sell Type</h3>
@@ -157,11 +157,15 @@
           />
         </label>
         <label> Furnished </label>
-        <input
-          type="checkbox"
-          formControlName="is_furnished"
-          placeholder="e.g. 12 months"
-        />
+        <div>
+          <label>
+            <input type="radio" formControlName="is_furnished" [value]="1" />
+            Yes
+          </label>
+          <label>
+            <input type="radio" formControlName="is_furnished" [value]="0" /> No
+          </label>
+        </div>
       </div>
       <div *ngIf="selectedSellType === 2" formGroupName="purchase">
         <label
@@ -169,7 +173,15 @@
           <input type="number" formControlName="price" />
         </label>
         <label> Furnished </label>
-        <input type="checkbox" formControlName="is_furnished" />
+        <div>
+          <label>
+            <input type="radio" formControlName="is_furnished" [value]="1" />
+            Yes
+          </label>
+          <label>
+            <input type="radio" formControlName="is_furnished" [value]="0" /> No
+          </label>
+        </div>
       </div>
 
       <!-- Off‑plan-only controls -->

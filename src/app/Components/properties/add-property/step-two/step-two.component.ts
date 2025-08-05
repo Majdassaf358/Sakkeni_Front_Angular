@@ -24,16 +24,16 @@ export class StepTwoComponent {
   sellTypes = [
     { id: 1, name: 'rent' },
     { id: 2, name: 'purchase' },
-    { id: 3, name: 'off_plan' },
+    { id: 3, name: 'offPlan' },
   ];
   propertyTypes = [
-    { id: 1, name: 'apartment' },
-    { id: 2, name: 'villa' },
-    { id: 3, name: 'office' },
+    { id: 1, name: 'apartment', group: 'residential' },
+    { id: 2, name: 'villa', group: 'residential' },
+    { id: 3, name: 'office', group: 'commercial' },
   ];
 
-  selectedSellType: number = 1; // default to 'rent'
-  selectedPropertyType: number = 1; // default to 'apartment'
+  selectedSellType: number = 1;
+  selectedPropertyType: number = 1;
   showExtendedSection: boolean = false;
   form: FormGroup;
   stepTwo: addProperty = new addProperty();
@@ -87,20 +87,24 @@ export class StepTwoComponent {
     { lat: 34.5, lng: 35.7 },
     { lat: 33.3, lng: 36.2 },
     { lat: 32.7, lng: 36.0 },
-    { lat: 32.0, lng: 36.8 }, // close the polygon
+    { lat: 32.0, lng: 36.8 },
   ];
   syriaPolygon: google.maps.Polygon = new google.maps.Polygon();
   constructor(private formSvc: AddPropertyService) {
     this.form = this.formSvc.getForm();
   }
   ngOnInit(): void {
+    this.setSellType(this.basicGroup.get('sellType')?.value);
+    this.setPropertyType(this.basicGroup.get('propertyType')?.value);
+
     this.basicGroup.get('sellType')?.valueChanges.subscribe((value) => {
-      this.selectedSellType = value;
+      this.setSellType(value);
     });
 
     this.basicGroup.get('propertyType')?.valueChanges.subscribe((value) => {
-      this.selectedPropertyType = value;
+      this.setPropertyType(value);
     });
+
     this.syriaPolygon = new google.maps.Polygon({
       paths: this.syriaPolygonCoords,
     });
@@ -113,29 +117,53 @@ export class StepTwoComponent {
   get extendedGroup(): FormGroup {
     return this.form.get('stepTwo.extended') as FormGroup;
   }
+  get residentialGroup(): FormGroup {
+    return this.extendedGroup.get('residential') as FormGroup;
+  }
+
+  get commercialGroup(): FormGroup {
+    return this.extendedGroup.get('commercial') as FormGroup;
+  }
   setSellType(id: number): void {
+    this.selectedSellType = id;
     this.basicGroup.get('sellType')!.setValue(id);
     const ext = this.extendedGroup;
-    this.sellTypes.forEach(({ id: t }) => {
-      const grp = ext.get(
-        this.sellTypes.find((s) => s.id === t)!.name
-      ) as FormGroup;
-      if (t === id) grp.enable({ emitEvent: false });
-      else grp.disable({ emitEvent: false });
+
+    this.sellTypes.forEach(({ id: t, name }) => {
+      const grp = ext.get(name) as FormGroup | null;
+      if (!grp) {
+        console.warn(`Missing group for sellType: ${name}`);
+        return;
+      }
+
+      if (t === id) {
+        grp.enable({ emitEvent: false });
+      } else {
+        grp.disable({ emitEvent: false });
+      }
     });
   }
 
   setPropertyType(id: number): void {
+    this.selectedPropertyType = id;
     this.basicGroup.get('propertyType')!.setValue(id);
-    const ext = this.extendedGroup;
-    this.propertyTypes.forEach(({ id: t }) => {
-      const grp = ext.get(
-        this.propertyTypes.find((p) => p.id === t)!.name
-      ) as FormGroup;
-      if (t === id) grp.enable({ emitEvent: false });
-      else grp.disable({ emitEvent: false });
-    });
+
+    const residential = this.extendedGroup.get('residential') as FormGroup;
+    const commercial = this.extendedGroup.get('commercial') as FormGroup;
+
+    residential.get('apartment')?.disable({ emitEvent: false });
+    residential.get('villa')?.disable({ emitEvent: false });
+    commercial.get('office')?.disable({ emitEvent: false });
+
+    if (id === 1) {
+      residential.get('apartment')?.enable({ emitEvent: false });
+    } else if (id === 2) {
+      residential.get('villa')?.enable({ emitEvent: false });
+    } else if (id === 3) {
+      commercial.get('office')?.enable({ emitEvent: false });
+    }
   }
+
   toggleSelection(path: string, id: number): void {
     const array = this.form.get(path) as FormArray;
     const index = array.value.indexOf(id);

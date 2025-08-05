@@ -7,10 +7,8 @@ import { StepTwoComponent } from './step-two/step-two.component';
 import { StepThreeComponent } from './step-three/step-three.component';
 import { AddPropertyService } from '../../../Services/add-property.service';
 import { MessageComponent } from '../../message/message.component';
-import { addProperty } from '../../../Models/addProperty';
 import { ApiResponse } from '../../../Models/ApiResponse';
 import { lastValueFrom } from 'rxjs';
-import { PropertyService } from '../../../Services/property.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -30,7 +28,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class AddPropertyComponent {
   @ViewChild('stepOneRef') stepOneComponent!: StepOneComponent;
   @ViewChild('stepTwoRef') stepTwoComponent!: StepTwoComponent;
-  currentStep = 1;
+  currentStep = 2;
   form: FormGroup;
   popupMessage: string | null = null;
   messageText = '';
@@ -95,10 +93,9 @@ export class AddPropertyComponent {
   }
 
   async onSubmit() {
-    var req: addProperty = this.form.getRawValue();
     try {
       let res: ApiResponse<null> = await lastValueFrom(
-        this.formSvc.addProperty(req)
+        this.formSvc.addProperty()
       );
     } catch (error) {
       if (error instanceof HttpErrorResponse && error.status === 422) {

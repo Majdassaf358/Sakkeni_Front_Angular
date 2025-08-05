@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import { amenities } from '../Models/amenities';
-import { commercial } from '../Models/property-types/commercial';
-import { residential } from '../Models/property-types/residential';
-import { rent } from '../Models/sale-types/rent';
-import { purchase } from '../Models/sale-types/purchase';
-import { off_plan } from '../Models/sale-types/off_plan';
+
 import {
   FormArray,
   FormBuilder,
@@ -12,11 +7,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { addProperty } from '../Models/addProperty';
 import { ApiResponse } from '../Models/ApiResponse';
 import { Observable } from 'rxjs';
 import { environment } from '../shared/environments';
 import { HttpClient } from '@angular/common/http';
+import { residential } from '../Models/property-types/residential';
+import { commercial } from '../Models/property-types/commercial';
 
 @Injectable({
   providedIn: 'root',
@@ -50,26 +46,30 @@ export class AddPropertyService {
           propertyType: [1, Validators.required],
         }),
         extended: this.fb.group({
-          apartment: this.fb.group({
-            building_number: [''],
-            apartment_number: [''],
+          residential: this.fb.group({
+            apartment: this.fb.group({
+              building_number: [''],
+              apartment_number: [''],
+            }),
+            villa: this.fb.group({
+              floors: [null],
+            }),
           }),
-          villa: this.fb.group({
-            floors: [null],
-          }),
-          office: this.fb.group({
-            building_number: [''],
-            apartment_number: [''],
+          commercial: this.fb.group({
+            office: this.fb.group({
+              building_number: [''],
+              apartment_number: [''],
+            }),
           }),
           rent: this.fb.group({
             price: [null, [Validators.required, Validators.min(0)]],
             lease_period_value: [''],
             lease_period_unit: [''],
-            is_furnished: [false],
+            is_furnished: [0],
           }),
           purchase: this.fb.group({
             price: [null, [Validators.required, Validators.min(0)]],
-            is_furnished: [false],
+            is_furnished: [0],
           }),
           offPlan: this.fb.group({
             delivery_date: [null],
@@ -101,9 +101,60 @@ export class AddPropertyService {
   resetForm(): void {
     this.form = this.createForm();
   }
-  public addProperty(property: addProperty): Observable<ApiResponse<null>> {
-    var req: addProperty = this.form.getRawValue();
+  public addProperty(): Observable<ApiResponse<null>> {
+    const basic = this.form.get('stepTwo.basic')!.value;
+    const extended = this.form.get('stepTwo.extended')!.value;
+    const images = this.form.get('stepOne.images')!.value;
+
+    const formData = new FormData();
+    images.forEach((image: File) => {
+      formData.append('images[]', image);
+    });
+    formData.append('country_id', basic.country_id);
+    formData.append('city_id', basic.city_id);
+    formData.append('latitude', basic.latitude);
+    formData.append('longitude', basic.longitude);
+    formData.append('additional_info', basic.additional_info);
+
+    formData.append('area', basic.area);
+    formData.append('bathrooms', basic.bathrooms);
+    formData.append('balconies', basic.balconies);
+    formData.append('bedrooms', basic.bedrooms ?? 2);
+    formData.append(
+      'residential_property_type_id',
+      basic.residential_property_type_id ?? 2
+    );
+
+    formData.append('sell_type_id', basic.sellType);
+    formData.append('property_type_id', basic.propertyType);
+
+    basic.exposures.forEach((item: any) => {
+      formData.append('exposure[]', item);
+    });
+
+    basic.ownership_type_id.forEach((id: any) => {
+      formData.append('ownership_type_id', id);
+    });
+
+    basic.amenities.forEach((id: any) => {
+      formData.append('amenities[]', id);
+    });
+    if (basic.sellType == 1) {
+      console.log('rent id 1');
+      formData.append('price', extended.rent.price);
+      formData.append('lease_period_value', extended.rent.lease_period_value);
+      formData.append('lease_period_unit', extended.rent.lease_period_unit);
+      formData.append('is_furnished', extended.rent.is_furnished);
+    }
+    if (basic.sellType == 2) {
+      console.log('purchase id 2');
+      formData.append('price', extended.purchase.price);
+      formData.append('is_furnished', extended.purchase.is_furnished);
+    }
+    if (basic.sellType == 3) {
+      console.log('offPlan id 3');
+    }
     let url = `${environment.Api}/add-property`;
-    return this.http.post<ApiResponse<null>>(url, property);
+    return this.http.post<ApiResponse<null>>(url, formData);
   }
 }
