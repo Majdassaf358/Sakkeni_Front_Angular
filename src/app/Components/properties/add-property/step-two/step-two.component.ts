@@ -35,6 +35,7 @@ export class StepTwoComponent {
   selectedSellType: number = 1;
   selectedPropertyType: number = 1;
   showExtendedSection: boolean = false;
+  isfurnitured: number = 1;
   form: FormGroup;
   stepTwo: addProperty = new addProperty();
   countries: { id: number; name: string }[] = [{ id: 1, name: 'Syria' }];
@@ -163,7 +164,16 @@ export class StepTwoComponent {
       commercial.get('office')?.enable({ emitEvent: false });
     }
   }
-
+  swichFurnitured(number: number) {
+    this.isfurnitured = number;
+    if (this.selectedSellType === 1) {
+      this.form.get('stepTwo.extended.rent.is_furnished')?.setValue(number);
+    }
+    if (this.selectedSellType === 2) {
+      this.form.get('stepTwo.extended.purchase.is_furnished')?.setValue(number);
+    }
+    console.log(this.isfurnitured);
+  }
   toggleSelection(path: string, id: number): void {
     const array = this.form.get(path) as FormArray;
     const index = array.value.indexOf(id);

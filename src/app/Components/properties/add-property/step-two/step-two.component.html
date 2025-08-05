@@ -157,14 +157,28 @@
           />
         </label>
         <label> Furnished </label>
-        <div>
-          <label>
-            <input type="radio" formControlName="is_furnished" [value]="1" />
+        <div class="furnished-toggle">
+          <button
+            class="add_options font-12 font-400"
+            type="button"
+            [ngClass]="{
+              'bg-focused': isfurnitured === 1
+            }"
+            (click)="swichFurnitured(1)"
+          >
             Yes
-          </label>
-          <label>
-            <input type="radio" formControlName="is_furnished" [value]="0" /> No
-          </label>
+          </button>
+
+          <button
+            class="add_options font-12 font-400"
+            type="button"
+            [ngClass]="{
+              'bg-focused': isfurnitured === 0
+            }"
+            (click)="swichFurnitured(0)"
+          >
+            No
+          </button>
         </div>
       </div>
       <div *ngIf="selectedSellType === 2" formGroupName="purchase">
@@ -174,13 +188,27 @@
         </label>
         <label> Furnished </label>
         <div>
-          <label>
-            <input type="radio" formControlName="is_furnished" [value]="1" />
+          <button
+            class="add_options font-12 font-400"
+            type="button"
+            [ngClass]="{
+              'bg-focused': isfurnitured === 1
+            }"
+            (click)="swichFurnitured(1)"
+          >
             Yes
-          </label>
-          <label>
-            <input type="radio" formControlName="is_furnished" [value]="0" /> No
-          </label>
+          </button>
+
+          <button
+            class="add_options font-12 font-400"
+            type="button"
+            [ngClass]="{
+              'bg-focused': isfurnitured === 0
+            }"
+            (click)="swichFurnitured(0)"
+          >
+            No
+          </button>
         </div>
       </div>
 
@@ -238,17 +266,25 @@
     <div class="details-grid inputs-col">
       <div *ngIf="selectedPropertyType === 1" formGroupName="apartment">
         <label
+          >Number of Bedrooms
+          <input type="number" formControlName="bedrooms" />
+        </label>
+        <label
           >Building Number
-          <input type="text" formControlName="building_number" />
+          <input type="number" formControlName="building_number" />
         </label>
         <label
           >Apartment Number
-          <input type="text" formControlName="apartment_number" />
+          <input type="number" formControlName="apartment_number" />
         </label>
       </div>
 
       <!-- Villa Form -->
       <div *ngIf="selectedPropertyType === 2" formGroupName="villa">
+        <label
+          >Number of Bedrooms
+          <input type="number" formControlName="bedrooms" />
+        </label>
         <label
           >Number of Floors
           <input type="number" formControlName="floors" />
@@ -258,12 +294,16 @@
       <!-- Commercial/Office Form -->
       <div *ngIf="selectedPropertyType === 3" formGroupName="office">
         <label
+          >Floor Number
+          <input type="number" formControlName="floor" />
+        </label>
+        <label
           >Building Number
-          <input type="text" formControlName="building_number" />
+          <input type="number" formControlName="building_number" />
         </label>
         <label
           >Apartment Number
-          <input type="text" formControlName="apartment_number" />
+          <input type="number" formControlName="apartment_number" />
         </label>
       </div>
     </div>

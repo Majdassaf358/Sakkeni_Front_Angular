@@ -47,16 +47,21 @@ export class AddPropertyService {
         }),
         extended: this.fb.group({
           residential: this.fb.group({
+            residential_property_type_id: [''],
             apartment: this.fb.group({
+              bedrooms: [''],
               building_number: [''],
               apartment_number: [''],
             }),
             villa: this.fb.group({
+              bedrooms: [''],
               floors: [null],
             }),
           }),
           commercial: this.fb.group({
+            commercial_property_type_id: [],
             office: this.fb.group({
+              floor: [''],
               building_number: [''],
               apartment_number: [''],
             }),
