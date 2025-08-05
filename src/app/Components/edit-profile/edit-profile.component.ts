@@ -61,7 +61,7 @@ export class EditProfileComponent implements OnInit {
         this.authenticationService.upgradeToSeller(this.accountType)
       );
       this.previewUrl = null;
-      await this.getProfile();
+      this.router.navigate(['/profile']);
     } catch (error) {
       console.log(error);
     }
