@@ -1,4 +1,4 @@
-<form *ngIf="showExtendedSection" [formGroup]="basicGroup">
+<form *ngIf="!showExtendedSection" [formGroup]="basicGroup">
   <div class="step-two-grid">
     <div class="inputs-col">
       <label>
@@ -38,7 +38,7 @@
       </button>
       <label>
         Area (m²)
-        <input type="text" formControlName="area" placeholder="Add Area" />
+        <input type="number" formControlName="area" placeholder="Add Area" />
       </label>
 
       <label>
@@ -99,7 +99,7 @@
 <form
   class="extended-section"
   [formGroup]="extendedGroup"
-  *ngIf="!showExtendedSection"
+  *ngIf="showExtendedSection"
 >
   <div class="sale-section width-50">
     <h3>Select Sell Type</h3>
@@ -110,7 +110,7 @@
         [ngClass]="{ 'bg-focused': selectedSellType === 1 }"
         (click)="setSellType(1)"
       >
-        For Rent
+        For Sale
       </button>
       <button
         type="button"
@@ -118,7 +118,7 @@
         [ngClass]="{ 'bg-focused': selectedSellType === 2 }"
         (click)="setSellType(2)"
       >
-        For Sale
+        For Rent
       </button>
 
       <button
@@ -131,7 +131,7 @@
       </button>
     </div>
     <div class="details-grid inputs-col">
-      <div *ngIf="selectedSellType === 1" formGroupName="rent">
+      <div *ngIf="selectedSellType === 2" formGroupName="rent">
         <label
           >Price
           <input
@@ -181,7 +181,7 @@
           </button>
         </div>
       </div>
-      <div *ngIf="selectedSellType === 2" formGroupName="purchase">
+      <div *ngIf="selectedSellType === 1" formGroupName="purchase">
         <label
           >Price
           <input type="number" formControlName="price" />

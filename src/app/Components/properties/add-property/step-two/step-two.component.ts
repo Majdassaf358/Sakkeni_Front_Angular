@@ -22,8 +22,8 @@ export class StepTwoComponent {
   @Output() prev = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
   sellTypes = [
-    { id: 1, name: 'rent' },
-    { id: 2, name: 'purchase' },
+    { id: 1, name: 'purchase' },
+    { id: 2, name: 'rent' },
     { id: 3, name: 'offPlan' },
   ];
   propertyTypes = [
@@ -43,6 +43,12 @@ export class StepTwoComponent {
     { id: 1, name: 'Damascus' },
     { id: 2, name: 'Aleppo' },
     { id: 3, name: 'Homs' },
+    { id: 4, name: 'Latakia' },
+    { id: 5, name: 'Hama' },
+    { id: 6, name: 'Daraa' },
+    { id: 7, name: 'Deir ez-Zor' },
+    { id: 8, name: 'Raqqa' },
+    { id: 9, name: 'Tartus' },
   ];
   exposures: { id: number; name: string }[] = [
     { id: 1, name: 'North' },
@@ -95,17 +101,6 @@ export class StepTwoComponent {
     this.form = this.formSvc.getForm();
   }
   ngOnInit(): void {
-    this.setSellType(this.basicGroup.get('sellType')?.value);
-    this.setPropertyType(this.basicGroup.get('propertyType')?.value);
-
-    this.basicGroup.get('sellType')?.valueChanges.subscribe((value) => {
-      this.setSellType(value);
-    });
-
-    this.basicGroup.get('propertyType')?.valueChanges.subscribe((value) => {
-      this.setPropertyType(value);
-    });
-
     this.syriaPolygon = new google.maps.Polygon({
       paths: this.syriaPolygonCoords,
     });
@@ -147,7 +142,6 @@ export class StepTwoComponent {
 
   setPropertyType(id: number): void {
     this.selectedPropertyType = id;
-    this.basicGroup.get('propertyType')!.setValue(id);
 
     const residential = this.extendedGroup.get('residential') as FormGroup;
     const commercial = this.extendedGroup.get('commercial') as FormGroup;
@@ -157,20 +151,35 @@ export class StepTwoComponent {
     commercial.get('office')?.disable({ emitEvent: false });
 
     if (id === 1) {
+      this.form
+        .get('stepTwo.extended.residential.residential_property_type_id')
+        ?.setValue(1);
+      this.basicGroup.get('propertyType')!.setValue(1);
+
       residential.get('apartment')?.enable({ emitEvent: false });
     } else if (id === 2) {
+      this.form
+        .get('stepTwo.extended.residential.residential_property_type_id')
+        ?.setValue(2);
+      this.basicGroup.get('propertyType')!.setValue(1);
+
       residential.get('villa')?.enable({ emitEvent: false });
     } else if (id === 3) {
+      this.form
+        .get('stepTwo.extended.commercial.commercial_property_type_id')
+        ?.setValue(1);
+      this.basicGroup.get('propertyType')!.setValue(2);
+
       commercial.get('office')?.enable({ emitEvent: false });
     }
   }
   swichFurnitured(number: number) {
     this.isfurnitured = number;
     if (this.selectedSellType === 1) {
-      this.form.get('stepTwo.extended.rent.is_furnished')?.setValue(number);
+      this.form.get('stepTwo.extended.purchase.is_furnished')?.setValue(number);
     }
     if (this.selectedSellType === 2) {
-      this.form.get('stepTwo.extended.purchase.is_furnished')?.setValue(number);
+      this.form.get('stepTwo.extended.rent.is_furnished')?.setValue(number);
     }
     console.log(this.isfurnitured);
   }

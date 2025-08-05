@@ -22,8 +22,8 @@ export class StepThreeComponent implements OnInit {
   ];
 
   sellTypes = [
-    { id: 1, name: 'rent' },
-    { id: 2, name: 'purchase' },
+    { id: 1, name: 'purchase' },
+    { id: 2, name: 'rent' },
     { id: 3, name: 'off_plan' },
   ];
   countries: { id: number; name: string }[] = [{ id: 1, name: 'Syria' }];
@@ -99,10 +99,10 @@ export class StepThreeComponent implements OnInit {
 
     switch (basic.sellType) {
       case 1:
-        action = 'For Rent';
+        action = 'For Sale';
         break;
       case 2:
-        action = 'For Sale';
+        action = 'For Rent';
         break;
       case 3:
         action = 'Off Plan';
@@ -112,10 +112,10 @@ export class StepThreeComponent implements OnInit {
     let pricePart: string | number = '';
     switch (basic.sellType) {
       case 1:
-        pricePart = extended.rent.price;
+        pricePart = extended.purchase.price;
         break;
       case 2:
-        pricePart = extended.purchase.price;
+        pricePart = extended.rent.price;
         break;
       case 3:
         pricePart = extended.off_plan.overall_payment;

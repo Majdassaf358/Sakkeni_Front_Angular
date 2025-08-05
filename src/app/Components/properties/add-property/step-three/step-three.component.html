@@ -24,7 +24,7 @@
 <div class="details">
   <div class="info">
     <div class="info-title">
-      <p class="font-500 font-24 uppercase">{{ displayText }}</p>
+      <p class="font-500 font-24 uppercase">{{ displayText }} S.P</p>
       <h3 *ngIf="basic.country_id && basic.city_id">
         {{ getCountryName(basic.country_id) }} -
         {{ getCityName(basic.city_id) }}
@@ -56,7 +56,7 @@
       </div>
       <div class="row">
         <p class="font-600">Area:</p>
-        {{ basic.area }}
+        {{ basic.area }} m²
       </div>
       <div class="row">
         <p class="font-600">Ownership Type:</p>
@@ -65,10 +65,10 @@
 
       <div class="row" *ngIf="basic.sellType !== 3">
         <p class="font-600">Furnished:</p>
-        <span *ngIf="basic.sellType === 1">
+        <span *ngIf="basic.sellType === 2">
           {{ extended.rent.is_furnished === 1 ? "Yes" : "No" }}
         </span>
-        <span *ngIf="basic.sellType === 2">
+        <span *ngIf="basic.sellType === 1">
           {{ extended.purchase.is_furnished === 1 ? "Yes" : "No" }}
         </span>
       </div>
@@ -89,28 +89,11 @@
   </div>
 
   <div class="right-section">
-    <div class="right-boxes">
-      <div class="price-box">
-        <div class="card-header">
-          <span class="status-dot"></span>
-          <span class="residential-text text-primary-clr font-12">
-            {{ propertyTypes[basic.propertyType - 1].name }}
-          </span>
-          <img class="location-icon" src="assets/Icons/Location-line.svg" />
-        </div>
-        <div class="price-box-text">
-          <p class="font-18 text-primary-clr">
-            {{ displayText }}
-          </p>
-        </div>
-      </div>
-      <div class="contact-box"></div>
-    </div>
     <div class="map-box">
       <google-map
         [options]="mapOptions"
         [center]="center"
-        width="20rem"
+        width="38rem"
         height="23rem"
       >
         <map-marker [position]="marker"></map-marker>
