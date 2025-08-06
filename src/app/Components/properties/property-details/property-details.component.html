@@ -32,7 +32,7 @@
 <div class="details">
   <div class="info">
     <div class="info-title">
-      <p class="font-500 font-24 uppercase">{{ displayText }}</p>
+      <p class="font-500 font-24 uppercase">{{ displayText }} S.P</p>
       <h3 *ngIf="details?.location?.country && details?.location?.city">
         {{ details.location.country.name }} - {{ details.location.city.name }}
       </h3>
@@ -61,7 +61,7 @@
       </div>
       <div class="row">
         <p class="font-600">Area:</p>
-        {{ details.area }}
+        {{ details.area }} m²
       </div>
       <div class="row">
         <p class="font-600">Ownership Type:</p>

@@ -47,27 +47,28 @@ export class AddPropertyService {
           residential: this.fb.group({
             residential_property_type_id: [''],
             apartment: this.fb.group({
-              bedrooms: [1],
-              building_number: [''],
-              apartment_number: [''],
+              bedrooms: [0],
+              floor: [0],
+              building_number: [0],
+              apartment_number: [0],
             }),
             villa: this.fb.group({
-              bedrooms: [1],
-              floors: [1],
+              bedrooms: [0],
+              floors: [0],
             }),
           }),
           commercial: this.fb.group({
             commercial_property_type_id: [''],
             office: this.fb.group({
-              floor: [1],
-              building_number: [''],
-              apartment_number: [''],
+              floor: [0],
+              building_number: [0],
+              apartment_number: [0],
             }),
           }),
           rent: this.fb.group({
             price: [null, [Validators.required, Validators.min(0)]],
-            lease_period_value: [''],
-            lease_period_unit: [''],
+            lease_period_value: [0],
+            lease_period_unit: [0],
             is_furnished: [0],
           }),
           purchase: this.fb.group({
@@ -159,6 +160,7 @@ export class AddPropertyService {
     if (extended.residential.residential_property_type_id === 1) {
       console.log('apa');
       formData.append('bedrooms', extended.residential.apartment.bedrooms);
+      formData.append('floor', extended.residential.apartment.floor);
       formData.append(
         'building_number',
         extended.residential.apartment.building_number
