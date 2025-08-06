@@ -10,11 +10,11 @@
     <div class="slide-track">
       <div class="slide">
         <img
-          *ngFor="let img of images"
-          [src]="img"
+          *ngFor="let url of previewImages; let i = index"
+          [src]="url"
           alt="Property image"
           draggable="false"
-          (click)="openPopup(img)"
+          (click)="openPopup(url)"
         />
       </div>
     </div>

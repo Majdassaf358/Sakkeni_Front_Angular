@@ -28,6 +28,7 @@ export class StepOneComponent {
   showMessagePopup = false;
   imageToShow: string = '';
   form: FormGroup;
+  previewImages: string[] = [];
 
   constructor(private formSvc: AddPropertyService) {
     this.form = this.formSvc.getForm();
@@ -51,14 +52,17 @@ export class StepOneComponent {
         return;
       }
       this.fileSignatures.add(signature);
+
       const reader = new FileReader();
-      reader.onload = () => {
-        const dataUrl = reader.result as string;
-        this.images.push(dataUrl);
-        this.imagesArray.push(new FormControl(dataUrl));
-      };
+      reader.onload = () => this.previewImages.push(reader.result as string);
       reader.readAsDataURL(file);
+
+      (this.form.get('stepOne.images') as FormArray).push(
+        new FormControl(file)
+      );
     });
+
+    (event.target as HTMLInputElement).value = '';
   }
   removeImage(index: number): void {
     this.images.splice(index, 1);

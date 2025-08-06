@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AddPropertyService } from '../../../../Services/add-property.service';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormsModule } from '@angular/forms';
@@ -11,6 +11,7 @@ import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
   styleUrl: './step-three.component.css',
 })
 export class StepThreeComponent implements OnInit {
+  @Input() previewImages: string[] = [];
   @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
   @ViewChild(GoogleMap) map!: GoogleMap;
   form: FormGroup;

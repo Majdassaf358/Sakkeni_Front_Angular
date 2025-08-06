@@ -21,6 +21,7 @@
     ></app-step-two>
     <app-step-three
       [hidden]="currentStep !== 3"
+      [previewImages]="stepOneRef.previewImages"
       (prev)="onPrev()"
       (submit)="onSubmit()"
     ></app-step-three>

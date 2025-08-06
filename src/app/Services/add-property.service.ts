@@ -107,11 +107,11 @@ export class AddPropertyService {
   public addProperty(): Observable<ApiResponse<null>> {
     const basic = this.form.get('stepTwo.basic')!.value;
     const extended = this.form.get('stepTwo.extended')!.value;
-    const images = this.form.get('stepOne.images')!.value;
+    const filesArray = this.form.get('stepOne.images')!.value as File[];
 
     const formData = new FormData();
-    images.forEach((image: File) => {
-      formData.append('images[]', image);
+    filesArray.forEach((file: File) => {
+      formData.append('images[]', file);
     });
     formData.append('country_id', basic.country_id);
     formData.append('city_id', basic.city_id);

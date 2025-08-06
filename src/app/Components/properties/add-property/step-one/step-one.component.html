@@ -32,11 +32,11 @@
         <div class="slide">
           <img
             class="image-with-remove cursor-pointer"
-            *ngFor="let img of images; let i = index"
-            [src]="img"
+            *ngFor="let url of previewImages; let i = index"
+            [src]="url"
             alt="Property image"
             draggable="false"
-            (click)="openPopup(img)"
+            (click)="openPopup(url)"
             (contextmenu)="removeImage(i); $event.preventDefault()"
           />
         </div>
