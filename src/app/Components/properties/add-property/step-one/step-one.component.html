@@ -31,12 +31,13 @@
       <div class="slide-track">
         <div class="slide">
           <img
-            class="cursor-pointer"
-            *ngFor="let img of images"
+            class="image-with-remove cursor-pointer"
+            *ngFor="let img of images; let i = index"
             [src]="img"
             alt="Property image"
             draggable="false"
             (click)="openPopup(img)"
+            (contextmenu)="removeImage(i); $event.preventDefault()"
           />
         </div>
       </div>

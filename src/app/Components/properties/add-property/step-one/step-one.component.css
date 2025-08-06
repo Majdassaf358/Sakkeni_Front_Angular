@@ -5,6 +5,7 @@
 }
 .upload-controls {
   display: flex;
+  justify-content: space-between;
 }
 .slider-section {
   height: 20rem;
@@ -34,6 +35,28 @@
   border-radius: 10px;
   object-fit: cover;
   box-shadow: 0px 4px 4px 0px #00000040;
+}
+.image-with-remove {
+  position: relative;
+}
+
+.image-with-remove::after {
+  content: "✕";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.image-with-remove:hover::after {
+  opacity: 1;
 }
 .clear-btn {
   background-color: #fcfdfd;

@@ -60,6 +60,10 @@ export class StepOneComponent {
       reader.readAsDataURL(file);
     });
   }
+  removeImage(index: number): void {
+    this.images.splice(index, 1);
+    this.imagesArray.removeAt(index);
+  }
   clearImages(): void {
     this.images = [];
     this.fileSignatures.clear();
