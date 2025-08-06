@@ -72,5 +72,6 @@
 <app-message
   *ngIf="popupMessage"
   [message]="popupMessage"
+  [from]="messageFrom"
   (popupClosed)="closePopup()"
 ></app-message>

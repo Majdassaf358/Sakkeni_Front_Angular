@@ -31,6 +31,7 @@ export class AddPropertyComponent {
   currentStep = 1;
   form: FormGroup;
   popupMessage: string | null = null;
+  messageFrom: string = 'add';
   messageText = '';
   showMessagePopup = false;
   constructor(private formSvc: AddPropertyService) {
@@ -97,6 +98,8 @@ export class AddPropertyComponent {
       let res: ApiResponse<null> = await lastValueFrom(
         this.formSvc.addProperty()
       );
+      this.popupMessage =
+        'Waiting for the Admin Approval,you can see the house in your profile history';
     } catch (error) {
       if (error instanceof HttpErrorResponse && error.status === 422) {
         console.error('Validation errors:', error.error.errors);
