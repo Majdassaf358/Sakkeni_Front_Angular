@@ -111,3 +111,70 @@
   width: 20px;
   height: 25px;
 }
+.map__image-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+
+.map__image {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease-in-out;
+}
+.map__image-wrapper:hover .map__image {
+  transform: scale(1.1);
+}
+
+.map__save-btn {
+  position: absolute;
+  top: 1px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  background: #ceddde80;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1;
+}
+
+.map__save-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+  transition: opacity 0.7s ease;
+}
+.map__save-icon.active {
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+
+.map__image-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.map__save-btn img {
+  width: 20px;
+  height: 25px;
+}
+.map_bottom_card {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1rem 1rem;
+}
+.map_property-details {
+  background-color: #fffefc;
+  padding: 0.5rem 0 0.5rem 0.7rem;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

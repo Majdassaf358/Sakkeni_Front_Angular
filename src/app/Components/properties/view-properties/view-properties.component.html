@@ -36,7 +36,7 @@
           </button>
         </div>
 
-        <div class="property-details">
+        <div class="map_property-details">
           <div class="card__content">
             <div class="card__tag">
               <span
@@ -74,7 +74,7 @@
         <map-info-window #infoWindow="mapInfoWindow">
           <ng-container *ngIf="hoveredProperty">
             <div>
-              <div class="card__image-wrapper">
+              <div class="map__image-wrapper">
                 <img
                   (click)="goToDetails(hoveredProperty.id)"
                   [src]="
@@ -83,16 +83,16 @@
                       : 'assets/Imgs/pool.jpg'
                   "
                   (error)="handleImageError($event)"
-                  class="card__image"
+                  class="map__image"
                 />
-                <button class="card__save-btn"></button>
+                <button class="map__save-btn"></button>
               </div>
 
-              <div class="property-details">
-                <div class="card__content">
-                  <div class="card__tag">
+              <div class="map_property-details">
+                <div class="map__content">
+                  <div class="map__tag">
                     <span
-                      class="card__dot"
+                      class="map__dot"
                       [ngClass]="{
                         commercial: hoveredProperty.property_type,
                         residential: hoveredProperty.residential
@@ -101,21 +101,13 @@
                     <span class="font-400 font-12 text-primary-clr">{{
                       hoveredProperty.property_type.name
                     }}</span>
-                    <img
-                      class="card_location"
-                      src="assets\Icons\Location-line.svg"
-                      alt=""
-                    />
                   </div>
                 </div>
-                <div class="bottom_card">
+                <div class="map_bottom_card">
                   <h3 class="font-400 font-18 text-primary-clr">
                     {{ getPrice(hoveredProperty) }} S.P
                   </h3>
                   <p class="font-400 font-14 text-primary-clr">
-                    {{ hoveredProperty.location.country.name }},{{
-                      hoveredProperty.location.city.name
-                    }}<br />
                     {{
                       hoveredProperty.property_type.created_at
                         | date : "mediumDate"
@@ -131,17 +123,60 @@
           #m="mapMarker"
           [position]="marker.position"
           (mapMouseover)="openInfoWindow(m, marker)"
-          (mapClick)="onMarkerClick(marker.data.id)"
+          (mapMouseout)="infoWindow.close()"
+          (mapClick)="goToDetails(marker.data.id)"
         ></map-marker>
       </google-map>
     </div>
   </div>
   <div *ngIf="sideFilter == 'map'">
     <google-map [center]="center" [zoom]="10" height="100vh" width="100%">
+      <map-info-window #infoWindow="mapInfoWindow">
+        <ng-container *ngIf="hoveredProperty">
+          <div>
+            <div class="map__image-wrapper">
+              <img
+                [src]="
+                  hoveredProperty.cover_image?.image_path
+                    ? imageUrl + hoveredProperty.cover_image.image_path
+                    : 'assets/Imgs/pool.jpg'
+                "
+                (error)="handleImageError($event)"
+                class="map__image"
+              />
+              <button class="map__save-btn"></button>
+            </div>
+
+            <div class="map_property-details">
+              <div class="map__content">
+                <div class="map__tag">
+                  <span class="font-400 font-12 text-primary-clr">{{
+                    hoveredProperty.property_type.name
+                  }}</span>
+                </div>
+              </div>
+              <div class="map_bottom_card">
+                <h3 class="font-400 font-18 text-primary-clr">
+                  {{ getPrice(hoveredProperty) }} S.P
+                </h3>
+                <p class="font-400 font-14 text-primary-clr">
+                  {{
+                    hoveredProperty.property_type.created_at
+                      | date : "mediumDate"
+                  }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </map-info-window>
       <map-marker
         *ngFor="let marker of markers"
+        #m="mapMarker"
         [position]="marker.position"
-        (mapClick)="onMarkerClick(marker.data.id)"
+        (mapMouseover)="openInfoWindow(m, marker)"
+        (mapMouseout)="infoWindow.close()"
+        (mapClick)="goToDetails(marker.data.id)"
       ></map-marker>
     </google-map>
   </div>

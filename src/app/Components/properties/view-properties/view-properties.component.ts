@@ -72,7 +72,6 @@ export class ViewPropertiesComponent implements OnInit {
   }
   openInfoWindow(marker: MapMarker, markerData: { data: propertyCard }) {
     this.hoveredProperty = markerData.data;
-    console.log(this.hoveredProperty);
     this.infoWindow.open(marker);
   }
   async filterProperties() {
