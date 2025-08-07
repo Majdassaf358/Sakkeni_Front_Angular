@@ -15,6 +15,8 @@ import {
   MapMarker,
 } from '@angular/google-maps';
 import { FiltersComponent } from '../../../shared/filters/filters.component';
+import { add_favourite } from '../../../Models/add_favorite';
+import { favoriteCard } from '../../../Models/favorite_card';
 
 @Component({
   selector: 'app-view-properties',
@@ -35,9 +37,12 @@ export class ViewPropertiesComponent implements OnInit {
   viewType: string = 'rent';
   propertyType!: string;
   receivedFilters!: filters;
-  savedCardIds = new Set<number>();
+  favourite_property!: add_favourite;
+  favoriteIds: Set<number> = new Set();
   currentPage: number = 1;
   properties: propertyCard[] = [];
+  currentFavoritePage: number = 1;
+  favoriteProperties: favoriteCard[] = [];
   imageUrl: string = 'http://127.0.0.1:8000/';
 
   center: google.maps.LatLngLiteral = {
@@ -54,6 +59,7 @@ export class ViewPropertiesComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.getProperties();
+    this.getFavorites();
   }
   async getProperties() {
     try {
@@ -70,9 +76,53 @@ export class ViewPropertiesComponent implements OnInit {
       console.log(error);
     }
   }
-  openInfoWindow(marker: MapMarker, markerData: { data: propertyCard }) {
-    this.hoveredProperty = markerData.data;
-    this.infoWindow.open(marker);
+  async getFavorites() {
+    try {
+      let res: ApiResponse<PaginatedData<favoriteCard>> = await lastValueFrom(
+        this.propertyservice.viewFavoriteProperty(this.viewType)
+      );
+      this.currentFavoritePage = res.data.current_page;
+      this.favoriteProperties = res.data.data;
+
+      this.favoriteIds.clear();
+      this.favoriteProperties.forEach((fr) =>
+        this.favoriteIds.add(fr.property_id)
+      );
+
+      this.markers = this.favoriteProperties.map((fr) => ({
+        data: fr.property,
+        position: {
+          lat: fr.property.location.latitude,
+          lng: fr.property.location.longitude,
+        },
+      }));
+      console.log('Loaded favoriteIds:', Array.from(this.favoriteIds));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async addToFavorites(id: number) {
+    try {
+      const res = await lastValueFrom(this.propertyservice.addToFavorite(id));
+      this.favourite_property = res.data;
+      this.favoriteIds.add(id);
+      console.log(id, 'added');
+      console.log(this.favoriteIds);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async removeFavorites(id: number) {
+    try {
+      await lastValueFrom(this.propertyservice.removeFromFavorite(id));
+
+      this.favoriteIds.delete(id);
+      console.log(id, 'removed');
+      console.log(this.favoriteIds);
+    } catch (error) {
+      console.log(error);
+    }
   }
   async filterProperties() {
     try {
@@ -90,12 +140,26 @@ export class ViewPropertiesComponent implements OnInit {
       console.log(error);
     }
   }
+  toggleFavorite(id: number) {
+    if (this.favoriteIds.has(id)) {
+      console.log('going to remove');
+      this.removeFavorites(id);
+    } else {
+      console.log('going to add');
+      this.addToFavorites(id);
+    }
+  }
+  openInfoWindow(marker: MapMarker, markerData: { data: propertyCard }) {
+    this.hoveredProperty = markerData.data;
+    this.infoWindow.open(marker);
+  }
   updateSideFilter(value: string) {
     this.sideFilter = value;
   }
   updateViewType(value: string) {
     this.viewType = value;
     this.getProperties();
+    this.getFavorites();
   }
   goToDetails(id: number) {
     this.router.navigate(['/home-details', id]);
@@ -103,13 +167,6 @@ export class ViewPropertiesComponent implements OnInit {
   handleFiltersUpdate(newFilters: filters) {
     this.receivedFilters = newFilters;
     this.filterProperties();
-  }
-  toggleSave(index: number) {
-    if (this.savedCardIds.has(index)) {
-      this.savedCardIds.delete(index);
-    } else {
-      this.savedCardIds.add(index);
-    }
   }
   handleImageError(event: Event) {
     const target = event.target as HTMLImageElement;

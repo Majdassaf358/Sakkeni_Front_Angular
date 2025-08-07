@@ -8,7 +8,8 @@ import { PaginatedData } from '../Models/paginatedData';
 import { addProperty } from '../Models/addProperty';
 import { filters } from '../Models/filters';
 import { propertyDetails } from '../Models/property-details';
-import { add_favourite } from '../Models/add_favourite';
+import { add_favourite } from '../Models/add_favorite';
+import { favoriteCard } from '../Models/favorite_card';
 
 @Injectable({
   providedIn: 'root',
@@ -25,9 +26,9 @@ export class PropertyService {
   }
   public viewFavoriteProperty(
     type: string
-  ): Observable<ApiResponse<PaginatedData<propertyCard>>> {
+  ): Observable<ApiResponse<PaginatedData<favoriteCard>>> {
     let url = `${environment.Api}/view-favorite-properties/${type}`;
-    return this.http.get<ApiResponse<PaginatedData<propertyCard>>>(url);
+    return this.http.get<ApiResponse<PaginatedData<favoriteCard>>>(url);
   }
   public viewPropertyDetails(
     homeId: number
@@ -46,11 +47,11 @@ export class PropertyService {
       filters
     );
   }
-  public addToFavourite(id: number): Observable<ApiResponse<add_favourite>> {
+  public addToFavorite(id: number): Observable<ApiResponse<add_favourite>> {
     let url = `${environment.Api}/add-property-to-favorite/${id}`;
     return this.http.get<ApiResponse<add_favourite>>(url);
   }
-  public removeFromFavourite(id: number): Observable<ApiResponse<null>> {
+  public removeFromFavorite(id: number): Observable<ApiResponse<null>> {
     let url = `${environment.Api}/remove-property-from-favorite/${id}`;
     return this.http.get<ApiResponse<null>>(url);
   }
