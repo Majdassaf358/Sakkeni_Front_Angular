@@ -58,7 +58,7 @@
           </div>
           <div class="bottom_card">
             <h3 class="font-400 font-18 text-primary-clr">
-              {{ getPrice(card) }}
+              {{ getPrice(card) }} S.P
             </h3>
             <p class="font-400 font-14 text-primary-clr">
               {{ card.location.country.name }},{{ card.location.city.name
@@ -71,10 +71,67 @@
     </div>
     <div *ngIf="sideFilter == 'split'">
       <google-map [center]="center" [zoom]="10" height="100vh">
+        <map-info-window #infoWindow="mapInfoWindow">
+          <ng-container *ngIf="hoveredProperty">
+            <div>
+              <div class="card__image-wrapper">
+                <img
+                  (click)="goToDetails(hoveredProperty.id)"
+                  [src]="
+                    hoveredProperty.cover_image?.image_path
+                      ? imageUrl + hoveredProperty.cover_image.image_path
+                      : 'assets/Imgs/pool.jpg'
+                  "
+                  (error)="handleImageError($event)"
+                  class="card__image"
+                />
+                <button class="card__save-btn"></button>
+              </div>
+
+              <div class="property-details">
+                <div class="card__content">
+                  <div class="card__tag">
+                    <span
+                      class="card__dot"
+                      [ngClass]="{
+                        commercial: hoveredProperty.property_type,
+                        residential: hoveredProperty.residential
+                      }"
+                    ></span>
+                    <span class="font-400 font-12 text-primary-clr">{{
+                      hoveredProperty.property_type.name
+                    }}</span>
+                    <img
+                      class="card_location"
+                      src="assets\Icons\Location-line.svg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="bottom_card">
+                  <h3 class="font-400 font-18 text-primary-clr">
+                    {{ getPrice(hoveredProperty) }} S.P
+                  </h3>
+                  <p class="font-400 font-14 text-primary-clr">
+                    {{ hoveredProperty.location.country.name }},{{
+                      hoveredProperty.location.city.name
+                    }}<br />
+                    {{
+                      hoveredProperty.property_type.created_at
+                        | date : "mediumDate"
+                    }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </map-info-window>
         <map-marker
           *ngFor="let marker of markers"
+          #m="mapMarker"
           [position]="marker.position"
-          (mapClick)="onMarkerClick(marker)"
+          (mapMouseover)="openInfoWindow(m, marker)"
+          (mapClick)="onMarkerClick(marker.data.id)"
         ></map-marker>
       </google-map>
     </div>
@@ -84,7 +141,7 @@
       <map-marker
         *ngFor="let marker of markers"
         [position]="marker.position"
-        (mapClick)="onMarkerClick(marker)"
+        (mapClick)="onMarkerClick(marker.data.id)"
       ></map-marker>
     </google-map>
   </div>

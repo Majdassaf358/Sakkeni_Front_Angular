@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
@@ -9,7 +9,11 @@ import { lastValueFrom } from 'rxjs';
 import { PropertyService } from '../../../Services/property.service';
 import { FormsModule } from '@angular/forms';
 import { filters } from '../../../Models/filters';
-import { GoogleMapsModule } from '@angular/google-maps';
+import {
+  GoogleMapsModule,
+  MapInfoWindow,
+  MapMarker,
+} from '@angular/google-maps';
 import { FiltersComponent } from '../../../shared/filters/filters.component';
 
 @Component({
@@ -25,6 +29,8 @@ import { FiltersComponent } from '../../../shared/filters/filters.component';
   styleUrl: './view-properties.component.css',
 })
 export class ViewPropertiesComponent implements OnInit {
+  @ViewChild('infoWindow', { static: false })
+  infoWindow!: MapInfoWindow;
   sideFilter: string = 'list';
   viewType: string = 'rent';
   propertyType!: string;
@@ -39,8 +45,9 @@ export class ViewPropertiesComponent implements OnInit {
     lng: 36.94301086943456,
   };
 
-  markers: { id: number; position: google.maps.LatLngLiteral }[] = [];
-
+  markers: Array<{ position: google.maps.LatLngLiteral; data: propertyCard }> =
+    [];
+  hoveredProperty: propertyCard | null = null;
   constructor(
     private router: Router,
     private propertyservice: PropertyService
@@ -56,13 +63,17 @@ export class ViewPropertiesComponent implements OnInit {
       this.currentPage = res.data.current_page;
       this.properties = res.data.data;
       this.markers = this.properties.map((p) => ({
-        id: p.id,
+        data: p,
         position: { lat: p.location.latitude, lng: p.location.longitude },
       }));
-      console.log(this.properties);
     } catch (error) {
       console.log(error);
     }
+  }
+  openInfoWindow(marker: MapMarker, markerData: { data: propertyCard }) {
+    this.hoveredProperty = markerData.data;
+    console.log(this.hoveredProperty);
+    this.infoWindow.open(marker);
   }
   async filterProperties() {
     try {
@@ -122,7 +133,7 @@ export class ViewPropertiesComponent implements OnInit {
         return 'N/A';
     }
   }
-  onMarkerClick(marker: { id: number; position: any }) {
-    console.log('Clicked property ID:', marker.id);
+  onMarkerClick(id: number) {
+    console.log('Clicked property ID:', id);
   }
 }

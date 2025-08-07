@@ -6,7 +6,6 @@
       <p class="font-14 font-400 text">View History</p>
       <img src="assets\Icons\history.svg" alt="" />
     </div>
-    <!-- <input type="file" (change)="onFileSelected($event)" accept="image/*" /> -->
   </div>
   <div class="nav-line"></div>
   <div class="profile-body">
@@ -56,11 +55,6 @@
             profileInfo.seller.account_type.name
           }}</label>
         </div>
-      </div>
-      <div *ngIf="!profileInfo.seller">
-        <button class="upgrade text-secondary-clr" (click)="goToEditProfile()">
-          Upgrade to seller
-        </button>
       </div>
     </div>
   </div>
