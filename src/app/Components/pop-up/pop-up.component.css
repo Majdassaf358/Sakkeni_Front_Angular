@@ -1,5 +1,6 @@
 /* Popup container styles */
 .popup-container {
+  position: relative;
   background: #fff;
   width: 46.2%;
   border-radius: 30px;
@@ -42,7 +43,7 @@
 .filter-options {
   overflow-y: auto;
   max-height: 300px;
-  margin: 1.8rem 4rem;
+  margin: 1.8rem 2rem 5rem 2rem;
 }
 .filter-options::-webkit-scrollbar {
   width: 0.5rem;
@@ -81,8 +82,15 @@
 }
 
 .filter-footer {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: center;
+  z-index: 20;
+  pointer-events: auto;
+  background: transparent;
 }
 
 .search-btn {

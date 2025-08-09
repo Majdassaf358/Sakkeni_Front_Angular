@@ -8,34 +8,25 @@
     <div class="filter-options">
       <div class="filter-section">
         <p class="font-600">Location</p>
-        <input
-          type="hidden"
-          [(ngModel)]="filterValues.country_id"
-          [ngModel]="1"
-        />
+
+        <div *ngIf="countriesLoaded">
+          <select
+            [(ngModel)]="filterValues.country_id"
+            (ngModelChange)="onCountrySelectChange($event)"
+          >
+            <option
+              *ngFor="let country of displayedCountries; trackBy: trackById"
+              [value]="country.id"
+            >
+              {{ country.name }}
+            </option>
+          </select>
+        </div>
+
         <div class="filter-subsection">
           <p>City</p>
           <div class="checkbox-group">
-            <label
-              *ngFor="
-                let city of [
-                  { id: 1, name: 'Damascus' },
-                  { id: 2, name: 'Aleppo' },
-                  { id: 3, name: 'Homs' },
-                  { id: 4, name: 'Latakia' },
-                  { id: 5, name: 'Hama' },
-                  { id: 6, name: 'Daraa' },
-                  { id: 7, name: 'Deir ez-Zor' },
-                  { id: 8, name: 'Raqqa' },
-                  { id: 9, name: 'Tartus' },
-                  { id: 10, name: 'Idlib' },
-                  { id: 11, name: 'Qamishli' },
-                  { id: 12, name: 'Al-Hasakah' },
-                  { id: 13, name: 'Palmyra' },
-                  { id: 14, name: 'Apamea' }
-                ]
-              "
-            >
+            <label *ngFor="let city of displayedCities; trackBy: trackById">
               <input
                 type="radio"
                 name="city"
@@ -44,11 +35,14 @@
               />
               {{ city.name }}
             </label>
+
+            <p *ngIf="countriesLoaded && displayedCities.length === 0">
+              No cities available for this country.
+            </p>
           </div>
         </div>
       </div>
 
-      <!-- RENT -->
       <ng-container *ngIf="selectedType === 'rent'">
         <div class="filter-section">
           <p class="font-600">Area (m²)</p>
@@ -73,22 +67,7 @@
         </div>
         <div class="filter-section">
           <p class="font-600">Amenities</p>
-          <label
-            *ngFor="
-              let amenity of [
-                { id: 1, name: 'nihil' },
-                { id: 2, name: 'earum' },
-                { id: 3, name: 'quam' },
-                { id: 4, name: 'nostrum' },
-                { id: 5, name: 'eaque' },
-                { id: 6, name: 'corporis' },
-                { id: 7, name: 'in' },
-                { id: 8, name: 'facilis' },
-                { id: 9, name: 'sequi' },
-                { id: 10, name: 'harum' }
-              ]
-            "
-          >
+          <label *ngFor="let amenity of amenities">
             <input
               type="checkbox"
               [value]="amenity.id"
@@ -163,22 +142,7 @@
         </div>
         <div class="filter-section">
           <p class="font-600">Amenities</p>
-          <label
-            *ngFor="
-              let amenity of [
-                { id: 1, name: 'nihil' },
-                { id: 2, name: 'earum' },
-                { id: 3, name: 'quam' },
-                { id: 4, name: 'nostrum' },
-                { id: 5, name: 'eaque' },
-                { id: 6, name: 'corporis' },
-                { id: 7, name: 'in' },
-                { id: 8, name: 'facilis' },
-                { id: 9, name: 'sequi' },
-                { id: 10, name: 'harum' }
-              ]
-            "
-          >
+          <label *ngFor="let amenity of amenities">
             <input
               type="checkbox"
               [value]="amenity.id"
@@ -260,22 +224,7 @@
         </div>
         <div class="filter-section">
           <p class="font-600">Amenities</p>
-          <label
-            *ngFor="
-              let amenity of [
-                { id: 1, name: 'nihil' },
-                { id: 2, name: 'earum' },
-                { id: 3, name: 'quam' },
-                { id: 4, name: 'nostrum' },
-                { id: 5, name: 'eaque' },
-                { id: 6, name: 'corporis' },
-                { id: 7, name: 'in' },
-                { id: 8, name: 'facilis' },
-                { id: 9, name: 'sequi' },
-                { id: 10, name: 'harum' }
-              ]
-            "
-          >
+          <label *ngFor="let amenity of amenities">
             <input
               type="checkbox"
               [value]="amenity.id"
