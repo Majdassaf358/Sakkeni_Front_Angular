@@ -212,26 +212,124 @@
         </div>
       </div>
 
-      <!-- Off‑plan-only controls -->
       <div *ngIf="selectedSellType === 3" formGroupName="offPlan">
-        <label
-          >Delivery Date
+        <!-- Delivery date -->
+        <label>
+          Delivery Date
           <input type="date" formControlName="delivery_date" />
         </label>
-        <label
-          >Overall Payment
+
+        <!-- Overall payment (text for now) -->
+        <label>
+          Overall Payment
           <input type="text" formControlName="overall_payment" />
         </label>
-        <!-- payment_phases can be added here later -->
+
+        <!-- LIVE Remaining % box -->
+        <div class="remaining-wrap" style="margin-top: 12px">
+          <ng-container *ngIf="anySelected; else noneSelected">
+            <div class="remaining">
+              Remaining:
+              <span [ngClass]="remainingClass()">{{ remaining }}</span
+              >%
+            </div>
+            <div class="small-hint">
+              Sum: {{ percentSum }}% —
+              {{
+                remaining === 0
+                  ? "Good ✅"
+                  : remaining > 0
+                  ? remaining + " more % needed"
+                  : Math.abs(remaining) + "% over"
+              }}
+            </div>
+          </ng-container>
+          <ng-template #noneSelected>
+            <div class="remaining neutral">No phases selected</div>
+          </ng-template>
+        </div>
+
+        <!-- payment_phases list -->
+        <div formArrayName="payment_phases" style="margin-top: 10px">
+          <div
+            *ngFor="let p of paymentPhases?.controls; let i = index"
+            [formGroupName]="i"
+            class="phase-row"
+            style="margin-bottom: 10px"
+          >
+            <label>
+              <input type="checkbox" formControlName="selected" />
+              {{ formSvc.phases[i] | titlecase }}
+            </label>
+
+            <!-- payment percentage -->
+            <input
+              type="number"
+              formControlName="payment_percentage"
+              placeholder="% (integer)"
+              [class.pct-mismatch]="shouldHighlightPercentInput(i)"
+              style="width: 100px; margin-left: 8px"
+            />
+
+            <!-- duration inputs -->
+            <input
+              type="number"
+              formControlName="duration_value"
+              placeholder="duration"
+              style="width: 90px; margin-left: 8px"
+            />
+
+            <select
+              formControlName="duration_unit"
+              style="width: 110px; margin-left: 8px"
+            >
+              <option [ngValue]="null">--</option>
+              <option value="months">months</option>
+              <option value="years">years</option>
+            </select>
+
+            <!-- inline validation hints for percentage (null-safe) -->
+            <div
+              *ngIf="
+                phaseAt(i)?.get('payment_percentage')?.invalid &&
+                phaseAt(i)?.get('payment_percentage')?.touched
+              "
+            >
+              <small
+                *ngIf="phaseAt(i)?.get('payment_percentage')?.errors?.['required']"
+                >Percentage is required.</small
+              >
+              <small
+                *ngIf="phaseAt(i)?.get('payment_percentage')?.errors?.['pattern']"
+                >Must be integer.</small
+              >
+              <small
+                *ngIf="
+                  phaseAt(i)?.get('payment_percentage')?.errors?.['min'] ||
+                  phaseAt(i)?.get('payment_percentage')?.errors?.['max']
+                "
+                >0 - 100</small
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- offPlan-level error from validator (null-safe and bracket notation) -->
+        <div
+          *ngIf="offPlanGroup?.errors?.['percentageTotalNot100']"
+          class="error"
+          style="margin-top: 8px"
+        >
+          <small>
+            Selected payment phases percentages must sum to 100%. Current total:
+            {{ offPlanGroup?.errors?.['percentageTotalNot100']?.sum ?? percentSum
+
+
+
+            }}%
+          </small>
+        </div>
       </div>
-      <label>
-        Building Number
-        <input
-          type="text"
-          formControlName="buildingNumber"
-          placeholder="Add Building Number"
-        />
-      </label>
     </div>
   </div>
   <!-- Second part -->

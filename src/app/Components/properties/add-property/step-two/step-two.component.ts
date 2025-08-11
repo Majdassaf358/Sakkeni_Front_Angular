@@ -1,4 +1,10 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { AddPropertyService } from '../../../../Services/add-property.service';
 import { GoogleMapsModule, GoogleMap } from '@angular/google-maps';
 
@@ -11,6 +17,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { addProperty } from '../../../../Models/addProperty';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-step-two',
@@ -18,7 +25,8 @@ import { addProperty } from '../../../../Models/addProperty';
   templateUrl: './step-two.component.html',
   styleUrl: './step-two.component.css',
 })
-export class StepTwoComponent {
+export class StepTwoComponent implements OnInit, OnDestroy {
+  private paymentPhasesSub?: Subscription;
   @Output() prev = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
   sellTypes = [
@@ -38,6 +46,16 @@ export class StepTwoComponent {
   isfurnitured: number = 1;
   form: FormGroup;
   stepTwo: addProperty = new addProperty();
+  phases = [
+    'down_payment',
+    'during_construction',
+    'on_completion',
+    'post_handover',
+    'installment_plan',
+  ];
+  public percentSum = 0; // sum of selected percentages (integer)
+  public remaining = 100; // 100 - percentSum
+  public anySelected = false;
   countries: { id: number; name: string }[] = [{ id: 1, name: 'Syria' }];
   cities: { id: number; name: string }[] = [
     { id: 1, name: 'Damascus' },
@@ -97,13 +115,27 @@ export class StepTwoComponent {
     { lat: 32.0, lng: 36.8 },
   ];
   syriaPolygon: google.maps.Polygon = new google.maps.Polygon();
-  constructor(private formSvc: AddPropertyService) {
+  Math = Math;
+  constructor(public formSvc: AddPropertyService) {
     this.form = this.formSvc.getForm();
   }
   ngOnInit(): void {
     this.syriaPolygon = new google.maps.Polygon({
       paths: this.syriaPolygonCoords,
     });
+    const arr = this.paymentPhases;
+    if (arr) {
+      // compute immediately
+      this.recalculatePercentSum();
+
+      this.paymentPhasesSub = arr.valueChanges.subscribe(() => {
+        this.recalculatePercentSum();
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.paymentPhasesSub?.unsubscribe();
   }
 
   get basicGroup(): FormGroup {
@@ -119,6 +151,56 @@ export class StepTwoComponent {
 
   get commercialGroup(): FormGroup {
     return this.extendedGroup.get('commercial') as FormGroup;
+  }
+  get offPlanGroup(): FormGroup {
+    return this.extendedGroup.get('offPlan') as FormGroup;
+  }
+
+  get paymentPhases(): FormArray {
+    return this.offPlanGroup.get('payment_phases') as FormArray;
+  }
+  phaseAt(i: number) {
+    return this.paymentPhases.at(i) as FormGroup;
+  }
+  private recalculatePercentSum(): void {
+    const arr = this.paymentPhases?.controls ?? [];
+    let sum = 0;
+    let anySel = false;
+
+    for (const pg of arr) {
+      const sel = pg.get('selected')?.value;
+      if (sel) {
+        anySel = true;
+        const raw = pg.get('payment_percentage')?.value;
+        // allow only integer parsing; if invalid treat as 0
+        const n =
+          raw !== null && raw !== undefined && String(raw).trim() !== ''
+            ? parseInt(String(raw), 10)
+            : 0;
+        sum += Number.isNaN(n) ? 0 : n;
+      }
+    }
+
+    this.percentSum = sum;
+    this.remaining = 100 - sum;
+    this.anySelected = anySel;
+  }
+
+  /** Helper used in template to decide whether a percentage input should be highlighted */
+  shouldHighlightPercentInput(index: number): boolean {
+    // highlight when there is a mismatch (sum !== 100) AND this phase is selected
+    const pg = this.phaseAt(index);
+    const sel = !!pg.get('selected')?.value;
+    const mismatch = this.anySelected && this.percentSum !== 100;
+    return sel && mismatch;
+  }
+
+  /** Helper for template to return css class for remaining text */
+  remainingClass(): string {
+    if (!this.anySelected) return 'neutral';
+    if (this.remaining === 0) return 'ok';
+    if (this.remaining > 0) return 'positive'; // still room (orange)
+    return 'negative'; // over 100 (red)
   }
   setSellType(id: number): void {
     this.selectedSellType = id;

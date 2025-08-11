@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { ApiResponse } from '../Models/ApiResponse';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { environment } from '../shared/environments';
 import { HttpClient } from '@angular/common/http';
 
@@ -17,9 +19,84 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddPropertyService {
   private form: FormGroup;
+  private selectedSubs: Subscription[] = [];
+  private paymentPhasesSub?: Subscription;
+  phases = [
+    'down_payment',
+    'during_construction',
+    'on_completion',
+    'post_handover',
+    'installment_plan',
+  ];
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.form = this.createForm();
+    this.attachOffPlanValidator();
+  }
+  private attachOffPlanValidator(): void {
+    const offPlan = this.getOffPlanGroup();
+    if (!offPlan) return;
+
+    offPlan.setValidators(this.totalPercentageValidator());
+    offPlan.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+
+    // subscribe to payment_phases value changes so the validator runs when any child changes
+    const paymentPhases = this.getPaymentPhases();
+    if (paymentPhases) {
+      // unsubscribe previous if any
+      this.paymentPhasesSub?.unsubscribe();
+      this.paymentPhasesSub = paymentPhases.valueChanges.subscribe(() => {
+        offPlan.updateValueAndValidity({ onlySelf: true, emitEvent: true });
+      });
+    }
+  }
+
+  /** Validator: if any selected phase exists, the sum of selected percentages must equal 100 */
+  private totalPercentageValidator(): ValidatorFn {
+    return (control: AbstractControl) => {
+      const offPlanGroup = control as FormGroup;
+      const paymentPhases = offPlanGroup.get(
+        'payment_phases'
+      ) as FormArray | null;
+
+      if (!paymentPhases) return null;
+
+      // gather selected phase groups
+      const selectedPhaseGroups = paymentPhases.controls.filter((pg) => {
+        const selCtrl = pg.get('selected');
+        return !!selCtrl && !!selCtrl.value;
+      });
+
+      // if nothing selected, no validation error (you can change this if you want "at least one" enforced)
+      if (selectedPhaseGroups.length === 0) {
+        return null;
+      }
+
+      // compute integer sum (treat missing/invalid as 0)
+      const sum = selectedPhaseGroups
+        .map((pg) => {
+          const pct = pg.get('payment_percentage')?.value;
+          // ensure integers only — parseInt will ignore decimals after the decimal point but we rely on control validators to prevent decimals
+          const n = Number.isFinite(+pct) ? parseInt(String(pct), 10) : 0;
+          return Number.isNaN(n) ? 0 : n;
+        })
+        .reduce((a, b) => a + b, 0);
+
+      // enforce exact 100
+      return sum === 100 ? null : { percentageTotalNot100: { sum } };
+    };
+  }
+
+  // cleanup
+  public destroy(): void {
+    this.selectedSubs.forEach((s) => s.unsubscribe());
+    this.selectedSubs = [];
+    this.paymentPhasesSub?.unsubscribe();
+    this.paymentPhasesSub = undefined;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy();
   }
 
   private createForm(): FormGroup {
@@ -78,7 +155,9 @@ export class AddPropertyService {
           offPlan: this.fb.group({
             delivery_date: [null],
             overall_payment: [null],
-            payment_phases: this.fb.array([]),
+            payment_phases: this.fb.array(
+              this.phases.map((_, idx) => this.createPhase(idx))
+            ),
           }),
         }),
       }),
@@ -88,7 +167,12 @@ export class AddPropertyService {
   getForm(): FormGroup {
     return this.form;
   }
-
+  public getOffPlanGroup(): FormGroup {
+    return this.form.get('stepTwo.extended.offPlan') as FormGroup;
+  }
+  public getPaymentPhases(): FormArray {
+    return this.getOffPlanGroup().get('payment_phases') as FormArray;
+  }
   get images(): FormArray {
     return this.form.get('stepOne.images') as FormArray;
   }
@@ -105,6 +189,96 @@ export class AddPropertyService {
   resetForm(): void {
     this.form = this.createForm();
   }
+  private createPhase(index: number): FormGroup {
+    const grp = this.fb.group({
+      // user toggles this checkbox
+      selected: [false],
+      payment_phase_id: [index + 1], // 1..5
+      // start disabled (will be enabled when selected)
+      payment_percentage: [
+        { value: null, disabled: true },
+        [Validators.min(0), Validators.max(100), Validators.pattern(/^\d+$/)],
+      ],
+      duration_value: [
+        { value: null, disabled: true },
+        [Validators.min(0), Validators.pattern(/^\d+$/)],
+      ],
+      duration_unit: [{ value: null, disabled: true }], // 'months' | 'years' | null
+    });
+
+    // set up listener to toggle validators / enabled state
+    this.watchPhaseSelected(grp);
+
+    return grp;
+  }
+
+  private watchPhaseSelected(phaseGroup: FormGroup) {
+    const sel = phaseGroup.get('selected');
+    if (!sel) return;
+
+    // subscription toggles validators/enabled state
+    const sub = sel.valueChanges.subscribe((isSelected: boolean) => {
+      const pct = phaseGroup.get('payment_percentage');
+      const durVal = phaseGroup.get('duration_value');
+      const durUnit = phaseGroup.get('duration_unit');
+      if (!pct || !durVal || !durUnit) return;
+      if (isSelected) {
+        // enable controls and apply "required" on top of existing constraints
+        pct.enable({ emitEvent: false });
+        pct.setValidators([
+          Validators.required,
+          Validators.min(0),
+          Validators.max(100),
+          Validators.pattern(/^\d+$/),
+        ]);
+        pct.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+
+        durVal.enable({ emitEvent: false });
+        durVal.setValidators([
+          Validators.required,
+          Validators.min(0),
+          Validators.pattern(/^\d+$/),
+        ]);
+        durVal.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+
+        durUnit.enable({ emitEvent: false });
+        durUnit.setValidators([Validators.required]);
+        durUnit.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+      } else {
+        // clear values, remove validators and disable controls
+        pct.setValue(null, { emitEvent: false });
+        pct.clearValidators();
+        pct.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+        pct.disable({ emitEvent: false });
+
+        durVal.setValue(null, { emitEvent: false });
+        durVal.clearValidators();
+        durVal.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+        durVal.disable({ emitEvent: false });
+
+        durUnit.setValue(null, { emitEvent: false });
+        durUnit.clearValidators();
+        durUnit.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+        durUnit.disable({ emitEvent: false });
+      }
+    });
+
+    // store subscription to allow cleanup later if you want
+    this.selectedSubs.push(sub);
+
+    // run once to set initial state based on initial value
+    const initiallySelected = !!sel.value;
+    if (!initiallySelected) {
+      // ensure controls are disabled / cleared on init (we already created them disabled)
+      phaseGroup.get('payment_percentage')!.disable({ emitEvent: false });
+      phaseGroup.get('duration_value')!.disable({ emitEvent: false });
+      phaseGroup.get('duration_unit')!.disable({ emitEvent: false });
+    } else {
+      // if initially selected, enable & set required validators
+      sel.setValue(true, { emitEvent: true });
+    }
+  }
+
   public addProperty(): Observable<ApiResponse<null>> {
     const basic = this.form.get('stepTwo.basic')!.value;
     const extended = this.form.get('stepTwo.extended')!.value;
