@@ -9,6 +9,7 @@ import { EditProfileComponent } from './Components/edit-profile/edit-profile.com
 import { ViewPropertiesComponent } from './Components/properties/view-properties/view-properties.component';
 import { PropertyDetailsComponent } from './Components/properties/property-details/property-details.component';
 import { AddPropertyComponent } from './Components/properties/add-property/add-property.component';
+import { ProfileHistoryComponent } from './Components/profile-history/profile-history.component';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,10 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+  },
+  {
+    path: 'history',
+    component: ProfileHistoryComponent,
   },
   {
     path: 'edit',

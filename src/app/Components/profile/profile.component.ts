@@ -48,6 +48,9 @@ export class ProfileComponent implements OnInit {
   goToEditProfile() {
     this.router.navigate(['/edit']);
   }
+  goToHistory() {
+    this.router.navigate(['/history']);
+  }
   resetPass() {
     this.router.navigate(['/reset']);
   }
