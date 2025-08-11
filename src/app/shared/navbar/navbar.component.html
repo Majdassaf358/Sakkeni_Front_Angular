@@ -14,33 +14,38 @@
     <ul class="nav-section width-50 text-secondary-clr font-400">
       <li
         class="nav-item"
-        [ngClass]="{ active: page === 'home' }"
+        [ngClass]="{ active: page === 'home', without_login: profileInfo }"
         [routerLink]="['/home']"
       >
         Home
       </li>
       <li
         class="nav-item"
-        [ngClass]="{ active: page === 'properties' }"
+        [ngClass]="{
+          active: page === 'properties',
+          without_login: profileInfo
+        }"
         [routerLink]="['/properties']"
       >
         Properties
       </li>
       <li
         class="nav-item"
-        [ngClass]="{ active: page === 'services' }"
+        [ngClass]="{ active: page === 'services', without_login: profileInfo }"
         [routerLink]="['/services']"
       >
         Services
       </li>
       <li
         class="nav-item"
-        [ngClass]="{ active: page === 'about' }"
+        [ngClass]="{ active: page === 'about', without_login: profileInfo }"
         [routerLink]="['/about-us']"
       >
         About Us
       </li>
-      <li class="nav-item" [routerLink]="['/login']">Log In</li>
+      <li *ngIf="!profileInfo" class="nav-item" [routerLink]="['/login']">
+        Log In
+      </li>
     </ul>
 
     <div class="right-section width-25">
