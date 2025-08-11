@@ -7,7 +7,7 @@
     <div class="nav-line"></div>
     <div class="filter-options">
       <div class="filter-section">
-        <p class="font-600">Location</p>
+        <p class="font-600 title">Location</p>
 
         <div *ngIf="countriesLoaded">
           <select
@@ -24,7 +24,7 @@
         </div>
 
         <div class="filter-subsection">
-          <p>City</p>
+          <p class="font-600 title">City</p>
           <div class="checkbox-group">
             <label *ngFor="let city of displayedCities; trackBy: trackById">
               <input
@@ -45,7 +45,7 @@
 
       <ng-container *ngIf="selectedType === 'rent'">
         <div class="filter-section">
-          <p class="font-600">Area (m²)</p>
+          <p class="font-600 title">Area (m²)</p>
           <input
             type="number"
             placeholder="Min area"
@@ -58,15 +58,15 @@
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">Bathrooms</p>
+          <p class="font-600 title">Bathrooms</p>
           <input type="number" [(ngModel)]="filterValues.bathrooms" />
         </div>
         <div class="filter-section">
-          <p class="font-600">Balconies</p>
+          <p class="font-600 title">Balconies</p>
           <input type="number" [(ngModel)]="filterValues.balconies" />
         </div>
         <div class="filter-section">
-          <p class="font-600">Amenities</p>
+          <p class="font-600 title">Amenities</p>
           <label *ngFor="let amenity of amenities">
             <input
               type="checkbox"
@@ -77,7 +77,7 @@
           </label>
         </div>
         <div class="filter-section">
-          <p class="font-600">Price (USD)</p>
+          <p class="font-600 title">Price (USD)</p>
           <input
             type="number"
             placeholder="Min price"
@@ -90,7 +90,7 @@
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">Furnished</p>
+          <p class="font-600 title">Furnished</p>
           <label
             ><input
               type="radio"
@@ -109,7 +109,7 @@
           >
         </div>
         <div class="filter-section">
-          <p class="font-600">Lease Period</p>
+          <p class="font-600 title">Lease Period</p>
           <select [(ngModel)]="filterValues.lease_period">
             <option value="Yearly">Yearly</option>
             <option value="Monthly">Monthly</option>
@@ -120,7 +120,7 @@
       <!-- PURCHASE -->
       <ng-container *ngIf="selectedType === 'purchase'">
         <div class="filter-section">
-          <p class="font-600">Area (m²)</p>
+          <p class="font-600 title">Area (m²)</p>
           <input
             type="number"
             placeholder="Min area"
@@ -133,15 +133,15 @@
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">Bathrooms</p>
+          <p class="font-600 title">Bathrooms</p>
           <input type="number" [(ngModel)]="filterValues.bathrooms" />
         </div>
         <div class="filter-section">
-          <p class="font-600">Balconies</p>
+          <p class="font-600 title">Balconies</p>
           <input type="number" [(ngModel)]="filterValues.balconies" />
         </div>
         <div class="filter-section">
-          <p class="font-600">Amenities</p>
+          <p class="font-600 title">Amenities</p>
           <label *ngFor="let amenity of amenities">
             <input
               type="checkbox"
@@ -152,7 +152,7 @@
           </label>
         </div>
         <div class="filter-section">
-          <p class="font-600">Price (USD)</p>
+          <p class="font-600 title">Price (USD)</p>
           <input
             type="number"
             placeholder="Min price"
@@ -165,7 +165,7 @@
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">Furnished</p>
+          <p class="font-600 title">Furnished</p>
           <label
             ><input
               type="radio"
@@ -189,7 +189,7 @@
       <ng-container *ngIf="selectedType === 'off-plan'">
         <!-- reuse base fields -->
         <div class="filter-section">
-          <p class="font-600">Area (m²)</p>
+          <p class="font-600 title">Area (m²)</p>
           <input
             type="number"
             placeholder="Min area"
@@ -202,7 +202,7 @@
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">Area (m²)</p>
+          <p class="font-600 title">Area (m²)</p>
           <input
             type="number"
             placeholder="Min area"
@@ -215,15 +215,15 @@
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">Bathrooms</p>
+          <p class="font-600 title">Bathrooms</p>
           <input type="number" [(ngModel)]="filterValues.bathrooms" />
         </div>
         <div class="filter-section">
-          <p class="font-600">Balconies</p>
+          <p class="font-600 title">Balconies</p>
           <input type="number" [(ngModel)]="filterValues.balconies" />
         </div>
         <div class="filter-section">
-          <p class="font-600">Amenities</p>
+          <p class="font-600 title">Amenities</p>
           <label *ngFor="let amenity of amenities">
             <input
               type="checkbox"
@@ -234,7 +234,7 @@
           </label>
         </div>
         <div class="filter-section">
-          <p class="font-600">Price (USD)</p>
+          <p class="font-600 title">Price (USD)</p>
           <input
             type="number"
             placeholder="Min price"
@@ -247,7 +247,7 @@
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">First Payment (USD)</p>
+          <p class="font-600 title">First Payment (USD)</p>
           <input
             type="number"
             placeholder="Min first pay"
@@ -260,7 +260,7 @@
           />
         </div>
         <div class="filter-section">
-          <p class="font-600">Delivery Year</p>
+          <p class="font-600 title">Delivery Year</p>
           <input type="number" [(ngModel)]="filterValues.delivery_date" />
         </div>
       </ng-container>

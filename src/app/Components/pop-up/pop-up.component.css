@@ -26,6 +26,10 @@
   margin-left: 1.5rem;
   color: #27393a;
 }
+.title {
+  margin: 0.4rem 0.5rem;
+  color: #27393a;
+}
 .nav-line {
   background-color: #b4c5c5;
   height: 1px;
@@ -53,10 +57,17 @@
   background: #ccc;
   border-radius: 4px;
 }
-.filter-section {
-  /* margin-bottom: 1.5rem; */
+.filter-section select,
+.filter-section input[type="text"],
+.filter-section input[type="number"] {
+  width: 90%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cbcbcb;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #27393a8c;
+  margin: 0.5rem;
 }
-
 .filter-subsection {
   margin: 0.5rem 0;
 }
