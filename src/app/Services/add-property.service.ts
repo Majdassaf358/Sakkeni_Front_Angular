@@ -330,6 +330,8 @@ export class AddPropertyService {
     }
     if (basic.sellType == 3) {
       console.log('offPlan id 3');
+      formData.append('delivery_date', extended.offPlan.delivery_date);
+      formData.append('overall_payment', extended.offPlan.overall_payment);
     }
     if (extended.residential.residential_property_type_id === 1) {
       console.log('apa');
