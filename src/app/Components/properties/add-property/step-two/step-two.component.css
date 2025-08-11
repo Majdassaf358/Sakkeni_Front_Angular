@@ -70,7 +70,8 @@
 
 .details-grid select,
 .details-grid input[type="text"],
-.details-grid input[type="number"] {
+.details-grid input[type="number"],
+.details-grid input[type="date"] {
   width: 90%;
   padding: 0.5rem 0.75rem;
   border: 1px solid #cbcbcb;
