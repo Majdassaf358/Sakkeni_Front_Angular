@@ -19,28 +19,28 @@ export class ProjectIdsService {
     let url = `${environment.Api}/view-amenities`;
     return this.http.get<ApiResponse<id_name[]>>(url);
   }
-  public getPropertyTypes(): Observable<ApiResponse<id_name>> {
+  public getPropertyTypes(): Observable<ApiResponse<id_name[]>> {
     let url = `${environment.Api}/view-property-types`;
-    return this.http.get<ApiResponse<id_name>>(url);
+    return this.http.get<ApiResponse<id_name[]>>(url);
   }
-  public getCommercialPropertyTypes(): Observable<ApiResponse<id_name>> {
+  public getCommercialPropertyTypes(): Observable<ApiResponse<id_name[]>> {
     let url = `${environment.Api}/view-commercial-property-types`;
-    return this.http.get<ApiResponse<id_name>>(url);
+    return this.http.get<ApiResponse<id_name[]>>(url);
   }
-  public getResidentialPropertyTypes(): Observable<ApiResponse<id_name>> {
+  public getResidentialPropertyTypes(): Observable<ApiResponse<id_name[]>> {
     let url = `${environment.Api}/view-residential-property-types`;
-    return this.http.get<ApiResponse<id_name>>(url);
+    return this.http.get<ApiResponse<id_name[]>>(url);
   }
-  public getDirections(): Observable<ApiResponse<id_name>> {
+  public getDirections(): Observable<ApiResponse<id_name[]>> {
     let url = `${environment.Api}/view-directions`;
-    return this.http.get<ApiResponse<id_name>>(url);
+    return this.http.get<ApiResponse<id_name[]>>(url);
   }
-  public getAvailabilityStatus(): Observable<ApiResponse<id_name>> {
+  public getAvailabilityStatus(): Observable<ApiResponse<id_name[]>> {
     let url = `${environment.Api}/view-availability-status`;
-    return this.http.get<ApiResponse<id_name>>(url);
+    return this.http.get<ApiResponse<id_name[]>>(url);
   }
-  public getOwnershipTypes(): Observable<ApiResponse<id_name>> {
+  public getOwnershipTypes(): Observable<ApiResponse<id_name[]>> {
     let url = `${environment.Api}/view-ownership-types`;
-    return this.http.get<ApiResponse<id_name>>(url);
+    return this.http.get<ApiResponse<id_name[]>>(url);
   }
 }

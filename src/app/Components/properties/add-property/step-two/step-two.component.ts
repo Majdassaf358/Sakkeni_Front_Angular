@@ -17,7 +17,10 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { addProperty } from '../../../../Models/addProperty';
-import { Subscription } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
+import { id_name } from '../../../../Models/get_ids/id_name';
+import { ApiResponse } from '../../../../Models/ApiResponse';
+import { ProjectIdsService } from '../../../../Services/project-ids.service';
 
 @Component({
   selector: 'app-step-two',
@@ -53,8 +56,8 @@ export class StepTwoComponent implements OnInit, OnDestroy {
     'post_handover',
     'installment_plan',
   ];
-  public percentSum = 0; // sum of selected percentages (integer)
-  public remaining = 100; // 100 - percentSum
+  public percentSum = 0;
+  public remaining = 100;
   public anySelected = false;
   countries: { id: number; name: string }[] = [{ id: 1, name: 'Syria' }];
   cities: { id: number; name: string }[] = [
@@ -68,31 +71,11 @@ export class StepTwoComponent implements OnInit, OnDestroy {
     { id: 8, name: 'Raqqa' },
     { id: 9, name: 'Tartus' },
   ];
-  exposures: { id: number; name: string }[] = [
-    { id: 1, name: 'North' },
-    { id: 2, name: 'South' },
-    { id: 3, name: 'East' },
-    { id: 4, name: 'West' },
-    { id: 5, name: 'North‑East' },
-    { id: 6, name: 'North‑West' },
-    { id: 7, name: 'South‑East' },
-    { id: 8, name: 'South‑West' },
-  ];
-  amenities: { id: number; name: string }[] = [
-    { id: 1, name: 'Rerum' },
-    { id: 2, name: 'Id' },
-    { id: 3, name: 'Voluptatem' },
-    { id: 4, name: 'Laudantium' },
-    { id: 5, name: 'Sunt' },
-    { id: 6, name: 'Blanditiis' },
-    { id: 7, name: 'Assumenda' },
-    { id: 8, name: 'Recusandae' },
-    { id: 9, name: 'Vel' },
-    { id: 10, name: 'Repudiandae' },
-  ];
-  ownership_type_id: { id: number; name: string }[] = [
-    { id: 1, name: 'Freehold' },
-  ];
+  exposures: id_name[] = [];
+
+  amenities: id_name[] = [];
+  ownership_type_id: id_name[] = [];
+
   center: google.maps.LatLngLiteral = {
     lat: 33.499997429698276,
     lng: 36.26559615601456,
@@ -116,7 +99,10 @@ export class StepTwoComponent implements OnInit, OnDestroy {
   ];
   syriaPolygon: google.maps.Polygon = new google.maps.Polygon();
   Math = Math;
-  constructor(public formSvc: AddPropertyService) {
+  constructor(
+    public formSvc: AddPropertyService,
+    private helpsrv: ProjectIdsService
+  ) {
     this.form = this.formSvc.getForm();
   }
   ngOnInit(): void {
@@ -125,13 +111,13 @@ export class StepTwoComponent implements OnInit, OnDestroy {
     });
     const arr = this.paymentPhases;
     if (arr) {
-      // compute immediately
       this.recalculatePercentSum();
 
       this.paymentPhasesSub = arr.valueChanges.subscribe(() => {
         this.recalculatePercentSum();
       });
     }
+    this.getIds();
   }
 
   ngOnDestroy(): void {
@@ -284,6 +270,24 @@ export class StepTwoComponent implements OnInit, OnDestroy {
       this.showExtendedSection = false;
     } else {
       this.prev.emit();
+    }
+  }
+  async getIds() {
+    try {
+      let res1: ApiResponse<id_name[]> = await lastValueFrom(
+        this.helpsrv.getAmenities()
+      );
+      let res2: ApiResponse<id_name[]> = await lastValueFrom(
+        this.helpsrv.getDirections()
+      );
+      let res3: ApiResponse<id_name[]> = await lastValueFrom(
+        this.helpsrv.getOwnershipTypes()
+      );
+      this.amenities = res1.data;
+      this.exposures = res2.data;
+      this.ownership_type_id = res3.data;
+    } catch (err) {
+      console.log(err);
     }
   }
   saveAndNext(): boolean {
