@@ -1,0 +1,53 @@
+/* sidebar.component.css */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15rem;
+  height: 100vh;
+  background-color: #fff;
+  border-right: 1px solid #e9eeee;
+  padding-top: 1rem;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+.menu-item.active {
+  background-color: #27393a; /* dark greenish from your design */
+  color: #fcfdfd;
+  margin: 0rem 1rem;
+  border-radius: 6px;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.label {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.text_style {
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+}

@@ -1,1 +1,286 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --text-primary-clr: #27393a;
+  --text-secondary-clr: #fcfdfd;
+  --text-neutural-clr: #101818;
+  --bg-primary: #fcfdfd;
+  --bg-secondary: #27393a;
+  --bg-neutural: #fcfdfd47;
+  --bg-focused: #b4c5c5;
+  --fw-300: 300;
+  --fw-400: 400;
+  --fw-500: 500;
+  --fw-600: 600;
+  --fs-24: 1.5rem;
+  --fs-22: 1.375rem;
+  --fs-20: 1.25rem;
+  --fs-18: 1.125rem;
+  --fs-16: 1rem;
+  --fs-14: 0.875rem;
+  --fs-12: 0.75rem;
+  --fs-10: 0.625rem;
+  --text-spacing-16-10: 0.1rem;
+  --text-spacing-14-10: 0.0875rem;
+}
+.text-primary-clr {
+  color: var(--text-primary-clr);
+}
+.text-secondary-clr {
+  color: var(--text-secondary-clr);
+}
+.text-neutural-clr {
+  color: var(--text-neutural-clr);
+}
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+.bg-neutural {
+  background-color: var(--bg-neutural);
+}
+.bg-focused {
+  background-color: var(--bg-focused) !important;
+}
+.font-300 {
+  font-weight: var(--fw-300);
+}
+.font-400 {
+  font-weight: var(--fw-400);
+}
+.font-500 {
+  font-weight: var(--fw-500);
+}
+.font-600 {
+  font-weight: var(--fw-600);
+}
+.font-10 {
+  font-size: var(--fs-10);
+}
+.font-12 {
+  font-size: var(--fs-12);
+}
+.font-14 {
+  font-size: var(--fs-14);
+}
+.font-16 {
+  font-size: var(--fs-16);
+}
+.font-18 {
+  font-size: var(--fs-18);
+}
+.font-20 {
+  font-size: var(--fs-20);
+}
+.font-22 {
+  font-size: var(--fs-22);
+}
+.font-24 {
+  font-size: var(--fs-24);
+}
+.letter-16-10 {
+  letter-spacing: var(--text-spacing-16-10);
+}
+.letter-14-10 {
+  letter-spacing: var(--text-spacing-14-10);
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.flex {
+  display: flex;
+}
+.width-20 {
+  width: 20%;
+}
+.width-25 {
+  width: 25%;
+}
+.width-33 {
+  width: 33%;
+}
+.width-50 {
+  width: 50%;
+}
+.width-75 {
+  width: 75%;
+}
+.width-88 {
+  width: 88%;
+}
+.width-90 {
+  width: 90%;
+}
+.width-95 {
+  width: 95%;
+}
+.width-100 {
+  width: 100%;
+}
+.margin-1 {
+  margin: 1rem;
+}
+.border-right {
+  border-right: 1px solid #27393a33;
+}
+.border-left {
+  border-left: 1px solid #27393a33;
+}
+body {
+  background-color: #fcfdfd;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  height: 100vh;
+  height: 100dvh;
+}
+
+a {
+  color: #27393a;
+  cursor: pointer;
+  text-decoration: none;
+}
+li {
+  cursor: pointer;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+/* Set core body defaults */
+html,
+body {
+  height: 100%;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-inline-size: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+.container {
+  --max-width: 972px;
+  --padding: 1.5rem;
+
+  width: min(var(--max-width), 100%) - (var(--padding) * 2);
+  margin-inline: auto;
+}
+.table-columns {
+  display: grid;
+  gap: 1rem;
+}
+.underpoint {
+  display: none;
+  position: absolute;
+  top: 11%;
+  width: 4px;
+  height: 4px;
+  background-color: #fcfdfd;
+  border-radius: 5px;
+}
+.underpoint.active {
+  display: block;
+}
+.uppercase::first-letter {
+  text-transform: uppercase;
+}
+.nav-line {
+  background-color: #e9eeeebf;
+  height: 0.8px;
+  width: 85%;
+  justify-self: center;
+}
+@media (min-width: 50em) {
+  .table-columns {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+  }
+}
+/* Icons */
+.location-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.home-icon {
+  width: 1.1rem;
+  height: 1.3rem;
+}
+.budget-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.lan-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  margin: 0rem 0.5rem 0 0;
+}
+/* Remove arrows from input[type=number] */
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Edge */
+  margin: 0;
+}
+/* Pop-up Section */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.gm-style-iw-d {
+  width: 150px;
+  height: 250px;
+  overflow: visible !important;
+}
+.gm-style-iw-t::after {
+  border-top-color: white !important;
+}
+.gm-style .gm-style-iw-c {
+  padding: 0 !important;
+}
+.gm-ui-hover-effect {
+  display: none !important;
+}
+.gm-style-iw-ch {
+  padding: 0 !important;
+}
