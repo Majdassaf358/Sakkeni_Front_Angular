@@ -12,8 +12,12 @@ import { environment } from '../shared/environments';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  public login(req: login): Observable<ApiResponse<AdminRes>> {
-    let url = `${environment.Api}/login`;
+  public adminLogin(req: login): Observable<ApiResponse<AdminRes>> {
+    let url = `${environment.Api}/admin-login`;
     return this.http.post<ApiResponse<AdminRes>>(url, req);
+  }
+  public adminLogout(): Observable<ApiResponse<null>> {
+    let url = `${environment.Api}/logout-admin`;
+    return this.http.get<ApiResponse<null>>(url);
   }
 }
