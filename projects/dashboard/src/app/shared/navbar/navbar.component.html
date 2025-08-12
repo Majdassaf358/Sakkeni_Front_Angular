@@ -1,11 +1,16 @@
 <nav class="navbar">
+  <!-- Left Section -->
   <div class="nav-left">
-    <button class="menu-btn">☰</button>
+    <!-- Hamburger (visible on tablet/mobile only) -->
+    <button class="menu-btn" (click)="toggleSidebar()">☰</button>
+
+    <!-- Search (desktop/tablet) -->
     <div class="search-container">
       <input type="text" placeholder="Search" />
     </div>
   </div>
 
+  <!-- Right Section -->
   <div class="nav-right">
     <button class="icon-btn">🔔</button>
     <button class="icon-btn">🌐</button>

@@ -2,7 +2,7 @@
 .navbar {
   position: fixed;
   top: 0;
-  left: 15rem; /* matches sidebar width */
+  left: 15rem;
   right: 0;
   height: 60px;
   background-color: #fff;
@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
-  z-index: 1000;
+  z-index: 10;
 }
 
 .nav-left {
@@ -25,6 +25,7 @@
   border: none;
   font-size: 1.3rem;
   cursor: pointer;
+  display: none;
 }
 
 .search-container {
@@ -65,10 +66,35 @@
 
 .profile img {
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
 }
 
 .arrow {
   font-size: 0.8rem;
+}
+/* =========================
+   RESPONSIVE STYLES
+========================= */
+
+/* Tablet & Mobile (<= 1024px) */
+@media (max-width: 1024px) {
+  .navbar {
+    left: 0; /* sidebar hidden by default */
+  }
+
+  .menu-btn {
+    display: block; /* show hamburger */
+  }
+
+  .search-container {
+    width: 13rem; /* shrink search bar */
+  }
+}
+
+/* Mobile (<= 720px) */
+@media (max-width: 720px) {
+  .search-container {
+    display: none; /* hide search bar for mobile */
+  }
 }

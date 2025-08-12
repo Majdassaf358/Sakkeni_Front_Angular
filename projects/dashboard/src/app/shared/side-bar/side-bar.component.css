@@ -8,6 +8,8 @@
   background-color: #fff;
   border-right: 1px solid #e9eeee;
   padding-top: 1rem;
+  z-index: 10;
+  transition: transform 0.3s ease;
 }
 
 .sidebar-menu {
@@ -32,7 +34,7 @@
 }
 
 .menu-item.active {
-  background-color: #27393a; /* dark greenish from your design */
+  background-color: #27393a;
   color: #fcfdfd;
   margin: 0rem 1rem;
   border-radius: 6px;
@@ -50,4 +52,44 @@
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.8px;
+}
+.logo-section {
+  margin-right: 0.5rem;
+  max-width: 10%;
+}
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1090;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* Tablet & Mobile: hidden sidebar by default */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Desktop: sidebar always visible */
+@media (min-width: 1025px) {
+  .content {
+    margin-left: 15rem;
+    padding: 1rem;
+  }
 }
