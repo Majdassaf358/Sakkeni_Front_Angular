@@ -38,4 +38,8 @@ export class SuperAdminService {
     let url = `${environment.Api}/search-admin?page=${page}`;
     return this.http.post<ApiResponse<AdminRes>>(url, { name: name });
   }
+  public viewStatistics(): Observable<ApiResponse<PaginatedData<AdminRes>>> {
+    let url = `${environment.Api}/view-admins`;
+    return this.http.get<ApiResponse<PaginatedData<AdminRes>>>(url);
+  }
 }

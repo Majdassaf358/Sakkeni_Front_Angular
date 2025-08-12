@@ -7,7 +7,6 @@
   height: 100vh;
   background-color: #fff;
   border-right: 1px solid #e9eeee;
-  padding-top: 1rem;
   z-index: 10;
   transition: transform 0.3s ease;
 }
@@ -54,8 +53,11 @@
   letter-spacing: 0.8px;
 }
 .logo-section {
-  margin-right: 0.5rem;
-  max-width: 10%;
+  width: 40%;
+  display: flex;
+  justify-self: center;
+  background-color: #27393a;
+  margin: 0.5rem 1rem 1rem 1rem;
 }
 .sidebar-overlay {
   position: fixed;
