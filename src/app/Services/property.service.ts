@@ -30,6 +30,13 @@ export class PropertyService {
     let url = `${environment.Api}/view-favorite-properties/${type}`;
     return this.http.get<ApiResponse<PaginatedData<favoriteCard>>>(url);
   }
+  public viewMyProperties(
+    type: string,
+    page: number
+  ): Observable<ApiResponse<PaginatedData<propertyCard>>> {
+    let url = `${environment.Api}/view-my-properties/${type}?page=${page}`;
+    return this.http.get<ApiResponse<PaginatedData<propertyCard>>>(url);
+  }
   public viewPropertyDetails(
     homeId: number
   ): Observable<ApiResponse<propertyDetails>> {
@@ -53,6 +60,10 @@ export class PropertyService {
   }
   public removeFromFavorite(id: number): Observable<ApiResponse<null>> {
     let url = `${environment.Api}/remove-property-from-favorite/${id}`;
+    return this.http.get<ApiResponse<null>>(url);
+  }
+  public deleteProperty(id: number): Observable<ApiResponse<null>> {
+    let url = `${environment.Api}/delete-property/${id}`;
     return this.http.get<ApiResponse<null>>(url);
   }
 }

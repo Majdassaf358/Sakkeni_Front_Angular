@@ -1,33 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { ApiResponse } from '../../Models/ApiResponse';
-import { profile } from '../../Models/profile/profile';
 import { lastValueFrom } from 'rxjs';
-import { AuthenticationService } from '../../Services/authentication.service';
 import { Router } from '@angular/router';
+import { propertyCard } from '../../Models/property-card';
+import { PropertyService } from '../../Services/property.service';
+import { PaginatedData } from '../../Models/paginatedData';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
   selector: 'app-profile-history',
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, CommonModule, FormsModule, GoogleMapsModule],
   templateUrl: './profile-history.component.html',
   styleUrl: './profile-history.component.css',
 })
 export class ProfileHistoryComponent implements OnInit {
-  // profileHistory: history = new history();
+  profileHistory: propertyCard[] = [];
+  type: string = 'rent';
+  page: number = 1;
 
-  constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router
-  ) {}
+  constructor(private srv: PropertyService, private router: Router) {}
   ngOnInit(): void {
     this.getHistory();
   }
   async getHistory() {
     try {
-      let res: ApiResponse<profile> = await lastValueFrom(
-        this.authenticationService.profile()
+      let res: ApiResponse<PaginatedData<propertyCard>> = await lastValueFrom(
+        this.srv.viewMyProperties(this.type, this.page)
       );
-      // this.profileHistory = res.data;
+      this.page = res.data.current_page;
+      this.profileHistory = res.data.data;
     } catch (error) {
       console.log(error);
     }
