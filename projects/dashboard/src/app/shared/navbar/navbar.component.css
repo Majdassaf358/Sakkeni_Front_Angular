@@ -1,0 +1,74 @@
+/* navbar.component.css */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 15rem; /* matches sidebar width */
+  right: 0;
+  height: 60px;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 1000;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.search-container {
+  background-color: #f5f7f6;
+  padding: 0.4rem 0.75rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+
+.search-container input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+.profile img {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.arrow {
+  font-size: 0.8rem;
+}
