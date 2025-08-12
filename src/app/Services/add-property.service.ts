@@ -191,9 +191,8 @@ export class AddPropertyService {
   }
   private createPhase(index: number): FormGroup {
     const grp = this.fb.group({
-      // user toggles this checkbox
       selected: [false],
-      payment_phase_id: [index + 1], // 1..5
+      payment_phase_id: [index + 1],
       // start disabled (will be enabled when selected)
       payment_percentage: [
         { value: null, disabled: true },
@@ -203,10 +202,9 @@ export class AddPropertyService {
         { value: null, disabled: true },
         [Validators.min(0), Validators.pattern(/^\d+$/)],
       ],
-      duration_unit: [{ value: null, disabled: true }], // 'months' | 'years' | null
+      duration_unit: [{ value: null, disabled: true }],
     });
 
-    // set up listener to toggle validators / enabled state
     this.watchPhaseSelected(grp);
 
     return grp;
@@ -216,14 +214,12 @@ export class AddPropertyService {
     const sel = phaseGroup.get('selected');
     if (!sel) return;
 
-    // subscription toggles validators/enabled state
     const sub = sel.valueChanges.subscribe((isSelected: boolean) => {
       const pct = phaseGroup.get('payment_percentage');
       const durVal = phaseGroup.get('duration_value');
       const durUnit = phaseGroup.get('duration_unit');
       if (!pct || !durVal || !durUnit) return;
       if (isSelected) {
-        // enable controls and apply "required" on top of existing constraints
         pct.enable({ emitEvent: false });
         pct.setValidators([
           Validators.required,
@@ -245,7 +241,6 @@ export class AddPropertyService {
         durUnit.setValidators([Validators.required]);
         durUnit.updateValueAndValidity({ onlySelf: true, emitEvent: false });
       } else {
-        // clear values, remove validators and disable controls
         pct.setValue(null, { emitEvent: false });
         pct.clearValidators();
         pct.updateValueAndValidity({ onlySelf: true, emitEvent: false });
@@ -263,18 +258,14 @@ export class AddPropertyService {
       }
     });
 
-    // store subscription to allow cleanup later if you want
     this.selectedSubs.push(sub);
 
-    // run once to set initial state based on initial value
     const initiallySelected = !!sel.value;
     if (!initiallySelected) {
-      // ensure controls are disabled / cleared on init (we already created them disabled)
       phaseGroup.get('payment_percentage')!.disable({ emitEvent: false });
       phaseGroup.get('duration_value')!.disable({ emitEvent: false });
       phaseGroup.get('duration_unit')!.disable({ emitEvent: false });
     } else {
-      // if initially selected, enable & set required validators
       sel.setValue(true, { emitEvent: true });
     }
   }
