@@ -85,6 +85,7 @@
   .sidebar-overlay.show {
     opacity: 1;
     visibility: visible;
+    margin-left: 15rem;
   }
 }
 

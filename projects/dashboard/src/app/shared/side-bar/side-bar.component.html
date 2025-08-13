@@ -1,24 +1,31 @@
-<!-- Overlay (only visible on tablet/mobile when sidebar is open) -->
-<div class="sidebar-overlay"></div>
+<div
+  class="sidebar-overlay"
+  [class.show]="isOpen"
+  (click)="closeSidebar()"
+></div>
 
 <!-- Sidebar -->
-<aside class="sidebar">
+<aside class="sidebar" [class.open]="isOpen">
   <div class="logo-section">
     <img class="nav-logo" src="/Imgs/Logo.png" alt="Logo" />
   </div>
 
-  <div class="sidebar-menu">
-    <a href="#" class="menu-item active">
+  <ul class="sidebar-menu">
+    <li
+      class="menu-item"
+      [routerLink]="['/statistics']"
+      [ngClass]="{ active: page === 'statistics' }"
+    >
       <span class="icon">🏠</span>
       <span class="label">Dashboard</span>
-    </a>
-    <a href="#" class="menu-item">
+    </li>
+    <li class="menu-item" [routerLink]="['/home']">
       <span class="icon">⚙️</span>
       <span class="label">Settings</span>
-    </a>
-    <a href="#" class="menu-item">
+    </li>
+    <li class="menu-item" [routerLink]="['/home']">
       <span class="icon">📊</span>
       <span class="label">Reports</span>
-    </a>
-  </div>
+    </li>
+  </ul>
 </aside>
