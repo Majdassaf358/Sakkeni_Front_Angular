@@ -36,7 +36,7 @@
   border-radius: 16px;
 }
 .profile-details {
-  height: 460px;
+  height: 400px;
   width: 30%;
   margin-top: 2rem;
 }
@@ -62,7 +62,6 @@
 .buttons {
   display: flex;
   justify-content: end;
-  margin-top: 3rem;
 }
 .save-button {
   background-color: #fcfdfd;

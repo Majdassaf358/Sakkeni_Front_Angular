@@ -10,6 +10,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem 0rem;
   margin-right: 1.2rem;
+  margin-bottom: 2rem;
 }
 .property-details {
   background-color: #fffefc;
