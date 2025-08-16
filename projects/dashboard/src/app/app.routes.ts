@@ -1,5 +1,9 @@
 import { Routes } from '@angular/router';
 import { ViewStatisticsComponent } from './Components/view-statistics/view-statistics.component';
+import { ReportsComponent } from './Components/reports/reports.component';
+import { PropertiesComponent } from './Components/properties/properties.component';
+import { ServiceProvidersComponent } from './Components/service-providers/service-providers.component';
+import { AdminsComponent } from './Components/admins/admins.component';
 
 export const routes: Routes = [
   {
@@ -14,5 +18,21 @@ export const routes: Routes = [
   {
     path: 'statistics',
     component: ViewStatisticsComponent,
+  },
+  {
+    path: 'reports',
+    component: ReportsComponent,
+  },
+  {
+    path: 'properties',
+    component: PropertiesComponent,
+  },
+  {
+    path: 'services',
+    component: ServiceProvidersComponent,
+  },
+  {
+    path: 'admins',
+    component: AdminsComponent,
   },
 ];

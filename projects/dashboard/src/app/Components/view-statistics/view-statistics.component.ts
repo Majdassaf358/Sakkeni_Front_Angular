@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SideBarComponent } from '../../shared/side-bar/side-bar.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
-import { RouterModule, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApiResponse } from '../../Models/ApiResponse';
 import { SuperAdminService } from '../../Services/super-admin.service';
 @Component({
