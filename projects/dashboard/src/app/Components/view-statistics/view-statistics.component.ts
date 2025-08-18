@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SideBarComponent } from '../../shared/side-bar/side-bar.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { Router } from '@angular/router';
 import { ApiResponse } from '../../Models/ApiResponse';
@@ -9,7 +8,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-view-statistics',
-  imports: [SideBarComponent, NavbarComponent, CommonModule, NgxEchartsModule],
+  imports: [NavbarComponent, CommonModule, NgxEchartsModule],
   templateUrl: './view-statistics.component.html',
   styleUrl: './view-statistics.component.css',
 })

@@ -11,26 +11,48 @@
 
   <ul class="sidebar-menu">
     <li
+      routerLink="/statistics"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
       class="menu-item"
       [routerLink]="['/statistics']"
-      [ngClass]="{ active: page === 'statistics' }"
     >
       <span class="icon">🏠</span>
       <span class="label">Dashboard</span>
     </li>
-    <li class="menu-item" [routerLink]="['/reports']">
+    <li
+      routerLink="/statistics"
+      routerLinkActive="active"
+      class="menu-item"
+      [routerLink]="['/reports']"
+    >
       <span class="icon">⚙️</span>
       <span class="label">Reports</span>
     </li>
-    <li class="menu-item" [routerLink]="['/properties']">
+    <li
+      routerLink="/statistics"
+      routerLinkActive="active"
+      class="menu-item"
+      [routerLink]="['/properties']"
+    >
       <span class="icon">📊</span>
       <span class="label">properties</span>
     </li>
-    <li class="menu-item" [routerLink]="['/services']">
+    <li
+      routerLink="/statistics"
+      routerLinkActive="active"
+      class="menu-item"
+      [routerLink]="['/services']"
+    >
       <span class="icon">📊</span>
       <span class="label">Service Providers</span>
     </li>
-    <li class="menu-item" [routerLink]="['/admins']">
+    <li
+      routerLink="/statistics"
+      routerLinkActive="active"
+      class="menu-item"
+      [routerLink]="['/admins']"
+    >
       <span class="icon">📊</span>
       <span class="label">Admins</span>
     </li>

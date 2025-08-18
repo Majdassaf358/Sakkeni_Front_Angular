@@ -20,6 +20,7 @@
   --fs-10: 0.625rem;
   --text-spacing-16-10: 0.1rem;
   --text-spacing-14-10: 0.0875rem;
+  --sidebar-width: 15rem;
 }
 .text-primary-clr {
   color: var(--text-primary-clr);
@@ -133,7 +134,12 @@ body {
   height: 100vh;
   height: 100dvh;
 }
-
+.main {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  padding: 1.25rem;
+  transition: margin-left 0.2s ease;
+}
 a {
   color: #27393a;
   cursor: pointer;
@@ -283,4 +289,14 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .gm-style-iw-ch {
   padding: 0 !important;
+}
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 0;
+  }
+
+  .main {
+    margin-left: 0 !important;
+    padding: 1rem;
+  }
 }

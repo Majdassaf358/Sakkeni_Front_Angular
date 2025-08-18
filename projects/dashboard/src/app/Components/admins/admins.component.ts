@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { SideBarComponent } from '../../shared/side-bar/side-bar.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-admins',
-  imports: [SideBarComponent, NavbarComponent],
+  imports: [NavbarComponent],
   templateUrl: './admins.component.html',
   styleUrl: './admins.component.css',
 })

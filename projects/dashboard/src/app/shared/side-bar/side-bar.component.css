@@ -3,7 +3,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 15rem;
+  width: var(--sidebar-width);
   height: 100vh;
   background-color: #fff;
   border-right: 1px solid #e9eeee;

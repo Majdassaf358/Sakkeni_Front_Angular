@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { OpenSideService } from '../../Services/open-side.service';
 
@@ -10,7 +10,6 @@ import { OpenSideService } from '../../Services/open-side.service';
   styleUrl: './side-bar.component.css',
 })
 export class SideBarComponent implements OnInit {
-  @Input() page!: string;
   isOpen = false;
 
   constructor(private sidebarService: OpenSideService) {}

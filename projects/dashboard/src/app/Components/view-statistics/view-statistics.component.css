@@ -1,0 +1,32 @@
+/* dashboard.component.css */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 18px;
+}
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(20, 20, 40, 0.06);
+}
+.card-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.chart {
+  width: 100%;
+}
+.chart-medium {
+  height: 320px;
+}
+.chart-wide {
+  height: 220px;
+  grid-column: span 2;
+}
+.kpi-cards {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+}
