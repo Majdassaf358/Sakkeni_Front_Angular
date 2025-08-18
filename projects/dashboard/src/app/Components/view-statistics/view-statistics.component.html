@@ -1,3 +1,23 @@
 <app-side-bar [page]="'statistics'"></app-side-bar>
 <app-navbar></app-navbar>
-<p>view-statistics works!</p>
+<!-- dashboard.component.html -->
+<div class="dashboard-grid">
+  <div class="kpi-cards">
+    <!-- your KPI cards... -->
+  </div>
+
+  <div class="card">
+    <div class="card-title">Properties Types</div>
+    <div echarts [options]="donutOptions" class="chart chart-medium"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Properties Location</div>
+    <div echarts [options]="barOptions" class="chart chart-medium"></div>
+  </div>
+
+  <div class="card wide">
+    <div class="card-title">Monthly updates</div>
+    <div echarts [options]="lineOptions" class="chart chart-wide"></div>
+  </div>
+</div>
