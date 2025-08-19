@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { OpenSideService } from '../../Services/open-side.service';
 
 @Component({
+  standalone: true,
   selector: 'app-side-bar',
   imports: [RouterModule, CommonModule],
   templateUrl: './side-bar.component.html',

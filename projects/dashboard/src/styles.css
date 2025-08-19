@@ -291,10 +291,6 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 0 !important;
 }
 @media (max-width: 1024px) {
-  :root {
-    --sidebar-width: 0;
-  }
-
   .main {
     margin-left: 0 !important;
     padding: 1rem;

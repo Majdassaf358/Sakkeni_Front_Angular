@@ -11,7 +11,6 @@
 
   <ul class="sidebar-menu">
     <li
-      routerLink="/statistics"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
       class="menu-item"
@@ -20,17 +19,11 @@
       <span class="icon">🏠</span>
       <span class="label">Dashboard</span>
     </li>
-    <li
-      routerLink="/statistics"
-      routerLinkActive="active"
-      class="menu-item"
-      [routerLink]="['/reports']"
-    >
+    <li routerLinkActive="active" class="menu-item" [routerLink]="['/reports']">
       <span class="icon">⚙️</span>
       <span class="label">Reports</span>
     </li>
     <li
-      routerLink="/statistics"
       routerLinkActive="active"
       class="menu-item"
       [routerLink]="['/properties']"
@@ -39,7 +32,6 @@
       <span class="label">properties</span>
     </li>
     <li
-      routerLink="/statistics"
       routerLinkActive="active"
       class="menu-item"
       [routerLink]="['/services']"
@@ -47,12 +39,7 @@
       <span class="icon">📊</span>
       <span class="label">Service Providers</span>
     </li>
-    <li
-      routerLink="/statistics"
-      routerLinkActive="active"
-      class="menu-item"
-      [routerLink]="['/admins']"
-    >
+    <li routerLinkActive="active" class="menu-item" [routerLink]="['/admins']">
       <span class="icon">📊</span>
       <span class="label">Admins</span>
     </li>
