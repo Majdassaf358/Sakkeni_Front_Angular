@@ -21,6 +21,7 @@
   --text-spacing-16-10: 0.1rem;
   --text-spacing-14-10: 0.0875rem;
   --sidebar-width: 15rem;
+  --navbar-height: 3.75rem;
 }
 .text-primary-clr {
   color: var(--text-primary-clr);
@@ -136,6 +137,7 @@ body {
 }
 .main {
   margin-left: var(--sidebar-width);
+  margin-top: var(--navbar-height);
   min-height: 100vh;
   padding: 1.25rem;
   transition: margin-left 0.2s ease;
