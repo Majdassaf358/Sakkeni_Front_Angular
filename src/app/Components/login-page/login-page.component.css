@@ -193,12 +193,12 @@
 .remember-me {
   margin-right: 2.5rem;
 }
-.error-message {
-  margin-left: 2rem;
+
+.error-placeholder::placeholder {
+  color: red;
 }
 
-/* Adjustments for smaller screens */
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
 }
 
 @media (max-width: 992px) {
@@ -208,4 +208,4 @@
 }
 
 @media (max-width: 576px) {
-}
+} */

@@ -17,6 +17,7 @@ import { AuthenticationService } from '../../Services/authentication.service';
 import { sign_up } from '../../Models/auth/sign-up';
 import { forgot } from '../../Models/auth/forgot';
 import { MessageComponent } from '../message/message.component';
+import { getErrorMessage } from '../../shared/messages';
 
 @Component({
   selector: 'app-login-page',
@@ -94,7 +95,9 @@ export class LoginPageComponent {
     });
   }
   ngOnInit(): void {}
-
+  getError(controlName: string, label: string) {
+    return getErrorMessage(this.logInForm.get(controlName), label);
+  }
   switchToLogIn() {
     this.mode = 'log';
   }
@@ -109,6 +112,10 @@ export class LoginPageComponent {
   }
 
   async loginFunction() {
+    if (this.logInForm.invalid) {
+      this.logInForm.markAllAsTouched();
+      return;
+    }
     var req: login = {
       email: this.logInForm.get('logEmail')?.value,
       password: this.logInForm.get('logPassword')?.value,

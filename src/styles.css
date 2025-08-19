@@ -284,3 +284,24 @@ input[type="number"]::-webkit-outer-spin-button {
 .gm-style-iw-ch {
   padding: 0 !important;
 }
+.is-invalid {
+  animation: shake 0.3s;
+  border: 1px solid red !important;
+}
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

@@ -34,17 +34,31 @@
         <input
           [class.is-invalid]="logEmail?.invalid && logEmail?.touched"
           formControlName="logEmail"
-          placeholder="username@gmail.com"
+          [placeholder]="
+            logEmail?.touched && logEmail?.invalid
+              ? getError('logEmail', 'Email')
+              : 'username@gmail.com'
+          "
+          [class.error-placeholder]="logEmail?.touched && logEmail?.invalid"
           class="form-control"
           type="email"
         />
+
         <input
           [class.is-invalid]="logPassword?.invalid && logPassword?.touched"
           formControlName="logPassword"
-          placeholder="••••••••"
+          [placeholder]="
+            logPassword?.touched && logPassword?.invalid
+              ? getError('logPassword', 'Password')
+              : '••••••••'
+          "
+          [class.error-placeholder]="
+            logPassword?.touched && logPassword?.invalid
+          "
           class="form-control"
           type="password"
         />
+
         <div class="password-options">
           <div class="text-secondary-clr font-14 remember-me">
             <input type="checkbox" />Remember me
