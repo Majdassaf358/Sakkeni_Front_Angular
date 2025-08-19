@@ -76,16 +76,12 @@ export class ViewStatisticsComponent implements OnInit {
         barWidth: '40%',
         data: [56, 64, 76, 78, 70, 37],
         label: { show: true, position: 'top' },
-        itemStyle: {
-          // ECharts allows gradients or single colors; adjust as needed
-          // keep default color if you want minimal style
-        },
+        itemStyle: {},
         emphasis: { itemStyle: { opacity: 0.9 } },
       },
     ],
   };
 
-  // Simple line chart for monthly updates
   lineOptions: EChartsOption = {
     tooltip: { trigger: 'axis' },
     xAxis: {

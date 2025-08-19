@@ -1,7 +1,7 @@
-/* dashboard.component.css */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 180px);
   gap: 20px;
   padding: 18px;
 }
@@ -17,16 +17,148 @@
 }
 .chart {
   width: 100%;
-}
-.chart-medium {
   height: 320px;
 }
-.chart-wide {
-  height: 220px;
-  grid-column: span 2;
+
+:root {
+  --card-bg: #ffffff;
+  --muted: #7b8a8a;
+  --accent: #27393a;
+  --green: #16a34a;
+  --red: #ef4444;
+  --glass-shadow: 0 8px 24px rgba(39, 57, 58, 0.06);
+  --radius: 14px;
 }
-.kpi-cards {
-  grid-column: 1 / -1;
+.kpi_chart {
+  grid-area: 1/ 1 / 2/ 5;
+}
+.donut_chart {
+  grid-area: 2/ 1 / 4/ 3;
+}
+.bar_chart {
+  grid-area: 2/ 3 / 4/ 5;
+}
+.line_chart {
+  grid-area: 4/ 1 / 6/ 5;
+}
+
+/* Grid container (component-level) */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Card */
+.kpi-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 6px 6px 54px 0px #0000000d;
+
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+}
+
+/* Top row inside card */
+.kpi-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 12px;
+}
+
+/* Title */
+.kpi-title {
+  font-size: 0.95rem;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* Icon */
+.kpi-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: inline-grid;
+  place-items: center;
+  font-size: 1.1rem;
+  color: var(--accent);
+  background: linear-gradient(
+    180deg,
+    rgba(39, 57, 58, 0.06),
+    rgba(39, 57, 58, 0.02)
+  );
+  flex-shrink: 0;
+}
+
+/* Value */
+.kpi-value {
+  margin-top: 12px;
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #0b1720;
+  letter-spacing: -0.6px;
+}
+
+/* Small description under value */
+.kpi-desc {
+  font-size: 0.85rem;
+  color: #6f8686;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* Footer */
+.kpi-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Change pill */
+.change {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.change.up {
+  color: #00b69b;
+}
+.change.down {
+  color: #f93c65;
+}
+
+.change svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* Responsive tweaks for very small screens (optional) */
+@media (max-width: 420px) {
+  .kpi-icon {
+    width: 44px;
+    height: 44px;
+  }
+  .kpi-value {
+    font-size: 1.4rem;
+  }
+  .kpi-grid {
+    gap: 12px;
+  }
 }

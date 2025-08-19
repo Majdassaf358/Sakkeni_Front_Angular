@@ -1,22 +1,178 @@
 <app-navbar></app-navbar>
-<!-- dashboard.component.html -->
 <div class="dashboard-grid">
-  <div class="kpi-cards">
-    <!-- your KPI cards... -->
+  <div class="kpi-grid kpi_chart">
+    <article class="kpi-card" role="listitem" aria-labelledby="kpi1-title">
+      <div>
+        <div class="kpi-top">
+          <div>
+            <div id="kpi1-title" class="kpi-title">Total Users</div>
+          </div>
+          <img class="add-icon" src="Icons\purple.svg" alt="" />
+        </div>
+
+        <div class="kpi-value">40,689</div>
+      </div>
+
+      <div class="kpi-footer">
+        <div class="change up" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M12 5v14"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+            <path
+              d="M5 12l7-7 7 7"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          8.5%
+        </div>
+        <div>Up from yesterday</div>
+      </div>
+    </article>
+    <article class="kpi-card" role="listitem" aria-labelledby="kpi2-title">
+      <div>
+        <div class="kpi-top">
+          <div>
+            <div id="kpi2-title" class="kpi-title">Total Properties</div>
+          </div>
+          <img class="add-icon" src="Icons\yellow.svg" alt="" />
+        </div>
+
+        <div class="kpi-value">10,293</div>
+      </div>
+
+      <div class="kpi-footer">
+        <div class="change up" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M12 5v14"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+            <path
+              d="M5 12l7-7 7 7"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          1.3%
+        </div>
+        <div>Up from past week</div>
+      </div>
+    </article>
+    <article class="kpi-card" role="listitem" aria-labelledby="kpi3-title">
+      <div>
+        <div class="kpi-top">
+          <div>
+            <div id="kpi3-title" class="kpi-title">Total Services</div>
+          </div>
+          <img class="add-icon" src="Icons\green.svg" alt="" />
+        </div>
+
+        <div class="kpi-value">$89,000</div>
+      </div>
+
+      <div class="kpi-footer">
+        <div class="change down" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+            style="transform: rotate(180deg)"
+          >
+            <path
+              d="M12 5v14"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+            <path
+              d="M5 12l7-7 7 7"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          4.3%
+        </div>
+        <div>Down from yesterday</div>
+      </div>
+    </article>
+
+    <article class="kpi-card" role="listitem" aria-labelledby="kpi4-title">
+      <div>
+        <div class="kpi-top">
+          <div>
+            <div id="kpi4-title" class="kpi-title">Total Pending</div>
+          </div>
+          <img class="add-icon" src="Icons\red.svg" alt="" />
+        </div>
+
+        <div class="kpi-value">2,040</div>
+      </div>
+
+      <div class="kpi-footer">
+        <div class="change up" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M12 5v14"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+            <path
+              d="M5 12l7-7 7 7"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          1.8%
+        </div>
+        <div>Up from yesterday</div>
+      </div>
+    </article>
   </div>
 
-  <div class="card">
+  <div class="card donut_chart">
     <div class="card-title">Properties Types</div>
-    <div echarts [options]="donutOptions" class="chart chart-medium"></div>
+    <div echarts [options]="donutOptions" class="chart"></div>
   </div>
 
-  <div class="card">
+  <div class="card bar_chart">
     <div class="card-title">Properties Location</div>
-    <div echarts [options]="barOptions" class="chart chart-medium"></div>
+    <div echarts [options]="barOptions" class="chart"></div>
   </div>
 
-  <div class="card wide">
+  <div class="card wide line_chart">
     <div class="card-title">Monthly updates</div>
-    <div echarts [options]="lineOptions" class="chart chart-wide"></div>
+    <div echarts [options]="lineOptions" class="chart"></div>
   </div>
 </div>
