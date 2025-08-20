@@ -137,3 +137,25 @@
   vertical-align: middle;
   background: #101818;
 }
+.pending-actions {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.action-btn {
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.action-btn.approve {
+  background: #e6f7ec;
+  border-color: #bde8c9;
+}
+.action-btn.decline {
+  background: #fff0f0;
+  border-color: #f0bdbd;
+}

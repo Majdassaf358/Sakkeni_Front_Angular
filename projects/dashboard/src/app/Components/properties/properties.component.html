@@ -38,7 +38,35 @@
         <td>{{ p.id }}</td>
         <td>{{ p.owner.first_name + p.owner.last_name }}</td>
         <td>{{ p.owner.updated_at }}</td>
-        <td><span class="status pending"> Pending</span></td>
+        <td>
+          <ng-container *ngIf="activeFilter === 'Pending'; else normalStatus">
+            <div
+              class="pending-actions"
+              role="group"
+              aria-label="Pending actions"
+            >
+              <button
+                type="button"
+                class="action-btn approve"
+                (click)="approve(p.id)"
+              >
+                Approve
+              </button>
+              <button
+                type="button"
+                class="action-btn decline"
+                (click)="decline(p.id)"
+              >
+                Decline
+              </button>
+            </div>
+          </ng-container>
+
+          <!-- default single status -->
+          <ng-template #normalStatus>
+            <span class="status pending">Pending</span>
+          </ng-template>
+        </td>
       </tr>
     </tbody>
   </table>

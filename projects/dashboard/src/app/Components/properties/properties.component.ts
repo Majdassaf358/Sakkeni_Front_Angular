@@ -37,6 +37,12 @@ export class PropertiesComponent {
   setFilter(filter: StatusFilter) {
     this.activeFilter = filter;
   }
+  approve(id: number) {
+    // this.activeFilter = filter;
+  }
+  decline(id: number) {
+    // this.activeFilter = filter;
+  }
   get topStatusLabel(): string {
     return this.activeFilter;
   }
