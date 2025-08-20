@@ -2,10 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { Router } from '@angular/router';
 import { ApiResponse } from '../../Models/ApiResponse';
-import { SuperAdminService } from '../../Services/super-admin.service';
 import type { EChartsOption } from 'echarts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CommonModule } from '@angular/common';
+import { ChartsService } from '../../Services/charts.service';
+import { lastValueFrom } from 'rxjs';
+import { total_users } from '../../Models/charts/total_users';
+import { Properties_locations } from '../../Models/charts/properties_locations';
+import { properties_status } from '../../Models/charts/properties_status';
+import { services_status } from '../../Models/charts/services_status';
+import { total_properties } from '../../Models/charts/total_properties';
 @Component({
   selector: 'app-view-statistics',
   imports: [NavbarComponent, CommonModule, NgxEchartsModule],
@@ -55,7 +61,6 @@ export class ViewStatisticsComponent implements OnInit {
     ],
   };
 
-  // Bar chart with values on top and subtle background grid
   barOptions: EChartsOption = {
     tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
     xAxis: {
@@ -103,16 +108,38 @@ export class ViewStatisticsComponent implements OnInit {
       },
     ],
   };
-  constructor(private router: Router, private srv: SuperAdminService) {}
+  totalUsers!: total_users;
+  totalProperties!: total_properties;
+  propertiesStatus!: properties_status;
+  servicesStatus!: services_status;
+  propertiesLocations!: Properties_locations;
+  constructor(private router: Router, private srv: ChartsService) {}
   ngOnInit(): void {
     this.getStatistics();
   }
 
   async getStatistics() {
     try {
-      // let res: ApiResponse<PaginatedData<prope rtyCard>> = await lastValueFrom(
-      //   this.srv.viewStatistics()
-      // );
+      let res1: ApiResponse<total_users> = await lastValueFrom(
+        this.srv.getTotalUsers()
+      );
+      let res2: ApiResponse<total_properties> = await lastValueFrom(
+        this.srv.getTotalProperties()
+      );
+      let res3: ApiResponse<properties_status> = await lastValueFrom(
+        this.srv.getPropertyStatus()
+      );
+      let res4: ApiResponse<services_status> = await lastValueFrom(
+        this.srv.getServiceStatus()
+      );
+      let res5: ApiResponse<Properties_locations> = await lastValueFrom(
+        this.srv.getPropertiesLocations()
+      );
+      this.totalUsers = res1.data;
+      this.totalProperties = res2.data;
+      this.propertiesStatus = res3.data;
+      this.servicesStatus = res4.data;
+      this.propertiesLocations = res5.data;
     } catch (error) {
       console.log(error);
     }
