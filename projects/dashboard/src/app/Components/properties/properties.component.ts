@@ -7,6 +7,7 @@ import { ApiResponse } from '../../Models/ApiResponse';
 import { PaginatedData } from '../../Models/paginated_data';
 import { pendingReq } from '../../Models/viewPending/pendingReq';
 import { lastValueFrom } from 'rxjs';
+import { adjudicationProperty } from '../../Models/adjudication/adjudicationProperty';
 
 type StatusFilter = 'All' | 'Pending' | 'Approved' | 'Declined';
 @Component({
@@ -19,6 +20,7 @@ export class PropertiesComponent {
   tabs: StatusFilter[] = ['All', 'Pending', 'Approved', 'Declined'];
   activeFilter: StatusFilter = 'All';
   pendings: pendingReq[] = [];
+  adjProperty!: adjudicationProperty;
   constructor(private router: Router, private srv: AdministrationService) {}
   ngOnInit(): void {
     this.getPending();
@@ -37,9 +39,20 @@ export class PropertiesComponent {
   setFilter(filter: StatusFilter) {
     this.activeFilter = filter;
   }
-  approve(id: number) {
-    // this.activeFilter = filter;
+  async approveOrdecline(id: number, n: number, reason: string) {
+    this.adjProperty.approve = n;
+    this.adjProperty.property_id = id;
+    this.adjProperty.reason = reason;
+    try {
+      const res = await lastValueFrom(
+        this.srv.adjudicationProperties(this.adjProperty)
+      );
+      // this.favourite_property = res.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
+  async addToFavorites(id: number) {}
   decline(id: number) {
     // this.activeFilter = filter;
   }

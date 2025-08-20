@@ -106,8 +106,6 @@ export class ViewPropertiesComponent implements OnInit {
       const res = await lastValueFrom(this.propertyservice.addToFavorite(id));
       this.favourite_property = res.data;
       this.favoriteIds.add(id);
-      console.log(id, 'added');
-      console.log(this.favoriteIds);
     } catch (error) {
       console.log(error);
     }
@@ -118,8 +116,6 @@ export class ViewPropertiesComponent implements OnInit {
       await lastValueFrom(this.propertyservice.removeFromFavorite(id));
 
       this.favoriteIds.delete(id);
-      console.log(id, 'removed');
-      console.log(this.favoriteIds);
     } catch (error) {
       console.log(error);
     }

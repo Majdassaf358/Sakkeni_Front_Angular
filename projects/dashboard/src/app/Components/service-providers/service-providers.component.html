@@ -1,2 +1,64 @@
 <app-navbar></app-navbar>
-<p>service-providers works!</p>
+<div class="providers-status">
+  <div class="header">
+    <h2>Service Providers Status</h2>
+    <span [ngClass]="topStatusClass">{{ topStatusLabel }}</span>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button
+      *ngFor="let t of tabs"
+      type="button"
+      class="tab"
+      [class.active]="t === activeFilter"
+      (click)="setFilter(t)"
+      [attr.aria-pressed]="t === activeFilter"
+    >
+      {{ t }}
+    </button>
+  </div>
+
+  <table class="providers-table">
+    <thead>
+      <tr>
+        <th>Service Provider</th>
+        <th>Owner</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sp of service">
+        <td>{{ sp.id }}</td>
+        <td>{{ sp.owner.first_name + sp.owner.last_name }}</td>
+        <td>{{ sp.owner.updated_at }}</td>
+        <td>
+          <ng-container *ngIf="activeFilter === 'Pending'; else normalStatus">
+            <div class="pending-actions">
+              <button
+                type="button"
+                class="action-btn approve"
+                (click)="approveOrdecline(sp.id, 1, '')"
+              >
+                Approve
+              </button>
+              <button
+                type="button"
+                class="action-btn decline"
+                (click)="approveOrdecline(sp.id, 0, '')"
+              >
+                Decline
+              </button>
+            </div>
+          </ng-container>
+
+          <ng-template #normalStatus>
+            <span class="status" [ngClass]="activeFilter.toLowerCase()">
+              {{ activeFilter }}
+            </span>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

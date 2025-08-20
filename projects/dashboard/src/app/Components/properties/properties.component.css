@@ -152,10 +152,8 @@
 }
 
 .action-btn.approve {
-  background: #e6f7ec;
-  border-color: #bde8c9;
+  background: #d9f7e8;
 }
 .action-btn.decline {
-  background: #fff0f0;
-  border-color: #f0bdbd;
+  background: #ffded1;
 }

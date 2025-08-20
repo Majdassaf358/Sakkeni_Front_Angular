@@ -48,14 +48,14 @@
               <button
                 type="button"
                 class="action-btn approve"
-                (click)="approve(p.id)"
+                (click)="approveOrdecline(p.id, 1, '')"
               >
                 Approve
               </button>
               <button
                 type="button"
                 class="action-btn decline"
-                (click)="decline(p.id)"
+                (click)="approveOrdecline(p.id, 0, '')"
               >
                 Decline
               </button>
@@ -64,7 +64,14 @@
 
           <!-- default single status -->
           <ng-template #normalStatus>
-            <span class="status pending">Pending</span>
+            <span
+              class="status"
+              [ngClass]="
+                activeFilter.charAt(0).toLowerCase() + activeFilter.slice(1)
+              "
+            >
+              {{ activeFilter }}
+            </span>
           </ng-template>
         </td>
       </tr>

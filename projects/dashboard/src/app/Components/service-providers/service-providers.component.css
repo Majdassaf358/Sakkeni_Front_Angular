@@ -1,0 +1,161 @@
+.providers-status {
+  margin: 1rem 3rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.filter-tag {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.tab {
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #777;
+  padding: 8px 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.tab.active {
+  color: #000;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #000;
+  border-radius: 2px;
+}
+
+.providers-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.providers-table th {
+  font-size: 0.9rem;
+}
+.providers-table td {
+  font-size: 0.95rem;
+}
+
+.providers-table th,
+.providers-table td {
+  text-align: left;
+  padding: 12px 10px;
+}
+
+.providers-table thead {
+  color: #27393a80;
+}
+
+.providers-table tr {
+  border-bottom: 1px solid #eee;
+}
+
+.top_status,
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 6.5rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #101818;
+}
+
+.top_status {
+  min-width: 5rem;
+  padding: 0.35rem;
+  margin-left: 0.5rem;
+}
+
+.top_status.all {
+  background: #e9eeee;
+}
+.top_status.pending {
+  background: #fff3d6;
+}
+.top_status.approved {
+  background: #d9f7e8;
+}
+.top_status.declined {
+  background: #ffded1;
+}
+
+.status.all {
+  background: #e9eeee;
+}
+.status.pending {
+  background: #fff3d6;
+}
+.status.approved {
+  background: #d9f7e8;
+}
+.status.declined {
+  background: #ffded1;
+}
+
+.top_status::before,
+.status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.3rem;
+  vertical-align: middle;
+  background: #101818;
+}
+
+.pending-actions {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.action-btn {
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.action-btn.approve {
+  background: #d9f7e8;
+}
+.action-btn.decline {
+  background: #ffded1;
+}
