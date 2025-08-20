@@ -1,1 +1,44 @@
-<p>login works!</p>
+<div class="main-home-container bg-secondary">
+  <img class="home-img" src="/Imgs/Home-page-img.png" alt="" />
+  <div class="home-img-text">Discover a place you'll call Home.</div>
+  <div class="home-nav">
+    <div class="sign-up-div">
+      <div class="sign-up-title font-300">Welcome to</div>
+      <div class="logo">
+        <img class="forms-logo" src="/Imgs/Logo.png" alt="" />
+      </div>
+      <form [formGroup]="logInForm" class="forms-holder">
+        <input
+          [class.is-invalid]="logEmail?.invalid && logEmail?.touched"
+          formControlName="logEmail"
+          [placeholder]="
+            logEmail?.touched && logEmail?.invalid
+              ? getError('logEmail', 'Email')
+              : 'admin@gmail.com'
+          "
+          [class.error-placeholder]="logEmail?.touched && logEmail?.invalid"
+          class="form-control"
+          type="email"
+        />
+
+        <input
+          [class.is-invalid]="logPassword?.invalid && logPassword?.touched"
+          formControlName="logPassword"
+          [placeholder]="
+            logPassword?.touched && logPassword?.invalid
+              ? getError('logPassword', 'Password')
+              : '••••••••'
+          "
+          [class.error-placeholder]="
+            logPassword?.touched && logPassword?.invalid
+          "
+          class="form-control"
+          type="password"
+        />
+      </form>
+      <button class="log-button cursor-pointer" (click)="loginFunction()">
+        Log In
+      </button>
+    </div>
+  </div>
+</div>

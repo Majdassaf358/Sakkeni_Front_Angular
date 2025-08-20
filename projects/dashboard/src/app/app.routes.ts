@@ -4,6 +4,7 @@ import { ReportsComponent } from './Components/reports/reports.component';
 import { PropertiesComponent } from './Components/properties/properties.component';
 import { ServiceProvidersComponent } from './Components/service-providers/service-providers.component';
 import { AdminsComponent } from './Components/admins/admins.component';
+import { LoginComponent } from './Components/login/login.component';
 
 export const routes: Routes = [
   {
@@ -13,7 +14,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: ViewStatisticsComponent,
+    component: LoginComponent,
   },
   {
     path: 'statistics',

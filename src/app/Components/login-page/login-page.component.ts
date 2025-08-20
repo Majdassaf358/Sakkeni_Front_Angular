@@ -43,7 +43,6 @@ export class LoginPageComponent {
   mode: string = 'log';
   token: string = '';
   message: string = '';
-  selectedProperty: string = 'ready';
   authenticationRes!: authenticationRes;
 
   get logEmail() {
@@ -94,7 +93,6 @@ export class LoginPageComponent {
       ],
     });
   }
-  ngOnInit(): void {}
   getError(controlName: string, label: string) {
     return getErrorMessage(this.logInForm.get(controlName), label);
   }
@@ -106,9 +104,6 @@ export class LoginPageComponent {
   }
   switchToForgot() {
     this.mode = 'forgot';
-  }
-  selectProperty(property: string) {
-    this.selectedProperty = property;
   }
 
   async loginFunction() {

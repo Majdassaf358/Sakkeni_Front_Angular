@@ -1,5 +1,5 @@
-<app-loader></app-loader> <app-side-bar></app-side-bar>
+<app-loader></app-loader> <app-side-bar *ngIf="!isLoginPage"></app-side-bar>
 
-<main class="main">
+<main class="main" [class.no-sidebar]="isLoginPage">
   <router-outlet></router-outlet>
 </main>
