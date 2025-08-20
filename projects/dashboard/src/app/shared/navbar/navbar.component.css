@@ -69,7 +69,56 @@
   width: 2rem;
   height: 2rem;
 }
+.lan-button {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #27393a;
+  border-bottom: none;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 5px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
+.dropdown-menu li {
+  color: #27393a;
+  padding: 0.1rem 0.5rem;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.edit-profile {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.logout {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
 .arrow {
   font-size: 0.8rem;
 }
