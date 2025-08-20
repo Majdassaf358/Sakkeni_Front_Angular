@@ -35,6 +35,7 @@ export class NavbarComponent {
   async logout() {
     try {
       let res: ApiResponse<null> = await lastValueFrom(this.auth.adminLogout());
+      this.router.navigate(['/login']);
     } catch (error) {
       console.log(error);
     }
