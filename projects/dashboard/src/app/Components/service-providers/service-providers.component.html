@@ -61,4 +61,55 @@
       </tr>
     </tbody>
   </table>
+  <div class="providers-cards">
+    <div class="provider-card" *ngFor="let sp of service">
+      <div class="row">
+        <span class="label">Service Provider:</span>
+        <span class="value">{{ sp.id }}</span>
+      </div>
+      <div class="row">
+        <span class="label">Owner:</span>
+        <span class="value">{{
+          sp.owner.first_name + sp.owner.last_name
+        }}</span>
+      </div>
+      <div class="row">
+        <span class="label">Date:</span>
+        <span class="value">{{
+          sp.owner.updated_at | date : "mediumDate"
+        }}</span>
+      </div>
+      <div class="row">
+        <span class="label">Status:</span>
+        <span class="value">
+          <ng-container
+            *ngIf="activeFilter === 'Pending'; else normalStatusMobile"
+          >
+            <div class="actions">
+              <button
+                type="button"
+                class="action-btn approve"
+                (click)="approveOrdecline(sp.id, 1, '')"
+              >
+                Approve
+              </button>
+              <button
+                type="button"
+                class="action-btn decline"
+                (click)="approveOrdecline(sp.id, 0, '')"
+              >
+                Decline
+              </button>
+            </div>
+          </ng-container>
+
+          <ng-template #normalStatusMobile>
+            <span class="status" [ngClass]="activeFilter.toLowerCase()">
+              {{ activeFilter }}
+            </span>
+          </ng-template>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>

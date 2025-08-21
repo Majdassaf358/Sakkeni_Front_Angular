@@ -157,3 +157,79 @@
 .action-btn.decline {
   background: #ffded1;
 }
+/* Base styles remain the same */
+.properties-cards {
+  display: none;
+}
+/* Responsive layout */
+@media (max-width: 1024px) {
+  .properties-status {
+    margin: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .header h2 {
+    font-size: 1.1rem;
+  }
+
+  .tabs {
+    overflow-x: auto;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: none;
+  }
+
+  .tab {
+    flex: 0 0 auto;
+    font-size: 0.9rem;
+    padding: 6px 0;
+  }
+
+  /* Hide the original table */
+  .properties-table {
+    display: none;
+  }
+
+  /* Mobile card layout */
+  .properties-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .property-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 1rem;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .property-card .row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+
+  .property-card .label {
+    font-weight: 600;
+    color: #555;
+  }
+
+  .property-card .value {
+    color: #333;
+  }
+
+  .property-card .actions,
+  .property-card .status {
+    margin-top: 0.5rem;
+  }
+}

@@ -53,4 +53,31 @@
       </tr>
     </tbody>
   </table>
+  <div class="admins-cards">
+    <div class="admin-card" *ngFor="let admin of admins">
+      <div class="top">
+        <img [src]="admin.profile_picture_path" alt="avatar" class="avatar" />
+        <div class="info">
+          <div class="name">{{ admin.first_name + admin.last_name }}</div>
+          <div class="email">{{ admin.email }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <span class="label">Date Joined:</span>
+        <span class="value">{{ admin.created_at | date : "mediumDate" }}</span>
+      </div>
+      <div class="row">
+        <span class="label">Properties Status:</span>
+        <span class="value status-counters">
+          <span class="status approved">
+            {{ admin.number_of_accepted_houses }}
+          </span>
+          <!-- Optional declined -->
+          <!-- <span class="status declined">
+          {{ admin.number_of_declined_houses }}
+        </span> -->
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
