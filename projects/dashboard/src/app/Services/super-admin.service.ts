@@ -13,6 +13,7 @@ import { view_admins } from '../Models/viewAdmin/view_admins';
 })
 export class SuperAdminService {
   constructor(private http: HttpClient) {}
+  s: string = '/admin';
 
   public adminReg(req: admin_reg): Observable<ApiResponse<AdminRes>> {
     let url = `${environment.Api}/sign-up`;

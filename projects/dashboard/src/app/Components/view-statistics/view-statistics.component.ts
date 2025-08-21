@@ -20,33 +20,9 @@ import { total_properties } from '../../Models/charts/total_properties';
 })
 export class ViewStatisticsComponent implements OnInit {
   donutOptions: EChartsOption | null = null;
-  groupOptions: EChartsOption | null = null; // residential vs commercial (nested)
+  groupOptions: EChartsOption | null = null;
   topLevelOptions: EChartsOption | null = null;
-  barOptions: EChartsOption = {
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-    xAxis: {
-      type: 'category',
-      data: ['Damascus', 'Tartus', 'Lattakia', 'Daraa', 'Hama', 'Idlib'],
-      axisTick: { alignWithLabel: true },
-    },
-    yAxis: {
-      type: 'value',
-      min: 0,
-      max: 120,
-      splitLine: { lineStyle: { type: 'dashed' } },
-    },
-    series: [
-      {
-        name: '2025',
-        type: 'bar',
-        barWidth: '40%',
-        data: [56, 64, 76, 78, 70, 37],
-        label: { show: true, position: 'top' },
-        itemStyle: {},
-        emphasis: { itemStyle: { opacity: 0.9 } },
-      },
-    ],
-  };
+  barOptions: EChartsOption = {};
 
   lineOptions: EChartsOption = {
     tooltip: { trigger: 'axis' },
@@ -104,6 +80,7 @@ export class ViewStatisticsComponent implements OnInit {
       this.servicesStatus = res4.data;
       this.propertiesLocations = res5.data;
       this.buildOptions();
+      this.updateChart();
       this.donutOptions = this.groupOptions;
     } catch (error) {
       console.log(error);
@@ -235,4 +212,54 @@ export class ViewStatisticsComponent implements OnInit {
       this.chartInstance.setOption(this.donutOptions, { notMerge: true });
     }
   }
+  updateChart() {
+    if (!this.propertiesLocations) return;
+
+    const cities = Object.keys(this.propertiesLocations);
+    const values = Object.values(this.propertiesLocations);
+
+    this.barOptions = {
+      tooltip: { trigger: 'axis' },
+      xAxis: {
+        type: 'category',
+        data: cities,
+        axisLabel: { rotate: 30 }, // rotate names so they don’t overlap
+      },
+      yAxis: { type: 'value' },
+      series: [
+        {
+          data: values,
+          type: 'bar',
+          itemStyle: {
+            borderRadius: [4, 4, 0, 0],
+          },
+        },
+      ],
+    };
+  }
 }
+//  barOptions: EChartsOption = {
+//     tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+//     xAxis: {
+//       type: 'category',
+//       data: ['Damascus', 'Tartus', 'Lattakia', 'Daraa', 'Hama', 'Idlib'],
+//       axisTick: { alignWithLabel: true },
+//     },
+//     yAxis: {
+//       type: 'value',
+//       min: 0,
+//       max: 120,
+//       splitLine: { lineStyle: { type: 'dashed' } },
+//     },
+//     series: [
+//       {
+//         name: '2025',
+//         type: 'bar',
+//         barWidth: '40%',
+//         data: [56, 64, 76, 78, 70, 37],
+//         label: { show: true, position: 'top' },
+//         itemStyle: {},
+//         emphasis: { itemStyle: { opacity: 0.9 } },
+//       },
+//     ],
+//   };
