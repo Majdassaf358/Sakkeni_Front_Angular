@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ type StatusFilter = 'All' | 'Pending' | 'Approved' | 'Declined';
   templateUrl: './properties.component.html',
   styleUrl: './properties.component.css',
 })
-export class PropertiesComponent {
+export class PropertiesComponent implements OnInit {
   tabs: StatusFilter[] = ['All', 'Pending', 'Approved', 'Declined'];
   activeFilter: StatusFilter = 'All';
   pendings: pendingReq[] = [];
@@ -51,10 +51,6 @@ export class PropertiesComponent {
     } catch (error) {
       console.log(error);
     }
-  }
-  async addToFavorites(id: number) {}
-  decline(id: number) {
-    // this.activeFilter = filter;
   }
   get topStatusLabel(): string {
     return this.activeFilter;

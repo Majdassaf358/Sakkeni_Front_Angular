@@ -6,6 +6,7 @@ import { environment } from '../shared/environments';
 import { AdminRes } from '../Models/AdminRes';
 import { HttpClient } from '@angular/common/http';
 import { PaginatedData } from '../Models/paginated_data';
+import { view_admins } from '../Models/viewAdmin/view_admins';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +20,9 @@ export class SuperAdminService {
   }
   public viewAdmins(
     page: number
-  ): Observable<ApiResponse<PaginatedData<AdminRes>>> {
+  ): Observable<ApiResponse<PaginatedData<view_admins>>> {
     let url = `${environment.Api}/view-admins?page=${page}`;
-    return this.http.get<ApiResponse<PaginatedData<AdminRes>>>(url);
+    return this.http.get<ApiResponse<PaginatedData<view_admins>>>(url);
   }
   public viewAdminProfile(adminId: number): Observable<ApiResponse<AdminRes>> {
     let url = `${environment.Api}/view-admin-profile/${adminId}`;

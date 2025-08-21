@@ -1,2 +1,56 @@
 <app-navbar></app-navbar>
-<p>admins works!</p>
+
+<div class="admins-page">
+  <div class="header">
+    <h2>Admins</h2>
+    <button class="all-btn">● All</button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs" role="tablist">
+    <button
+      *ngFor="let t of tabs"
+      type="button"
+      class="tab"
+      [class.active]="t === activeFilter"
+      (click)="setFilter(t)"
+      [attr.aria-pressed]="t === activeFilter"
+    >
+      {{ t }}
+    </button>
+  </div>
+
+  <!-- Table -->
+  <table class="admins-table">
+    <colgroup>
+      <col style="width: 25%" />
+      <col style="width: 25%" />
+      <col style="width: 20%" />
+      <col style="width: 30%" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Date Joined</th>
+        <th>Properties Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let admin of admins">
+        <td class="admin-info">
+          <img [src]="admin.profile_picture_path" alt="avatar" class="avatar" />
+          <span>{{ admin.first_name + admin.last_name }}</span>
+        </td>
+        <td>{{ admin.email }}</td>
+        <td>{{ admin.created_at | date : "mediumDate" }}</td>
+        <td class="status-counters">
+          <span class="status approved">
+            {{ admin.number_of_accepted_houses }}</span
+          >
+          <!-- <span class="status declined"> {{ admin.number_of_declined_houses }}</span> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -31,7 +31,7 @@
       <tr *ngFor="let sp of service">
         <td>{{ sp.id }}</td>
         <td>{{ sp.owner.first_name + sp.owner.last_name }}</td>
-        <td>{{ sp.owner.updated_at }}</td>
+        <td>{{ sp.owner.updated_at | date : "mediumDate" }}</td>
         <td>
           <ng-container *ngIf="activeFilter === 'Pending'; else normalStatus">
             <div class="pending-actions">
