@@ -148,6 +148,45 @@
   height: 14px;
   display: block;
 }
+/* view-statistics.component.scss */
+.controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.toggle-btn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+}
+
+.toggle-btn.active {
+  border-color: #2b6edb;
+  background: #eef5ff;
+  font-weight: 600;
+}
+
+.chart {
+  width: 100%;
+  height: 360px; /* adjust as needed */
+}
+
+.loading {
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.summary {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
 
 /* Responsive tweaks for very small screens (optional) */
 @media (max-width: 420px) {

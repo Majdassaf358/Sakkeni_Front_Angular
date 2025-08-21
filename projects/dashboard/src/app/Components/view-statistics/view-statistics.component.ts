@@ -19,48 +19,9 @@ import { total_properties } from '../../Models/charts/total_properties';
   styleUrl: './view-statistics.component.css',
 })
 export class ViewStatisticsComponent implements OnInit {
-  donutOptions: EChartsOption = {
-    tooltip: { trigger: 'item' },
-    legend: {
-      bottom: 10,
-      data: ['Villa', 'House', 'Office', 'Apartment', 'House2', 'Building'],
-    },
-    series: [
-      {
-        name: 'Properties',
-        type: 'pie',
-        radius: ['45%', '70%'],
-        avoidLabelOverlap: false,
-        label: {
-          show: false,
-          position: 'outside',
-        },
-        labelLine: { show: true, length: 12 },
-        emphasis: { disabled: false },
-        data: [
-          { value: 71, name: 'Villa' },
-          { value: 49, name: 'House' },
-          { value: 48, name: 'Office' },
-          { value: 34, name: 'Apartment' },
-          { value: 26, name: 'House2' },
-          { value: 13, name: 'Building' },
-        ],
-      },
-    ],
-    graphic: [
-      {
-        type: 'text',
-        left: 'center',
-        top: 'center',
-        style: {
-          text: '241', // center number
-          fontSize: 22,
-          fontWeight: 700,
-        },
-      },
-    ],
-  };
-
+  donutOptions: EChartsOption | null = null;
+  groupOptions: EChartsOption | null = null; // residential vs commercial (nested)
+  topLevelOptions: EChartsOption | null = null;
   barOptions: EChartsOption = {
     tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
     xAxis: {
@@ -108,11 +69,13 @@ export class ViewStatisticsComponent implements OnInit {
       },
     ],
   };
-  totalUsers!: total_users;
-  totalProperties!: total_properties;
-  propertiesStatus!: properties_status;
-  servicesStatus!: services_status;
-  propertiesLocations!: Properties_locations;
+  totalUsers: total_users | null = null;
+  totalProperties: total_properties | null = null;
+  propertiesStatus: properties_status | null = null;
+  servicesStatus: services_status | null = null;
+  propertiesLocations: Properties_locations | null = null;
+  activeView: 'groups' | 'top' = 'groups';
+  private chartInstance: any;
   constructor(private router: Router, private srv: ChartsService) {}
   ngOnInit(): void {
     this.getStatistics();
@@ -140,8 +103,136 @@ export class ViewStatisticsComponent implements OnInit {
       this.propertiesStatus = res3.data;
       this.servicesStatus = res4.data;
       this.propertiesLocations = res5.data;
+      this.buildOptions();
+      this.donutOptions = this.groupOptions;
     } catch (error) {
       console.log(error);
+      this.totalProperties = null as any;
+      this.buildOptions();
+      this.donutOptions = this.groupOptions;
+    }
+  }
+  onChartInit(ec: any) {
+    this.chartInstance = ec;
+  }
+  private buildOptions() {
+    const p =
+      this.totalProperties ??
+      ({
+        total: 0,
+        residential: { total: 0, villa: 0, apartment: 0 },
+        commercial: { total: 0, office: 0 },
+        'off-plan': 0,
+        purchase: 0,
+        rent: 0,
+      } as any);
+    const inner = [
+      { value: p.residential?.total ?? 0, name: 'Residential' },
+      { value: p.commercial?.total ?? 0, name: 'Commercial' },
+    ];
+    const outer = [
+      { value: p.residential?.villa ?? 0, name: 'Villa' },
+      { value: p.residential?.apartment ?? 0, name: 'Apartment' },
+      { value: p.commercial?.office ?? 0, name: 'Office' },
+    ];
+    this.groupOptions = {
+      tooltip: {
+        trigger: 'item',
+        formatter: (params: any) => {
+          return `${params.seriesName ? params.seriesName + '<br/>' : ''}<b>${
+            params.name
+          }</b>: ${params.value} (${params.percent}%)`;
+        },
+      },
+      legend: { bottom: 10 },
+      series: [
+        {
+          name: 'Groups',
+          type: 'pie',
+          selectedMode: 'single',
+          radius: ['30%', '45%'],
+          label: { position: 'inside', formatter: '{b}\n{c}' },
+          data: inner,
+        },
+        {
+          name: 'Details',
+          type: 'pie',
+          radius: ['60%', '75%'],
+          avoidLabelOverlap: false,
+          label: { show: false },
+          labelLine: { show: true, length: 12 },
+          data: outer,
+        },
+      ],
+      graphic: [
+        {
+          type: 'text',
+          left: 'center',
+          top: 'center',
+          style: {
+            text: String(
+              p.total ?? inner.reduce((s: any, a: any) => s + a.value, 0)
+            ),
+            fontSize: 20,
+            fontWeight: 700,
+          },
+        },
+      ],
+    };
+    const topData = [
+      { value: p['off-plan'] ?? 0, name: 'Off-plan' },
+      { value: p.purchase ?? 0, name: 'Purchase' },
+      { value: p.rent ?? 0, name: 'Rent' },
+    ];
+
+    this.topLevelOptions = {
+      tooltip: {
+        trigger: 'item',
+        formatter: (params: any) =>
+          `${params.marker} <b>${params.name}</b><br/>Count: ${params.value}<br/>Share: ${params.percent}%`,
+      },
+      legend: { bottom: 10 },
+      series: [
+        {
+          name: 'Top-level',
+          type: 'pie',
+          radius: ['45%', '70%'],
+          avoidLabelOverlap: false,
+          label: {
+            show: true,
+            position: 'outside',
+            formatter: '{b}\n{c} ({d}%)',
+          },
+          labelLine: { length: 12 },
+          data: topData,
+        },
+      ],
+      graphic: [
+        {
+          type: 'text',
+          left: 'center',
+          top: 'center',
+          style: {
+            text: String(
+              p.total ?? topData.reduce((s: any, a: any) => s + a.value, 0)
+            ),
+            fontSize: 20,
+            fontWeight: 700,
+          },
+        },
+      ],
+    };
+  }
+
+  switchView(view: 'groups' | 'top') {
+    if (this.activeView === view) return;
+    this.activeView = view;
+    this.donutOptions =
+      view === 'groups' ? this.groupOptions : this.topLevelOptions;
+
+    if (this.chartInstance && this.donutOptions) {
+      // replace previous config cleanly
+      this.chartInstance.setOption(this.donutOptions, { notMerge: true });
     }
   }
 }

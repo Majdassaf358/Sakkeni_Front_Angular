@@ -10,7 +10,9 @@
           <img class="add-icon" src="Icons\purple.svg" alt="" />
         </div>
 
-        <div class="kpi-value">40,689</div>
+        <div *ngIf="totalUsers" class="kpi-value">
+          {{ totalUsers.total }}
+        </div>
       </div>
 
       <div class="kpi-footer">
@@ -49,7 +51,9 @@
           <img class="add-icon" src="Icons\yellow.svg" alt="" />
         </div>
 
-        <div class="kpi-value">10,293</div>
+        <div *ngIf="totalProperties" class="kpi-value">
+          {{ totalProperties.total }}
+        </div>
       </div>
 
       <div class="kpi-footer">
@@ -88,7 +92,9 @@
           <img class="add-icon" src="Icons\green.svg" alt="" />
         </div>
 
-        <div class="kpi-value">$89,000</div>
+        <div *ngIf="totalUsers" class="kpi-value">
+          {{ totalUsers.service_providers }}
+        </div>
       </div>
 
       <div class="kpi-footer">
@@ -129,7 +135,9 @@
           <img class="add-icon" src="Icons\red.svg" alt="" />
         </div>
 
-        <div class="kpi-value">2,040</div>
+        <div *ngIf="propertiesStatus" class="kpi-value">
+          {{ propertiesStatus.pending }}
+        </div>
       </div>
 
       <div class="kpi-footer">
@@ -163,7 +171,60 @@
 
   <div class="card donut_chart">
     <div class="card-title">Properties Types</div>
-    <div echarts [options]="donutOptions" class="chart"></div>
+
+    <!-- Toggle controls to switch between the two donut views -->
+    <div class="controls" role="tablist" aria-label="Chart view switch">
+      <button
+        type="button"
+        class="toggle-btn"
+        [class.active]="activeView === 'groups'"
+        (click)="switchView('groups')"
+        [attr.aria-pressed]="activeView === 'groups'"
+      >
+        Residential / Commercial
+      </button>
+
+      <button
+        type="button"
+        class="toggle-btn"
+        [class.active]="activeView === 'top'"
+        (click)="switchView('top')"
+        [attr.aria-pressed]="activeView === 'top'"
+      >
+        > Rent / Purchase / Off-plan
+      </button>
+    </div>
+
+    <!-- Chart area: shows when donutOptions is ready -->
+    <div *ngIf="donutOptions; else donutLoading">
+      <div
+        echarts
+        [options]="donutOptions"
+        (chartInit)="onChartInit($event)"
+        class="chart"
+        aria-label="Properties chart"
+      ></div>
+    </div>
+
+    <ng-template #donutLoading>
+      <div class="loading">Loading chart…</div>
+    </ng-template>
+
+    <!-- Accessible textual summary / fallback -->
+    <div class="summary" *ngIf="totalProperties">
+      <div><strong>Total:</strong> {{ totalProperties.total }}</div>
+      <div *ngIf="activeView === 'groups'">
+        <strong>Residential:</strong>
+        {{ totalProperties.residential.total }},
+        <strong>Commercial:</strong>
+        {{ totalProperties.commercial.total }}
+      </div>
+      <div *ngIf="activeView === 'top'">
+        <strong>Off-plan:</strong> {{ totalProperties?.['off-plan']}},
+        <strong>Purchase:</strong> {{ totalProperties.purchase }},
+        <strong>Rent:</strong> {{ totalProperties.rent }}
+      </div>
+    </div>
   </div>
 
   <div class="card bar_chart">
