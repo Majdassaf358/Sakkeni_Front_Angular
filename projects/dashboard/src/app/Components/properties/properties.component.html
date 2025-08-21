@@ -20,8 +20,8 @@
 
   <table class="properties-table">
     <colgroup>
-      <col style="width: 60%" />
-      <col style="width: 10%" />
+      <col style="width: 55%" />
+      <col style="width: 15%" />
       <col style="width: 10%" />
       <col style="width: 20%" />
     </colgroup>
@@ -36,7 +36,7 @@
     <tbody>
       <tr *ngFor="let p of pendings">
         <td>{{ p.id }}</td>
-        <td>{{ p.owner.first_name + p.owner.last_name }}</td>
+        <td>{{ p.owner.first_name + " " + p.owner.last_name }}</td>
         <td>{{ p.owner.updated_at | date : "mediumDate" }}</td>
         <td>
           <ng-container *ngIf="activeFilter === 'Pending'; else normalStatus">
@@ -85,7 +85,9 @@
       </div>
       <div class="row">
         <span class="label">Owner:</span>
-        <span class="value">{{ p.owner.first_name + p.owner.last_name }}</span>
+        <span class="value">{{
+          p.owner.first_name + " " + p.owner.last_name
+        }}</span>
       </div>
       <div class="row">
         <span class="label">Date:</span>

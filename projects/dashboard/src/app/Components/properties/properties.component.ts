@@ -20,7 +20,7 @@ export class PropertiesComponent implements OnInit {
   tabs: StatusFilter[] = ['All', 'Pending', 'Approved', 'Declined'];
   activeFilter: StatusFilter = 'All';
   pendings: pendingReq[] = [];
-  adjProperty!: adjudicationProperty;
+  adjProperty: adjudicationProperty = new adjudicationProperty();
   constructor(private router: Router, private srv: AdministrationService) {}
   ngOnInit(): void {
     this.getPending();
@@ -39,15 +39,16 @@ export class PropertiesComponent implements OnInit {
   setFilter(filter: StatusFilter) {
     this.activeFilter = filter;
   }
-  async approveOrdecline(id: number, n: number, reason: string) {
-    this.adjProperty.approve = n;
+  async approveOrdecline(id: number, adj: number, reason: string) {
+    this.adjProperty.approve = adj;
     this.adjProperty.property_id = id;
     this.adjProperty.reason = reason;
     try {
       const res = await lastValueFrom(
         this.srv.adjudicationProperties(this.adjProperty)
       );
-      // this.favourite_property = res.data;
+      this.getPending();
+      // window.location.reload();
     } catch (error) {
       console.log(error);
     }
