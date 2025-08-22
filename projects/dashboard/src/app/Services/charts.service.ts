@@ -15,25 +15,25 @@ import { Properties_locations } from '../Models/charts/properties_locations';
 export class ChartsService {
   constructor(private http: HttpClient) {}
   public getTotalUsers(): Observable<ApiResponse<total_users>> {
-    let url = `${environment.Api}/charts/total-users`;
+    let url = `${environment.Api}/admin/charts/total-users`;
     return this.http.get<ApiResponse<total_users>>(url);
   }
   public getTotalProperties(): Observable<ApiResponse<total_properties>> {
-    let url = `${environment.Api}/charts/total-properties`;
+    let url = `${environment.Api}/admin/charts/total-properties`;
     return this.http.get<ApiResponse<total_properties>>(url);
   }
   public getPropertyStatus(): Observable<ApiResponse<properties_status>> {
-    let url = `${environment.Api}/charts/properties-status`;
+    let url = `${environment.Api}/admin/charts/properties-status`;
     return this.http.get<ApiResponse<properties_status>>(url);
   }
   public getServiceStatus(): Observable<ApiResponse<services_status>> {
-    let url = `${environment.Api}/charts/services-status`;
+    let url = `${environment.Api}/admin/charts/services-status`;
     return this.http.get<ApiResponse<services_status>>(url);
   }
   public getPropertiesLocations(): Observable<
     ApiResponse<Properties_locations>
   > {
-    let url = `${environment.Api}/charts/properties-locations`;
+    let url = `${environment.Api}/admin/charts/properties-locations`;
     return this.http.get<ApiResponse<Properties_locations>>(url);
   }
 }

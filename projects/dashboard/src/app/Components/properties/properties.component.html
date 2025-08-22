@@ -20,9 +20,9 @@
 
   <table class="properties-table">
     <colgroup>
-      <col style="width: 55%" />
+      <col style="width: 47%" />
+      <col style="width: 18%" />
       <col style="width: 15%" />
-      <col style="width: 10%" />
       <col style="width: 20%" />
     </colgroup>
     <thead>
@@ -35,7 +35,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let p of pendings">
-        <td>{{ p.id }}</td>
+        <td>{{ p.location.country.name + ", " + p.location.city.name }}</td>
         <td>{{ p.owner.first_name + " " + p.owner.last_name }}</td>
         <td>{{ p.owner.updated_at | date : "mediumDate" }}</td>
         <td>

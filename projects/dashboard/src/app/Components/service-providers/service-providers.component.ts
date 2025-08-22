@@ -28,14 +28,13 @@ export class ServiceProvidersComponent {
   }
 
   async getServices() {
-    // try {
-    //   let res: ApiResponse<PaginatedData<pendingReq>> = await lastValueFrom(
-    //     this.srv.viewPendingProperties(1)
-    //   );
-    //   this.pendings = res.data.data;
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      let res: ApiResponse<PaginatedData<pendingServices>> =
+        await lastValueFrom(this.srv.viewPendingServiceProviders(1));
+      this.service = res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
   setFilter(filter: StatusFilter) {
     this.activeFilter = filter;
@@ -48,15 +47,11 @@ export class ServiceProvidersComponent {
       const res = await lastValueFrom(
         this.srv.adjudicationServiceProviders(this.adjService)
       );
-      // this.favourite_property = res.data;
     } catch (error) {
       console.log(error);
     }
   }
-  async addToFavorites(id: number) {}
-  decline(id: number) {
-    // this.activeFilter = filter;
-  }
+
   get topStatusLabel(): string {
     return this.activeFilter;
   }
