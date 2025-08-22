@@ -13,35 +13,32 @@ import { view_admins } from '../Models/viewAdmin/view_admins';
 })
 export class SuperAdminService {
   constructor(private http: HttpClient) {}
-  s: string = '/admin';
 
-  public adminReg(req: admin_reg): Observable<ApiResponse<AdminRes>> {
-    let url = `${environment.Api}/sign-up`;
-    return this.http.post<ApiResponse<AdminRes>>(url, req);
-  }
   public viewAdmins(
     page: number
   ): Observable<ApiResponse<PaginatedData<view_admins>>> {
-    let url = `${environment.Api}/view-admins?page=${page}`;
+    let url = `${environment.Api}/admin/view-admins?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<view_admins>>>(url);
   }
   public viewAdminProfile(adminId: number): Observable<ApiResponse<AdminRes>> {
-    let url = `${environment.Api}/view-admin-profile/${adminId}`;
+    let url = `${environment.Api}/admin/view-profile/${adminId}`;
+    return this.http.get<ApiResponse<AdminRes>>(url);
+  }
+  public updateAdminProfile(
+    adminId: number
+  ): Observable<ApiResponse<AdminRes>> {
+    let url = `${environment.Api}/admin/update-profile/${adminId}`;
     return this.http.get<ApiResponse<AdminRes>>(url);
   }
   public removeAdmin(id: number): Observable<ApiResponse<AdminRes>> {
-    let url = `${environment.Api}/remove-admin/${id}`;
+    let url = `${environment.Api}/admin/delete/${id}`;
     return this.http.get<ApiResponse<AdminRes>>(url);
   }
   public searchAdmins(
     name: string,
     page: number
   ): Observable<ApiResponse<AdminRes>> {
-    let url = `${environment.Api}/search-admin?page=${page}`;
+    let url = `${environment.Api}/admin/search?page=${page}`;
     return this.http.post<ApiResponse<AdminRes>>(url, { name: name });
-  }
-  public viewStatistics(): Observable<ApiResponse<PaginatedData<AdminRes>>> {
-    let url = `${environment.Api}/view-admins`;
-    return this.http.get<ApiResponse<PaginatedData<AdminRes>>>(url);
   }
 }

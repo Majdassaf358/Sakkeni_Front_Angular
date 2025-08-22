@@ -17,25 +17,25 @@ export class AdministrationService {
   public viewPendingProperties(
     page: number
   ): Observable<ApiResponse<PaginatedData<pendingReq>>> {
-    let url = `${environment.Api}/view-pending-properties?page=${page}`;
+    let url = `${environment.Api}/admin/view-pending-properties?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<pendingReq>>>(url);
   }
   public adjudicationProperties(
     req: adjudicationProperty
   ): Observable<ApiResponse<null>> {
-    let url = `${environment.Api}/property-adjudication`;
+    let url = `${environment.Api}/admin/property-adjudication`;
     return this.http.post<ApiResponse<null>>(url, req);
   }
   public viewPendingServiceProviders(
     page: number
   ): Observable<ApiResponse<PaginatedData<pendingReq>>> {
-    let url = `${environment.Api}/view-pending-service-providers?page=${page}`;
+    let url = `${environment.Api}/admin/view-pending-service-providers?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<pendingReq>>>(url);
   }
   public adjudicationServiceProviders(
     req: adjudicationServiceProviders
   ): Observable<ApiResponse<null>> {
-    let url = `${environment.Api}/service-provider-service-adjudication`;
+    let url = `${environment.Api}/admin/service-provider-service-adjudication`;
     return this.http.post<ApiResponse<null>>(url, req);
   }
 }

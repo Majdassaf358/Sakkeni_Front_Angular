@@ -14,15 +14,15 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public adminReg(req: admin_reg): Observable<ApiResponse<AdminRes>> {
-    let url = `${environment.Api}/register-admin`;
+    let url = `${environment.Api}/admin/register`;
     return this.http.post<ApiResponse<AdminRes>>(url, req);
   }
   public adminLogin(req: login): Observable<ApiResponse<AdminRes>> {
-    let url = `${environment.Api}/admin-login`;
+    let url = `${environment.Api}/admin/login`;
     return this.http.post<ApiResponse<AdminRes>>(url, req);
   }
   public adminLogout(): Observable<ApiResponse<null>> {
-    let url = `${environment.Api}/logout-admin`;
+    let url = `${environment.Api}/admin/logout`;
     return this.http.get<ApiResponse<null>>(url);
   }
 }
