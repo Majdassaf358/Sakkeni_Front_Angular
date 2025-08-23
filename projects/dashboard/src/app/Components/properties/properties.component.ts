@@ -8,6 +8,7 @@ import { PaginatedData } from '../../Models/paginated_data';
 import { pendingReq } from '../../Models/viewPending/pendingReq';
 import { lastValueFrom } from 'rxjs';
 import { adjudicationProperty } from '../../Models/adjudication/adjudicationProperty';
+import { approve_or_decline_property } from '../../Models/approve_or_decline._property';
 
 type StatusFilter = 'All' | 'Pending' | 'Approved' | 'Declined';
 @Component({
@@ -20,6 +21,8 @@ export class PropertiesComponent implements OnInit {
   tabs: StatusFilter[] = ['All', 'Pending', 'Approved', 'Declined'];
   activeFilter: StatusFilter = 'All';
   pendings: pendingReq[] = [];
+  app: approve_or_decline_property[] = [];
+  dec: approve_or_decline_property[] = [];
   adjProperty: adjudicationProperty = new adjudicationProperty();
   constructor(private router: Router, private srv: AdministrationService) {}
   ngOnInit(): void {
@@ -36,8 +39,51 @@ export class PropertiesComponent implements OnInit {
       console.log(error);
     }
   }
+  async getApproved() {
+    try {
+      let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
+        await lastValueFrom(this.srv.viewApprovedProperties(1));
+      this.app = res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async getDeclined() {
+    try {
+      let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
+        await lastValueFrom(this.srv.viewDeclinedProperties(1));
+      this.dec = res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async getAll() {
+    try {
+      let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
+        await lastValueFrom(this.srv.viewAllProperties(1));
+      this.app = res.data.data;
+      console.log(this.app);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   setFilter(filter: StatusFilter) {
     this.activeFilter = filter;
+
+    switch (filter) {
+      case 'Pending':
+        this.getPending();
+        break;
+      case 'Approved':
+        this.getApproved();
+        break;
+      case 'Declined':
+        this.getDeclined();
+        break;
+      case 'All':
+        this.getAll();
+        break;
+    }
   }
   async approveOrdecline(id: number, adj: number, reason: string) {
     this.adjProperty.approve = adj;

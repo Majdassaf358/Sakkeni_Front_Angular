@@ -7,7 +7,10 @@ export class AdminRes {
   'profile_picture_path': string;
   'address': string;
   'phoneNumber': number;
-  'number_of_accepted_houses': number;
+  'accepted_properties': number;
+  'rejected_properties': number;
+  'accepted_services': number;
+  'rejected_services': number;
   'is_super_admin': boolean;
   'token': string;
 }

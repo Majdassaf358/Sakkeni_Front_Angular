@@ -7,6 +7,7 @@ import { pendingReq } from '../Models/viewPending/pendingReq';
 import { environment } from '../shared/environments';
 import { adjudicationProperty } from '../Models/adjudication/adjudicationProperty';
 import { adjudicationServiceProviders } from '../Models/adjudication/adjudicationServiceProvider';
+import { approve_or_decline_property } from '../Models/approve_or_decline._property';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,30 @@ export class AdministrationService {
   ): Observable<ApiResponse<PaginatedData<pendingReq>>> {
     let url = `${environment.Api}/admin/view-pending-properties?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<pendingReq>>>(url);
+  }
+  public viewApprovedProperties(
+    page: number
+  ): Observable<ApiResponse<PaginatedData<approve_or_decline_property>>> {
+    let url = `${environment.Api}/admin/view-latest-accepted-properties?page=${page}`;
+    return this.http.get<
+      ApiResponse<PaginatedData<approve_or_decline_property>>
+    >(url);
+  }
+  public viewDeclinedProperties(
+    page: number
+  ): Observable<ApiResponse<PaginatedData<approve_or_decline_property>>> {
+    let url = `${environment.Api}/admin/view-latest-rejected-properties?page=${page}`;
+    return this.http.get<
+      ApiResponse<PaginatedData<approve_or_decline_property>>
+    >(url);
+  }
+  public viewAllProperties(
+    page: number
+  ): Observable<ApiResponse<PaginatedData<approve_or_decline_property>>> {
+    let url = `${environment.Api}/admin/view-latest-properties-adjudication?page=${page}`;
+    return this.http.get<
+      ApiResponse<PaginatedData<approve_or_decline_property>>
+    >(url);
   }
   public adjudicationProperties(
     req: adjudicationProperty

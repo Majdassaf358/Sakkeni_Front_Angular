@@ -45,9 +45,7 @@
         <td>{{ admin.email }}</td>
         <td>{{ admin.created_at | date : "mediumDate" }}</td>
         <td class="status-counters">
-          <span class="status approved">
-            {{ admin.number_of_accepted_houses }}</span
-          >
+          <span class="status approved"> {{ admin.accepted_properties }}</span>
           <!-- <span class="status declined"> {{ admin.number_of_declined_houses }}</span> -->
         </td>
       </tr>
@@ -70,7 +68,7 @@
         <span class="label">Properties Status:</span>
         <span class="value status-counters">
           <span class="status approved">
-            {{ admin.number_of_accepted_houses }}
+            {{ admin.accepted_properties }}
           </span>
           <!-- Optional declined -->
           <!-- <span class="status declined">
