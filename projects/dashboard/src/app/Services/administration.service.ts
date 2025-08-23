@@ -8,6 +8,7 @@ import { environment } from '../shared/environments';
 import { adjudicationProperty } from '../Models/adjudication/adjudicationProperty';
 import { adjudicationServiceProviders } from '../Models/adjudication/adjudicationServiceProvider';
 import { approve_or_decline_property } from '../Models/approve_or_decline._property';
+import { pendingServices } from '../Models/viewPending/pendingServices';
 
 @Injectable({
   providedIn: 'root',
@@ -53,9 +54,9 @@ export class AdministrationService {
   }
   public viewPendingServiceProviders(
     page: number
-  ): Observable<ApiResponse<PaginatedData<pendingReq>>> {
+  ): Observable<ApiResponse<PaginatedData<pendingServices>>> {
     let url = `${environment.Api}/admin/view-pending-service-providers?page=${page}`;
-    return this.http.get<ApiResponse<PaginatedData<pendingReq>>>(url);
+    return this.http.get<ApiResponse<PaginatedData<pendingServices>>>(url);
   }
   public adjudicationServiceProviders(
     req: adjudicationServiceProviders

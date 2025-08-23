@@ -30,8 +30,8 @@
     <tbody>
       <tr *ngFor="let sp of service">
         <td>{{ sp.id }}</td>
-        <td>{{ sp.owner.first_name + sp.owner.last_name }}</td>
-        <td>{{ sp.owner.updated_at | date : "mediumDate" }}</td>
+        <td>{{ sp.first_name + sp.last_name }}</td>
+        <td>{{ sp.service_provider.updated_at | date : "mediumDate" }}</td>
         <td>
           <ng-container *ngIf="activeFilter === 'Pending'; else normalStatus">
             <div class="pending-actions">
@@ -61,6 +61,8 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- Mobile -->
   <div class="providers-cards">
     <div class="provider-card" *ngFor="let sp of service">
       <div class="row">
@@ -69,14 +71,12 @@
       </div>
       <div class="row">
         <span class="label">Owner:</span>
-        <span class="value">{{
-          sp.owner.first_name + sp.owner.last_name
-        }}</span>
+        <span class="value">{{ sp.first_name + sp.last_name }}</span>
       </div>
       <div class="row">
         <span class="label">Date:</span>
         <span class="value">{{
-          sp.owner.updated_at | date : "mediumDate"
+          sp.service_provider.updated_at | date : "mediumDate"
         }}</span>
       </div>
       <div class="row">
