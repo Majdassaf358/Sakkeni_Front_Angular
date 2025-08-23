@@ -212,6 +212,18 @@ export class ViewStatisticsComponent implements OnInit {
       this.chartInstance.setOption(this.donutOptions, { notMerge: true });
     }
   }
+  get sideLabel(): string {
+    // For display next to the arrow
+    return this.activeView === 'groups' ? 'Sale types' : 'Property types';
+  }
+
+  // Convenience flags (optional)
+  get showRightArrow(): boolean {
+    return this.activeView === 'groups';
+  }
+  get showLeftArrow(): boolean {
+    return this.activeView === 'top';
+  }
   updateChart() {
     if (!this.propertiesLocations) return;
 

@@ -1,7 +1,7 @@
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 180px);
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(5, 150px);
   gap: 20px;
   padding: 18px;
 }
@@ -30,16 +30,16 @@
   --radius: 14px;
 }
 .kpi_chart {
-  grid-area: 1/ 1 / 2/ 5;
+  grid-area: 1/ 1 / 2 / 9;
 }
 .donut_chart {
-  grid-area: 2/ 1 / 4/ 3;
+  grid-area: 2/ 1 / 5/ 5;
 }
 .bar_chart {
-  grid-area: 2/ 3 / 4/ 5;
+  grid-area: 2/ 5 / 5/ 9;
 }
 .line_chart {
-  grid-area: 4/ 1 / 6/ 5;
+  grid-area: 5/ 1 / 7/ 9;
 }
 
 /* Grid container (component-level) */
@@ -186,6 +186,56 @@
   margin-top: 10px;
   font-size: 14px;
   color: #333;
+}
+.chart-wrapper {
+  position: relative;
+}
+
+.side-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* right / left anchors */
+.arrow-right {
+  right: 12px;
+}
+.arrow-left {
+  left: 12px;
+}
+
+/* reverse the arrow for the left control */
+.arrow-left .arrow {
+  transform: rotate(180deg);
+}
+
+/* arrow symbol sizing */
+.arrow {
+  font-size: 18px;
+  display: inline-block;
+}
+
+/* label styling */
+.arrow-label {
+  font-size: 13px;
+}
+
+/* accessible focus style */
+.side-arrow:focus {
+  outline: 3px solid rgba(0, 123, 255, 0.25);
+  outline-offset: 2px;
 }
 
 /* Responsive tweaks for very small screens (optional) */

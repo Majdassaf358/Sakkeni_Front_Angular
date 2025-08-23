@@ -42,7 +42,7 @@ export class PropertiesComponent implements OnInit {
   async approveOrdecline(id: number, adj: number, reason: string) {
     this.adjProperty.approve = adj;
     this.adjProperty.property_id = id;
-    this.adjProperty.reason = reason;
+    // this.adjProperty.reason = reason;
     try {
       const res = await lastValueFrom(
         this.srv.adjudicationProperties(this.adjProperty)

@@ -169,60 +169,62 @@
     </article>
   </div>
 
+  <!-- donut -->
   <div class="card donut_chart">
     <div class="card-title">Properties Types</div>
 
-    <!-- Toggle controls to switch between the two donut views -->
-    <div class="controls" role="tablist" aria-label="Chart view switch">
-      <button
-        type="button"
-        class="toggle-btn"
-        [class.active]="activeView === 'groups'"
-        (click)="switchView('groups')"
-        [attr.aria-pressed]="activeView === 'groups'"
-      >
-        Residential / Commercial
-      </button>
+    <div class="chart-wrapper" style="position: relative">
+      <div *ngIf="donutOptions; else donutLoading">
+        <div
+          echarts
+          [options]="donutOptions"
+          (chartInit)="onChartInit($event)"
+          class="chart"
+          aria-label="Properties chart"
+        ></div>
 
-      <button
-        type="button"
-        class="toggle-btn"
-        [class.active]="activeView === 'top'"
-        (click)="switchView('top')"
-        [attr.aria-pressed]="activeView === 'top'"
-      >
-        > Rent / Purchase / Off-plan
-      </button>
-    </div>
+        <button
+          *ngIf="activeView === 'groups'"
+          type="button"
+          class="side-arrow arrow-right"
+          (click)="switchView('top')"
+          aria-label="Show sale types"
+          title="Sale types"
+        >
+          <span class="arrow" aria-hidden="true">➜</span>
+          <span class="arrow-label">{{ "Sale types" }}</span>
+        </button>
 
-    <!-- Chart area: shows when donutOptions is ready -->
-    <div *ngIf="donutOptions; else donutLoading">
-      <div
-        echarts
-        [options]="donutOptions"
-        (chartInit)="onChartInit($event)"
-        class="chart"
-        aria-label="Properties chart"
-      ></div>
-    </div>
-
-    <ng-template #donutLoading>
-      <div class="loading">Loading chart…</div>
-    </ng-template>
-
-    <!-- Accessible textual summary / fallback -->
-    <div class="summary" *ngIf="totalProperties">
-      <div><strong>Total:</strong> {{ totalProperties.total }}</div>
-      <div *ngIf="activeView === 'groups'">
-        <strong>Residential:</strong>
-        {{ totalProperties.residential.total }},
-        <strong>Commercial:</strong>
-        {{ totalProperties.commercial.total }}
+        <button
+          *ngIf="activeView === 'top'"
+          type="button"
+          class="side-arrow arrow-left"
+          (click)="switchView('groups')"
+          aria-label="Show property types"
+          title="Property types"
+        >
+          <span class="arrow" aria-hidden="true">➜</span>
+          <span class="arrow-label">{{ "Property types" }}</span>
+        </button>
       </div>
-      <div *ngIf="activeView === 'top'">
-        <strong>Off-plan:</strong> {{ totalProperties?.['off-plan']}},
-        <strong>Purchase:</strong> {{ totalProperties.purchase }},
-        <strong>Rent:</strong> {{ totalProperties.rent }}
+
+      <ng-template #donutLoading>
+        <div class="loading">Loading chart…</div>
+      </ng-template>
+
+      <div class="summary" *ngIf="totalProperties">
+        <div><strong>Total:</strong> {{ totalProperties.total }}</div>
+        <div *ngIf="activeView === 'groups'">
+          <strong>Residential:</strong>
+          {{ totalProperties.residential.total }},
+          <strong>Commercial:</strong>
+          {{ totalProperties.commercial.total }}
+        </div>
+        <div *ngIf="activeView === 'top'">
+          <strong>Off-plan:</strong> {{ totalProperties?.['off-plan']}},
+          <strong>Purchase:</strong> {{ totalProperties.purchase }},
+          <strong>Rent:</strong> {{ totalProperties.rent }}
+        </div>
       </div>
     </div>
   </div>
