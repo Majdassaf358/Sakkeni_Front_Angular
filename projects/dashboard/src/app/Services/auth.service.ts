@@ -25,4 +25,8 @@ export class AuthService {
     let url = `${environment.Api}/admin/logout`;
     return this.http.get<ApiResponse<null>>(url);
   }
+  public viewMyProfile(): Observable<ApiResponse<AdminRes>> {
+    let url = `${environment.Api}/admin/my-profile/`;
+    return this.http.get<ApiResponse<AdminRes>>(url);
+  }
 }

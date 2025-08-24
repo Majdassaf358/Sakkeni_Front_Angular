@@ -24,6 +24,10 @@ export class SuperAdminService {
     let url = `${environment.Api}/admin/view-profile/${adminId}`;
     return this.http.get<ApiResponse<AdminRes>>(url);
   }
+  public viewMyProfile(): Observable<ApiResponse<AdminRes>> {
+    let url = `${environment.Api}/admin/my-profile/`;
+    return this.http.get<ApiResponse<AdminRes>>(url);
+  }
   public updateAdminProfile(
     adminId: number
   ): Observable<ApiResponse<AdminRes>> {

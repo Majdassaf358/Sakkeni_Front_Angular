@@ -5,6 +5,7 @@ import { PropertiesComponent } from './Components/properties/properties.componen
 import { ServiceProvidersComponent } from './Components/service-providers/service-providers.component';
 import { AdminsComponent } from './Components/admins/admins.component';
 import { LoginComponent } from './Components/login/login.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
   },
   {
     path: 'statistics',

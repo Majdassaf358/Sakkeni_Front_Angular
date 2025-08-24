@@ -13,17 +13,16 @@
     <img class="" src="/Icons/black_vector.svg" alt="" />
 
     <div class="profile" (click)="toggleDropdown()" #dropdown>
-      <!-- <img
+      <img
         [src]="
           profileInfo.profile_picture_path
             ? imageUrl + profileInfo.profile_picture_path
-            : 'assets/Imgs/em.jpeg'
+            : '/Imgs/em.jpeg'
         "
         alt="Profile Picture"
         class="profile-img"
         (error)="handleImageError($event)"
-      /> -->
-      <img src="\Imgs\em.jpeg" alt="User" />
+      />
       <span class="lan-button"></span>
       <ul class="dropdown-menu" [class.show]="dropdownOpen">
         <li (click)="goToProfile()" class="font-400 font-14">View Profile</li>

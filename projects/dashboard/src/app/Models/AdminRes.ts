@@ -12,5 +12,7 @@ export class AdminRes {
   'accepted_services': number;
   'rejected_services': number;
   'is_super_admin': boolean;
+  'created_at': string;
+  'updated_at': string;
   'token': string;
 }

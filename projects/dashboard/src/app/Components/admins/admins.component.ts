@@ -32,4 +32,7 @@ export class AdminsComponent implements OnInit {
       console.log(error);
     }
   }
+  goTo(id: number) {
+    this.router.navigate(['/profile', id]);
+  }
 }

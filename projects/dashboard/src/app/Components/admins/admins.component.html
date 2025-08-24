@@ -21,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let admin of admins">
+      <tr *ngFor="let admin of admins" (click)="goTo(admin.id)">
         <td class="admin-info">
           <img
             [src]="
