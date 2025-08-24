@@ -21,13 +21,13 @@ export class ServiceProvidersComponent {
   tabs: StatusFilter[] = ['All', 'Pending', 'Approved', 'Declined'];
   activeFilter: StatusFilter = 'All';
   service: pendingServices[] = [];
-  adjService!: adjudicationServiceProviders;
+  adjService: adjudicationServiceProviders = new adjudicationServiceProviders();
   constructor(private router: Router, private srv: AdministrationService) {}
   ngOnInit(): void {
-    this.getServices();
+    this.getPending();
   }
 
-  async getServices() {
+  async getPending() {
     try {
       let res: ApiResponse<PaginatedData<pendingServices>> =
         await lastValueFrom(this.srv.viewPendingServiceProviders(1));
@@ -36,13 +36,31 @@ export class ServiceProvidersComponent {
       console.log(error);
     }
   }
+  // async getApproved() {
+  //   try {
+  //     let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
+  //       await lastValueFrom(this.srv.viewApprovedProperties(1));
+  //     this.app = res.data.data;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  // async getDeclined() {
+  //   try {
+  //     let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
+  //       await lastValueFrom(this.srv.viewDeclinedProperties(1));
+  //     this.dec = res.data.data;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
   setFilter(filter: StatusFilter) {
     this.activeFilter = filter;
   }
   async approveOrdecline(id: number, n: number, reason: string) {
     this.adjService.approve = n;
     this.adjService.service_provider_service_id = id;
-    this.adjService.reason = reason;
+    // this.adjService.reason = reason;
     try {
       const res = await lastValueFrom(
         this.srv.adjudicationServiceProviders(this.adjService)

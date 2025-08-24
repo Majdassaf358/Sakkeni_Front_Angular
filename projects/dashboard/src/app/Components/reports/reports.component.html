@@ -1,2 +1,90 @@
 <app-navbar></app-navbar>
-<p>reports works!</p>
+
+<div class="reports-page">
+  <div class="header">
+    <h2>Reports</h2>
+    <button class="all-btn">● All</button>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button
+      *ngFor="let t of tabs"
+      type="button"
+      class="tab"
+      [class.active]="t === activeFilter"
+      (click)="setFilter(t)"
+      [attr.aria-pressed]="t === activeFilter"
+    >
+      {{ t }}
+    </button>
+  </div>
+
+  <table class="reports-table">
+    <colgroup>
+      <col style="width: 15%" />
+      <col style="width: 15%" />
+      <col style="width: 15%" />
+      <col style="width: 55%" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Reporter</th>
+        <th>Property</th>
+        <th>Date</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="activeFilter === 'Properties'">
+        <tr *ngFor="let report of propertyReports">
+          <td>
+            {{ report.user.first_name + " " + report.user.last_name }}
+          </td>
+          <td>{{ "Info" }}</td>
+          <td>{{ report.created_at | date : "mediumDate" }}</td>
+          <td>
+            {{ report.additional_comments }}
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="activeFilter === 'Service Provider'">
+        <tr *ngFor="let report of serviceReports">
+          <td>
+            {{ report.user.first_name + " " + report.user.last_name }}
+          </td>
+          <td>{{ "Info" }}</td>
+          <td>{{ report.created_at | date : "mediumDate" }}</td>
+          <td>
+            {{ report.additional_comments }}
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <!-- Mobile view -->
+  <div class="reports-cards">
+    <div class="report-card" *ngFor="let report of propertyReports">
+      <div class="top">
+        {{ report.user.first_name + " " + report.user.last_name }}
+
+        <div class="info">
+          <div class="name">{{ "Info" }}</div>
+          <div class="email">{{ report.additional_comments }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <span class="label">Date Submitted:</span>
+        <span class="value">{{ report.created_at | date : "mediumDate" }}</span>
+      </div>
+      <div class="row">
+        <span class="label">Status:</span>
+        <span class="value status-counters">
+          <span class="status approved">
+            {{ report.status }}
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -94,7 +94,6 @@ export class PropertiesComponent implements OnInit {
         this.srv.adjudicationProperties(this.adjProperty)
       );
       this.getPending();
-      // window.location.reload();
     } catch (error) {
       console.log(error);
     }
