@@ -8,8 +8,6 @@ import { PaginatedData } from '../../Models/paginated_data';
 import { lastValueFrom } from 'rxjs';
 import { view_admins } from '../../Models/viewAdmin/view_admins';
 
-type TabFilter = 'Properties' | 'Service Provider';
-
 @Component({
   selector: 'app-admins',
   imports: [NavbarComponent, CommonModule],
@@ -17,10 +15,8 @@ type TabFilter = 'Properties' | 'Service Provider';
   styleUrl: './admins.component.css',
 })
 export class AdminsComponent implements OnInit {
-  tabs: TabFilter[] = ['Properties', 'Service Provider'];
-  activeFilter: TabFilter = 'Properties';
-
   admins: view_admins[] = [];
+  imageUrl: string = 'http://127.0.0.1:8000/';
 
   constructor(private router: Router, private srv: SuperAdminService) {}
   ngOnInit(): void {
@@ -35,8 +31,5 @@ export class AdminsComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
-  }
-  setFilter(filter: TabFilter) {
-    this.activeFilter = filter;
   }
 }
