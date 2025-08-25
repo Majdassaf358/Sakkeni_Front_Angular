@@ -3,7 +3,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 export const interceptorInterceptor: HttpInterceptorFn = (req, next) => {
   let myToken: string | null = null;
   if (typeof localStorage !== 'undefined') {
-    myToken = localStorage.getItem('Token');
+    myToken = localStorage.getItem('adminToken');
   }
 
   let headers = req.headers;

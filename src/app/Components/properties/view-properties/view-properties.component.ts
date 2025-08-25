@@ -53,7 +53,7 @@ export class ViewPropertiesComponent implements OnInit {
 
   markers: Array<{ position: google.maps.LatLngLiteral; data: propertyCard }> =
     [];
-  hoveredProperty: propertyCard | null = null;
+  hoveredProperty: propertyCard = new propertyCard();
   constructor(
     private router: Router,
     private propertyservice: PropertyService
@@ -74,6 +74,7 @@ export class ViewPropertiesComponent implements OnInit {
         data: p,
         position: { lat: p.location.latitude, lng: p.location.longitude },
       }));
+      // this.getImageSrc(res.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -134,6 +135,7 @@ export class ViewPropertiesComponent implements OnInit {
       );
       this.currentPage = res.data.current_page;
       this.properties = res.data.data;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
@@ -186,6 +188,19 @@ export class ViewPropertiesComponent implements OnInit {
       default:
         return 'N/A';
     }
+  }
+  getImageSrc(path?: string): string {
+    if (!path) {
+      return 'assets/Imgs/pool.jpg'; // fallback
+    }
+
+    // If path is already a full URL (http/https), return it as-is
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+      return path;
+    }
+
+    // Otherwise, prepend your backend base URL
+    return this.imageUrl + path;
   }
 
   nextPage() {

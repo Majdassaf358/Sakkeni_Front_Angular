@@ -14,13 +14,9 @@
         <div class="card__image-wrapper">
           <img
             (click)="goToDetails(card.id)"
-            [src]="
-              card.cover_image?.image_path
-                ? imageUrl + card.cover_image.image_path
-                : 'assets/Imgs/pool.jpg'
-            "
+            [src]="getImageSrc(card.cover_image?.image_path)"
             (error)="handleImageError($event)"
-            class="card__image"
+            class="map__image"
           />
           <button class="card__save-btn" (click)="toggleFavorite(card.id)">
             <img

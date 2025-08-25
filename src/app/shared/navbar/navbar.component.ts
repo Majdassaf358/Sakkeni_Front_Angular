@@ -12,10 +12,11 @@ import { ApiResponse } from '../../Models/ApiResponse';
 import { lastValueFrom } from 'rxjs';
 import { AuthenticationService } from '../../Services/authentication.service';
 import { profile } from '../../Models/profile/profile';
+import { MessageComponent } from '../../Components/message/message.component';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MessageComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -28,6 +29,10 @@ export class NavbarComponent implements OnInit {
   imageUrl: string = 'http://127.0.0.1:8000/';
   dropdownOpen = false;
   menuOpen = false;
+  messageText = '';
+  showMessagePopup = false;
+  isSeller: number = 0;
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
@@ -57,6 +62,7 @@ export class NavbarComponent implements OnInit {
         this.authenticationService.profile()
       );
       this.profileInfo = res.data;
+      this.isSeller = res.data.seller.account_type.id;
       this.Profile = true;
     } catch (error) {
       this.Profile = false;
@@ -70,11 +76,19 @@ export class NavbarComponent implements OnInit {
     this.menuOpen = !this.menuOpen;
   }
   addProperty() {
-    this.router.navigate(['/add_property']);
+    if (this.isSeller) {
+      this.router.navigate(['/add_property']);
+    } else {
+      this.messageText = 'Please Upgrade Your Account To Seller.';
+      this.showMessagePopup = true;
+    }
   }
 
   closeDropdown() {
     setTimeout(() => (this.dropdownOpen = false), 150);
+  }
+  onPopupClosed() {
+    this.showMessagePopup = false;
   }
 
   async logout() {

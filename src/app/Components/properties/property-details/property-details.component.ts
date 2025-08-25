@@ -77,9 +77,7 @@ export class PropertyDetailsComponent implements OnInit {
         this.propertyservice.viewPropertyDetails(homeId)
       );
       this.details = res.data;
-      this.images = res.data.images.map(
-        (img) => this.imagesUrl + img.image_path
-      );
+      this.images = res.data.images.map((img) => img.image_path);
       this.center.lat = this.details.location.latitude;
       this.center.lng = this.details.location.longitude;
       this.marker.lat = this.details.location.latitude;

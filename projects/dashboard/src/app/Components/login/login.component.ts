@@ -60,7 +60,7 @@ export class LoginComponent {
       );
       this.auth = res.data;
       this.token = res.data.token || '';
-      localStorage.setItem('Token', this.token);
+      localStorage.setItem('adminToken', this.token);
       this.router.navigate(['/statistics']);
     } catch (error) {
       // this.messageText = 'Login failed. Please check your credentials.';

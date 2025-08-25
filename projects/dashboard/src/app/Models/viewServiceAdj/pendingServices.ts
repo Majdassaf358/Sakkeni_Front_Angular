@@ -1,9 +1,9 @@
-import { owner } from '../viewPending/owner';
+import { service_provider } from './service_provider';
 
 export class pendingServices {
   'id': number;
   'first_name': string;
   'last_name': string;
   'address': string;
-  'service_provider': owner;
+  'service_provider': service_provider;
 }
