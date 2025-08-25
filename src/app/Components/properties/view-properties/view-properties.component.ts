@@ -39,11 +39,12 @@ export class ViewPropertiesComponent implements OnInit {
   receivedFilters!: filters;
   favourite_property!: add_favourite;
   favoriteIds: Set<number> = new Set();
-  currentPage: number = 1;
   properties: propertyCard[] = [];
-  currentFavoritePage: number = 1;
   favoriteProperties: favoriteCard[] = [];
   imageUrl: string = 'http://127.0.0.1:8000/';
+  currentPage: number = 1;
+  currentFavoritePage: number = 1;
+  pagination: any;
 
   center: google.maps.LatLngLiteral = {
     lat: 33.42565943762839,
@@ -58,15 +59,16 @@ export class ViewPropertiesComponent implements OnInit {
     private propertyservice: PropertyService
   ) {}
   ngOnInit(): void {
-    this.getProperties();
-    this.getFavorites();
+    this.getProperties(1);
+    this.getFavorites(1);
   }
-  async getProperties() {
+  async getProperties(page: number) {
     try {
       let res: ApiResponse<PaginatedData<propertyCard>> = await lastValueFrom(
-        this.propertyservice.viewProperty(this.viewType, 1)
+        this.propertyservice.viewProperty(this.viewType, page)
       );
       this.currentPage = res.data.current_page;
+      this.pagination = res.data;
       this.properties = res.data.data;
       this.markers = this.properties.map((p) => ({
         data: p,
@@ -76,10 +78,10 @@ export class ViewPropertiesComponent implements OnInit {
       console.log(error);
     }
   }
-  async getFavorites() {
+  async getFavorites(page: number) {
     try {
       let res: ApiResponse<PaginatedData<favoriteCard>> = await lastValueFrom(
-        this.propertyservice.viewFavoriteProperty(this.viewType)
+        this.propertyservice.viewFavoriteProperty(this.viewType, page)
       );
       this.currentFavoritePage = res.data.current_page;
       this.favoriteProperties = res.data.data;
@@ -154,8 +156,8 @@ export class ViewPropertiesComponent implements OnInit {
   }
   updateViewType(value: string) {
     this.viewType = value;
-    this.getProperties();
-    this.getFavorites();
+    this.getProperties(1);
+    this.getFavorites(1);
   }
   goToDetails(id: number) {
     this.router.navigate(['/home-details', id]);
@@ -183,6 +185,18 @@ export class ViewPropertiesComponent implements OnInit {
         return card.off_plan?.overall_payment ?? 'N/A';
       default:
         return 'N/A';
+    }
+  }
+
+  nextPage() {
+    if (this.pagination?.next_page_url) {
+      this.getProperties(this.currentPage + 1);
+    }
+  }
+
+  prevPage() {
+    if (this.pagination?.prev_page_url) {
+      this.getProperties(this.currentPage - 1);
     }
   }
   onMarkerClick(id: number) {

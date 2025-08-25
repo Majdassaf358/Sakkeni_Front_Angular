@@ -25,9 +25,10 @@ export class PropertyService {
     return this.http.get<ApiResponse<PaginatedData<propertyCard>>>(url);
   }
   public viewFavoriteProperty(
-    type: string
+    type: string,
+    page: number
   ): Observable<ApiResponse<PaginatedData<favoriteCard>>> {
-    let url = `${environment.Api}/view-favorite-properties/${type}`;
+    let url = `${environment.Api}/view-favorite-properties/${type}?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<favoriteCard>>>(url);
   }
   public viewMyProperties(

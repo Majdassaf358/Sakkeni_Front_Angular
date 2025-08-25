@@ -181,4 +181,15 @@
       ></map-marker>
     </google-map>
   </div>
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="!pagination?.prev_page_url">
+      ‹ Prev
+    </button>
+
+    <span> Page {{ currentPage }} </span>
+
+    <button (click)="nextPage()" [disabled]="!pagination?.next_page_url">
+      Next ›
+    </button>
+  </div>
 </div>
