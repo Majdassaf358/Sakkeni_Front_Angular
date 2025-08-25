@@ -274,7 +274,8 @@ export class StepTwoComponent implements OnInit, OnDestroy {
       this.prev.emit();
     }
   }
-  sendRentUnit(n: string) {
+  sendRentUnit(n: string, b: number) {
+    this.rentUnit = b;
     this.form.get('stepTwo.extended.rent.lease_period_unit')?.setValue(n);
   }
   async getIds() {

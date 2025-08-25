@@ -154,9 +154,9 @@
             class="add_options font-12 font-400"
             type="button"
             [ngClass]="{
-              'bg-focused': rentUnit === 1
+              'bg-focused': rentUnit === 0
             }"
-            (click)="sendRentUnit('Month')"
+            (click)="sendRentUnit('Month', 0)"
           >
             Month
           </button>
@@ -165,9 +165,9 @@
             class="add_options font-12 font-400"
             type="button"
             [ngClass]="{
-              'bg-focused': rentUnit === 0
+              'bg-focused': rentUnit === 1
             }"
-            (click)="sendRentUnit('Year')"
+            (click)="sendRentUnit('Year', 1)"
           >
             Year
           </button>
@@ -339,6 +339,7 @@
           <small>
             Selected payment phases percentages must sum to 100%. Current total:
             {{ offPlanGroup?.errors?.['percentageTotalNot100']?.sum ?? percentSum
+
 
 
 
