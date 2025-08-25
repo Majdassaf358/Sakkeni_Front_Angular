@@ -145,7 +145,7 @@ export class AddPropertyService {
           rent: this.fb.group({
             price: [null, [Validators.required, Validators.min(0)]],
             lease_period_value: [0],
-            lease_period_unit: [0],
+            lease_period_unit: [''],
             is_furnished: [0],
           }),
           purchase: this.fb.group({

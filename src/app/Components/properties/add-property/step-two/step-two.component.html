@@ -141,21 +141,37 @@
           />
         </label>
         <label>
-          Lease Period
+          Lease Period Value
           <input
-            type="text"
+            type="number"
             formControlName="lease_period_value"
             placeholder="e.g. 12 months"
           />
         </label>
-        <label
-          >Unit
-          <input
-            type="text"
-            formControlName="lease_period_unit"
-            placeholder="e.g. 12 months"
-          />
-        </label>
+        <label>Lease Period Unit </label>
+        <div class="furnished-toggle">
+          <button
+            class="add_options font-12 font-400"
+            type="button"
+            [ngClass]="{
+              'bg-focused': rentUnit === 1
+            }"
+            (click)="sendRentUnit('Month')"
+          >
+            Month
+          </button>
+
+          <button
+            class="add_options font-12 font-400"
+            type="button"
+            [ngClass]="{
+              'bg-focused': rentUnit === 0
+            }"
+            (click)="sendRentUnit('Year')"
+          >
+            Year
+          </button>
+        </div>
         <label> Furnished </label>
         <div class="furnished-toggle">
           <button
@@ -323,6 +339,12 @@
           <small>
             Selected payment phases percentages must sum to 100%. Current total:
             {{ offPlanGroup?.errors?.['percentageTotalNot100']?.sum ?? percentSum
+
+
+
+
+
+
 
 
 

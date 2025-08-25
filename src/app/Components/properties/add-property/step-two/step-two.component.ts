@@ -42,11 +42,13 @@ export class StepTwoComponent implements OnInit, OnDestroy {
     { id: 2, name: 'villa', group: 'residential' },
     { id: 3, name: 'office', group: 'commercial' },
   ];
+  rentOptions = ['month', 'year'];
 
   selectedSellType: number = 1;
   selectedPropertyType: number = 1;
   showExtendedSection: boolean = false;
   isfurnitured: number = 1;
+  rentUnit: number = 1;
   form: FormGroup;
   stepTwo: addProperty = new addProperty();
   phases = [
@@ -271,6 +273,9 @@ export class StepTwoComponent implements OnInit, OnDestroy {
     } else {
       this.prev.emit();
     }
+  }
+  sendRentUnit(n: string) {
+    this.form.get('stepTwo.extended.rent.lease_period_unit')?.setValue(n);
   }
   async getIds() {
     try {
