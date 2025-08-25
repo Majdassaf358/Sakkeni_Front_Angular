@@ -7,4 +7,5 @@ export class owner {
   'profile_picture_path': string;
   'address': string;
   'phone_number': string;
+  'updated_at': string;
 }

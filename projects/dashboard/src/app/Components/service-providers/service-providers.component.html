@@ -28,12 +28,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let sp of service" (click)="goTo(sp.id)">
-        <td>{{ sp.id }}</td>
-        <td>{{ sp.first_name + sp.last_name }}</td>
-        <td>{{ sp.service_provider.updated_at | date : "mediumDate" }}</td>
-        <td>
-          <ng-container *ngIf="activeFilter === 'Pending'; else normalStatus">
+      <!-- Pending -->
+      <ng-container *ngIf="activeFilter === 'Pending'">
+        <tr *ngFor="let sp of pending">
+          <td>{{ sp.id }}</td>
+          <td>{{ sp.first_name + " " + sp.last_name }}</td>
+          <td>{{ sp.service_provider.updated_at | date : "mediumDate" }}</td>
+          <td>
             <div class="pending-actions">
               <button
                 type="button"
@@ -50,21 +51,39 @@
                 Decline
               </button>
             </div>
-          </ng-container>
+          </td>
+        </tr>
+      </ng-container>
 
-          <ng-template #normalStatus>
-            <span class="status" [ngClass]="activeFilter.toLowerCase()">
-              {{ activeFilter }}
-            </span>
-          </ng-template>
-        </td>
-      </tr>
+      <!-- Approved -->
+      <ng-container *ngIf="activeFilter === 'Approved'">
+        <tr *ngFor="let a of app" (click)="goTo(a.id)">
+          <td>{{ a.id }}</td>
+          <td>{{ a.admin.first_name + " " + a.admin.last_name }}</td>
+          <td>{{ a.updated_at | date : "mediumDate" }}</td>
+          <td>
+            <span class="status approved">Approved</span>
+          </td>
+        </tr>
+      </ng-container>
+
+      <!-- Declined -->
+      <ng-container *ngIf="activeFilter === 'Declined'">
+        <tr *ngFor="let d of dec" (click)="goTo(d.id)">
+          <td>{{ d.id }}</td>
+          <td>{{ d.admin.first_name + " " + d.admin.last_name }}</td>
+          <td>{{ d.updated_at | date : "mediumDate" }}</td>
+          <td>
+            <span class="status declined">Declined</span>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
 
   <!-- Mobile -->
   <div class="providers-cards">
-    <div class="provider-card" *ngFor="let sp of service">
+    <div class="provider-card" *ngFor="let sp of pending">
       <div class="row">
         <span class="label">Service Provider:</span>
         <span class="value">{{ sp.id }}</span>

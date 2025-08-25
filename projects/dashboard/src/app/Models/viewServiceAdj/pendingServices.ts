@@ -1,4 +1,4 @@
-import { owner } from './owner';
+import { owner } from '../viewPending/owner';
 
 export class pendingServices {
   'id': number;

@@ -8,7 +8,8 @@ import { PaginatedData } from '../../Models/paginated_data';
 import { lastValueFrom } from 'rxjs';
 import { adjudicationProperty } from '../../Models/adjudication/adjudicationProperty';
 import { adjudicationServiceProviders } from '../../Models/adjudication/adjudicationServiceProvider';
-import { pendingServices } from '../../Models/viewPending/pendingServices';
+import { pendingServices } from '../../Models/viewServiceAdj/pendingServices';
+import { approve_or_decline_service } from '../../Models/viewServiceAdj/approve_or_decline_service';
 type StatusFilter = 'All' | 'Pending' | 'Approved' | 'Declined';
 
 @Component({
@@ -20,7 +21,9 @@ type StatusFilter = 'All' | 'Pending' | 'Approved' | 'Declined';
 export class ServiceProvidersComponent {
   tabs: StatusFilter[] = ['All', 'Pending', 'Approved', 'Declined'];
   activeFilter: StatusFilter = 'All';
-  service: pendingServices[] = [];
+  pending: pendingServices[] = [];
+  app: approve_or_decline_service[] = [];
+  dec: approve_or_decline_service[] = [];
   adjService: adjudicationServiceProviders = new adjudicationServiceProviders();
   constructor(private router: Router, private srv: AdministrationService) {}
   ngOnInit(): void {
@@ -31,31 +34,54 @@ export class ServiceProvidersComponent {
     try {
       let res: ApiResponse<PaginatedData<pendingServices>> =
         await lastValueFrom(this.srv.viewPendingServiceProviders(1));
-      this.service = res.data.data;
+      this.pending = res.data.data;
     } catch (error) {
       console.log(error);
     }
   }
-  // async getApproved() {
-  //   try {
-  //     let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
-  //       await lastValueFrom(this.srv.viewApprovedProperties(1));
-  //     this.app = res.data.data;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-  // async getDeclined() {
-  //   try {
-  //     let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
-  //       await lastValueFrom(this.srv.viewDeclinedProperties(1));
-  //     this.dec = res.data.data;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  async getApproved() {
+    try {
+      let res: ApiResponse<PaginatedData<approve_or_decline_service>> =
+        await lastValueFrom(this.srv.viewAcceptedServiceProviders(1));
+      this.app = res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async getDeclined() {
+    try {
+      let res: ApiResponse<PaginatedData<approve_or_decline_service>> =
+        await lastValueFrom(this.srv.viewRejectedServiceProviders(1));
+      this.dec = res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async getAll() {
+    try {
+      // let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
+      //   await lastValueFrom(this.srv.viewAllProperties(1));
+      // this.app = res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   setFilter(filter: StatusFilter) {
     this.activeFilter = filter;
+    switch (filter) {
+      case 'Pending':
+        this.getPending();
+        break;
+      case 'Approved':
+        this.getApproved();
+        break;
+      case 'Declined':
+        this.getDeclined();
+        break;
+      case 'All':
+        this.getAll();
+        break;
+    }
   }
   async approveOrdecline(id: number, n: number, reason: string) {
     this.adjService.approve = n;
@@ -65,6 +91,7 @@ export class ServiceProvidersComponent {
       const res = await lastValueFrom(
         this.srv.adjudicationServiceProviders(this.adjService)
       );
+      this.getPending();
     } catch (error) {
       console.log(error);
     }

@@ -8,8 +8,9 @@ import { environment } from '../shared/environments';
 import { adjudicationProperty } from '../Models/adjudication/adjudicationProperty';
 import { adjudicationServiceProviders } from '../Models/adjudication/adjudicationServiceProvider';
 import { approve_or_decline_property } from '../Models/approve_or_decline._property';
-import { pendingServices } from '../Models/viewPending/pendingServices';
+import { pendingServices } from '../Models/viewServiceAdj/pendingServices';
 import { propertyDetails } from '../Models/viewproperty/property-details';
+import { approve_or_decline_service } from '../Models/viewServiceAdj/approve_or_decline_service';
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +65,22 @@ export class AdministrationService {
   ): Observable<ApiResponse<PaginatedData<pendingServices>>> {
     let url = `${environment.Api}/admin/view-pending-service-providers?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<pendingServices>>>(url);
+  }
+  public viewAcceptedServiceProviders(
+    page: number
+  ): Observable<ApiResponse<PaginatedData<approve_or_decline_service>>> {
+    let url = `${environment.Api}/admin/view-latest-accepted-service-providers?page=${page}`;
+    return this.http.get<
+      ApiResponse<PaginatedData<approve_or_decline_service>>
+    >(url);
+  }
+  public viewRejectedServiceProviders(
+    page: number
+  ): Observable<ApiResponse<PaginatedData<approve_or_decline_service>>> {
+    let url = `${environment.Api}/admin/view-latest-rejected-service-providers?page=${page}`;
+    return this.http.get<
+      ApiResponse<PaginatedData<approve_or_decline_service>>
+    >(url);
   }
   public adjudicationServiceProviders(
     req: adjudicationServiceProviders
