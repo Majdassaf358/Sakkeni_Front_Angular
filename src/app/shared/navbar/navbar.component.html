@@ -1,6 +1,7 @@
 <app-message
   *ngIf="showMessagePopup"
   [message]="messageText"
+  [from]="from"
   (popupClosed)="onPopupClosed()"
 >
 </app-message>

@@ -32,6 +32,7 @@ export class NavbarComponent implements OnInit {
   messageText = '';
   showMessagePopup = false;
   isSeller: number = 0;
+  from: string = 'nav';
 
   constructor(
     private router: Router,

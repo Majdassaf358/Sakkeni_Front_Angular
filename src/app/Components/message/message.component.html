@@ -11,8 +11,26 @@
       <p class="font-400 font-16">{{ message }}</p>
     </div>
     <div class="button-container">
-      <button class="search-btn font-16 font-400" (click)="close()">
+      <button
+        *ngIf="this.from !== 'nav'"
+        class="search-btn font-16 font-400"
+        (click)="close()"
+      >
         Done!
+      </button>
+      <button
+        *ngIf="this.from === 'nav'"
+        class="search-btn font-16 font-400"
+        (click)="upgrade()"
+      >
+        Upgrade
+      </button>
+      <button
+        *ngIf="this.from === 'nav'"
+        class="search-btn font-16 font-400"
+        (click)="close()"
+      >
+        Cancel
       </button>
     </div>
   </div>
