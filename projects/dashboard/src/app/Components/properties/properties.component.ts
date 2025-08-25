@@ -105,4 +105,7 @@ export class PropertiesComponent implements OnInit {
   get topStatusClass(): string[] {
     return ['top_status', this.activeFilter.toLowerCase()];
   }
+  goTo(id: number) {
+    this.router.navigate(['/property', id]);
+  }
 }

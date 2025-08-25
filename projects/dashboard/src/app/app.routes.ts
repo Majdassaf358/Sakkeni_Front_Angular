@@ -6,6 +6,8 @@ import { ServiceProvidersComponent } from './Components/service-providers/servic
 import { AdminsComponent } from './Components/admins/admins.component';
 import { LoginComponent } from './Components/login/login.component';
 import { ProfileComponent } from './Components/profile/profile.component';
+import { ViewPropertyComponent } from './Components/view-property/view-property.component';
+import { ViewServiceComponent } from './Components/view-service/view-service.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +22,14 @@ export const routes: Routes = [
   {
     path: 'profile/:id',
     component: ProfileComponent,
+  },
+  {
+    path: 'property/:Pid',
+    component: ViewPropertyComponent,
+  },
+  {
+    path: 'service/:Sid',
+    component: ViewServiceComponent,
   },
   {
     path: 'statistics',

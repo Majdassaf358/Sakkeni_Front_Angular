@@ -37,7 +37,7 @@
     </thead>
     <tbody>
       <ng-container *ngIf="activeFilter === 'Pending'">
-        <tr *ngFor="let p of pendings">
+        <tr *ngFor="let p of pendings" (click)="goTo(p.id)">
           <td>{{ p.location.country.name + ", " + p.location.city.name }}</td>
           <td>{{ p.owner.first_name + " " + p.owner.last_name }}</td>
           <td>{{ p.owner.updated_at | date : "mediumDate" }}</td>
@@ -68,7 +68,7 @@
         </tr>
       </ng-container>
       <ng-container *ngIf="activeFilter === 'Approved'">
-        <tr *ngFor="let a of app">
+        <tr *ngFor="let a of app" (click)="goTo(a.id)">
           <td>{{ a.admin.first_name + " " + a.admin.last_name }}</td>
           <td>
             {{
@@ -87,7 +87,7 @@
         </tr>
       </ng-container>
       <ng-container *ngIf="activeFilter === 'Declined'">
-        <tr *ngFor="let d of dec">
+        <tr *ngFor="let d of dec" (click)="goTo(d.id)">
           <td>{{ d.admin.first_name + " " + d.admin.last_name }}</td>
           <td>
             {{

@@ -28,7 +28,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let sp of service">
+      <tr *ngFor="let sp of service" (click)="goTo(sp.id)">
         <td>{{ sp.id }}</td>
         <td>{{ sp.first_name + sp.last_name }}</td>
         <td>{{ sp.service_provider.updated_at | date : "mediumDate" }}</td>

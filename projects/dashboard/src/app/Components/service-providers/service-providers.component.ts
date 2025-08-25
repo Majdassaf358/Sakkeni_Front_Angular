@@ -77,4 +77,7 @@ export class ServiceProvidersComponent {
   get topStatusClass(): string[] {
     return ['top_status', this.activeFilter.toLowerCase()];
   }
+  goTo(id: number) {
+    this.router.navigate(['/service', id]);
+  }
 }

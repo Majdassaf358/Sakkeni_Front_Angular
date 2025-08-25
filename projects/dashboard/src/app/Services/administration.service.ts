@@ -9,6 +9,7 @@ import { adjudicationProperty } from '../Models/adjudication/adjudicationPropert
 import { adjudicationServiceProviders } from '../Models/adjudication/adjudicationServiceProvider';
 import { approve_or_decline_property } from '../Models/approve_or_decline._property';
 import { pendingServices } from '../Models/viewPending/pendingServices';
+import { propertyDetails } from '../Models/viewproperty/property-details';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,12 @@ export class AdministrationService {
     return this.http.get<
       ApiResponse<PaginatedData<approve_or_decline_property>>
     >(url);
+  }
+  public viewPropertyDetails(
+    homeId: number
+  ): Observable<ApiResponse<propertyDetails>> {
+    let url = `${environment.Api}/view-property-details/${homeId}`;
+    return this.http.get<ApiResponse<propertyDetails>>(url);
   }
   public adjudicationProperties(
     req: adjudicationProperty
