@@ -24,6 +24,7 @@ export class ServiceProvidersComponent {
   pending: pendingServices[] = [];
   app: approve_or_decline_service[] = [];
   dec: approve_or_decline_service[] = [];
+  test: any;
   adjService: adjudicationServiceProviders = new adjudicationServiceProviders();
   constructor(private router: Router, private srv: AdministrationService) {}
   ngOnInit(): void {

@@ -9,6 +9,7 @@ import { pendingReq } from '../../Models/viewPending/pendingReq';
 import { lastValueFrom } from 'rxjs';
 import { adjudicationProperty } from '../../Models/adjudication/adjudicationProperty';
 import { approve_or_decline_property } from '../../Models/approve_or_decline._property';
+import { allproperties } from '../../Models/ViewAllPropertiesAdj/allproperties';
 
 type StatusFilter = 'All' | 'Pending' | 'Approved' | 'Declined';
 @Component({
@@ -23,10 +24,11 @@ export class PropertiesComponent implements OnInit {
   pendings: pendingReq[] = [];
   app: approve_or_decline_property[] = [];
   dec: approve_or_decline_property[] = [];
+  all: allproperties[] = [];
   adjProperty: adjudicationProperty = new adjudicationProperty();
   constructor(private router: Router, private srv: AdministrationService) {}
   ngOnInit(): void {
-    this.getPending();
+    this.getAll();
   }
 
   async getPending() {
@@ -59,10 +61,11 @@ export class PropertiesComponent implements OnInit {
   }
   async getAll() {
     try {
-      let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
-        await lastValueFrom(this.srv.viewAllProperties(1));
-      this.app = res.data.data;
-      console.log(this.app);
+      let res: ApiResponse<PaginatedData<allproperties>> = await lastValueFrom(
+        this.srv.viewAllProperties(1)
+      );
+      this.all = res.data.data;
+      console.log(this.all);
     } catch (error) {
       console.log(error);
     }

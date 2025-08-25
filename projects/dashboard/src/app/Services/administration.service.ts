@@ -11,6 +11,7 @@ import { approve_or_decline_property } from '../Models/approve_or_decline._prope
 import { pendingServices } from '../Models/viewServiceAdj/pendingServices';
 import { propertyDetails } from '../Models/viewproperty/property-details';
 import { approve_or_decline_service } from '../Models/viewServiceAdj/approve_or_decline_service';
+import { allproperties } from '../Models/ViewAllPropertiesAdj/allproperties';
 
 @Injectable({
   providedIn: 'root',
@@ -42,11 +43,9 @@ export class AdministrationService {
   }
   public viewAllProperties(
     page: number
-  ): Observable<ApiResponse<PaginatedData<approve_or_decline_property>>> {
+  ): Observable<ApiResponse<PaginatedData<allproperties>>> {
     let url = `${environment.Api}/admin/view-latest-properties-adjudication?page=${page}`;
-    return this.http.get<
-      ApiResponse<PaginatedData<approve_or_decline_property>>
-    >(url);
+    return this.http.get<ApiResponse<PaginatedData<allproperties>>>(url);
   }
   public viewPropertyDetails(
     homeId: number

@@ -28,14 +28,37 @@
     <thead>
       <tr>
         <th *ngIf="activeFilter === 'Pending'">Property</th>
-        <th *ngIf="activeFilter !== 'Pending'">Location</th>
-        <th *ngIf="activeFilter !== 'Pending'">Admin</th>
+        <th *ngIf="activeFilter === 'Approved' || activeFilter === 'Declined'">
+          Location
+        </th>
+        <th *ngIf="activeFilter === 'Approved' || activeFilter === 'Declined'">
+          Admin
+        </th>
         <th>Owner</th>
         <th>Date</th>
         <th *ngIf="activeFilter === 'All'">Status</th>
       </tr>
     </thead>
     <tbody>
+      <ng-container *ngIf="activeFilter === 'All'">
+        <tr *ngFor="let a of all" (click)="goTo(a.id)">
+          <!-- <td>
+            {{
+              a.property.location.country.name +
+              ", " +
+              a.property.location.city.name
+              }}
+            </td> -->
+          <td>{{ a.owner.first_name + " " + a.owner.last_name }}</td>
+
+          <td>{{ a.updated_at | date : "mediumDate" }}</td>
+          <td>
+            <span class="status" [ngClass]="a.availability_status.name">
+              {{ a.availability_status.name }}
+            </span>
+          </td>
+        </tr>
+      </ng-container>
       <ng-container *ngIf="activeFilter === 'Pending'">
         <tr *ngFor="let p of pendings" (click)="goTo(p.id)">
           <td>{{ p.location.country.name + ", " + p.location.city.name }}</td>
@@ -69,40 +92,40 @@
       </ng-container>
       <ng-container *ngIf="activeFilter === 'Approved'">
         <tr *ngFor="let a of app" (click)="goTo(a.id)">
-          <td>{{ a.admin.first_name + " " + a.admin.last_name }}</td>
-          <td>
+          <!-- <td>
             {{
               a.property.location.country.name +
-                ", " +
-                a.property.location.city.name
-            }}
-          </td>
+              ", " +
+              a.property.location.city.name
+              }}
+            </td> -->
+          <td>{{ a.admin.first_name + " " + a.admin.last_name }}</td>
           <td>
             {{ a.property.owner.first_name + " " + a.property.owner.last_name }}
           </td>
           <td>{{ a.property.owner.updated_at | date : "mediumDate" }}</td>
           <td>
-            <span class="status approved">Approved</span>
+            <span class="status Active">Approved</span>
           </td>
         </tr>
       </ng-container>
       <ng-container *ngIf="activeFilter === 'Declined'">
         <tr *ngFor="let d of dec" (click)="goTo(d.id)">
-          <td>{{ d.admin.first_name + " " + d.admin.last_name }}</td>
-          <td>
+          <!-- <td>
             {{
               d.property.location.country.name +
-                ", " +
-                d.property.location.city.name
-            }}
-          </td>
+              ", " +
+              d.property.location.city.name
+              }}
+            </td> -->
 
+          <td>{{ d.admin.first_name + " " + d.admin.last_name }}</td>
           <td>
             {{ d.property.owner.first_name + " " + d.property.owner.last_name }}
           </td>
           <td>{{ d.property.owner.updated_at | date : "mediumDate" }}</td>
           <td>
-            <span class="status declined">Declined</span>
+            <span class="status Rejected">Declined</span>
           </td>
         </tr>
       </ng-container>
