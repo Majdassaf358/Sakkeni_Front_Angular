@@ -12,6 +12,7 @@ import { pendingServices } from '../Models/viewServiceAdj/pendingServices';
 import { propertyDetails } from '../Models/viewproperty/property-details';
 import { approve_or_decline_service } from '../Models/viewServiceAdj/approve_or_decline_service';
 import { allproperties } from '../Models/ViewAllPropertiesAdj/allproperties';
+import { all_services } from '../Models/viewAllServicesAdj/all_services';
 
 @Injectable({
   providedIn: 'root',
@@ -80,6 +81,12 @@ export class AdministrationService {
     return this.http.get<
       ApiResponse<PaginatedData<approve_or_decline_service>>
     >(url);
+  }
+  public viewAllServiceProviders(
+    page: number
+  ): Observable<ApiResponse<PaginatedData<all_services>>> {
+    let url = `${environment.Api}/admin/view-latest-service-providers-adjudication?page=${page}`;
+    return this.http.get<ApiResponse<PaginatedData<all_services>>>(url);
   }
   public adjudicationServiceProviders(
     req: adjudicationServiceProviders

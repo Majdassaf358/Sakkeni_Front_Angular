@@ -117,13 +117,13 @@
 .status.all {
   background: #e9eeee;
 }
-.status.pending {
+.status.Pending {
   background: #fff3d6;
 }
-.status.approved {
+.status.Active {
   background: #d9f7e8;
 }
-.status.declined {
+.status.Rejected {
   background: #ffded1;
 }
 

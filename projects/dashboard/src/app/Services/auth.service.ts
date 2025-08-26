@@ -18,7 +18,7 @@ export class AuthService {
     return this.http.post<ApiResponse<AdminRes>>(url, req);
   }
   public adminLogin(req: login): Observable<ApiResponse<AdminRes>> {
-    let url = `${environment.Api}/admin/login`;
+    let url = `${environment.Api}/admin-login`;
     return this.http.post<ApiResponse<AdminRes>>(url, req);
   }
   public adminLogout(): Observable<ApiResponse<null>> {

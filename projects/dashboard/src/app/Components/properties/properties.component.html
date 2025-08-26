@@ -40,6 +40,7 @@
       </tr>
     </thead>
     <tbody>
+      <!-- All -->
       <ng-container *ngIf="activeFilter === 'All'">
         <tr *ngFor="let a of all" (click)="goTo(a.id)">
           <!-- <td>
@@ -59,6 +60,7 @@
           </td>
         </tr>
       </ng-container>
+      <!-- Pending -->
       <ng-container *ngIf="activeFilter === 'Pending'">
         <tr *ngFor="let p of pendings" (click)="goTo(p.id)">
           <td>{{ p.location.country.name + ", " + p.location.city.name }}</td>
@@ -90,6 +92,8 @@
           </td>
         </tr>
       </ng-container>
+      <!-- Approved -->
+
       <ng-container *ngIf="activeFilter === 'Approved'">
         <tr *ngFor="let a of app" (click)="goTo(a.id)">
           <!-- <td>
@@ -109,6 +113,8 @@
           </td>
         </tr>
       </ng-container>
+      <!-- Declined -->
+
       <ng-container *ngIf="activeFilter === 'Declined'">
         <tr *ngFor="let d of dec" (click)="goTo(d.id)">
           <!-- <td>

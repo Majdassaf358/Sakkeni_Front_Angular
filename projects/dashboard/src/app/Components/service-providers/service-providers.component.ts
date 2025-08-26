@@ -10,6 +10,7 @@ import { adjudicationProperty } from '../../Models/adjudication/adjudicationProp
 import { adjudicationServiceProviders } from '../../Models/adjudication/adjudicationServiceProvider';
 import { pendingServices } from '../../Models/viewServiceAdj/pendingServices';
 import { approve_or_decline_service } from '../../Models/viewServiceAdj/approve_or_decline_service';
+import { all_services } from '../../Models/viewAllServicesAdj/all_services';
 type StatusFilter = 'All' | 'Pending' | 'Approved' | 'Declined';
 
 @Component({
@@ -24,11 +25,11 @@ export class ServiceProvidersComponent {
   pending: pendingServices[] = [];
   app: approve_or_decline_service[] = [];
   dec: approve_or_decline_service[] = [];
-  test: any;
+  all: all_services[] = [];
   adjService: adjudicationServiceProviders = new adjudicationServiceProviders();
   constructor(private router: Router, private srv: AdministrationService) {}
   ngOnInit(): void {
-    this.getPending();
+    this.getAll();
   }
 
   async getPending() {
@@ -60,9 +61,10 @@ export class ServiceProvidersComponent {
   }
   async getAll() {
     try {
-      // let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
-      //   await lastValueFrom(this.srv.viewAllProperties(1));
-      // this.app = res.data.data;
+      let res: ApiResponse<PaginatedData<all_services>> = await lastValueFrom(
+        this.srv.viewAllServiceProviders(1)
+      );
+      this.all = res.data.data;
     } catch (error) {
       console.log(error);
     }

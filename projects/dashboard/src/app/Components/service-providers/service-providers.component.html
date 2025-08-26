@@ -28,32 +28,57 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Pending -->
-      <ng-container *ngIf="activeFilter === 'Pending'">
-        <tr *ngFor="let sp of pending">
-          <td>{{ sp.id }}</td>
-          <td>{{ sp.first_name + " " + sp.last_name }}</td>
-          <td>{{ sp.service_provider.updated_at | date : "mediumDate" }}</td>
+      <!-- All -->
+      <ng-container *ngIf="activeFilter === 'All'">
+        <tr *ngFor="let a of all" (click)="goTo(a.id)">
+          <td>{{ a.id }}</td>
           <td>
-            <div class="pending-actions">
-              <button
-                type="button"
-                class="action-btn approve"
-                (click)="approveOrdecline(sp.id, 1, '')"
-              >
-                Approve
-              </button>
-              <button
-                type="button"
-                class="action-btn decline"
-                (click)="approveOrdecline(sp.id, 0, '')"
-              >
-                Decline
-              </button>
-            </div>
+            {{
+              a.service_provider.user.first_name +
+                " " +
+                a.service_provider.user.last_name
+            }}
+          </td>
+          <td>{{ a.updated_at | date : "mediumDate" }}</td>
+          <td>
+            <span class="status" [ngClass]="a.availability_status.name">
+              {{ a.availability_status.name }}
+            </span>
           </td>
         </tr>
       </ng-container>
+      <!-- Pending -->
+      <ng-container *ngIf="activeFilter === 'Pending'">
+        <ng-container *ngFor="let p of pending">
+          <tr
+            *ngFor="
+              let sp of p.service_provider.service_provider_pending_services
+            "
+          >
+            <td>{{ sp.id }}</td>
+            <td>{{ p.first_name + " " + p.last_name }}</td>
+            <td>{{ p.service_provider.updated_at | date : "mediumDate" }}</td>
+            <td>
+              <div class="pending-actions">
+                <button
+                  type="button"
+                  class="action-btn approve"
+                  (click)="approveOrdecline(sp.id, 1, '')"
+                >
+                  Approve
+                </button>
+                <button
+                  type="button"
+                  class="action-btn decline"
+                  (click)="approveOrdecline(sp.id, 0, '')"
+                >
+                  Decline
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-container></ng-container
+      >
 
       <!-- Approved -->
       <ng-container *ngIf="activeFilter === 'Approved'">
@@ -62,7 +87,7 @@
           <td>{{ a.admin.first_name + " " + a.admin.last_name }}</td>
           <td>{{ a.updated_at | date : "mediumDate" }}</td>
           <td>
-            <span class="status approved">Approved</span>
+            <span class="status Active">Approved</span>
           </td>
         </tr>
       </ng-container>
@@ -74,7 +99,7 @@
           <td>{{ d.admin.first_name + " " + d.admin.last_name }}</td>
           <td>{{ d.updated_at | date : "mediumDate" }}</td>
           <td>
-            <span class="status declined">Declined</span>
+            <span class="status Rejected">Declined</span>
           </td>
         </tr>
       </ng-container>
