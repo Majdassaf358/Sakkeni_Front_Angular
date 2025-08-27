@@ -1,3 +1,136 @@
 <app-navbar></app-navbar>
 
-<p>view-property works!</p>
+<div class="container">
+  <section
+    #scrollContainer
+    class="slider-section"
+    (mousedown)="startDrag($event)"
+    (mouseup)="stopDrag()"
+    (mouseleave)="stopDrag()"
+    (mousemove)="onDrag($event)"
+  >
+    <div class="slide-track">
+      <div class="slide">
+        <img
+          *ngFor="let img of images"
+          [src]="img"
+          alt="Property image"
+          draggable="false"
+          (click)="openPopup(img)"
+        />
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="details">
+  <div class="info">
+    <div class="info-title">
+      <p class="font-500 font-24 uppercase">{{ displayText }} S.P</p>
+      <h3 *ngIf="details?.location?.country && details?.location?.city">
+        {{ details.location.country.name }} - {{ details.location.city.name }}
+      </h3>
+    </div>
+    <div
+      class="info-details"
+      *ngIf="details?.location?.country && details?.location?.city"
+    >
+      <div class="row">
+        <p class="font-600">Directions:</p>
+        <span *ngFor="let dir of details.directions; let isLast = last">
+          {{ dir.name }}<span *ngIf="!isLast">,&nbsp;</span>
+        </span>
+      </div>
+      <div class="row">
+        <p class="font-600">Property Type:</p>
+        {{ details.property_type.name }}
+      </div>
+      <div class="row">
+        <p class="font-600">Balconies:</p>
+        {{ details.balconies }} Balconies
+      </div>
+      <div class="row">
+        <p class="font-600">Bathrooms:</p>
+        {{ details.bathrooms }} Bathrooms
+      </div>
+      <div class="row">
+        <p class="font-600">Area:</p>
+        {{ details.area }} m²
+      </div>
+      <div class="row">
+        <p class="font-600">Ownership Type:</p>
+        {{ details.ownership_type.name }}
+      </div>
+
+      <div class="row" *ngIf="!details.off_plan">
+        <p class="font-600">Furnished:</p>
+        <span *ngIf="details.rent">
+          {{ details.rent.is_furnished === 1 ? "Yes" : "No" }}
+        </span>
+        <span *ngIf="details.purchase">
+          {{ details.purchase.is_furnished === 1 ? "Yes" : "No" }}
+        </span>
+      </div>
+      <div class="row" *ngIf="details.off_plan">
+        <p class="font-600">Price Details:</p>
+        <div class="off_info">
+          <p>First Pay: {{ details.off_plan.first_pay }}</p>
+          <p>Pay Plan: in progress</p>
+          <p>Overall Payment: {{ details.off_plan.overall_payment }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <p class="font-600">Amenities:</p>
+        <span *ngFor="let ame of details.amenities; let isLast = last">
+          {{ ame.name }}<span *ngIf="!isLast">,&nbsp;</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-section">
+    <div class="right-boxes">
+      <div class="price-box">
+        <div class="card-header">
+          <span class="status-dot"></span>
+          <span class="residential-text text-primary-clr font-12"
+            >Residential</span
+          >
+          <!-- <img class="location-icon" src="assets\Icons\Location-line.svg" /> -->
+        </div>
+        <div class="price-box-text">
+          <p class="font-18 text-primary-clr">$2,200/month</p>
+          <p class="font-12 text-primary-clr">2 bedroom</p>
+          <p class="font-12 text-primary-clr">30 Kershner Pl, Fair Lawn</p>
+        </div>
+        <button class="save-btn text-primary-clr">Save</button>
+      </div>
+      <div class="contact-box">
+        <!-- <div class="contact-info">
+          <img src="assets\Icons\email.svg" />
+          <p class="text-primary-clr font-400 font-12 contact-text">
+            {{ details.owner.email }}
+          </p>
+        </div> -->
+        <!-- <div class="contact-info">
+          <img src="assets\Icons\call.svg" />
+          <p class="text-primary-clr font-400 font-12 contact-text">
+            {{ details.owner.phone_number }}
+          </p>
+        </div> -->
+      </div>
+    </div>
+    <div class="map-box">
+      <!-- <google-map
+        [options]="mapOptions"
+        [center]="center"
+        width="20rem"
+        height="23rem"
+      >
+        <map-marker [position]="marker"> </map-marker>
+      </google-map> -->
+      <!-- <button (click)="toggleSatellite(true)">Satellite</button>
+      <button (click)="toggleSatellite(false)">Roadmap</button> -->
+    </div>
+  </div>
+</div>
