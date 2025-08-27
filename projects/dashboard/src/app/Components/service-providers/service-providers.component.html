@@ -5,17 +5,71 @@
     <span [ngClass]="topStatusClass">{{ topStatusLabel }}</span>
   </div>
 
-  <div class="tabs" role="tablist">
-    <button
-      *ngFor="let t of tabs"
-      type="button"
-      class="tab"
-      [class.active]="t === activeFilter"
-      (click)="setFilter(t)"
-      [attr.aria-pressed]="t === activeFilter"
-    >
-      {{ t }}
-    </button>
+  <div class="top">
+    <div class="tabs" role="tablist">
+      <button
+        *ngFor="let t of tabs"
+        type="button"
+        class="tab"
+        [class.active]="t === activeFilter"
+        (click)="setFilter(t, 1)"
+        [attr.aria-pressed]="t === activeFilter"
+      >
+        {{ t }}
+      </button>
+    </div>
+    <div class="pagination-controls" *ngIf="pagination">
+      <button
+        class="page-btn"
+        aria-label="Previous page"
+        (click)="prevPage()"
+        [disabled]="!pagination?.prev_page_url"
+      >
+        ‹
+      </button>
+
+      <button
+        class="page-btn"
+        [class.active]="currentPage === 1"
+        (click)="goToPage(1)"
+      >
+        1
+      </button>
+
+      <span *ngIf="currentPage > 2" class="page-ellipsis">…</span>
+
+      <button
+        *ngIf="currentPage !== 1 && currentPage !== pagination?.last_page"
+        class="page-btn active"
+        disabled
+      >
+        {{ currentPage }}
+      </button>
+
+      <span
+        *ngIf="currentPage < pagination?.last_page - 1"
+        class="page-ellipsis"
+        >…</span
+      >
+
+      <button
+        *ngIf="1 < pagination?.last_page"
+        class="page-btn"
+        [class.active]="currentPage === pagination.last_page"
+        (click)="goToPage(pagination?.last_page)"
+      >
+        {{ pagination?.last_page }}
+      </button>
+
+      <button
+        class="page-btn"
+        aria-label="Next page"
+        (click)="nextPage()"
+        [disabled]="!pagination?.next_page_url"
+      >
+        ›
+      </button>
+    </div>
   </div>
 
   <table class="providers-table">

@@ -17,22 +17,56 @@ import { view_admins } from '../../Models/viewAdmin/view_admins';
 export class AdminsComponent implements OnInit {
   admins: view_admins[] = [];
   imageUrl: string = 'http://127.0.0.1:8000/';
-
+  currentPage: number = 1;
+  pagination: any;
   constructor(private router: Router, private srv: SuperAdminService) {}
   ngOnInit(): void {
-    this.getAdmins();
+    this.getAdmins(1);
   }
-  async getAdmins() {
+  async getAdmins(page: number) {
     try {
       let res: ApiResponse<PaginatedData<view_admins>> = await lastValueFrom(
-        this.srv.viewAdmins(1)
+        this.srv.viewAdmins(page)
       );
       this.admins = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
   }
   goTo(id: number) {
     this.router.navigate(['/profile', id]);
+  }
+
+  goToPage(page: number) {
+    if (page !== this.currentPage) {
+      this.getAdmins(page);
+    }
+  }
+
+  getPageRange(): number[] {
+    const range: number[] = [];
+    const total = this.pagination?.last_page || 1;
+
+    const start = Math.max(2, this.currentPage - 1);
+    const end = Math.min(total - 1, this.currentPage + 1);
+
+    for (let i = start; i <= end; i++) {
+      range.push(i);
+    }
+    return range;
+  }
+
+  nextPage() {
+    if (this.pagination?.next_page_url) {
+      this.getAdmins(this.currentPage + 1);
+    }
+  }
+
+  prevPage() {
+    if (this.pagination?.prev_page_url) {
+      this.getAdmins(this.currentPage - 1);
+    }
   }
 }

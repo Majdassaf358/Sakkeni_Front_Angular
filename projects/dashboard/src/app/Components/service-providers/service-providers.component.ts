@@ -27,62 +27,73 @@ export class ServiceProvidersComponent {
   dec: approve_or_decline_service[] = [];
   all: all_services[] = [];
   adjService: adjudicationServiceProviders = new adjudicationServiceProviders();
+  currentPage: number = 1;
+  pagination: any;
   constructor(private router: Router, private srv: AdministrationService) {}
   ngOnInit(): void {
-    this.getAll();
+    this.getAll(1);
   }
 
-  async getPending() {
+  async getPending(page: number) {
     try {
       let res: ApiResponse<PaginatedData<pendingServices>> =
-        await lastValueFrom(this.srv.viewPendingServiceProviders(1));
+        await lastValueFrom(this.srv.viewPendingServiceProviders(page));
       this.pending = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
   }
-  async getApproved() {
+  async getApproved(page: number) {
     try {
       let res: ApiResponse<PaginatedData<approve_or_decline_service>> =
-        await lastValueFrom(this.srv.viewAcceptedServiceProviders(1));
+        await lastValueFrom(this.srv.viewAcceptedServiceProviders(page));
       this.app = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
   }
-  async getDeclined() {
+  async getDeclined(page: number) {
     try {
       let res: ApiResponse<PaginatedData<approve_or_decline_service>> =
-        await lastValueFrom(this.srv.viewRejectedServiceProviders(1));
+        await lastValueFrom(this.srv.viewRejectedServiceProviders(page));
       this.dec = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
   }
-  async getAll() {
+  async getAll(page: number) {
     try {
       let res: ApiResponse<PaginatedData<all_services>> = await lastValueFrom(
-        this.srv.viewAllServiceProviders(1)
+        this.srv.viewAllServiceProviders(page)
       );
       this.all = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
   }
-  setFilter(filter: StatusFilter) {
+  setFilter(filter: StatusFilter, page: number) {
     this.activeFilter = filter;
+
     switch (filter) {
       case 'Pending':
-        this.getPending();
+        this.getPending(page);
         break;
       case 'Approved':
-        this.getApproved();
+        this.getApproved(page);
         break;
       case 'Declined':
-        this.getDeclined();
+        this.getDeclined(page);
         break;
       case 'All':
-        this.getAll();
+        this.getAll(page);
         break;
     }
   }
@@ -94,7 +105,7 @@ export class ServiceProvidersComponent {
       const res = await lastValueFrom(
         this.srv.adjudicationServiceProviders(this.adjService)
       );
-      this.getPending();
+      this.getPending(this.currentPage);
     } catch (error) {
       console.log(error);
     }
@@ -109,5 +120,36 @@ export class ServiceProvidersComponent {
   }
   goTo(id: number) {
     this.router.navigate(['/service', id]);
+  }
+
+  goToPage(page: number) {
+    if (page !== this.currentPage) {
+      this.setFilter(this.activeFilter, page);
+    }
+  }
+
+  getPageRange(): number[] {
+    const range: number[] = [];
+    const total = this.pagination?.last_page || 1;
+
+    const start = Math.max(2, this.currentPage - 1);
+    const end = Math.min(total - 1, this.currentPage + 1);
+
+    for (let i = start; i <= end; i++) {
+      range.push(i);
+    }
+    return range;
+  }
+
+  nextPage() {
+    if (this.pagination?.next_page_url) {
+      this.setFilter(this.activeFilter, this.currentPage + 1);
+    }
+  }
+
+  prevPage() {
+    if (this.pagination?.prev_page_url) {
+      this.setFilter(this.activeFilter, this.currentPage - 1);
+    }
   }
 }

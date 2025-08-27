@@ -26,12 +26,17 @@
   cursor: pointer;
 }
 
-/* Tabs */
-.tabs {
+.top {
   display: flex;
   gap: 1.5rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid #eee;
+  justify-content: space-between;
+}
+.tabs {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .tab {
@@ -137,6 +142,34 @@
 
 .reports-cards {
   display: none;
+}
+.pagination-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.page-btn {
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #212b36;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.page-btn.active {
+  border-color: #000;
+  font-weight: bold;
+}
+
+.page-btn:disabled {
+  cursor: not-allowed;
+}
+
+.page-btn.ellipsis {
+  cursor: default;
 }
 
 /* Responsive layout */

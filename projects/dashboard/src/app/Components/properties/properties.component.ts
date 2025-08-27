@@ -121,14 +121,12 @@ export class PropertiesComponent implements OnInit {
   goTo(id: number) {
     this.router.navigate(['/property', id]);
   }
-  // Add inside PropertiesComponent
   goToPage(page: number) {
     if (page !== this.currentPage) {
-      this.setFilter(this.activeFilter, page); // uses the helper we wrote earlier
+      this.setFilter(this.activeFilter, page);
     }
   }
 
-  // Creates an array of page numbers around the currentPage
   getPageRange(): number[] {
     const range: number[] = [];
     const total = this.pagination?.last_page || 1;

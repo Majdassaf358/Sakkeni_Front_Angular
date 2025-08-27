@@ -23,39 +23,75 @@ export class ReportsComponent implements OnInit {
 
   propertyReports: property_report[] = [];
   serviceReports: service_report[] = [];
-
+  currentPage: number = 1;
+  pagination: any;
   constructor(private router: Router, private srv: ReportsService) {}
   ngOnInit(): void {
-    this.getPropertiesReports();
+    this.getPropertiesReports(1);
   }
-  async getPropertiesReports() {
+  async getPropertiesReports(page: number) {
     try {
       let res: ApiResponse<PaginatedData<property_report>> =
-        await lastValueFrom(this.srv.viewPropertiesReports('pending'));
+        await lastValueFrom(this.srv.viewPropertiesReports(page, 'pending'));
       this.propertyReports = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
   }
-  async getServicesReports() {
+  async getServicesReports(page: number) {
     try {
       let res: ApiResponse<PaginatedData<service_report>> = await lastValueFrom(
-        this.srv.viewServicesReports('pending')
+        this.srv.viewServicesReports(page, 'pending')
       );
       this.serviceReports = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
   }
-  setFilter(filter: TabFilter) {
+  setFilter(filter: TabFilter, page: number) {
     this.activeFilter = filter;
     switch (filter) {
       case 'Properties':
-        this.getPropertiesReports();
+        this.getPropertiesReports(page);
         break;
       case 'Service Provider':
-        this.getServicesReports();
+        this.getServicesReports(page);
         break;
+    }
+  }
+
+  goToPage(page: number) {
+    if (page !== this.currentPage) {
+      this.setFilter(this.activeFilter, page);
+    }
+  }
+
+  getPageRange(): number[] {
+    const range: number[] = [];
+    const total = this.pagination?.last_page || 1;
+
+    const start = Math.max(2, this.currentPage - 1);
+    const end = Math.min(total - 1, this.currentPage + 1);
+
+    for (let i = start; i <= end; i++) {
+      range.push(i);
+    }
+    return range;
+  }
+
+  nextPage() {
+    if (this.pagination?.next_page_url) {
+      this.setFilter(this.activeFilter, this.currentPage + 1);
+    }
+  }
+
+  prevPage() {
+    if (this.pagination?.prev_page_url) {
+      this.setFilter(this.activeFilter, this.currentPage - 1);
     }
   }
 }
