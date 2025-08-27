@@ -31,7 +31,6 @@ export class PropertyDetailsComponent implements OnInit {
   scrollLeft = 0;
   showMessagePopup = false;
   imageToShow: string = '';
-
   homeIdSRT: string = '';
   homeId: number = 0;
   images: string[] = [];

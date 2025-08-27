@@ -1,0 +1,46 @@
+<div class="popup-overlay">
+  <div
+    *ngIf="message"
+    class="message-container"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="sekkeni-container">
+      <img class="sekkeni" src="assets\Imgs\Sekkeni-green.png" alt="" />
+    </div>
+    <div class="filter-header">
+      <p class="font-400 font-16">{{ message }}</p>
+    </div>
+    <!-- <div class="button-container"> -->
+    <!-- <button
+        *ngIf="this.from !== 'nav'"
+        class="search-btn font-16 font-400"
+        (click)="close()"
+      >
+        Done!
+      </button>
+      <button
+        *ngIf="this.from === 'nav'"
+        class="search-btn font-16 font-400"
+        (click)="upgrade()"
+      >
+        Upgrade
+      </button>
+      <button
+        *ngIf="this.from === 'nav'"
+        class="search-btn font-16 font-400"
+        (click)="close()"
+      >
+        Cancel
+      </button>
+    </div> -->
+  </div>
+  <div *ngIf="image">
+    <button class="close-btn" (click)="close()">&times;</button>
+    <img
+      class="pop-image"
+      [src]="image"
+      alt=""
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+</div>
