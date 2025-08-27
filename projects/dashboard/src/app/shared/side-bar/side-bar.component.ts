@@ -11,6 +11,38 @@ import { OpenSideService } from '../../Services/open-side.service';
   styleUrl: './side-bar.component.css',
 })
 export class SideBarComponent implements OnInit {
+  menuItems = [
+    {
+      label: 'Dashboard',
+      route: '/statistics',
+      icon: '/Icons/sidebar_dash.svg',
+      activeIcon: '/Icons/sidebar_dash_active.svg',
+    },
+    {
+      label: 'Reports',
+      route: '/reports',
+      icon: '/Icons/sidebar_report.svg',
+      activeIcon: '/Icons/sidebar_report_active.svg',
+    },
+    {
+      label: 'Properties',
+      route: '/properties',
+      icon: '/Icons/sidebar_property.svg',
+      activeIcon: '/Icons/sidebar_property_active.svg',
+    },
+    {
+      label: 'Service Providers',
+      route: '/services',
+      icon: '/Icons/sidebar_service.svg',
+      activeIcon: '/Icons/sidebar_service_active.svg',
+    },
+    {
+      label: 'Admins',
+      route: '/admins',
+      icon: '/Icons/sidebar_admins.svg',
+      activeIcon: '/Icons/sidebar_admins_active.svg',
+    },
+  ];
   isOpen = false;
 
   constructor(private sidebarService: OpenSideService) {}

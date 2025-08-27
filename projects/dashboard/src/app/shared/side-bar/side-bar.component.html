@@ -11,42 +11,20 @@
 
   <ul class="sidebar-menu">
     <li
+      *ngFor="let item of menuItems"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
+      #rla="routerLinkActive"
       class="menu-item"
-      [routerLink]="['/statistics']"
+      [routerLink]="[item.route]"
     >
-      <img class="nav-logo" src="/Icons/Save.svg" alt="Logo" />
+      <img
+        class="nav-logo"
+        [src]="rla.isActive ? item.activeIcon : item.icon"
+        [alt]="item.label"
+      />
 
-      <span class="label">Dashboard</span>
-    </li>
-    <li routerLinkActive="active" class="menu-item" [routerLink]="['/reports']">
-      <img class="nav-logo" src="/Icons/call.svg" alt="Logo" />
-
-      <span class="label">Reports</span>
-    </li>
-    <li
-      routerLinkActive="active"
-      class="menu-item"
-      [routerLink]="['/properties']"
-    >
-      <img class="nav-logo" src="/Icons/add-property.svg" alt="Logo" />
-
-      <span class="label">properties</span>
-    </li>
-    <li
-      routerLinkActive="active"
-      class="menu-item"
-      [routerLink]="['/services']"
-    >
-      <img class="nav-logo" src="/Icons/add-service.svg" alt="Logo" />
-
-      <span class="label">Service Providers</span>
-    </li>
-    <li routerLinkActive="active" class="menu-item" [routerLink]="['/admins']">
-      <img class="nav-logo" src="/Icons/User.svg" alt="Logo" />
-
-      <span class="label">Admins</span>
+      <span class="label">{{ item.label }}</span>
     </li>
   </ul>
 </aside>
