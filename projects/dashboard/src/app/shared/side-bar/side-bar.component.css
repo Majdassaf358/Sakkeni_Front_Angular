@@ -60,7 +60,7 @@
   display: flex;
   justify-self: center;
   background-color: #27393a;
-  margin: 0.5rem 1rem 1rem 1rem;
+  margin: 0.5rem 1rem 4rem 1rem;
 }
 .sidebar-overlay {
   position: fixed;

@@ -26,65 +26,75 @@ export class PropertiesComponent implements OnInit {
   dec: approve_or_decline_property[] = [];
   all: allproperties[] = [];
   adjProperty: adjudicationProperty = new adjudicationProperty();
+  currentPage: number = 1;
+  pagination: any;
   constructor(private router: Router, private srv: AdministrationService) {}
   ngOnInit(): void {
-    this.getAll();
+    this.getAll(1);
   }
 
-  async getPending() {
+  async getPending(page: number) {
     try {
       let res: ApiResponse<PaginatedData<pendingReq>> = await lastValueFrom(
-        this.srv.viewPendingProperties(1)
+        this.srv.viewPendingProperties(page)
       );
       this.pendings = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
   }
-  async getApproved() {
+  async getApproved(page: number) {
     try {
       let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
-        await lastValueFrom(this.srv.viewApprovedProperties(1));
+        await lastValueFrom(this.srv.viewApprovedProperties(page));
       this.app = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
   }
-  async getDeclined() {
+  async getDeclined(page: number) {
     try {
       let res: ApiResponse<PaginatedData<approve_or_decline_property>> =
-        await lastValueFrom(this.srv.viewDeclinedProperties(1));
+        await lastValueFrom(this.srv.viewDeclinedProperties(page));
       this.dec = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
     } catch (error) {
       console.log(error);
     }
   }
-  async getAll() {
+  async getAll(page: number) {
     try {
       let res: ApiResponse<PaginatedData<allproperties>> = await lastValueFrom(
-        this.srv.viewAllProperties(1)
+        this.srv.viewAllProperties(page)
       );
       this.all = res.data.data;
+      this.currentPage = res.data.current_page;
+      this.pagination = res.data;
       console.log(this.all);
     } catch (error) {
       console.log(error);
     }
   }
-  setFilter(filter: StatusFilter) {
+  setFilter(filter: StatusFilter, page: number) {
     this.activeFilter = filter;
 
     switch (filter) {
       case 'Pending':
-        this.getPending();
+        this.getPending(page);
         break;
       case 'Approved':
-        this.getApproved();
+        this.getApproved(page);
         break;
       case 'Declined':
-        this.getDeclined();
+        this.getDeclined(page);
         break;
       case 'All':
-        this.getAll();
+        this.getAll(page);
         break;
     }
   }
@@ -96,7 +106,7 @@ export class PropertiesComponent implements OnInit {
       const res = await lastValueFrom(
         this.srv.adjudicationProperties(this.adjProperty)
       );
-      this.getPending();
+      this.getPending(this.currentPage);
     } catch (error) {
       console.log(error);
     }
@@ -110,5 +120,37 @@ export class PropertiesComponent implements OnInit {
   }
   goTo(id: number) {
     this.router.navigate(['/property', id]);
+  }
+  // Add inside PropertiesComponent
+  goToPage(page: number) {
+    if (page !== this.currentPage) {
+      this.setFilter(this.activeFilter, page); // uses the helper we wrote earlier
+    }
+  }
+
+  // Creates an array of page numbers around the currentPage
+  getPageRange(): number[] {
+    const range: number[] = [];
+    const total = this.pagination?.last_page || 1;
+
+    const start = Math.max(2, this.currentPage - 1);
+    const end = Math.min(total - 1, this.currentPage + 1);
+
+    for (let i = start; i <= end; i++) {
+      range.push(i);
+    }
+    return range;
+  }
+
+  nextPage() {
+    if (this.pagination?.next_page_url) {
+      this.setFilter(this.activeFilter, this.currentPage + 1);
+    }
+  }
+
+  prevPage() {
+    if (this.pagination?.prev_page_url) {
+      this.setFilter(this.activeFilter, this.currentPage - 1);
+    }
   }
 }
