@@ -57,7 +57,6 @@ export class ResetPasswordComponent {
       let res: ApiResponse<null> = await lastValueFrom(
         this.authenticationService.resetPassword(req)
       );
-      console.log(res.message);
       this.router.navigate(['/profile']);
     } catch (error) {
       console.log(error);

@@ -21,8 +21,6 @@ export class MessageComponent {
     if (this.from === 'add') {
       this.popupClosed.emit();
       this.router.navigate(['/properties']);
-    }
-    if (this.from === 'nav') {
     } else {
       this.popupClosed.emit();
     }

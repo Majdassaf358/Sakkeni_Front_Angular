@@ -73,7 +73,6 @@ export class EditProfileComponent implements OnInit {
         this.authenticationService.profile()
       );
       this.profileInfo = res.data;
-      console.log(this.profileInfo);
     } catch (error) {
       console.log(error);
     }

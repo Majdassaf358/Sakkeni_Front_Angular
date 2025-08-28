@@ -45,6 +45,7 @@ export class ViewPropertiesComponent implements OnInit {
   currentPage: number = 1;
   currentFavoritePage: number = 1;
   pagination: any;
+  lastQuery = '';
 
   center: google.maps.LatLngLiteral = {
     lat: 33.42565943762839,
@@ -99,7 +100,6 @@ export class ViewPropertiesComponent implements OnInit {
           lng: fr.property.location.longitude,
         },
       }));
-      console.log('Loaded favoriteIds:', Array.from(this.favoriteIds));
     } catch (error) {
       console.log(error);
     }
@@ -140,12 +140,24 @@ export class ViewPropertiesComponent implements OnInit {
       console.log(error);
     }
   }
+  async onFilterSearch(query: string) {
+    try {
+      this.lastQuery = query;
+      let res: ApiResponse<PaginatedData<propertyCard>> = await lastValueFrom(
+        this.propertyservice.searchProperty(query)
+      );
+      // this.currentPage = res.data.current_page;
+      this.properties = res.data.data;
+      // this.pagination = res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   toggleFavorite(id: number) {
     if (this.favoriteIds.has(id)) {
-      console.log('going to remove');
       this.removeFavorites(id);
     } else {
-      console.log('going to add');
       this.addToFavorites(id);
     }
   }
@@ -214,7 +226,5 @@ export class ViewPropertiesComponent implements OnInit {
       this.getProperties(this.currentPage - 1);
     }
   }
-  onMarkerClick(id: number) {
-    console.log('Clicked property ID:', id);
-  }
+  onMarkerClick(id: number) {}
 }

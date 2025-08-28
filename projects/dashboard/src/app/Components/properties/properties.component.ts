@@ -74,7 +74,6 @@ export class PropertiesComponent implements OnInit {
       this.all = res.data.data;
       this.currentPage = res.data.current_page;
       this.pagination = res.data;
-      console.log(this.all);
     } catch (error) {
       console.log(error);
     }

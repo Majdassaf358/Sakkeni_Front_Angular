@@ -46,7 +46,12 @@
       >
         <div class="search-container-left">
           <img class="search-icon" src="assets\Icons\Search.svg" alt="" />
-          <input type="text" placeholder="Search Location" />
+          <input
+            [formControl]="searchControl"
+            type="text"
+            placeholder="Search Property"
+            (keyup.enter)="emitSearch()"
+          />
         </div>
         <div class="search-container-right">
           <div class="vertical-line"></div>

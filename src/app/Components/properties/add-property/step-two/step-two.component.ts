@@ -251,7 +251,6 @@ export class StepTwoComponent implements OnInit, OnDestroy {
     if (this.selectedSellType === 2) {
       this.form.get('stepTwo.extended.rent.is_furnished')?.setValue(number);
     }
-    console.log(this.isfurnitured);
   }
   toggleSelection(path: string, id: number): void {
     const array = this.form.get(path) as FormArray;
@@ -302,22 +301,18 @@ export class StepTwoComponent implements OnInit, OnDestroy {
 
     if (basic.invalid) {
       basic.markAllAsTouched();
-      console.log('first');
 
       return false;
     }
     if (!this.showExtendedSection) {
-      console.log('second');
       this.showExtendedSection = true;
       return false;
     }
 
     if (extended.invalid) {
-      console.log('third');
       extended.markAllAsTouched();
       return false;
     }
-    console.log('four');
 
     return true;
   }
@@ -331,7 +326,6 @@ export class StepTwoComponent implements OnInit, OnDestroy {
 
       if (isInsideSyria) {
         const position = latLng.toJSON();
-        console.log('Clicked position:', position);
 
         this.markers = [
           {
@@ -343,7 +337,6 @@ export class StepTwoComponent implements OnInit, OnDestroy {
         this.form.get('stepTwo.basic.latitude')?.setValue(position.lat);
         this.form.get('stepTwo.basic.longitude')?.setValue(position.lng);
       } else {
-        console.log('Only locations in Syria are allowed.');
       }
     }
   }

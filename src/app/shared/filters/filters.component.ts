@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { filters } from '../../Models/filters';
 import { PopUpComponent } from '../../Components/pop-up/pop-up.component';
 import { filter } from 'rxjs';
@@ -8,7 +8,7 @@ import { filter } from 'rxjs';
 @Component({
   selector: 'app-filters',
   standalone: true,
-  imports: [CommonModule, FormsModule, PopUpComponent],
+  imports: [CommonModule, FormsModule, PopUpComponent, ReactiveFormsModule],
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.css'],
 })
@@ -17,6 +17,8 @@ export class FiltersComponent {
   @Output() typeChange = new EventEmitter<string>();
   @Output() filterChange = new EventEmitter<string>();
   @Output() filterToProperties = new EventEmitter<filters>();
+  @Output() searchText = new EventEmitter<string>();
+  searchControl = new FormControl('');
   sideSelect: string = 'list';
   type: string = 'rent';
   filtersSel: filters = new filters();
@@ -26,6 +28,10 @@ export class FiltersComponent {
   changeDisplay(change: string) {
     this.filterChange.emit(change);
     this.sideSelect = change;
+  }
+  emitSearch() {
+    const q = (this.searchControl.value || '').trim();
+    this.searchText.emit(q); // send to parent
   }
 
   changeType(change: string) {

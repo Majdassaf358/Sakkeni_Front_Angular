@@ -40,7 +40,6 @@ export class PopUpComponent implements OnInit {
         this.helpsrv.getAmenities()
       );
       this.amenities = res.data;
-      console.log(this.amenities);
     } catch (err) {
       console.log(err);
     }
@@ -86,7 +85,6 @@ export class PopUpComponent implements OnInit {
   applyFilters() {
     this.filterValues.amenity_ids = Array.from(this.amenitySet);
     this.filtersApplied.emit(this.filterValues);
-    console.log(this.filterValues);
     this.closePopup();
   }
 

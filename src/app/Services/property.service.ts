@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/ApiResponse';
@@ -54,6 +54,15 @@ export class PropertyService {
       url,
       filters
     );
+  }
+  public searchProperty(
+    query: string
+  ): Observable<ApiResponse<PaginatedData<propertyCard>>> {
+    const url = `${environment.Api}/properties/search`;
+    const params = new HttpParams().set('query', query || '');
+    return this.http.get<ApiResponse<PaginatedData<propertyCard>>>(url, {
+      params,
+    });
   }
   public addToFavorite(id: number): Observable<ApiResponse<add_favourite>> {
     let url = `${environment.Api}/add-property-to-favorite/${id}`;

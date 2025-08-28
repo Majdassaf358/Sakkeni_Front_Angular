@@ -68,7 +68,6 @@ export class AddPropertyComponent {
         this.popupMessage = 'Please fill all the required info';
         return;
       } else if (!this.stepTwoComponent.saveAndNext()) {
-        console.log(this.stepTwoComponent.saveAndNext());
         return;
       }
       this.currentStep = 3;

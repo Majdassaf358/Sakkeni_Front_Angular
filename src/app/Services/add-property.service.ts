@@ -308,24 +308,20 @@ export class AddPropertyService {
       formData.append('amenities[]', id);
     });
     if (basic.sellType == 2) {
-      console.log('rent id 2');
       formData.append('price', extended.rent.price);
       formData.append('lease_period_value', extended.rent.lease_period_value);
       formData.append('lease_period_unit', extended.rent.lease_period_unit);
       formData.append('is_furnished', extended.rent.is_furnished);
     }
     if (basic.sellType == 1) {
-      console.log('purchase id 1');
       formData.append('price', extended.purchase.price);
       formData.append('is_furnished', extended.purchase.is_furnished);
     }
     if (basic.sellType == 3) {
-      console.log('offPlan id 3');
       formData.append('delivery_date', extended.offPlan.delivery_date);
       formData.append('overall_payment', extended.offPlan.overall_payment);
     }
     if (extended.residential.residential_property_type_id === 1) {
-      console.log('apa');
       formData.append('bedrooms', extended.residential.apartment.bedrooms);
       formData.append('floor', extended.residential.apartment.floor);
       formData.append(
@@ -337,13 +333,9 @@ export class AddPropertyService {
         extended.residential.apartment.apartment_number
       );
     } else if (extended.residential.residential_property_type_id === 2) {
-      console.log('villa');
-
       formData.append('bedrooms', extended.residential.villa.bedrooms);
       formData.append('floors', extended.residential.villa.floors);
     } else {
-      console.log('office');
-
       formData.append('floor', extended.commercial.office.floor);
       formData.append(
         'building_number',
