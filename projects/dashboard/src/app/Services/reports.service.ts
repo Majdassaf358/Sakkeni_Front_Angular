@@ -16,14 +16,14 @@ export class ReportsService {
     page: number,
     type: string
   ): Observable<ApiResponse<PaginatedData<property_report>>> {
-    let url = `${environment.Api}/admin/reports/properties/${type}${page}`;
+    let url = `${environment.Api}/admin/reports/properties/${type}?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<property_report>>>(url);
   }
   public viewServicesReports(
     page: number,
     type: string
   ): Observable<ApiResponse<PaginatedData<service_report>>> {
-    let url = `${environment.Api}/admin/reports/service-providers/${type}${page}`;
+    let url = `${environment.Api}/admin/reports/service-providers/${type}?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<service_report>>>(url);
   }
   public processReports(
