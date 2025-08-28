@@ -14,6 +14,7 @@ import { ApiResponse } from '../../Models/ApiResponse';
 import { AdminRes } from '../../Models/AdminRes';
 import { lastValueFrom } from 'rxjs';
 import { getErrorMessage } from '../../shared/messages';
+import { MessageService } from '../../Services/message.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,8 @@ export class LoginComponent {
   logInForm!: FormGroup;
   auth!: AdminRes;
   token: string = '';
+  message: string = '';
+  showMessagePopup = false;
 
   get logEmail() {
     return this.logInForm.get('logEmail');
@@ -35,7 +38,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private srv: AuthService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {
     this.logInForm = this.fb.group({
       logEmail: ['', [Validators.required]],
@@ -58,14 +62,22 @@ export class LoginComponent {
       let res: ApiResponse<AdminRes> = await lastValueFrom(
         this.srv.adminLogin(req)
       );
+      this.message = res.message;
       this.auth = res.data;
       this.token = res.data.token || '';
       localStorage.setItem('adminToken', this.token);
       this.router.navigate(['/statistics']);
     } catch (error) {
-      // this.messageText = 'Login failed. Please check your credentials.';
-      // this.showMessagePopup = true;
+      this.message = 'Login failed. Please check your credentials.';
+      this.openPop();
       console.log(error);
     }
+  }
+  openPop(customMessage?: string) {
+    this.messageService.open({
+      message: customMessage ?? this.message ?? 'Something went wrong.',
+      from: 'login',
+      image: '',
+    });
   }
 }

@@ -5,10 +5,19 @@
     (click)="$event.stopPropagation()"
   >
     <div class="sekkeni-container">
-      <img class="sekkeni" src="assets\Imgs\Sekkeni-green.png" alt="" />
+      <img class="sekkeni" src="/Imgs/logo 1.png" alt="" />
     </div>
     <div class="filter-header">
       <p class="font-400 font-16">{{ message }}</p>
+    </div>
+    <div class="button-container">
+      <button
+        *ngIf="this.from !== 'nav'"
+        class="search-btn font-16 font-400"
+        (click)="close()"
+      >
+        Done!
+      </button>
     </div>
   </div>
   <div *ngIf="image">

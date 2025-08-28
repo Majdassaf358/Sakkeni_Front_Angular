@@ -13,15 +13,10 @@ export class MessageComponent {
   @Input() from: string = '';
   @Input() message: string = '';
   @Input() image: string = '';
-  @Input() add: string = '';
 
   @Output() popupClosed = new EventEmitter<void>();
   constructor(private router: Router) {}
   close() {
-    if (this.from === 'add') {
-      this.popupClosed.emit();
-      this.router.navigate(['/properties']);
-    }
     if (this.from === 'nav') {
     } else {
       this.popupClosed.emit();

@@ -5,7 +5,6 @@ export interface PopupPayload {
   message: string;
   image: string;
   from: string;
-  add: string;
 }
 
 @Injectable({ providedIn: 'root' })

@@ -1,12 +1,11 @@
 <app-loader></app-loader> <app-side-bar *ngIf="!isLoginPage"></app-side-bar>
-<app-navbar></app-navbar>
+<app-navbar *ngIf="!isLoginPage"></app-navbar>
 
 <app-message
   *ngIf="popupState"
   [message]="popupState.message"
   [image]="popupState.image"
   [from]="popupState.from"
-  [add]="popupState.add"
   (popupClosed)="onPopupClosed()"
 ></app-message>
 
