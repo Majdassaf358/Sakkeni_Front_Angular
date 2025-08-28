@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { ApiResponse } from '../../Models/ApiResponse';
 import { propertyDetails } from '../../Models/viewproperty/property-details';
 import { lastValueFrom } from 'rxjs';
@@ -11,7 +10,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-view-property',
-  imports: [NavbarComponent, CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './view-property.component.html',
   styleUrl: './view-property.component.css',
 })

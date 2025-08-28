@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { ApiResponse } from '../../Models/ApiResponse';
 import { Router } from '@angular/router';
@@ -13,7 +12,7 @@ type TabFilter = 'Properties' | 'Service Provider';
 
 @Component({
   selector: 'app-reports',
-  imports: [NavbarComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css',
 })

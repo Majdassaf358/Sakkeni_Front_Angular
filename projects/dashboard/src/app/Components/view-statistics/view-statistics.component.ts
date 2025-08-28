@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { Router } from '@angular/router';
 import { ApiResponse } from '../../Models/ApiResponse';
 import type { EChartsOption } from 'echarts';
@@ -14,7 +13,7 @@ import { services_status } from '../../Models/charts/services_status';
 import { total_properties } from '../../Models/charts/total_properties';
 @Component({
   selector: 'app-view-statistics',
-  imports: [NavbarComponent, CommonModule, NgxEchartsModule],
+  imports: [CommonModule, NgxEchartsModule],
   templateUrl: './view-statistics.component.html',
   styleUrl: './view-statistics.component.css',
 })

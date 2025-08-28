@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiResponse } from '../../Models/ApiResponse';
 import { lastValueFrom } from 'rxjs';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [NavbarComponent],
+  imports: [],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })

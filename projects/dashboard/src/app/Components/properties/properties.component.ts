@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AdministrationService } from '../../Services/administration.service';
@@ -14,7 +13,7 @@ import { allproperties } from '../../Models/ViewAllPropertiesAdj/allproperties';
 type StatusFilter = 'All' | 'Pending' | 'Approved' | 'Declined';
 @Component({
   selector: 'app-properties',
-  imports: [NavbarComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './properties.component.html',
   styleUrl: './properties.component.css',
 })

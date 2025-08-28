@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { AdministrationService } from '../../Services/administration.service';
 import { ApiResponse } from '../../Models/ApiResponse';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-view-service',
-  imports: [NavbarComponent],
+  imports: [],
   templateUrl: './view-service.component.html',
   styleUrl: './view-service.component.css',
 })
