@@ -1,0 +1,239 @@
+/* Container */
+.properties-history {
+  margin: 1rem 3rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background: #fff;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.active-filter {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.top {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  justify-content: space-between;
+}
+.tabs {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tab {
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #777;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.tab.active {
+  color: #000;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #000;
+  border-radius: 2px;
+}
+
+/* Table */
+.properties-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.properties-table th,
+.properties-table td {
+  text-align: left;
+  padding: 12px 10px;
+}
+
+.properties-table thead {
+  color: #888;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #eee;
+}
+
+.properties-table tr {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.properties-table td {
+  font-size: 0.95rem;
+}
+
+/* Property cell (image + address) */
+.property-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.property-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.property-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.property-info .address {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #222;
+}
+
+/* Status badges */
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Status colors */
+.status.all {
+  background: #e9eeee;
+  color: #333;
+}
+
+.status.pending {
+  background: #fff7e0;
+  color: #b88900;
+}
+
+.status.sold {
+  background: #e5f9ee;
+  color: #0a8f4d;
+}
+
+.status.all::before {
+  background: #666;
+}
+
+.status.pending::before {
+  background: #b88900;
+}
+
+.status.sold::before {
+  background: #0a8f4d;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.page-btn {
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #212b36;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.page-btn.active {
+  border-color: #000;
+  font-weight: bold;
+}
+
+.page-btn:disabled {
+  cursor: not-allowed;
+}
+
+.page-btn.ellipsis {
+  cursor: default;
+}
+
+/* Mobile cards */
+@media (max-width: 1024px) {
+  .properties-history {
+    margin: 1rem;
+  }
+
+  .properties-table {
+    display: none;
+  }
+
+  .properties-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .property-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 1rem;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .property-card .row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+
+  .property-card .label {
+    font-weight: 600;
+    color: #555;
+  }
+
+  .property-card .value {
+    color: #333;
+  }
+
+  .property-card .status {
+    margin-top: 0.5rem;
+  }
+}

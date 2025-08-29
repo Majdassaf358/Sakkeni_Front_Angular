@@ -1,2 +1,119 @@
 <app-navbar [page]="'history'" [withFilters]="false"></app-navbar>
-<div>history</div>
+
+<div class="properties-history">
+  <div class="header">
+    <h2>History</h2>
+    <span class="active-filter">• {{ activeFilter }}</span>
+  </div>
+  <div class="top">
+    <div class="tabs" role="tablist">
+      <button
+        *ngFor="let t of tabs"
+        type="button"
+        class="tab"
+        [class.active]="t === activeFilter"
+        (click)="setFilter(t, 1)"
+        [attr.aria-pressed]="t === activeFilter"
+      >
+        {{ t }}
+      </button>
+    </div>
+
+    <div class="pagination-controls" *ngIf="pagination">
+      <button
+        class="page-btn"
+        aria-label="Previous page"
+        (click)="prevPage()"
+        [disabled]="!pagination?.prev_page_url"
+      >
+        ‹
+      </button>
+
+      <button
+        class="page-btn"
+        [class.active]="currentPage === 1"
+        (click)="goToPage(1)"
+      >
+        1
+      </button>
+
+      <span *ngIf="currentPage > 2" class="page-ellipsis">…</span>
+
+      <button
+        *ngIf="currentPage !== 1 && currentPage !== pagination?.last_page"
+        class="page-btn active"
+        disabled
+      >
+        {{ currentPage }}
+      </button>
+
+      <span
+        *ngIf="currentPage < pagination?.last_page - 1"
+        class="page-ellipsis"
+        >…</span
+      >
+
+      <button
+        *ngIf="1 < pagination?.last_page"
+        class="page-btn"
+        [class.active]="currentPage === pagination.last_page"
+        (click)="goToPage(pagination?.last_page)"
+      >
+        {{ pagination?.last_page }}
+      </button>
+
+      <button
+        class="page-btn"
+        aria-label="Next page"
+        (click)="nextPage()"
+        [disabled]="!pagination?.next_page_url"
+      >
+        ›
+      </button>
+    </div>
+  </div>
+
+  <table class="properties-table">
+    <colgroup>
+      <col style="width: 47%" />
+      <col style="width: 18%" />
+      <col style="width: 15%" />
+      <col style="width: 20%" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Location</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of profileHistory" (click)="goTo(p.id)">
+        <td class="property-cell">
+          <img
+            [src]="getImageSrc(p.cover_image.image_path)"
+            alt="Property"
+            class="property-img"
+          />
+          <div class="property-info">
+            <div class="address">{{ p.location.additional_info }}</div>
+          </div>
+        </td>
+
+        <td>{{ p.location.city.name }}</td>
+
+        <td>{{ p.availability_status.updated_at | date : "mediumDate" }}</td>
+
+        <td>
+          <span
+            class="status"
+            [ngClass]="p.availability_status.name.toLowerCase()"
+          >
+            {{ p.availability_status.name }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

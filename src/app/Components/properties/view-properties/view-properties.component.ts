@@ -42,6 +42,7 @@ export class ViewPropertiesComponent implements OnInit {
   properties: propertyCard[] = [];
   favoriteProperties: favoriteCard[] = [];
   imageUrl: string = 'http://127.0.0.1:8000/';
+  pages: number[] = [];
   currentPage: number = 1;
   currentFavoritePage: number = 1;
   pagination: any;
@@ -75,7 +76,7 @@ export class ViewPropertiesComponent implements OnInit {
         data: p,
         position: { lat: p.location.latitude, lng: p.location.longitude },
       }));
-      // this.getImageSrc(res.data.data);
+      this.computePages();
     } catch (error) {
       console.log(error);
     }
@@ -100,6 +101,7 @@ export class ViewPropertiesComponent implements OnInit {
           lng: fr.property.location.longitude,
         },
       }));
+      this.computePages();
     } catch (error) {
       console.log(error);
     }
@@ -203,28 +205,65 @@ export class ViewPropertiesComponent implements OnInit {
   }
   getImageSrc(path?: string): string {
     if (!path) {
-      return 'assets/Imgs/pool.jpg'; // fallback
+      return 'assets/Imgs/pool.jpg';
     }
 
-    // If path is already a full URL (http/https), return it as-is
     if (path.startsWith('http://') || path.startsWith('https://')) {
       return path;
     }
 
-    // Otherwise, prepend your backend base URL
     return this.imageUrl + path;
+  }
+  computePages() {
+    const last = Number(this.pagination?.last_page ?? 1);
+    const current = Number(this.currentPage ?? 1);
+    const maxVisible = 7;
+
+    if (last <= 0) {
+      this.pages = [];
+      return;
+    }
+
+    if (last <= maxVisible) {
+      this.pages = Array.from({ length: last }, (_, i) => i + 1);
+      return;
+    }
+
+    let start = current - 3;
+    let end = current + 3;
+
+    if (start < 1) {
+      start = 1;
+      end = Math.min(maxVisible, last);
+    }
+
+    if (end > last) {
+      end = last;
+      start = Math.max(1, last - (maxVisible - 1));
+    }
+
+    const len = end - start + 1;
+    this.pages = Array.from({ length: len }, (_, i) => start + i);
   }
 
   nextPage() {
-    if (this.pagination?.next_page_url) {
+    if (
+      this.pagination?.next_page_url &&
+      this.currentPage < this.pagination.last_page
+    ) {
       this.getProperties(this.currentPage + 1);
     }
   }
 
   prevPage() {
-    if (this.pagination?.prev_page_url) {
+    if (this.pagination?.prev_page_url && this.currentPage > 1) {
       this.getProperties(this.currentPage - 1);
     }
   }
-  onMarkerClick(id: number) {}
+
+  goToPage(page: number) {
+    if (page === this.currentPage) return;
+    if (page < 1 || page > (this.pagination?.last_page ?? 1)) return;
+    this.getProperties(page);
+  }
 }

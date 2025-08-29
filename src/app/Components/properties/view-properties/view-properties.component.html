@@ -178,15 +178,36 @@
       ></map-marker>
     </google-map>
   </div>
-  <div *ngIf="sideFilter === 'list'" class="pagination-controls">
-    <button (click)="prevPage()" [disabled]="!pagination?.prev_page_url">
-      ‹ Prev
+  <!-- <div *ngIf="sideFilter === 'list'" class="pagination-controls"> -->
+  <div class="pagination" *ngIf="sideFilter === 'list'">
+    <button
+      class="arrow"
+      (click)="prevPage()"
+      [disabled]="!pagination.prev_page_url"
+      aria-label="Previous"
+    >
+      ‹
     </button>
 
-    <span> Page {{ currentPage }} </span>
+    <div class="pages">
+      <button
+        class="page"
+        *ngFor="let p of pages"
+        (click)="goToPage(p)"
+        [class.active]="p === currentPage"
+        [attr.aria-current]="p === currentPage ? 'page' : null"
+      >
+        {{ p }}
+      </button>
+    </div>
 
-    <button (click)="nextPage()" [disabled]="!pagination?.next_page_url">
-      Next ›
+    <button
+      class="arrow"
+      (click)="nextPage()"
+      [disabled]="!pagination.next_page_url"
+      aria-label="Next"
+    >
+      ›
     </button>
   </div>
 </div>
