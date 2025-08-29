@@ -29,6 +29,7 @@ export class StepOneComponent {
   imageToShow: string = '';
   form: FormGroup;
   previewImages: string[] = [];
+  previewSignatures: string[] = [];
 
   constructor(private formSvc: AddPropertyService) {
     this.form = this.formSvc.getForm();
@@ -42,31 +43,82 @@ export class StepOneComponent {
   }
   onFilesSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (!input.files?.length) {
-      return;
-    }
+    this.processFiles(input.files);
+    // reset so same file can be selected again if needed
+    if (input) input.value = '';
+  }
 
-    Array.from(input.files).forEach((file: File) => {
+  // Drag handlers
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragging = true;
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragging = false;
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragging = false;
+    const dt = event.dataTransfer;
+    if (!dt) return;
+    this.processFiles(dt.files);
+  }
+
+  // shared file-processing routine
+  private processFiles(fileList: FileList | null) {
+    if (!fileList || fileList.length === 0) return;
+
+    const imagesArray = this.form.get('stepOne.images') as FormArray;
+
+    Array.from(fileList).forEach((file: File) => {
+      // optionally filter non-images (defensive)
+      if (!file.type.startsWith('image/')) return;
+
       const signature = `${file.name}_${file.size}`;
       if (this.fileSignatures.has(signature)) {
+        // duplicate, skip
         return;
       }
+
+      // add signature trackers
       this.fileSignatures.add(signature);
+      this.previewSignatures.push(signature);
 
+      // push file into FormArray so the form contains File objects for upload later
+      imagesArray.push(new FormControl(file));
+
+      // make preview
       const reader = new FileReader();
-      reader.onload = () => this.previewImages.push(reader.result as string);
+      reader.onload = () => {
+        this.previewImages.push(reader.result as string);
+      };
       reader.readAsDataURL(file);
-
-      (this.form.get('stepOne.images') as FormArray).push(
-        new FormControl(file)
-      );
     });
-
-    (event.target as HTMLInputElement).value = '';
   }
-  removeImage(index: number): void {
-    this.images.splice(index, 1);
-    this.imagesArray.removeAt(index);
+
+  // remove image at index (updates previews, signatures set, and FormArray)
+  removeImage(index: number) {
+    const imagesArray = this.form.get('stepOne.images') as FormArray;
+    if (index < 0 || index >= this.previewImages.length) return;
+
+    const sig = this.previewSignatures[index];
+    if (sig) {
+      this.fileSignatures.delete(sig);
+      this.previewSignatures.splice(index, 1);
+    }
+
+    this.previewImages.splice(index, 1);
+
+    // remove form control at same index if exists
+    if (imagesArray && imagesArray.length > index) {
+      imagesArray.removeAt(index);
+    }
   }
   clearImages(): void {
     this.images = [];

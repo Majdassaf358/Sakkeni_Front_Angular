@@ -5,20 +5,54 @@
 >
 </app-message>
 <form>
-  <div class="upload-controls">
-    <label for="imageUpload">Upload images:</label>
-    <input
-      id="imageUpload"
-      type="file"
-      accept="image/*"
-      multiple
-      (change)="onFilesSelected($event)"
-      style="display: none"
-    />
-    <button type="button" class="clear-btn" (click)="clearImages()">
-      Clear All
-    </button>
+  <div class="upload-container">
+    <label class="upload-label">Upload Photos</label>
+
+    <div
+      class="upload-box"
+      (click)="fileInput.click()"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)"
+      [class.dragging]="isDragging"
+      role="button"
+      tabindex="0"
+      (keydown.enter)="fileInput.click()"
+    >
+      <div class="upload-content">
+        <div class="upload-icon"></div>
+        <p class="upload-text">Drag and drop files here</p>
+        <span class="upload-or">Or</span>
+        <button
+          type="button"
+          class="browse-btn"
+          (click)="fileInput.click(); $event.stopPropagation()"
+        >
+          Browse Files
+        </button>
+
+        <!-- hidden real input -->
+        <input
+          #fileInput
+          id="imageUpload"
+          type="file"
+          accept="image/*"
+          multiple
+          (change)="onFilesSelected($event)"
+          style="display: none"
+        />
+      </div>
+    </div>
+
+    <!-- simple previews (optional) -->
+    <div class="previews" *ngIf="previewImages.length">
+      <div class="preview" *ngFor="let src of previewImages; let i = index">
+        <img [src]="src" alt="preview {{ i }}" />
+        <button type="button" class="remove" (click)="removeImage(i)">✕</button>
+      </div>
+    </div>
   </div>
+
   <div class="container">
     <section
       #scrollContainer
