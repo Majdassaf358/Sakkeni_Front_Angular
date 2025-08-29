@@ -183,7 +183,7 @@
     <button
       class="arrow"
       (click)="prevPage()"
-      [disabled]="!pagination.prev_page_url"
+      [disabled]="!pagination?.prev_page_url"
       aria-label="Previous"
     >
       ‹
@@ -204,7 +204,7 @@
     <button
       class="arrow"
       (click)="nextPage()"
-      [disabled]="!pagination.next_page_url"
+      [disabled]="!pagination?.next_page_url"
       aria-label="Next"
     >
       ›

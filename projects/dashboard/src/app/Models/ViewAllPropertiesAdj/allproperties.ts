@@ -1,4 +1,5 @@
 import { availability_status } from '../sub_classes/availability_status';
+import { location } from '../sub_classes/location';
 import { owner } from '../viewPending/owner';
 import { property_admin } from './property_admin';
 
@@ -21,4 +22,5 @@ export class allproperties {
   'owner': owner;
   'property_admin': property_admin;
   'availability_status': availability_status;
+  'location': location;
 }

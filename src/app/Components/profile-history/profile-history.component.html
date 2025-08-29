@@ -17,6 +17,28 @@
       >
         {{ t }}
       </button>
+      <button
+        class="font-12 font-300 type"
+        [ngClass]="{ 'bg-focused': type === 'rent' }"
+        (click)="changeType('rent')"
+      >
+        For Rent
+      </button>
+
+      <button
+        class="font-12 font-300 type"
+        [ngClass]="{ 'bg-focused': type === 'purchase' }"
+        (click)="changeType('purchase')"
+      >
+        For Sale
+      </button>
+      <button
+        class="font-12 font-300 type"
+        [ngClass]="{ 'bg-focused': type === 'off-plan' }"
+        (click)="changeType('off-plan')"
+      >
+        Off Plan
+      </button>
     </div>
 
     <div class="pagination-controls" *ngIf="pagination">

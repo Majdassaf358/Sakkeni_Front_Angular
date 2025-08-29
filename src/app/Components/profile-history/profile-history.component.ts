@@ -28,11 +28,11 @@ export class ProfileHistoryComponent implements OnInit {
 
   constructor(private srv: PropertyService, private router: Router) {}
   ngOnInit(): void {
-    this.getAll(1);
+    this.myProperties(1);
   }
-  async getAll(page: number) {
+  async myProperties(page: number) {
     try {
-      let res = await lastValueFrom(this.srv.viewMyProperties('rent ', page));
+      let res = await lastValueFrom(this.srv.viewMyProperties(this.type, page));
       this.profileHistory = res.data.data;
       this.currentPage = res.data.current_page;
       this.pagination = res.data;
@@ -41,9 +41,13 @@ export class ProfileHistoryComponent implements OnInit {
     }
   }
 
+  changeType(change: string) {
+    this.type = change;
+    this.myProperties(1);
+  }
   setFilter(filter: StatusFilter, page: number) {
     this.activeFilter = filter;
-    this.getAll(page);
+    this.myProperties(page);
   }
 
   goTo(id: number) {
