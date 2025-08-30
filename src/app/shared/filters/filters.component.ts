@@ -31,7 +31,7 @@ export class FiltersComponent {
   }
   emitSearch() {
     const q = (this.searchControl.value || '').trim();
-    this.searchText.emit(q); // send to parent
+    this.searchText.emit(q);
   }
 
   changeType(change: string) {
