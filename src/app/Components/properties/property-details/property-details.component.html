@@ -4,10 +4,27 @@
   (popupClosed)="onPopupClosed()"
 >
 </app-message>
+<app-pop-up
+  *ngIf="showReportPopup"
+  (popupClosed)="ReportPopupClosed()"
+  [page]="'details'"
+></app-pop-up>
 <app-navbar [page]="'details'" [withFilters]="false"></app-navbar>
 
 <div class="info-title">
-  <p class="font-500 font-24 uppercase">{{ displayText }} S.P</p>
+  <p class="font-500 font-24 uppercase tit">
+    {{ displayText }} S.P
+    <img
+      class="three_dots"
+      src="assets\Icons\three_dots.svg"
+      alt=""
+      (click)="toggleDropdown()"
+      #dropdown
+    />
+  </p>
+  <ul class="dropdown-menu" [class.show]="dropdownOpen">
+    <li class="font-400 font-14" (click)="openReportPopup()">Report</li>
+  </ul>
   <div class="nav-line"></div>
 
   <h3 *ngIf="details?.location?.country && details?.location?.city">

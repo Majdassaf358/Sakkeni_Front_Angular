@@ -50,8 +50,7 @@
 .info-title {
   display: grid;
   gap: 0.6rem;
-  /* margin: 1.8rem 2rem; */
-  margin: 1.5rem clamp(1rem, 5vw, 5rem);
+  margin: 2.5rem clamp(1rem, 5vw, 5rem) 1.5rem clamp(1rem, 5vw, 5rem);
 }
 .info-title h3 {
   color: #27393a80;
@@ -60,7 +59,16 @@
   display: grid;
   gap: 1rem;
 }
-
+.tit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.three_dots {
+  cursor: pointer;
+  width: 10px;
+  height: 18px;
+}
 .row {
   margin-left: 2rem;
   display: flex;
@@ -157,10 +165,40 @@
   padding: 0 1rem;
 }
 .nav-line {
-  background-color: #b4c5c5;
+  background-color: #000000;
   height: 1.4px;
   width: 100%;
   margin-inline-end: auto;
+}
+.dropdown-menu {
+  position: absolute;
+  width: 8%;
+  top: 200px;
+  right: 70px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-menu li {
+  color: #27393a;
+  padding: 0.1rem 0.5rem;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {

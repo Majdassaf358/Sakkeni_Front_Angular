@@ -17,21 +17,25 @@ import { id_name } from '../../Models/get_ids/id_name';
 })
 export class PopUpComponent implements OnInit {
   @Input() selectedType: string = 'rent';
+  @Input() page: string = 'details';
   @Output() filtersApplied = new EventEmitter<filters>();
   @Output() popupClosed = new EventEmitter<void>();
   selectedPropertyType: string = '';
   filterValues: filters = new filters();
   private amenitySet = new Set<number>();
   amenities: id_name[] = [];
+  report_reasons: id_name[] = [];
   countryCities: country_cities[] = [];
   displayedCountries: country_cities[] = [];
   displayedCities: { id: number; name: string }[] = [];
   countriesLoaded = false;
   popupMessage: string = '';
+  selectedReportReason: number = 0;
 
   constructor(private helpsrv: ProjectIdsService) {}
   ngOnInit(): void {
     this.loadCitiesForCountry();
+    this.getPropertiesReports();
     this.getAmenities();
   }
   async getAmenities() {
@@ -40,6 +44,16 @@ export class PopUpComponent implements OnInit {
         this.helpsrv.getAmenities()
       );
       this.amenities = res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async getPropertiesReports() {
+    try {
+      let res: ApiResponse<id_name[]> = await lastValueFrom(
+        this.helpsrv.getPropertiesReport()
+      );
+      this.report_reasons = res.data;
     } catch (err) {
       console.log(err);
     }
@@ -94,6 +108,9 @@ export class PopUpComponent implements OnInit {
     } else {
       this.amenitySet.add(id);
     }
+  }
+  selectReportReason(id: number) {
+    this.selectedReportReason = id;
   }
 
   closePopup() {

@@ -43,4 +43,8 @@ export class ProjectIdsService {
     let url = `${environment.Api}/view-ownership-types`;
     return this.http.get<ApiResponse<id_name[]>>(url);
   }
+  public getPropertiesReport(): Observable<ApiResponse<id_name[]>> {
+    let url = `${environment.Api}/report-reasons/property`;
+    return this.http.get<ApiResponse<id_name[]>>(url);
+  }
 }

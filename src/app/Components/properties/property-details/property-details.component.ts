@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GoogleMapsModule, GoogleMap } from '@angular/google-maps';
 import { MessageComponent } from '../../message/message.component';
+import { PopUpComponent } from '../../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-property-details',
@@ -19,6 +20,7 @@ import { MessageComponent } from '../../message/message.component';
     FormsModule,
     GoogleMapsModule,
     MessageComponent,
+    PopUpComponent,
   ],
   templateUrl: './property-details.component.html',
   styleUrl: './property-details.component.css',
@@ -30,12 +32,14 @@ export class PropertyDetailsComponent implements OnInit {
   startX = 0;
   scrollLeft = 0;
   showMessagePopup = false;
+  showReportPopup = false;
   imageToShow: string = '';
   homeIdSRT: string = '';
   homeId: number = 0;
   images: string[] = [];
   imagesUrl: string = 'http://127.0.0.1:8000/';
   details: propertyDetails = new propertyDetails();
+  dropdownOpen = false;
 
   center: google.maps.LatLngLiteral = {
     lat: 33.42565943762839,
@@ -122,8 +126,18 @@ export class PropertyDetailsComponent implements OnInit {
     this.imageToShow = img;
     this.showMessagePopup = true;
   }
+  openReportPopup() {
+    this.dropdownOpen = !this.dropdownOpen;
+    this.showReportPopup = true;
+  }
+  ReportPopupClosed() {
+    this.showReportPopup = false;
+  }
   onPopupClosed() {
     this.showMessagePopup = false;
+  }
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
   }
 
   startDrag(event: MouseEvent): void {

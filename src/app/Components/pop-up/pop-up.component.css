@@ -5,6 +5,7 @@
   width: 46.2%;
   border-radius: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 3000;
 }
 
 /* Responsive tweaks if needed */

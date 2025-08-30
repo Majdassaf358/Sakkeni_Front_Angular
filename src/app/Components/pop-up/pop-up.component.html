@@ -1,5 +1,31 @@
 <div class="popup-overlay" (click)="closePopup()">
-  <div class="popup-container" (click)="$event.stopPropagation()">
+  <div
+    *ngIf="page === 'details'"
+    class="popup-container"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="filter-header">
+      <p class="font-600 font-16 filters-title">Filters</p>
+      <button class="close-btn" (click)="closePopup()">&times;</button>
+    </div>
+    <div class="nav-line"></div>
+
+    <label *ngFor="let reason of report_reasons">
+      <input
+        type="radio"
+        name="reportReason"
+        [value]="reason.id"
+        (change)="selectReportReason(reason.id)"
+        [checked]="selectedReportReason === reason.id"
+      />
+      {{ reason.name }}
+    </label>
+  </div>
+  <div
+    *ngIf="page === 'filters'"
+    class="popup-container"
+    (click)="$event.stopPropagation()"
+  >
     <div class="filter-header">
       <p class="font-600 font-16 filters-title">Filters</p>
       <button class="close-btn" (click)="closePopup()">&times;</button>
