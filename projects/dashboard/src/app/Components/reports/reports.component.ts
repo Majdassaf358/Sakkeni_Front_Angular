@@ -23,10 +23,11 @@ export class ReportsComponent implements OnInit {
 
   propertyReports: property_report[] = [];
   serviceReports: service_report[] = [];
+  selectedPropertyReports: property_report = new property_report();
+  selectedServiceReports: service_report = new service_report();
   currentPage: number = 1;
   pagination: any;
   showPop = false;
-  selectedReportId: number = 0;
 
   constructor(private router: Router, private srv: ReportsService) {}
   ngOnInit(): void {
@@ -67,8 +68,12 @@ export class ReportsComponent implements OnInit {
     }
   }
 
-  openPop(id: number) {
-    this.selectedReportId = id;
+  openPropertyPop(report: property_report) {
+    this.selectedPropertyReports = report;
+    this.showPop = true;
+  }
+  openServicePop(report: service_report) {
+    this.selectedServiceReports = report;
     this.showPop = true;
   }
   goToPage(page: number) {

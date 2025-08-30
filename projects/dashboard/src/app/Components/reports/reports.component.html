@@ -1,6 +1,7 @@
 <app-pop
   *ngIf="showPop"
-  [reportId]="selectedReportId"
+  [reportProperty]="selectedPropertyReports"
+  [reportService]="selectedServiceReports"
   (close)="showPop = false"
 ></app-pop>
 <div class="reports-page">
@@ -93,7 +94,7 @@
     <tbody>
       <ng-container *ngIf="activeFilter === 'Properties'">
         <tr *ngFor="let report of propertyReports">
-          <td class="goToDetails" (click)="openPop(report.id)">
+          <td class="goToDetails" (click)="openPropertyPop(report)">
             {{ report.user.first_name + " " + report.user.last_name }}
           </td>
           <td>{{ "Info" }}</td>
@@ -105,7 +106,7 @@
       </ng-container>
       <ng-container *ngIf="activeFilter === 'Service Provider'">
         <tr *ngFor="let report of serviceReports">
-          <td>
+          <td class="goToDetails" (click)="openServicePop(report)">
             {{ report.user.first_name + " " + report.user.last_name }}
           </td>
           <td>{{ "Info" }}</td>

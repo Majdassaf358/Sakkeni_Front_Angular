@@ -1,5 +1,23 @@
-<div class="popup">
-  <button (click)="closePop()">Close</button>
-  <p *ngIf="reportId">Loaded report id: {{ reportId }}</p>
-  <!-- render other report details here -->
+<div class="popup-overlay" (click)="closePop()">
+  <div class="popup-container" (click)="$event.stopPropagation()">
+    <button (click)="closePop()">Close</button>
+
+    <!-- <ng-container *ngIf="reportProperty; else serviceBlock">
+    <h3>Property Report: {{ reportProperty?.title }}</h3>
+    <p>ID: {{ reportProperty?.id }}</p>
+    <p *ngIf="reportProperty?.description">{{ reportProperty?.description }}</p>
+  </ng-container>
+
+  <ng-template #serviceBlock>
+    <ng-container *ngIf="reportService; else emptyBlock">
+      <h3>Service Report: {{ reportService?.title }}</h3>
+      <p>ID: {{ reportService?.id }}</p>
+      <p *ngIf="reportService?.description">{{ reportService?.description }}</p>
+    </ng-container>
+  </ng-template> -->
+
+    <ng-template #emptyBlock>
+      <p>No report selected</p>
+    </ng-template>
+  </div>
 </div>

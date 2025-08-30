@@ -7,6 +7,8 @@ import {
   SimpleChanges,
   EventEmitter,
 } from '@angular/core';
+import { property_report } from '../../Models/Reports/property_report';
+import { service_report } from '../../Models/Reports/service_report';
 
 @Component({
   selector: 'app-pop',
@@ -15,20 +17,26 @@ import {
   styleUrl: './pop.component.css',
 })
 export class PopComponent implements OnChanges {
-  @Input() reportId: number | null = null;
+  @Input() reportService: service_report = new service_report();
+  @Input() reportProperty: property_report = new property_report();
   @Output() close = new EventEmitter<void>();
 
   ngOnChanges(changes: SimpleChanges): void {
-    const change = changes['reportId'];
-    if (change && this.reportId != null) {
-      this.loadReport(this.reportId);
+    if (changes['reportProperty'] && this.reportProperty) {
+      this.handlePropertyReportChange(this.reportProperty);
+    }
+
+    if (changes['reportService'] && this.reportService) {
+      this.handleServiceReportChange(this.reportService);
     }
   }
 
-  loadReport(id: number) {
-    // fetch details by id or use passed data
-    console.log('Load report with id', id);
-    // e.g. this.reportService.getById(id).subscribe(...)
+  private handlePropertyReportChange(r: property_report): void {
+    console.log('Property report received in popup:', r);
+  }
+
+  private handleServiceReportChange(r: service_report): void {
+    console.log('Service report received in popup:', r);
   }
 
   closePop(): void {
