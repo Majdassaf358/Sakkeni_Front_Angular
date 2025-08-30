@@ -8,6 +8,8 @@ import { LoginComponent } from './Components/login/login.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { ViewPropertyComponent } from './Components/view-property/view-property.component';
 import { ViewServiceComponent } from './Components/view-service/view-service.component';
+import { ActivityLogsComponent } from './Components/activity-logs/activity-logs.component';
+import { MyPropertiesComponent } from './Components/my-properties/my-properties.component';
 
 export const routes: Routes = [
   {
@@ -40,8 +42,16 @@ export const routes: Routes = [
     component: ReportsComponent,
   },
   {
+    path: 'activity',
+    component: ActivityLogsComponent,
+  },
+  {
     path: 'properties',
     component: PropertiesComponent,
+  },
+  {
+    path: 'my-properties',
+    component: MyPropertiesComponent,
   },
   {
     path: 'services',

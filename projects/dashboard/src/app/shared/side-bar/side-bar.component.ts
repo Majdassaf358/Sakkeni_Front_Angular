@@ -42,6 +42,18 @@ export class SideBarComponent implements OnInit {
       icon: '/Icons/sidebar_admins.svg',
       activeIcon: '/Icons/sidebar_admins_active.svg',
     },
+    {
+      label: 'Activity',
+      route: '/activity',
+      icon: '/Icons/sidebar_activity.svg',
+      activeIcon: '/Icons/sidebar_activity_active.svg',
+    },
+    {
+      label: 'My Properties',
+      route: '/my-properties',
+      icon: '/Icons/sidebar_my_properties.svg',
+      activeIcon: '/Icons/sidebar_my_properties_active.svg',
+    },
   ];
   isOpen = false;
 

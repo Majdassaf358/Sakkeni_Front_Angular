@@ -48,6 +48,12 @@ export class AdministrationService {
     let url = `${environment.Api}/admin/view-latest-properties-adjudication?page=${page}`;
     return this.http.get<ApiResponse<PaginatedData<allproperties>>>(url);
   }
+  public viewMyProperties(
+    page: number
+  ): Observable<ApiResponse<PaginatedData<allproperties>>> {
+    let url = `${environment.Api}/admin/view-latest-properties-adjudication?page=${page}`;
+    return this.http.get<ApiResponse<PaginatedData<allproperties>>>(url);
+  }
   public viewPropertyDetails(
     homeId: number
   ): Observable<ApiResponse<propertyDetails>> {

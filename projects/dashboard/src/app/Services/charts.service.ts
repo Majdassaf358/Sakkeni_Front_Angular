@@ -8,6 +8,8 @@ import { total_properties } from '../Models/charts/total_properties';
 import { properties_status } from '../Models/charts/properties_status';
 import { services_status } from '../Models/charts/services_status';
 import { Properties_locations } from '../Models/charts/properties_locations';
+import { logs } from '../Models/activity-logs/logs';
+import { PaginatedData } from '../Models/paginated_data';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +31,12 @@ export class ChartsService {
   public getServiceStatus(): Observable<ApiResponse<services_status>> {
     let url = `${environment.Api}/admin/charts/services-status`;
     return this.http.get<ApiResponse<services_status>>(url);
+  }
+  public getActivityLogs(
+    page: number
+  ): Observable<ApiResponse<PaginatedData<logs>>> {
+    let url = `${environment.Api}/admin/view-log?page=${page}`;
+    return this.http.get<ApiResponse<PaginatedData<logs>>>(url);
   }
   public getPropertiesLocations(): Observable<
     ApiResponse<Properties_locations>
