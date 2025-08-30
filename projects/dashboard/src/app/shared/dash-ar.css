@@ -1,0 +1,135 @@
+/* Main Panel */
+.main-panel {
+  float: left;
+}
+
+/* Sidebar */
+.sidebar,
+.bootstrap-navbar {
+  left: auto;
+  right: 0;
+}
+.sidebar .nav i {
+  float: right;
+  margin-left: 15px;
+}
+
+.sidebar .nav p {
+  margin: 0 45px 0 0;
+}
+.sidebar .logo-img img {
+  right: 40px;
+}
+.sidebar .logo .simple-text {
+  text-align: right;
+  padding: 5px 30px 0 15px;
+}
+/* Navbar */
+.navbar-nav > li {
+  float: right;
+}
+.navbar-left {
+  float: right !important;
+}
+.navbar-right {
+  float: left !important;
+  margin-left: 15px;
+}
+.list-flags {
+  margin-right: 5px;
+}
+.selected-language {
+  width: 55px;
+}
+
+/* Filter */
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9 {
+  float: right;
+}
+.filter-cotainer {
+  margin-left: 5px;
+}
+.cross-ar {
+  left: 10%;
+}
+/* Pagination */
+.pagination > li:first-child > a {
+  margin-right: 0;
+  margin-left: -1px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.pagination > li:last-child > a {
+  margin-left: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* Cross */
+.cross-logo {
+  left: 10%;
+}
+
+/* Table */
+.row {
+  display: flex;
+}
+
+/* Buttons */
+.cancel-style {
+  margin-right: 1.5rem;
+}
+
+.save-style {
+  margin-left: 0;
+  margin-right: 15px;
+}
+
+/* Bundle */
+td .bundle-button {
+  left: -25px;
+}
+
+.input-check-disabled {
+  left: -30px;
+}
+
+.input-check {
+  left: -20px;
+}
+/* Text */
+th {
+  text-align: right;
+}
+
+/* Footer */
+.pull-right {
+  float: left !important;
+}
+.pull-left {
+  float: right !important;
+}
+
+/* Font */
+.table > thead > tr > th {
+  font-size: 16px;
+}
+.sidebar .nav p,
+.bootstrap-navbar .nav p {
+  font-size: 15px;
+}
