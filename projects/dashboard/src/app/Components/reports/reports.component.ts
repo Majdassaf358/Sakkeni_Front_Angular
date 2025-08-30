@@ -7,12 +7,13 @@ import { ReportsService } from '../../Services/reports.service';
 import { lastValueFrom } from 'rxjs';
 import { PaginatedData } from '../../Models/paginated_data';
 import { service_report } from '../../Models/Reports/service_report';
+import { PopComponent } from '../../shared/pop/pop.component';
 
 type TabFilter = 'Properties' | 'Service Provider';
 
 @Component({
   selector: 'app-reports',
-  imports: [CommonModule],
+  imports: [CommonModule, PopComponent],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css',
 })
@@ -24,6 +25,9 @@ export class ReportsComponent implements OnInit {
   serviceReports: service_report[] = [];
   currentPage: number = 1;
   pagination: any;
+  showPop = false;
+  selectedReportId: number = 0;
+
   constructor(private router: Router, private srv: ReportsService) {}
   ngOnInit(): void {
     this.getPropertiesReports(1);
@@ -63,6 +67,10 @@ export class ReportsComponent implements OnInit {
     }
   }
 
+  openPop(id: number) {
+    this.selectedReportId = id;
+    this.showPop = true;
+  }
   goToPage(page: number) {
     if (page !== this.currentPage) {
       this.setFilter(this.activeFilter, page);

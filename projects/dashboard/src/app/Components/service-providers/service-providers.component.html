@@ -83,8 +83,8 @@
     <tbody>
       <!-- All -->
       <ng-container *ngIf="activeFilter === 'All'">
-        <tr *ngFor="let a of all" (click)="goTo(a.id)">
-          <td>{{ a.id }}</td>
+        <tr *ngFor="let a of all">
+          <td class="goToDetails" (click)="goTo(a.id)">{{ a.id }}</td>
           <td>
             {{
               a.service_provider.user.first_name +

@@ -194,6 +194,11 @@
   cursor: default;
 }
 
+.goToDetails:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 @media (max-width: 1024px) {
   .properties-status {
     margin: 1rem;

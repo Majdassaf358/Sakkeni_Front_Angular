@@ -71,8 +71,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let admin of admins" (click)="goTo(admin.id)">
-        <td class="admin-info">
+      <tr *ngFor="let admin of admins">
+        <td class="admin-info goToDetails" (click)="goTo(admin.id)">
           <img
             [src]="
               admin.profile_picture_path

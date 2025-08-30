@@ -62,7 +62,6 @@
 
 .admins-table tr {
   border-bottom: 1px solid #eee;
-  cursor: pointer;
 }
 
 /* Name + Avatar */
@@ -146,7 +145,10 @@
 .page-btn.ellipsis {
   cursor: default;
 }
-
+.goToDetails:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 /* Responsive layout */
 @media (max-width: 1024px) {
   .admins-page {
