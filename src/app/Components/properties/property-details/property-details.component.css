@@ -69,14 +69,26 @@
   width: 10px;
   height: 18px;
 }
+.offrow {
+  display: grid;
+  margin-left: 2rem;
+  border-bottom: 1px solid #b4c5c5;
+  padding-bottom: 1rem;
+  gap: 1rem;
+}
 .row {
   margin-left: 2rem;
   display: flex;
   border-bottom: 1px solid #b4c5c5;
   padding-bottom: 1rem;
 }
+.bottom_row {
+  display: grid;
+  gap: 1rem;
+}
 .row p {
-  width: 18%;
+  width: auto;
+  margin-right: 2rem;
 }
 .row .font-600.amenities {
   flex: 0 0 140px;

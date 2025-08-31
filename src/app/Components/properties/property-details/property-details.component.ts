@@ -92,7 +92,9 @@ export class PropertyDetailsComponent implements OnInit {
         this.propertyservice.viewPropertyDetails(homeId)
       );
       this.details = res.data;
-      this.images = res.data.images.map((img) => img.image_path);
+      this.images = (res.data.images || []).map((imgObj) =>
+        this.getImageUrl(imgObj.image_path)
+      );
       this.center.lat = this.details.location.latitude;
       this.center.lng = this.details.location.longitude;
       this.marker.lat = this.details.location.latitude;
@@ -133,9 +135,25 @@ export class PropertyDetailsComponent implements OnInit {
 
     return pricePart != null ? `${base} - ${pricePart}` : base;
   }
+  getImageUrl(path: string): string {
+    if (!path) return '';
 
+    const clean = path.replace(/\\/g, '/').trim();
+
+    if (/^(?:https?:)?\/\//i.test(clean) || clean.startsWith('data:')) {
+      return clean;
+    }
+
+    try {
+      return new URL(clean, this.imagesUrl).toString();
+    } catch {
+      return (
+        this.imagesUrl.replace(/\/+$/, '') + '/' + clean.replace(/^\/+/, '')
+      );
+    }
+  }
   openPopup(img: string) {
-    this.imageToShow = img;
+    this.imageToShow = this.getImageUrl(img);
     this.showMessagePopup = true;
   }
   openReportPopup() {

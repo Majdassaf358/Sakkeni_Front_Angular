@@ -108,11 +108,12 @@
         <th>Location</th>
         <th>Date</th>
         <th>Status</th>
+        <th>Pay</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let p of profileHistory" (click)="goTo(p.id)">
-        <td class="property-cell">
+      <tr *ngFor="let p of profileHistory">
+        <td class="property-cell" (click)="goTo(p.id)">
           <img
             [src]="getImageSrc(p.cover_image.image_path)"
             alt="Property"
@@ -135,6 +136,27 @@
             {{ p.availability_status.name }}
           </span>
         </td>
+        <td
+          (click)="payment(p.id)"
+          class="pay_button"
+          *ngIf="p.availability_status.name === 'Pending Payment'"
+        >
+          pay
+        </td>
+        <ngx-stripe-elements
+          *ngIf="elementsOptions.clientSecret"
+          [stripe]="stripeForTemplate"
+          [elementsOptions]="elementsOptions"
+        >
+          <form (ngSubmit)="confirmPayment()" #payForm="ngForm">
+            <ngx-stripe-payment
+              [options]="paymentElementOptions"
+            ></ngx-stripe-payment>
+            <button type="submit" [disabled]="!stripeForTemplate">
+              Confirm payment
+            </button>
+          </form>
+        </ngx-stripe-elements>
       </tr>
     </tbody>
   </table>

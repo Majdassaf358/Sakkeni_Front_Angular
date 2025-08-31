@@ -96,7 +96,7 @@
       </div>
 
       <!-- Purchase -->
-      <div *ngIf="details.purchase">
+      <div class="bottom_row" *ngIf="details.purchase">
         <div class="row">
           <p class="font-600">Furnished:</p>
           <span>{{ details.purchase.is_furnished === 1 ? "Yes" : "No" }}</span>
@@ -104,7 +104,7 @@
       </div>
 
       <!-- Rent -->
-      <ng-container *ngIf="details.rent">
+      <ng-container class="bottom_row" *ngIf="details.rent">
         <div class="row">
           <p class="font-600">Furnished:</p>
           <span>{{ details.rent.is_furnished === 1 ? "Yes" : "No" }}</span>
@@ -120,13 +120,13 @@
       </ng-container>
 
       <!-- Off Plan -->
-      <ng-container *ngIf="details.off_plan">
-        <div class="row">
+      <ng-container class="bottom_row" *ngIf="details.off_plan">
+        <div class="offrow">
           <p class="font-600">Delivery Date:</p>
           <span>{{ details.off_plan.delivery_date }}</span>
         </div>
 
-        <div class="row" *ngFor="let d of details.off_plan.payment_phases">
+        <div class="offrow" *ngFor="let d of details.off_plan.payment_phases">
           <p class="font-600">Payment Phases:</p>
           <span>{{ d.name }}</span>
           <p class="font-600">Payment Percentage:</p>
@@ -137,7 +137,7 @@
           <span>{{ d.pivot.duration_value }} {{ d.pivot.duration_unit }}</span>
         </div>
 
-        <!-- <div class="row">
+        <!-- <div class="off">
           <p class="font-600">Payment Percentage:</p>
           <span>{{ details.off_plan.payment_percentage }}%</span>
         </div>
@@ -158,6 +158,7 @@
 
       <!-- Villa -->
       <ng-container
+        class="bottom_row"
         *ngIf="
           details?.residential?.residential_property_type?.name === 'villa'
         "
@@ -175,6 +176,7 @@
 
       <!-- Apartment -->
       <ng-container
+        class="bottom_row"
         *ngIf="
           details?.residential?.residential_property_type?.name === 'apartment'
         "
@@ -203,6 +205,7 @@
       <!-- Office -->
       <div
         *ngIf="details?.commercial?.commercial_property_type?.name === 'office'"
+        class="bottom_row"
       >
         <div class="row">
           <p class="font-600">Floor Number:</p>
@@ -239,13 +242,13 @@
       <div class="contact-info">
         <img src="assets\Icons\email.svg" />
         <p class="text-primary-clr font-400 font-12 contact-text">
-          {{ details.owner?.email }}
+          {{ details.admin?.email }}
         </p>
       </div>
       <div class="contact-info">
         <img src="assets\Icons\call.svg" />
         <p class="text-primary-clr font-400 font-12 contact-text">
-          {{ details.owner?.phone_number }}
+          {{ details.admin?.phone_number }}
         </p>
       </div>
     </div>

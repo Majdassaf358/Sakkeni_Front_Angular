@@ -12,6 +12,7 @@ import { add_favourite } from '../Models/add_favorite';
 import { favoriteCard } from '../Models/favorite_card';
 import { report_property } from '../Models/Report/report_property';
 import { report_response } from '../Models/Report/report_response';
+import { payRes } from '../Models/pay';
 
 @Injectable({
   providedIn: 'root',
@@ -84,5 +85,9 @@ export class PropertyService {
   ): Observable<ApiResponse<report_response>> {
     let url = `${environment.Api}/report-property/${id}`;
     return this.http.post<ApiResponse<report_response>>(url, reason);
+  }
+  public pay(id: number): Observable<ApiResponse<payRes>> {
+    let url = `${environment.Api}/properties/${id}/pay`;
+    return this.http.post<ApiResponse<payRes>>(url, {});
   }
 }

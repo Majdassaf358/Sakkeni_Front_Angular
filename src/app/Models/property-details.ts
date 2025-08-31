@@ -25,6 +25,7 @@ export class propertyDetails {
   'availability_status': availability_status;
   'ownership_type': ownership_type;
   'owner': profile;
+  'admin': profile;
   'location': location;
   'residential': residential;
   'commercial': commercial;
