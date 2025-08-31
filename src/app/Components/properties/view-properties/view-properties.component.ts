@@ -41,7 +41,7 @@ export class ViewPropertiesComponent implements OnInit {
   favoriteIds: Set<number> = new Set();
   properties: propertyCard[] = [];
   favoriteProperties: favoriteCard[] = [];
-  imageUrl: string = 'http://127.0.0.1:8000/';
+  imageUrl: string = 'http://192.168.20.74:8000/';
   pages: number[] = [];
   currentPage: number = 1;
   currentFavoritePage: number = 1;

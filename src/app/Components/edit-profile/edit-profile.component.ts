@@ -21,7 +21,7 @@ export class EditProfileComponent implements OnInit {
   updatedProfile: updateProfile = new updateProfile();
   accountType: number = 1;
   previewUrl: string | null = null;
-  imageUrl: string = 'http://127.0.0.1:8000/';
+  imageUrl: string = 'http://192.168.20.74:8000/';
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router

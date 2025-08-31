@@ -19,7 +19,7 @@ export class MyPropertiesComponent implements OnInit {
   pagination: any;
   my: propertyCard[] = [];
   type: string = 'rent';
-  imageUrl: string = 'http://127.0.0.1:8000/';
+  imageUrl: string = 'http://192.168.20.74:8000/';
   searchControl = new FormControl();
 
   constructor(private srv: AdministrationService, private router: Router) {}

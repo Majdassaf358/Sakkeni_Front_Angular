@@ -63,8 +63,8 @@ export class PropertyService {
   ): Observable<ApiResponse<PaginatedData<propertyCard>>> {
     const url = `${environment.Api}/properties/search`;
     const params = new HttpParams().set('query', query || '');
-    return this.http.get<ApiResponse<PaginatedData<propertyCard>>>(url, {
-      params,
+    return this.http.post<ApiResponse<PaginatedData<propertyCard>>>(url, {
+      query: query,
     });
   }
   public addToFavorite(id: number): Observable<ApiResponse<add_favourite>> {

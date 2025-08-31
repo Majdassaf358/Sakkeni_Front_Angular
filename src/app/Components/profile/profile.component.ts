@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   profileInfo: profile = new profile();
   updatedProfile: updateProfile = new updateProfile();
 
-  imageUrl: string = 'http://127.0.0.1:8000/';
+  imageUrl: string = 'http://192.168.20.74:8000/';
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router

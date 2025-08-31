@@ -16,7 +16,7 @@ import { view_admins } from '../../Models/viewAdmin/view_admins';
 })
 export class AdminsComponent implements OnInit {
   admins: view_admins[] = [];
-  imageUrl: string = 'http://127.0.0.1:8000/';
+  imageUrl: string = 'http://192.168.20.74:8000/';
   currentPage: number = 1;
   pagination: any;
   constructor(private router: Router, private srv: SuperAdminService) {}

@@ -39,7 +39,7 @@ export class PropertyDetailsComponent implements OnInit {
   homeIdSRT: string = '';
   homeId: number = 0;
   images: string[] = [];
-  imagesUrl: string = 'http://127.0.0.1:8000/';
+  imagesUrl: string = 'http://192.168.20.74:8000/';
   details: propertyDetails = new propertyDetails();
   dropdownOpen = false;
   reportRES: report_response = new report_response();

@@ -4,11 +4,12 @@
   margin: 1rem;
 }
 .slider-section {
-  height: 17rem;
-  width: 100%;
+  height: 20rem;
+  width: 97%;
   display: grid;
   position: relative;
-  /* margin-right: clamp(1rem, 7vw, 4rem); */
+  padding: 0.2rem clamp(1rem, 4vw, 5rem);
+  margin-right: clamp(1rem, 7vw, 4rem);
   overflow-x: auto;
   scroll-behavior: smooth;
 }
@@ -32,50 +33,80 @@
 }
 
 .details {
-  margin-left: clamp(1rem, 2vw, 2rem);
-  /* margin-right: clamp(1rem, 7vw, 4rem); */
+  margin-left: clamp(1rem, 7vw, 7rem);
+  margin-right: clamp(1rem, 10vw, 9rem);
   padding-bottom: 3rem;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: repeat(4, 25%);
+  gap: 1rem;
 }
 .info {
-  width: 50%;
+  grid-area: 1/ 1 / 5 / 4;
+}
+.right-section {
+  grid-area: 1/ 4 / 4 / 6;
 }
 .info-title {
   display: grid;
   gap: 0.6rem;
-  margin-bottom: 1.8rem;
+  margin: 2.5rem clamp(1rem, 5vw, 5rem) 1.5rem clamp(1rem, 5vw, 5rem);
 }
 .info-title h3 {
   color: #27393a80;
 }
 .info-details {
   display: grid;
-  gap: 1.56rem;
+  gap: 1rem;
 }
-
-.row {
-  margin-left: 2.1rem;
+.tit {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.three_dots {
+  cursor: pointer;
+  width: 10px;
+  height: 18px;
+}
+.offrow {
+  display: grid;
+  margin-left: 2rem;
+  border-bottom: 1px solid #b4c5c5;
+  padding-bottom: 1rem;
+  gap: 1rem;
+}
+.row {
+  margin-left: 2rem;
+  display: flex;
+  border-bottom: 1px solid #b4c5c5;
+  padding-bottom: 1rem;
+}
+.bottom_row {
+  display: grid;
+  gap: 1rem;
 }
 .row p {
-  width: 30%;
+  width: auto;
+  margin-right: 2rem;
+}
+.row .font-600.amenities {
+  flex: 0 0 140px;
+  margin: 0;
 }
 
-.right-section {
+.amenities-list {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  flex: 1 1 0;
+  min-width: 0;
 }
-.price-box,
-.contact-box {
-  display: grid;
-  background-color: #fffefc;
-  border-radius: 10px;
-  padding: 1rem 1.6rem;
-  box-shadow: 0px 4px 10px 0px #00000026;
-  margin-bottom: 1rem;
-}
-.price-box {
-  position: relative;
+
+.amenity {
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
 .card-header {
@@ -127,23 +158,67 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
 .contact-box {
-  background-color: #fcfdfd;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  background-color: #fffefc;
+  border-radius: 10px;
+  padding: 1rem 1.6rem;
+  box-shadow: 0px 4px 10px 0px #00000026;
+  margin-top: 1rem;
+  height: 40%;
+  width: 90%;
 }
+
 .contact-info {
-  margin-left: 1.2rem;
   display: flex;
   align-items: center;
 }
 .contact-text {
   padding: 0 1rem;
 }
-.map-box {
-  margin-left: 2rem;
+.nav-line {
+  background-color: #000000;
+  height: 1.4px;
+  width: 100%;
+  margin-inline-end: auto;
+}
+.dropdown-menu {
+  position: absolute;
+  width: 8%;
+  top: 200px;
+  right: 70px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-menu li {
+  color: #27393a;
+  padding: 0.1rem 0.5rem;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.delete {
+  background-color: #ffded1;
+  width: 50.8%;
+  border-radius: 5px;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  margin: 1rem;
 }
 
 @media (max-width: 768px) {

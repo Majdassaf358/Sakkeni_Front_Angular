@@ -25,7 +25,7 @@ export class ViewPropertyComponent implements OnInit {
   propertyIDSRT: string = '';
   propertyID: number = 0;
   images: string[] = [];
-  imagesUrl: string = 'http://127.0.0.1:8000/';
+  imagesUrl: string = 'http://192.168.20.74:8000/';
   details: propertyDetails = new propertyDetails();
 
   // center: google.maps.LatLngLiteral = {
@@ -61,13 +61,22 @@ export class ViewPropertyComponent implements OnInit {
       this.viewProperty(this.propertyID);
     });
   }
+  async delete(id: number) {
+    try {
+      let res = await lastValueFrom(this.srv.deleteProperty(id));
+    } catch (error) {
+      console.log(error);
+    }
+  }
   async viewProperty(id: number) {
     try {
       let res: ApiResponse<propertyDetails> = await lastValueFrom(
         this.srv.viewPropertyDetails(id)
       );
       this.details = res.data;
-      this.images = res.data.images.map((img) => img.image_path);
+      this.images = (res.data.images || []).map((imgObj) =>
+        this.getImageUrl(imgObj.image_path)
+      );
       // this.center.lat = this.details.location.latitude;
       // this.center.lng = this.details.location.longitude;
       // this.marker.lat = this.details.location.latitude;
@@ -108,8 +117,25 @@ export class ViewPropertyComponent implements OnInit {
 
     return pricePart != null ? `${base} - ${pricePart}` : base;
   }
+  getImageUrl(path: string): string {
+    if (!path) return '';
+
+    const clean = path.replace(/\\/g, '/').trim();
+
+    if (/^(?:https?:)?\/\//i.test(clean) || clean.startsWith('data:')) {
+      return clean;
+    }
+
+    try {
+      return new URL(clean, this.imagesUrl).toString();
+    } catch {
+      return (
+        this.imagesUrl.replace(/\/+$/, '') + '/' + clean.replace(/^\/+/, '')
+      );
+    }
+  }
   openPopup(img: string) {
-    this.imageToShow = img;
+    this.imageToShow = this.getImageUrl(img);
     this.showMessagePopup = true;
   }
   onPopupClosed() {

@@ -111,4 +111,12 @@ export class AdministrationService {
       property_id: id,
     });
   }
+  public deleteProperty(
+    id: number
+  ): Observable<ApiResponse<PaginatedData<null>>> {
+    const url = `${environment.Api}/delete-property/${id}`;
+    return this.http.post<ApiResponse<PaginatedData<null>>>(url, {
+      property_id: id,
+    });
+  }
 }

@@ -21,7 +21,7 @@ import { AdminRes } from '../../Models/AdminRes';
 export class NavbarComponent implements OnInit {
   @ViewChild('dropdown', { static: false }) dropdown!: ElementRef;
   profileInfo: AdminRes = new AdminRes();
-  imageUrl: string = 'http://127.0.0.1:8000/';
+  imageUrl: string = 'http://192.168.20.74:8000/';
   sidebarVisible = false;
   dropdownOpen = false;
 

@@ -72,7 +72,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let admin of admins">
-        <td class="admin-info goToDetails" (click)="goTo(admin.id)">
+        <td class="admin-info goToDetails">
           <img
             [src]="
               admin.profile_picture_path

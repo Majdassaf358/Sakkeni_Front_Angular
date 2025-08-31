@@ -84,7 +84,7 @@
       <!-- All -->
       <ng-container *ngIf="activeFilter === 'All'">
         <tr *ngFor="let a of all">
-          <td class="goToDetails" (click)="goTo(a.id)">{{ a.id }}</td>
+          <td class="goToDetails">{{ a.id }}</td>
           <td>
             {{
               a.service_provider.user.first_name +
@@ -135,7 +135,7 @@
 
       <!-- Approved -->
       <ng-container *ngIf="activeFilter === 'Approved'">
-        <tr *ngFor="let a of app" (click)="goTo(a.id)">
+        <tr *ngFor="let a of app">
           <td>{{ a.id }}</td>
           <td>{{ a.admin.first_name + " " + a.admin.last_name }}</td>
           <td>{{ a.updated_at | date : "mediumDate" }}</td>
@@ -147,7 +147,7 @@
 
       <!-- Declined -->
       <ng-container *ngIf="activeFilter === 'Declined'">
-        <tr *ngFor="let d of dec" (click)="goTo(d.id)">
+        <tr *ngFor="let d of dec">
           <td>{{ d.id }}</td>
           <td>{{ d.admin.first_name + " " + d.admin.last_name }}</td>
           <td>{{ d.updated_at | date : "mediumDate" }}</td>

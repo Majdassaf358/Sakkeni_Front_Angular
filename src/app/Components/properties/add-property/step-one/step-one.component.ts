@@ -21,7 +21,7 @@ export class StepOneComponent {
   @Output() next = new EventEmitter<void>();
   private fileSignatures = new Set<string>();
   images: string[] = [];
-  imagesUrl: string = 'http://127.0.0.1:8000/';
+  imagesUrl: string = 'http://192.168.20.74:8000/';
   isDragging = false;
   startX = 0;
   scrollLeft = 0;
