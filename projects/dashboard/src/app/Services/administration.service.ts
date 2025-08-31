@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../Models/ApiResponse';
@@ -14,6 +14,7 @@ import { approve_or_decline_service } from '../Models/viewServiceAdj/approve_or_
 import { allproperties } from '../Models/ViewAllPropertiesAdj/allproperties';
 import { all_services } from '../Models/viewAllServicesAdj/all_services';
 import { propertyCard } from '../Models/property-card';
+import { search_id } from '../Models/search_id';
 
 @Injectable({
   providedIn: 'root',
@@ -101,5 +102,13 @@ export class AdministrationService {
   ): Observable<ApiResponse<null>> {
     let url = `${environment.Api}/admin/service-provider-service-adjudication`;
     return this.http.post<ApiResponse<null>>(url, req);
+  }
+  public searchProperty(
+    id: number
+  ): Observable<ApiResponse<PaginatedData<search_id>>> {
+    const url = `${environment.Api}/admin/search-id`;
+    return this.http.post<ApiResponse<PaginatedData<search_id>>>(url, {
+      property_id: id,
+    });
   }
 }

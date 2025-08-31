@@ -28,6 +28,15 @@
       </button>
     </div>
 
+    <div class="search-container">
+      <input
+        type="number"
+        placeholder="Search by ID"
+        [formControl]="searchControl"
+        (keyup.enter)="onSearch()"
+      />
+    </div>
+
     <div class="pagination-controls" *ngIf="pagination">
       <button
         class="page-btn"

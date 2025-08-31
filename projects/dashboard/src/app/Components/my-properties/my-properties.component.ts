@@ -5,10 +5,11 @@ import { Router } from '@angular/router';
 import { AdministrationService } from '../../Services/administration.service';
 import { propertyCard } from '../../Models/property-card';
 import { CommonModule } from '@angular/common';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-my-properties',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './my-properties.component.html',
   styleUrl: './my-properties.component.css',
 })
@@ -19,6 +20,7 @@ export class MyPropertiesComponent implements OnInit {
   my: propertyCard[] = [];
   type: string = 'rent';
   imageUrl: string = 'http://127.0.0.1:8000/';
+  searchControl = new FormControl();
 
   constructor(private srv: AdministrationService, private router: Router) {}
   ngOnInit(): void {
@@ -31,6 +33,16 @@ export class MyPropertiesComponent implements OnInit {
       this.my = res.data.data;
       this.currentPage = res.data.current_page;
       this.pagination = res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async onSearch() {
+    try {
+      const searchValue = this.searchControl.value;
+      if (searchValue === null) return;
+      let res = await lastValueFrom(this.srv.searchProperty(searchValue));
+      this.router.navigate(['/property', searchValue]);
     } catch (error) {
       console.log(error);
     }

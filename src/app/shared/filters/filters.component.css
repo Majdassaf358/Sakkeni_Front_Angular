@@ -122,7 +122,9 @@
 .filter-btn:hover {
   background-color: #b2b7b6;
 }
-
+.width_change {
+  width: 41%;
+}
 .search-container {
   width: 69%;
   display: flex;
@@ -131,9 +133,6 @@
   background: #fcfdfdbf;
   box-shadow: 0px 4px 4px 0px #00000040;
   border-radius: 5px;
-}
-.width_change {
-  width: 41%;
 }
 
 .search-container input {
