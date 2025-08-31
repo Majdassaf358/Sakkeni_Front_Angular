@@ -39,7 +39,7 @@ export class ViewStatisticsComponent implements OnInit {
         data: [20, 60, 40, 70, 90, 65, 85, 45, 55],
         symbol: 'circle',
         symbolSize: 6,
-        areaStyle: {}, // fill under line if you like
+        areaStyle: {},
         showSymbol: false,
       },
     ],
@@ -102,42 +102,33 @@ export class ViewStatisticsComponent implements OnInit {
         purchase: 0,
         rent: 0,
       } as any);
-    const inner = [
-      { value: p.residential?.total ?? 0, name: 'Residential' },
-      { value: p.commercial?.total ?? 0, name: 'Commercial' },
-    ];
-    const outer = [
+
+    const propertyTypes = [
       { value: p.residential?.villa ?? 0, name: 'Villa' },
       { value: p.residential?.apartment ?? 0, name: 'Apartment' },
       { value: p.commercial?.office ?? 0, name: 'Office' },
     ];
+
     this.groupOptions = {
       tooltip: {
         trigger: 'item',
-        formatter: (params: any) => {
-          return `${params.seriesName ? params.seriesName + '<br/>' : ''}<b>${
-            params.name
-          }</b>: ${params.value} (${params.percent}%)`;
-        },
+        formatter: (params: any) =>
+          `${params.marker} <b>${params.name}</b><br/>Count: ${params.value}<br/>Share: ${params.percent}%`,
       },
       legend: { bottom: 10 },
       series: [
         {
-          name: 'Groups',
+          name: 'Property types',
           type: 'pie',
-          selectedMode: 'single',
-          radius: ['30%', '45%'],
-          label: { position: 'inside', formatter: '{b}\n{c}' },
-          data: inner,
-        },
-        {
-          name: 'Details',
-          type: 'pie',
-          radius: ['60%', '75%'],
+          radius: ['45%', '70%'],
           avoidLabelOverlap: false,
-          label: { show: false },
-          labelLine: { show: true, length: 12 },
-          data: outer,
+          label: {
+            show: true,
+            position: 'outside',
+            formatter: '{b}\n{c} ({d}%)',
+          },
+          labelLine: { length: 12 },
+          data: propertyTypes,
         },
       ],
       graphic: [
@@ -147,7 +138,8 @@ export class ViewStatisticsComponent implements OnInit {
           top: 'center',
           style: {
             text: String(
-              p.total ?? inner.reduce((s: any, a: any) => s + a.value, 0)
+              p.total ??
+                propertyTypes.reduce((s: any, a: any) => s + a.value, 0)
             ),
             fontSize: 20,
             fontWeight: 700,
@@ -207,16 +199,13 @@ export class ViewStatisticsComponent implements OnInit {
       view === 'groups' ? this.groupOptions : this.topLevelOptions;
 
     if (this.chartInstance && this.donutOptions) {
-      // replace previous config cleanly
       this.chartInstance.setOption(this.donutOptions, { notMerge: true });
     }
   }
   get sideLabel(): string {
-    // For display next to the arrow
     return this.activeView === 'groups' ? 'Sale types' : 'Property types';
   }
 
-  // Convenience flags (optional)
   get showRightArrow(): boolean {
     return this.activeView === 'groups';
   }
@@ -234,7 +223,7 @@ export class ViewStatisticsComponent implements OnInit {
       xAxis: {
         type: 'category',
         data: cities,
-        axisLabel: { rotate: 30 }, // rotate names so they don’t overlap
+        axisLabel: { rotate: 30 },
       },
       yAxis: { type: 'value' },
       series: [
