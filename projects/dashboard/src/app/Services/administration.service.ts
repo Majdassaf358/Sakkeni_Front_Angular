@@ -13,6 +13,7 @@ import { propertyDetails } from '../Models/viewproperty/property-details';
 import { approve_or_decline_service } from '../Models/viewServiceAdj/approve_or_decline_service';
 import { allproperties } from '../Models/ViewAllPropertiesAdj/allproperties';
 import { all_services } from '../Models/viewAllServicesAdj/all_services';
+import { propertyCard } from '../Models/property-card';
 
 @Injectable({
   providedIn: 'root',
@@ -49,10 +50,11 @@ export class AdministrationService {
     return this.http.get<ApiResponse<PaginatedData<allproperties>>>(url);
   }
   public viewMyProperties(
+    type: string,
     page: number
-  ): Observable<ApiResponse<PaginatedData<allproperties>>> {
-    let url = `${environment.Api}/admin/view-latest-properties-adjudication?page=${page}`;
-    return this.http.get<ApiResponse<PaginatedData<allproperties>>>(url);
+  ): Observable<ApiResponse<PaginatedData<propertyCard>>> {
+    let url = `${environment.Api}/admin/view-my-properties/${type}?page=${page}`;
+    return this.http.get<ApiResponse<PaginatedData<propertyCard>>>(url);
   }
   public viewPropertyDetails(
     homeId: number
