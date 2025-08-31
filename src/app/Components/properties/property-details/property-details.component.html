@@ -8,6 +8,7 @@
   *ngIf="showReportPopup"
   (popupClosed)="ReportPopupClosed()"
   [page]="'details'"
+  (reportSubmitted)="Report($event)"
 ></app-pop-up>
 <app-navbar [page]="'details'" [withFilters]="false"></app-navbar>
 

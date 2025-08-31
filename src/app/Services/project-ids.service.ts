@@ -5,6 +5,7 @@ import { country_cities } from '../Models/get_ids/country_cities';
 import { environment } from '../shared/environments';
 import { HttpClient } from '@angular/common/http';
 import { id_name } from '../Models/get_ids/id_name';
+import { id_reason } from '../Models/get_ids/id_reason';
 
 @Injectable({
   providedIn: 'root',
@@ -43,8 +44,8 @@ export class ProjectIdsService {
     let url = `${environment.Api}/view-ownership-types`;
     return this.http.get<ApiResponse<id_name[]>>(url);
   }
-  public getPropertiesReport(): Observable<ApiResponse<id_name[]>> {
+  public getPropertiesReportReasons(): Observable<ApiResponse<id_reason[]>> {
     let url = `${environment.Api}/report-reasons/property`;
-    return this.http.get<ApiResponse<id_name[]>>(url);
+    return this.http.get<ApiResponse<id_reason[]>>(url);
   }
 }

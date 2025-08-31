@@ -10,6 +10,8 @@ import { filters } from '../Models/filters';
 import { propertyDetails } from '../Models/property-details';
 import { add_favourite } from '../Models/add_favorite';
 import { favoriteCard } from '../Models/favorite_card';
+import { report_property } from '../Models/Report/report_property';
+import { report_response } from '../Models/Report/report_response';
 
 @Injectable({
   providedIn: 'root',
@@ -75,5 +77,12 @@ export class PropertyService {
   public deleteProperty(id: number): Observable<ApiResponse<null>> {
     let url = `${environment.Api}/delete-property/${id}`;
     return this.http.get<ApiResponse<null>>(url);
+  }
+  public reportProperty(
+    id: number,
+    reason: report_property
+  ): Observable<ApiResponse<report_response>> {
+    let url = `${environment.Api}/report-property/${id}`;
+    return this.http.post<ApiResponse<report_response>>(url, reason);
   }
 }

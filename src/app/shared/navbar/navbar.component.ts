@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
   @Input() withFilters!: boolean;
   @ViewChild('dropdown', { static: false }) dropdown!: ElementRef;
   profileInfo: profile = new profile();
-  Profile: boolean = false;
+  isLogin: boolean = true;
   imageUrl: string = 'http://127.0.0.1:8000/';
   dropdownOpen = false;
   menuOpen = false;
@@ -64,9 +64,9 @@ export class NavbarComponent implements OnInit {
       );
       this.profileInfo = res.data;
       this.isSeller = res.data.seller.account_type.id;
-      this.Profile = true;
+      this.isLogin = true;
     } catch (error) {
-      this.Profile = false;
+      this.isLogin = false;
       console.log(error);
     }
   }

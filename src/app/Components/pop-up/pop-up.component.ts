@@ -7,6 +7,8 @@ import { ApiResponse } from '../../Models/ApiResponse';
 import { country_cities } from '../../Models/get_ids/country_cities';
 import { lastValueFrom } from 'rxjs';
 import { id_name } from '../../Models/get_ids/id_name';
+import { report_property } from '../../Models/Report/report_property';
+import { id_reason } from '../../Models/get_ids/id_reason';
 
 @Component({
   selector: 'app-pop-up',
@@ -20,22 +22,24 @@ export class PopUpComponent implements OnInit {
   @Input() page: string = 'details';
   @Output() filtersApplied = new EventEmitter<filters>();
   @Output() popupClosed = new EventEmitter<void>();
+  @Output() reportSubmitted = new EventEmitter<report_property>();
   selectedPropertyType: string = '';
   filterValues: filters = new filters();
   private amenitySet = new Set<number>();
   amenities: id_name[] = [];
-  report_reasons: id_name[] = [];
+  report_reasons: id_reason[] = [];
   countryCities: country_cities[] = [];
   displayedCountries: country_cities[] = [];
   displayedCities: { id: number; name: string }[] = [];
   countriesLoaded = false;
   popupMessage: string = '';
   selectedReportReason: number = 0;
-
+  report: report_property = new report_property();
+  step: 1 | 2 = 1;
   constructor(private helpsrv: ProjectIdsService) {}
   ngOnInit(): void {
     this.loadCitiesForCountry();
-    this.getPropertiesReports();
+    this.getReasons();
     this.getAmenities();
   }
   async getAmenities() {
@@ -48,12 +52,13 @@ export class PopUpComponent implements OnInit {
       console.log(err);
     }
   }
-  async getPropertiesReports() {
+  async getReasons() {
     try {
-      let res: ApiResponse<id_name[]> = await lastValueFrom(
-        this.helpsrv.getPropertiesReport()
+      let res: ApiResponse<id_reason[]> = await lastValueFrom(
+        this.helpsrv.getPropertiesReportReasons()
       );
       this.report_reasons = res.data;
+      console.log(this.report_reasons);
     } catch (err) {
       console.log(err);
     }
@@ -79,6 +84,7 @@ export class PopUpComponent implements OnInit {
       }
     }
   }
+
   setCountry(countryId: number) {
     this.filterValues.country_id = countryId;
     const country = this.countryCities.find((c) => c.id === countryId);
@@ -101,6 +107,10 @@ export class PopUpComponent implements OnInit {
     this.filtersApplied.emit(this.filterValues);
     this.closePopup();
   }
+  goToStep2() {
+    if (!this.selectedReportReason) return;
+    this.step = 2;
+  }
 
   toggleAmenity(id: number) {
     if (this.amenitySet.has(id)) {
@@ -111,9 +121,21 @@ export class PopUpComponent implements OnInit {
   }
   selectReportReason(id: number) {
     this.selectedReportReason = id;
+    this.report.report_reason_id = id;
   }
 
   closePopup() {
+    this.step = 1;
+    this.selectedReportReason = 0;
+    this.report = new report_property();
     this.popupClosed.emit();
+  }
+
+  submitReport() {
+    if (!this.report.iadditional_commentsd) {
+      this.report.iadditional_commentsd = '';
+    }
+    this.reportSubmitted.emit(this.report);
+    this.closePopup();
   }
 }

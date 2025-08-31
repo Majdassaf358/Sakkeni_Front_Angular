@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { GoogleMapsModule, GoogleMap } from '@angular/google-maps';
 import { MessageComponent } from '../../message/message.component';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
+import { report_response } from '../../../Models/Report/report_response';
+import { report_property } from '../../../Models/Report/report_property';
 
 @Component({
   selector: 'app-property-details',
@@ -40,7 +42,7 @@ export class PropertyDetailsComponent implements OnInit {
   imagesUrl: string = 'http://127.0.0.1:8000/';
   details: propertyDetails = new propertyDetails();
   dropdownOpen = false;
-
+  reportRES: report_response = new report_response();
   center: google.maps.LatLngLiteral = {
     lat: 33.42565943762839,
     lng: 36.94301086943456,
@@ -73,6 +75,16 @@ export class PropertyDetailsComponent implements OnInit {
 
       this.viewHomeDetails(this.homeId);
     });
+  }
+  async Report(report: report_property) {
+    try {
+      let res: ApiResponse<report_response> = await lastValueFrom(
+        this.propertyservice.reportProperty(this.details.id, report)
+      );
+      this.reportRES = res.data;
+    } catch (err) {
+      console.log(err);
+    }
   }
   async viewHomeDetails(homeId: number) {
     try {

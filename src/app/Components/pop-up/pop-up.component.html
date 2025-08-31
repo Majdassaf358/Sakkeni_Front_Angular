@@ -5,21 +5,59 @@
     (click)="$event.stopPropagation()"
   >
     <div class="filter-header">
-      <p class="font-600 font-16 filters-title">Filters</p>
+      <p class="font-600 font-16 filters-title">Report</p>
       <button class="close-btn" (click)="closePopup()">&times;</button>
     </div>
     <div class="nav-line"></div>
 
-    <label *ngFor="let reason of report_reasons">
-      <input
-        type="radio"
-        name="reportReason"
-        [value]="reason.id"
-        (change)="selectReportReason(reason.id)"
-        [checked]="selectedReportReason === reason.id"
-      />
-      {{ reason.name }}
-    </label>
+    <div *ngIf="step === 1" class="step-container">
+      <p class="subtitle">
+        We'll check for all Community Guidelines, so don't worry about making
+        the perfect choice.
+      </p>
+
+      <label
+        *ngFor="let r of report_reasons; trackBy: trackById"
+        class="radio-label"
+      >
+        <input
+          type="radio"
+          name="reportReason"
+          [value]="r.id"
+          (change)="selectReportReason(r.id)"
+          [checked]="selectedReportReason === r.id"
+        />
+        {{ r.reason }}
+      </label>
+      <div class="report-footer">
+        <button
+          class="next-btn"
+          (click)="goToStep2()"
+          [disabled]="!selectedReportReason"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div *ngIf="step === 2" class="step-container">
+      <p class="subtitle">
+        Want to tell us more? It's optional<br />
+        Sharing a few details can help us understand the issue. Please don't
+        include personal info or questions.
+      </p>
+
+      <textarea
+        [(ngModel)]="report.iadditional_commentsd"
+        placeholder="Add details ..."
+        rows="4"
+        class="details-textarea"
+      ></textarea>
+      <div class="report-footer">
+        <button class="done-btn" (click)="submitReport()">Done</button>
+      </div>
+    </div>
   </div>
   <div
     *ngIf="page === 'filters'"
